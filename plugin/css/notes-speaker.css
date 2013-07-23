@@ -2,6 +2,15 @@ body {
     font-family: Helvetica;
 }
 
+
+.actionbar{
+    
+    background:#eee;
+    height:80px;
+    width:100%;    
+    margin-bottom:10px;
+}
+
 .border{
     border-style:solid;
     border-width:1px;
@@ -16,7 +25,7 @@ body {
     left:50%;
     margin-left:20px;
     margin-bottom:20px;
-    top:0;
+    top:80px;
 }
 
 #preview{
@@ -25,13 +34,14 @@ body {
     top:50%;
     margin-top:20px;
     left:0;
+    bottom:20px;
 }
 
 #time {
     width:50%;
     height:50%;    
     left:0;
-    top:0;
+    top:80px;
     text-align: center;
     opacity: 0;
 
@@ -209,15 +219,15 @@ body {
 }
 
 #next, #prev{
-    height:50px;
-    width:20px;
+    /*height:50px;
+    width:50px;*/
     top:50%;
     margin-top:-25px;
 }
 
 #up, #down{
-    height:20px;
-    width:50px;
+    /*height:50px;
+    width:50px;*/
     left:50%;
     margin-left:-25px;
 }
@@ -236,8 +246,8 @@ body {
 }
 
 #show{
-    height:50px;
-    width:50px;
+    /*height:50px;
+    width:50px;*/
     top:50%;
     left:50%;
     margin-left:-25px;

@@ -10,7 +10,7 @@ var RevealClientNotes = (function() {
 
 	
 	function initWS(){
-	  socket = io.connect('http://127.0.0.1:8080');
+	  socket = io.connect('http://'+window.location.hostname+':8080');
         socket.on('connect', function(){            
            socket.emit('message', {type :"config", url : window.location.pathname});
         });

@@ -5,6 +5,11 @@
 var RevealSpeakerNotes = (function() {
 
 	window.addEventListener( 'load', function() {
+        
+        // Plug Fastclick module
+        
+        FastClick.attach(document.body);
+
 
         // Connection to socket to 
     
@@ -57,9 +62,13 @@ var RevealSpeakerNotes = (function() {
                     }
                 }else if (json.type === "config"){							
                     if (json.url && !localUrl){
-                       localUrl = "http://localhost:8080"+json.url+"#speakerNotes";
-                       var iframe = document.getElementById("next-slide");
+                       localUrl = "http://"+window.location.hostname+":8080"+json.url+"#speakerNotes";
+                       var iframe = document.getElementById("next-slide");                          
                        iframe.src = localUrl;
+                       iframe.onload = function(){
+                           ;
+                       }
+                        
                     }else if (json.indices){
                         indices = json.indices;
                         fragment = 0;
@@ -73,9 +82,7 @@ var RevealSpeakerNotes = (function() {
                 }
             });
             
-               
-    
-    
+           
             // Time Management
             var start = new Date(),
                 timeEl = document.querySelector( '#time' ),

@@ -8,6 +8,8 @@
 
         <!-- Cardinal Css-->
         <link rel="stylesheet" href="css/main.min.css">
+        <!-- Font awesome Css-->
+        <link rel="stylesheet" href="css/font-awesome.min.css">
         <!-- Main Css -->
 		<link rel="stylesheet" href="css/notes-speaker.css">
         <!-- Socket IO mandatory import -->
@@ -26,47 +28,49 @@
 
 	<body>
 
-        <div class="actiobar">
-        </div>
-		<div id="time" class="border">
-            <h2>Elapsed</h2>
-			<div class="elapsed">
-                <div class="timeEllapesd">
-				    <span id="hours">00</span><span id="minutes">:00</span><span id="seconds">:00</span>
-                </div>
-                <div class="spiner-holder-one animate-0-25-a">
-                    <div class="spiner-holder-two animate-0-25-b">
-                        <div class="loader-spiner" style=""></div>
-                    </div>
-                </div>
-                <div class="spiner-holder-one animate-25-50-a">
-                    <div class="spiner-holder-two animate-25-50-b">
-                        <div class="loader-spiner"></div>
-                    </div>
-                </div>
-                <div class="spiner-holder-one animate-50-75-a">
-                    <div class="spiner-holder-two animate-50-75-b">
-                        <div class="loader-spiner"></div>
-                    </div>
-                </div>
-                <div class="spiner-holder-one animate-75-100-a">
-                    <div class="spiner-holder-two animate-75-100-b">
-                        <div class="loader-spiner"></div>
-                    </div>
-                </div>
-			</div>
-		</div>
-		<div id="notes" class="border"></div>
-		<div id="preview" class="border">
-            <div id="wrap-next-slide" class="slides">
-                <script>document.write( '<iframe width="100%" height="100%" id="next-slide" src=""></iframe>' );</script>
-                <span>UPCOMING:</span>
+        <div class="grid">        
+            <div class="actionbar grid-item one_whole">
             </div>
-			<button id="next" type="button">Next</button>
-			<button id="prev" type="button">Prev</button>
-			<button id="up" type="button">Up</button>
-			<button id="down" type="button">Down</button>
-            <button id="show" type="button">Show</button>			
-		</div>
+            <div id="time" class="border grid-tem one_half">
+                <h2>Elapsed</h2>
+                <div class="elapsed">
+                    <div class="timeEllapesd">
+                        <span id="hours">00</span><span id="minutes">:00</span><span id="seconds">:00</span>
+                    </div>
+                    <div class="spiner-holder-one animate-0-25-a">
+                        <div class="spiner-holder-two animate-0-25-b">
+                            <div class="loader-spiner" style=""></div>
+                        </div>
+                    </div>
+                    <div class="spiner-holder-one animate-25-50-a">
+                        <div class="spiner-holder-two animate-25-50-b">
+                            <div class="loader-spiner"></div>
+                        </div>
+                    </div>
+                    <div class="spiner-holder-one animate-50-75-a">
+                        <div class="spiner-holder-two animate-50-75-b">
+                            <div class="loader-spiner"></div>
+                        </div>
+                    </div>
+                    <div class="spiner-holder-one animate-75-100-a">
+                        <div class="spiner-holder-two animate-75-100-b">
+                            <div class="loader-spiner"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="notes" class="border grid-tem one_half"></div>
+            <div id="preview" class="border grid-tem one_whole">
+                <div id="wrap-next-slide" class="slides">
+                    <script>document.write( '<iframe width="100%" height="100%" id="next-slide" src=""></iframe>' );</script>
+                    <span>UPCOMING:</span>
+                </div>
+                <a href="#" id="next" class="button"><i class="icon-chevron-right"></i></a>
+                <a href="#" id="prev" class="button"><i class="icon-chevron-left"></i></a>
+                <a href="#" id="up" class="button"><i class="icon-chevron-up"></i></a>
+                <a href="#" id="down" class="button"><i class="icon-chevron-down"></i></a>
+                <a href="#" id="show" class="button"><i class="icon-eye-open"></i></a>                			
+            </div>
+        </div>
     </body>
 </html>
