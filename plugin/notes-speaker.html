@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<title>reveal.js - WebSocket Speaker Notes</title>
+
+        <!-- Cardinal Css-->
+        <link rel="stylesheet" href="css/main.min.css">
+        <!-- Main Css -->
+		<link rel="stylesheet" href="css/notes-speaker.css">
+        <!-- Socket IO mandatory import -->
+		<script src="/socket.io/socket.io.js"></script>
+        <!-- Use for selections css manipulations -->
+        <script src="js/jquery-2.0.3.min.js"></script>
+        <!-- Use for prefix free css management-->
+        <script src="js/prefixfree.min.js"></script>
+        <!-- Use for mobile use -->
+        <script src="js/fastclick.js"></script>
+        <!-- Use for decryption of markdown -->
+        <script src="../../../plugin/markdown/marked.js"></script>
+        <!-- Main script-->
+        <script src="js/notes-speaker.js"></script>
+	</head>
+
+	<body>
+
+        <div class="actiobar">
+        </div>
+		<div id="time" class="border">
+            <h2>Elapsed</h2>
+			<div class="elapsed">
+                <div class="timeEllapesd">
+				    <span id="hours">00</span><span id="minutes">:00</span><span id="seconds">:00</span>
+                </div>
+                <div class="spiner-holder-one animate-0-25-a">
+                    <div class="spiner-holder-two animate-0-25-b">
+                        <div class="loader-spiner" style=""></div>
+                    </div>
+                </div>
+                <div class="spiner-holder-one animate-25-50-a">
+                    <div class="spiner-holder-two animate-25-50-b">
+                        <div class="loader-spiner"></div>
+                    </div>
+                </div>
+                <div class="spiner-holder-one animate-50-75-a">
+                    <div class="spiner-holder-two animate-50-75-b">
+                        <div class="loader-spiner"></div>
+                    </div>
+                </div>
+                <div class="spiner-holder-one animate-75-100-a">
+                    <div class="spiner-holder-two animate-75-100-b">
+                        <div class="loader-spiner"></div>
+                    </div>
+                </div>
+			</div>
+		</div>
+		<div id="notes" class="border"></div>
+		<div id="preview" class="border">
+            <div id="wrap-next-slide" class="slides">
+                <script>document.write( '<iframe width="100%" height="100%" id="next-slide" src=""></iframe>' );</script>
+                <span>UPCOMING:</span>
+            </div>
+			<button id="next" type="button">Next</button>
+			<button id="prev" type="button">Prev</button>
+			<button id="up" type="button">Up</button>
+			<button id="down" type="button">Down</button>
+            <button id="show" type="button">Show</button>			
+		</div>
+    </body>
+</html>

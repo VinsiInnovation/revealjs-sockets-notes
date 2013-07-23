@@ -1,0 +1,245 @@
+body {
+    font-family: Helvetica;
+}
+
+.border{
+    border-style:solid;
+    border-width:1px;
+    border-radius:5px;
+    position: absolute;
+    margin: 10px;
+}
+
+#notes {
+    width:50%;
+    height:50%;    
+    left:50%;
+    margin-left:20px;
+    margin-bottom:20px;
+    top:0;
+}
+
+#preview{
+    width:100%;
+    height:50%;
+    top:50%;
+    margin-top:20px;
+    left:0;
+}
+
+#time {
+    width:50%;
+    height:50%;    
+    left:0;
+    top:0;
+    text-align: center;
+    opacity: 0;
+
+    -webkit-transition: opacity 0.4s;
+       -moz-transition: opacity 0.4s;
+         -o-transition: opacity 0.4s;
+            transition: opacity 0.4s;
+}
+
+#wrap-next-slide {
+    position:absolute;
+    width: 100%;
+    height: 100%;    
+}
+
+.slides {
+    position: relative;
+    margin-bottom: 10px;
+    border: 1px solid black;
+    border-radius: 2px;
+    background: rgb(28, 30, 32);
+}
+
+.slides span {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    font-weight: bold;
+    font-size: 14px;
+    color: rgba( 255, 255, 255, 0.9 );
+}
+
+.error {
+    font-weight: bold;
+    color: red;
+    font-size: 1.5em;
+    text-align: center;
+    margin-top: 10%;
+}
+
+.error code {
+    font-family: monospace;
+}
+
+/*
+*
+* Time Loader
+*
+*/
+
+
+.elapsed,
+.clock {
+    position:absolute;
+    width:80%;
+    border-radius:80%;
+    padding-bottom:80%;
+    margin-top:-40%;
+    margin-left:-40%;
+    top:50%;
+    left:50%;
+    color: #333;
+    font-size: 2em;
+    text-align: center;
+    vertical-align:middle;
+    /*display: inline-block;
+    padding: 0.5em;*/
+    background-color: #eee;
+    /*border-radius: 10px;*/
+}
+
+.timeEllapesd{
+   position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 50%;
+    margin-top: -10%;
+}
+
+.time h2,
+.clock h2 {
+    font-size: 0.8em;
+    line-height: 100%;
+    margin: 0;
+    color: #aaa;
+    position:absolute;
+    left:5px;
+    top:5px;
+}
+
+.elapsed .mute {
+    color: #ddd;
+}
+
+.spiner-holder-one
+{
+    position: absolute;
+    top:0;
+    left:0;
+    overflow: hidden;
+    width: 50%;
+    height: 50%;
+    background: transparent;
+    box-sizing: border-box;
+}
+.spiner-holder-two
+{
+    position: absolute;
+    top:0;
+    left:0;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    box-sizing: border-box;
+}
+.loader-spiner
+{
+    width: 200%;
+    height: 200%;
+    border-radius: 50%;
+    border: 5px solid rgba(127, 255, 0, 1);
+    box-sizing: border-box;
+}  
+  .animate-0-25-a
+{
+    transform: rotate(90deg);
+    transform-origin: 100% 100%;
+}
+.animate-0-25-b
+{
+    transform: rotate(-90deg);
+    transform-origin: 100% 100%;
+}
+.animate-25-50-a
+{
+    transform: rotate(180deg);
+    transform-origin: 100% 100%;
+}
+.animate-25-50-b
+{
+    transform: rotate(-90deg);
+    transform-origin: 100% 100%;
+}
+.animate-50-75-a
+{
+    transform: rotate(270deg);
+    transform-origin: 100% 100%;
+}
+.animate-50-75-b
+{
+    transform: rotate(-90deg);
+    transform-origin:100% 100%;
+}
+.animate-75-100-a
+{
+    transform: rotate(0deg);
+    transform-origin: 100% 100%;
+}
+.animate-75-100-b
+{
+    transform: rotate(-90deg);
+    transform-origin: 100% 100%;
+}
+
+
+/**
+*
+* Navigation
+*
+*/
+
+#next, #prev, #up, #down, #show{
+    position:absolute;
+}
+
+#next, #prev{
+    height:50px;
+    width:20px;
+    top:50%;
+    margin-top:-25px;
+}
+
+#up, #down{
+    height:20px;
+    width:50px;
+    left:50%;
+    margin-left:-25px;
+}
+
+#next{
+    right:10px;
+}
+#prev{
+    left:10px;
+}
+#up{
+    top:10px;
+}
+#down{
+    bottom:10px;
+}
+
+#show{
+    height:50px;
+    width:50px;
+    top:50%;
+    left:50%;
+    margin-left:-25px;
+    margin-top:-25px;
+}
