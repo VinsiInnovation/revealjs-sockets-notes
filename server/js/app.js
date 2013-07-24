@@ -1,9 +1,23 @@
 $(function(){
-    App.init();
+    App.initConf();
 });
 
 
 var App = App || {
+    
+    conf : null,
+    
+    initConf: function(){
+         // Read configuration file for getting server port
+        $.getJSON('../conf/conf.json', function(data){                  
+            App.conf = data;
+            App.init();
+        })
+        .error(function(e){
+            console.log("Erro when trying to load config file : "+e);
+        })
+        ;
+    },
     
     init:function(){
         $.getJSON('ips.json', function(data) {
@@ -28,8 +42,8 @@ var App = App || {
                 $('#'+data[i].id).on('click',function(event){
                     console.log("pouet");
                     qrCode.clear();
-                    qrCode.makeCode("http://"+datas[event.srcElement.id].ip+":8080/plugin/socket-notes/plugin/notes-speaker.html");
-                    $("#qrCodeLink").attr("href","http://"+datas[event.srcElement.id].ip+":8080/plugin/socket-notes/plugin/notes-speaker.html");
+                    qrCode.makeCode("http://"+datas[event.srcElement.id].ip+":"+App.conf.port+"/plugin/socket-notes/plugin/notes-speaker.html");
+                    $("#qrCodeLink").attr("href","http://"+datas[event.srcElement.id].ip+":"+App.conf.port+"/plugin/socket-notes/plugin/notes-speaker.html");
                 });
             }
         
@@ -39,10 +53,12 @@ var App = App || {
         });
         
         var alreadyInit = false;
-        var socket = io.connect('http://'+window.location.hostname+':8080');
+        
+       
+        var socket = io.connect('http://'+window.location.hostname+':'+App.conf.port);
         socket.on("message", function(json){
             if (json.type === "ping"){			
-                var url = "http://"+window.location.hostname+":8080/index.html";
+                var url = "http://"+window.location.hostname+":"+App.conf.port+"/index.html";
                 if (!alreadyInit){                    
                     window.open(url,'_blank');
                 }
@@ -52,5 +68,6 @@ var App = App || {
                 //$("revealPrezLink").click();
             }
         });
+        
     }
 }

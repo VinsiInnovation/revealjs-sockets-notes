@@ -28,49 +28,63 @@
 
 	<body>
 
-        <div class="grid">        
-            <div class="actionbar grid-item one_whole">
+        <div class="actionbar">
+            <div class="title-abs">SPEAKER WS</div>
+            <div class="icon-menu"><i class="icon-ellipsis-vertical"></i></div>
+        </div>
+        <div id="time" class="border">
+            <div class="actionbar">
+                <div class="title-abs">CHRONO</div>
+                <div class="icon-menu"><i class="icon-ellipsis-vertical"></i></div>
+                <div class="title-menu" style="display:none">paramètres</div>
             </div>
-            <div id="time" class="border grid-tem one_half">
-                <h2>Elapsed</h2>
-                <div class="elapsed">
-                    <div class="timeEllapesd">
-                        <span id="hours">00</span><span id="minutes">:00</span><span id="seconds">:00</span>
+            <hr>
+            <div class="elapsed">
+                <div class="timeEllapesd">
+                    <span id="hours">00</span><span id="minutes">:00</span><span id="seconds">:00</span>
+                </div>
+                <div class="spiner-holder-one animate-0-25-a">
+                    <div class="spiner-holder-two animate-0-25-b">
+                        <div class="loader-spiner" style=""></div>
                     </div>
-                    <div class="spiner-holder-one animate-0-25-a">
-                        <div class="spiner-holder-two animate-0-25-b">
-                            <div class="loader-spiner" style=""></div>
-                        </div>
+                </div>
+                <div class="spiner-holder-one animate-25-50-a">
+                    <div class="spiner-holder-two animate-25-50-b">
+                        <div class="loader-spiner"></div>
                     </div>
-                    <div class="spiner-holder-one animate-25-50-a">
-                        <div class="spiner-holder-two animate-25-50-b">
-                            <div class="loader-spiner"></div>
-                        </div>
+                </div>
+                <div class="spiner-holder-one animate-50-75-a">
+                    <div class="spiner-holder-two animate-50-75-b">
+                        <div class="loader-spiner"></div>
                     </div>
-                    <div class="spiner-holder-one animate-50-75-a">
-                        <div class="spiner-holder-two animate-50-75-b">
-                            <div class="loader-spiner"></div>
-                        </div>
-                    </div>
-                    <div class="spiner-holder-one animate-75-100-a">
-                        <div class="spiner-holder-two animate-75-100-b">
-                            <div class="loader-spiner"></div>
-                        </div>
+                </div>
+                <div class="spiner-holder-one animate-75-100-a">
+                    <div class="spiner-holder-two animate-75-100-b">
+                        <div class="loader-spiner"></div>
                     </div>
                 </div>
             </div>
-            <div id="notes" class="border grid-tem one_half"></div>
-            <div id="preview" class="border grid-tem one_whole">
-                <div id="wrap-next-slide" class="slides">
-                    <script>document.write( '<iframe width="100%" height="100%" id="next-slide" src=""></iframe>' );</script>
-                    <span>UPCOMING:</span>
+        </div>
+        <div id="notes" class="border">
+            <div class="actionbar">
+                <div class="title-abs">NOTES</div>
+                <div class="slide-number">
+                    Slide <span class="curent-slide">8</span> / <span class="nb-slides">35</span>
                 </div>
-                <a href="#" id="next" class="button"><i class="icon-chevron-right"></i></a>
-                <a href="#" id="prev" class="button"><i class="icon-chevron-left"></i></a>
-                <a href="#" id="up" class="button"><i class="icon-chevron-up"></i></a>
-                <a href="#" id="down" class="button"><i class="icon-chevron-down"></i></a>
-                <a href="#" id="show" class="button"><i class="icon-eye-open"></i></a>                			
             </div>
+            <hr>
+            <div id="content-notes">
+            </div>
+        </div>
+        <div id="preview" class="border">
+            <div id="wrap-next-slide" class="slides">
+                <script>document.write( '<iframe width="100%" height="100%" id="next-slide" src=""></iframe>' );</script>
+            </div>
+            <a href="#" id="next" class="button"><i class="icon-chevron-right"></i></a>
+            <a href="#" id="prev" class="button"><i class="icon-chevron-left"></i></a>
+            <a href="#" id="up" class="button"><i class="icon-chevron-up"></i></a>
+            <a href="#" id="down" class="button"><i class="icon-chevron-down"></i></a>
+            <a href="#" id="show" class="button"><i class="icon-share"></i></a>                			
         </div>
     </body>
 </html>

@@ -1,3 +1,18 @@
+// Configuration part
+var fs = require('fs');
+var confFile = process.cwd()+'/plugin/socket-notes/conf/conf.json';
+var conf = null;
+try{    
+    conf = JSON.parse(fs.readFileSync(confFile));
+}catch(err){
+    console.log('Error reading confFile : '+err);
+    return;
+}
+
+if (!conf){
+    console.log("No configuration file found");
+    return;
+}
 
 // Server part
 var connect = require('connect');
@@ -5,7 +20,8 @@ var connect = require('connect');
 console.log(process.cwd());
 var app = connect.createServer(
     connect.static(process.cwd())
-).listen(8080);
+).listen(conf.port);
+console.log("Start server on port : "+conf.port);
 
 // Define socket part
 var io   = require('socket.io');
@@ -20,7 +36,6 @@ wsServer.sockets.on('connection', function(socket) {
 
 // Service for rendering adresses
 var os = require('os');
-var fs = require('fs');
 var ifaces=os.networkInterfaces();
 var jsonNetWork = [];
 var index = 0;
