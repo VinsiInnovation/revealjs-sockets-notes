@@ -89,8 +89,7 @@ body {
 */
 
 
-.elapsed,
-.clock {
+.elapsed {
     position:absolute;
     width:80%;
     border-radius:80%;

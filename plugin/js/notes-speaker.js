@@ -5,6 +5,7 @@
 var RevealSpeakerNotes = (function() {
     
     var conf = null;
+    var defaultInterval = 60;
 
 	window.addEventListener( 'load', function() {
         
@@ -135,7 +136,8 @@ var RevealSpeakerNotes = (function() {
             minutesEl.innerHTML = ":" + zeroPadInteger( minutes );
             minutesEl.className = minutes > 0 ? "" : "mute";
             secondsEl.innerHTML = ":" + zeroPadInteger( seconds );
-            renderProgress(diff % 100);
+
+            renderProgress((diff / 1000) % 100);
         
         }, 1000 );
     }
