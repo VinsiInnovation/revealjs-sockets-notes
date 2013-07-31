@@ -4,15 +4,15 @@
  */
 var RevealSpeakerNotes = (function() {
     
-    var conf = null;
-    var defaultInterval = 60;
-    var limitAlert = 10;
-    var totalTime = 0;
+    var conf = null; // parameters comming from conf.json (with port for WebSockets)
+    var defaultInterval = 60; // Time in minute of the conference
+    var limitAlert = 10; // time before the end where we have to alert the speaker (if defaultInterval is upper limitAlert)
+    var totalTime = 0; // Total time ellapsed during the presentation
+    var timeStart = false; // true if the time loader is on
 
 	window.addEventListener( 'load', function() {
         
-        // Plug Fastclick module
-        
+        // Plug Fastclick module        
         FastClick.attach(document.body);
 
 
@@ -121,6 +121,7 @@ var RevealSpeakerNotes = (function() {
         secondsEl = document.getElementById( 'seconds' );
         
         
+        // Show / Hide methods
         $('#config_ellapsed_cancel').on('click',function(){
             $('#configEllapsed').hide();
             $('#ellapsedTime').show();
@@ -132,6 +133,7 @@ var RevealSpeakerNotes = (function() {
             $('#ellapsedTime').show();
             $('#timeMenu').show();
             $('#timeTitleMenu').hide();
+            defaultInterval = $('#config_interval').val();
         });
         $('#timeMenu').on('click',function(){
             $('#ellapsedTime').hide();
@@ -140,27 +142,54 @@ var RevealSpeakerNotes = (function() {
             $('#timeTitleMenu').show();
         });
         
+        
+        // Actions
+        $('#action_time_play').on('click',function(){
+            $('#action_time_pause').show();
+            $('#action_time_play').hide();
+            timeStart = true;
+            start  = new Date();
+        });
+        $('#action_time_pause').on('click',function(){
+            $('#action_time_pause').hide();
+            $('#action_time_play').show();
+            timeStart = false;
+            totalTime = totalTime + (new Date().getTime() - start.getTime());
+        });
+        $('#action_time_stop').on('click',function(){
+            $('#action_time_pause').hide();
+            $('#action_time_play').show();
+            timeStart = false;
+            totalTime  = 0;
+        });
+        
+        
+        
+        // Time interval for management of time
         setInterval( function() {
         
             timeEl.style.opacity = 1;
         
             var diff, hours, minutes, seconds,
                 now = new Date();
-        
-            diff = now.getTime() - start.getTime();
-            hours = parseInt( diff / ( 1000 * 60 * 60 ) );
-            minutes = parseInt( ( diff / ( 1000 * 60 ) ) % 60 );
-            seconds = parseInt( ( diff / 1000 ) % 60 );
-        
-            //clockEl.innerHTML = now.toLocaleTimeString();
-            hoursEl.innerHTML = zeroPadInteger( hours );
-            hoursEl.className = hours > 0 ? "" : "mute";
-            minutesEl.innerHTML = ":" + zeroPadInteger( minutes );
-            minutesEl.className = minutes > 0 ? "" : "mute";
-            secondsEl.innerHTML = ":" + zeroPadInteger( seconds );
-
-            renderProgress(((diff + totalTime) / 1000) % 100);
-        
+            if (timeStart){
+                diff = now.getTime() - start.getTime();
+                hours = parseInt( diff / ( 1000 * 60 * 60 ) );
+                minutes = parseInt( ( diff / ( 1000 * 60 ) ) % 60 );
+                seconds = parseInt( ( diff / 1000 ) % 60 );
+            
+                hoursEl.innerHTML = zeroPadInteger( hours );
+                hoursEl.className = hours > 0 ? "" : "mute";
+                minutesEl.innerHTML = ":" + zeroPadInteger( minutes );
+                minutesEl.className = minutes > 0 ? "" : "mute";
+                secondsEl.innerHTML = ":" + zeroPadInteger( seconds );
+                
+                var totalDiff = diff + totalTime;
+                defaultInterval = defaultInterval > 0 ? defaultInterval : 60;
+                var diffPercent = totalDiff / (defaultInterval * 1000);
+                
+                renderProgress(diffPercent % 100);
+            }
         }, 1000 );
     }
     
@@ -168,7 +197,7 @@ var RevealSpeakerNotes = (function() {
         progress = Math.floor(progress);
         if(progress<25){
             var angle = -90 + (progress/100)*360;
-            $(".animate-0-25-b").css("transform","rotate("+angle+"deg)");
+            $(".animate-0-25-b").css("transform ","rotate("+angle+"deg)");
             $(".animate-25-50-b").css("transform","rotate(-90deg)");
             $(".animate-50-75-b").css("transform","rotate(-90deg)");
             $(".animate-75-100-b").css("transform","rotate(-90deg)");

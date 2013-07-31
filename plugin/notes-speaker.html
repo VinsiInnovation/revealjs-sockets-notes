@@ -28,17 +28,22 @@
 
 	<body>
 
+        <!-- Main Action Bar -->
         <div class="actionbar">
             <div class="title-abs">SPEAKER WS</div>
             <div class="icon-menu"><i class="icon-ellipsis-vertical"></i></div>
         </div>
+        
+        <!-- Time Loader part -->
         <div id="time" class="border">
+            <!-- Common time loader actionbar-->
             <div class="actionbar">
                 <div class="title-abs">CHRONO</div>
                 <div id="timeMenu" class="icon-menu"><i class="icon-ellipsis-vertical"></i></div>
                 <div id="timeTitleMenu"  class="title-menu" style="display:none">parameters</div>
             </div>
             <hr>
+            <!-- ellapse time -->
             <div id="ellapsedTime">
                 <div class="elapsed">
                     <div class="elapsed_bg">
@@ -79,11 +84,14 @@
                     </div>
                 </div>
             </div>
+            <!-- config time -->
             <div id="configEllapsed" style="display:none">
-                    <span class="config_ellapsed_lbl">Total time of presentation in minutes</span>
-                    <div  class="config_ellapsed_time"><input type="number" value="60"></div>
-                    <div id="config_ellapsed_cancel"><em>CANCEL</em> (back to chrono)</div>
-                    <div id="config_ellapsed_validate">VALIDATE</div>                    
+                    <class class="config_ellapsed_lbl">Total time of presentation in minutes</class>
+                    <div  class="config_ellapsed_time"><input id="config_interval" type="number" value="60"></div>
+                    <div class="actions_times">
+                        <div id="config_ellapsed_cancel"><em>CANCEL</em></div>
+                        <div id="config_ellapsed_validate"><em>VALIDATE</em></div>                    
+                    </div>
             </div>
             </div>
         </div>

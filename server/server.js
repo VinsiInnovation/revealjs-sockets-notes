@@ -1,6 +1,6 @@
 // Configuration part
 var fs = require('fs');
-var confFile = process.cwd()+'/plugin/socket-notes/conf/conf.json';
+var confFile = process.cwd()+'/plugin/sockets-notes/conf/conf.json';
 var conf = null;
 try{    
     conf = JSON.parse(fs.readFileSync(confFile));
@@ -54,7 +54,7 @@ for (var dev in ifaces) {
     }
   });
 }
-fs.writeFile("./plugin/socket-notes/server/ips.json", JSON.stringify(jsonNetWork), function(err) {
+fs.writeFile("./plugin/sockets-notes/server/ips.json", JSON.stringify(jsonNetWork), function(err) {
     if(err) {
         console.log(err);
     } else {
