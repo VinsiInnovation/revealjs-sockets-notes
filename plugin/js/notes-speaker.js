@@ -6,6 +6,8 @@ var RevealSpeakerNotes = (function() {
     
     var conf = null;
     var defaultInterval = 60;
+    var limitAlert = 10;
+    var totalTime = 0;
 
 	window.addEventListener( 'load', function() {
         
@@ -112,11 +114,31 @@ var RevealSpeakerNotes = (function() {
     function timeManagement(){
         // Time Management
         var start = new Date(),
-            timeEl = document.querySelector( '#time' ),
-            //clockEl = document.getElementById( 'clock' ),
-            hoursEl = document.getElementById( 'hours' ),
-            minutesEl = document.getElementById( 'minutes' ),
-            secondsEl = document.getElementById( 'seconds' );
+        timeEl = document.querySelector( '#time' ),
+        //clockEl = document.getElementById( 'clock' ),
+        hoursEl = document.getElementById( 'hours' ),
+        minutesEl = document.getElementById( 'minutes' ),
+        secondsEl = document.getElementById( 'seconds' );
+        
+        
+        $('#config_ellapsed_cancel').on('click',function(){
+            $('#configEllapsed').hide();
+            $('#ellapsedTime').show();
+            $('#timeMenu').show();
+            $('#timeTitleMenu').hide();
+        });
+        $('#config_ellapsed_validate').on('click',function(){
+            $('#configEllapsed').hide();
+            $('#ellapsedTime').show();
+            $('#timeMenu').show();
+            $('#timeTitleMenu').hide();
+        });
+        $('#timeMenu').on('click',function(){
+            $('#ellapsedTime').hide();
+            $('#configEllapsed').show();
+            $('#timeMenu').hide();
+            $('#timeTitleMenu').show();
+        });
         
         setInterval( function() {
         
@@ -137,7 +159,7 @@ var RevealSpeakerNotes = (function() {
             minutesEl.className = minutes > 0 ? "" : "mute";
             secondsEl.innerHTML = ":" + zeroPadInteger( seconds );
 
-            renderProgress((diff / 1000) % 100);
+            renderProgress(((diff + totalTime) / 1000) % 100);
         
         }, 1000 );
     }
@@ -147,16 +169,22 @@ var RevealSpeakerNotes = (function() {
         if(progress<25){
             var angle = -90 + (progress/100)*360;
             $(".animate-0-25-b").css("transform","rotate("+angle+"deg)");
+            $(".animate-25-50-b").css("transform","rotate(-90deg)");
+            $(".animate-50-75-b").css("transform","rotate(-90deg)");
+            $(".animate-75-100-b").css("transform","rotate(-90deg)");
         }
         else if(progress>=25 && progress<50){
             var angle = -90 + ((progress-25)/100)*360;
             $(".animate-0-25-b").css("transform","rotate(0deg)");
             $(".animate-25-50-b").css("transform","rotate("+angle+"deg)");
+            $(".animate-50-75-b").css("transform","rotate(-90deg)");
+            $(".animate-75-100-b").css("transform","rotate(-90deg)");
         }
         else if(progress>=50 && progress<75){
             var angle = -90 + ((progress-50)/100)*360;
             $(".animate-25-50-b, .animate-0-25-b").css("transform","rotate(0deg)");
             $(".animate-50-75-b").css("transform","rotate("+angle+"deg)");
+            $(".animate-75-100-b").css("transform","rotate(-90deg)");
         }
         else if(progress>=75 && progress<=100){
             var angle = -90 + ((progress-75)/100)*360;

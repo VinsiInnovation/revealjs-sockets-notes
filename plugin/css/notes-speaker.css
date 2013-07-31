@@ -94,14 +94,23 @@ body {
     width:80%;
     border-radius:80%;
     padding-bottom:80%;
-    margin-top:-40%;
     margin-left:-40%;
-    top:50%;
+    top:15%;
     left:50%;
     color: #333;
     font-size: 2em;
     vertical-align:middle;
+    
+}
+
+.elapsed_bg{
     background-color: #3e3d40;
+    position: absolute;    
+    top: 15px;
+    left: 15px;
+    width: calc(100% - 30px);
+    height: calc(100% - 30px);
+    border-radius: 50%;
 }
 
 .timeEllapesd{
@@ -130,6 +139,71 @@ body {
     color: #ddd;
 }
 
+.actions_times{
+    position: absolute;
+    background-color:#3e3d40;
+    bottom:0;
+    left:0;
+    height:20%;
+    width:100%;
+}
+
+#action_time_play, #action_time_stop, #action_time_pause{
+    background-color: #009aa6;
+    position:absolute;
+    top: 0;
+    width:49%;
+    height:100%;
+    
+    text-align:center;
+    color:#fff;
+    font-size:4em;
+    margin:auto;    
+}
+
+#action_time_play, #action_time_pause{
+    left:0;
+}
+#action_time_stop{
+    right:0;
+}
+
+#config_ellapsed_cancel, #config_ellapsed_validate{
+    background-color: #009aa6;
+    position:absolute;
+    width:100%;
+    height:30px;
+    left:0;   
+    text-align:center;
+    color:#fff;
+    font-size:2em;
+    margin:auto;    
+}
+
+#config_ellapsed_cancel{
+    bottom: 31px;
+}
+
+#config_ellapsed_validate{
+    bottom:0;  
+}
+
+
+#time .config_ellapsed_time{
+    font-family:digital;    
+    width: 50%;
+    margin: auto;
+}
+
+#time .config_ellapsed_time input{
+    font-family:digital;
+    text-align: center;
+    font-size: 3em;
+    width: 100%;
+}
+
+
+
 .spiner-holder-one
 {
     position: absolute;
@@ -151,6 +225,10 @@ body {
     height: 100%;
     background: transparent;
     box-sizing: border-box;
+}
+
+.loader-spinner-alert{
+    border-color:#be233a;
 }
 .loader-spiner
 {
@@ -232,6 +310,7 @@ body {
     border-left-width:1px;
 }
 
+
 #time .actionbar, #notes .actionbar{
     height:30px;
     font-size:12px;
@@ -243,6 +322,16 @@ body {
     height:30px;
     padding-left:15px;
     line-height:30px;
+}
+
+#time .actionbar .title-menu{
+    width:100%;
+    height:30px;
+    position:absolute;
+    line-height:30px;
+    text-align:right;
+    right:5px;
+    top:0;
 }
 
 #notes .slide-number{
