@@ -24,7 +24,7 @@ var RevealClientNotes = (function() {
 
     
     function initConfig(){
-          ajaxJSONGet('./plugin/socket-notes/conf/conf.json', function(data){    
+          ajaxJSONGet('./plugin/sockets-notes/conf/conf.json', function(data){    
               conf = data;
               initWS();
           });

@@ -5,8 +5,8 @@
 var RevealSpeakerNotes = (function() {
     
     var conf = null; // parameters comming from conf.json (with port for WebSockets)
-    var defaultInterval = 60; // Time in minute of the conference
-    var limitAlert = 10; // time before the end where we have to alert the speaker (if defaultInterval is upper limitAlert)
+    var defaultInterval = 2; // Time in minute of the conference
+    var limitAlert = 1; // time before the end where we have to alert the speaker (if defaultInterval is upper limitAlert)
     var totalTime = 0; // Total time ellapsed during the presentation
     var timeStart = false; // true if the time loader is on
 
@@ -159,6 +159,8 @@ var RevealSpeakerNotes = (function() {
         $('#action_time_stop').on('click',function(){
             $('#action_time_pause').hide();
             $('#action_time_play').show();
+            $(".loader-spiner").removeClass("loader-spinner-alert");
+            $(".loader-spiner").addClass("loader-spiner");
             timeStart = false;
             totalTime  = 0;
         });
@@ -174,9 +176,12 @@ var RevealSpeakerNotes = (function() {
                 now = new Date();
             if (timeStart){
                 diff = now.getTime() - start.getTime();
-                hours = parseInt( diff / ( 1000 * 60 * 60 ) );
-                minutes = parseInt( ( diff / ( 1000 * 60 ) ) % 60 );
-                seconds = parseInt( ( diff / 1000 ) % 60 );
+                defaultInterval = defaultInterval > 0 ? defaultInterval : 60;
+                var totalDiff = diff + totalTime;
+                var alertTime = (defaultInterval * 60 * 1000) - (limitAlert * 60 * 1000);
+                hours = parseInt( totalDiff / ( 1000 * 60 * 60 ) );
+                minutes = parseInt( ( totalDiff / ( 1000 * 60 ) ) % 60 );
+                seconds = parseInt( ( totalDiff / 1000 ) % 60 );
             
                 hoursEl.innerHTML = zeroPadInteger( hours );
                 hoursEl.className = hours > 0 ? "" : "mute";
@@ -184,11 +189,14 @@ var RevealSpeakerNotes = (function() {
                 minutesEl.className = minutes > 0 ? "" : "mute";
                 secondsEl.innerHTML = ":" + zeroPadInteger( seconds );
                 
-                var totalDiff = diff + totalTime;
-                defaultInterval = defaultInterval > 0 ? defaultInterval : 60;
-                var diffPercent = totalDiff / (defaultInterval * 1000);
-                
+                var diffPercent = (totalDiff / (defaultInterval * 60 * 1000)) * 100;                
                 renderProgress(diffPercent % 100);
+                
+                
+                if (totalDiff > alertTime && !$(".loader-spiner").hasClass("loader-spinner-alert")){
+                    $(".loader-spiner").addClass("loader-spinner-alert");
+                    $(".loader-spiner").removeClass("loader-spiner");
+                }
             }
         }, 1000 );
     }
@@ -197,7 +205,7 @@ var RevealSpeakerNotes = (function() {
         progress = Math.floor(progress);
         if(progress<25){
             var angle = -90 + (progress/100)*360;
-            $(".animate-0-25-b").css("transform ","rotate("+angle+"deg)");
+            $(".animate-0-25-b").css("transform","rotate("+angle+"deg)");
             $(".animate-25-50-b").css("transform","rotate(-90deg)");
             $(".animate-50-75-b").css("transform","rotate(-90deg)");
             $(".animate-75-100-b").css("transform","rotate(-90deg)");
