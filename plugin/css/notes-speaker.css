@@ -54,8 +54,8 @@ body {
 
 #notes, #time{
     width:calc(50% - 20px);
-    height:calc(50% - 50px - 20px);    
-    top:50px;
+    height:calc(50% - 7% - 20px);    
+    top:7%;
 }
 
 #notes {    
@@ -74,6 +74,32 @@ body {
     /*margin : 10px;*/
     left:0;
 }
+
+@media screen and (orientation:landscape){
+    #notes, #time{
+        width:calc(30% - 20px);
+        height:calc(50% - 7% - 20px);    
+        top:7%;
+        left:0;
+    }
+    
+    #notes {    
+        top:7%;        
+    }
+    
+    #time {    
+        top:57%;
+    }
+    
+    #preview{
+        width:calc(70% - 20px);
+        height:calc(100% - 7% - 20px);
+        bottom:0;
+        /*margin : 10px;*/
+        left:30%;
+    }   
+}
+
 
 /***
  *      _____  _____  ________      _______ ________          __
@@ -164,13 +190,36 @@ body {
 }
 
 #show{
-    /*height:50px;
-    width:50px;*/
+    height:30%;
+    width:20%;
+    font-size:2em;
     top:50%;
     left:50%;
-    margin-left:-25px;
-    margin-top:-25px;
+    margin-left:-10%;
+    margin-top:-15%;
 }
+
+@media screen and (orientation:landscape){
+    #show{
+        height:15%;
+        margin-top:-10%;
+    }
+    
+}
+
+#preview .next-slide{
+    color:#009aa6;
+}
+
+#preview .slide-preview-number{
+    font-size:0.5em;
+    position:absolute;
+    bottom:2px;
+    left:50%;
+    margin-left:-25%;
+    
+}
+
 
 
 /***
@@ -190,6 +239,8 @@ body {
 **------------------
 */
 
+
+
 .elapsed {
     position:absolute;
     width:80%;
@@ -204,25 +255,36 @@ body {
     
 }
 
+@media screen and (orientation:landscape){
+    .elapsed {
+        width:70%;
+        border-radius:70%;
+        padding-bottom:70%;
+        margin-left:-35%;
+        
+    }
+}
+
+
 .elapsed_bg{
     background-color: #3e3d40;
     position: absolute;    
-    top: 15px;
-    left: 15px;
-    width: calc(100% - 30px);
-    height: calc(100% - 30px);
+    top: 10px;
+    left: 10px;
+    width: calc(100% - 20px);
+    height: calc(100% - 20px);
     border-radius: 50%;
 }
 
 .timeEllapesd{
     font-family:digital;
-    font-size:35px;
+    font-size:70%;
     color:#fff;
     position: absolute;
     width: 100%;
     height: 100%;
     top: 50%;
-    margin-top: -10%;
+    margin-top: -20%;
     text-align: center;
 }
 
@@ -258,7 +320,8 @@ body {
     
     text-align:center;
     color:#fff;
-    font-size:4em;
+    font-size:150%;
+    line-height:150%;
     margin:auto;    
 }
 
@@ -282,7 +345,7 @@ body {
     left:0;   
     text-align:center;
     color:#fff;
-    font-size:2em;
+    font-size:1em;
     margin:auto;    
 }
 
@@ -296,10 +359,11 @@ body {
 
 .config_ellapsed_lbl{
     position:absolute;
-    width:50%;
-    font-size:20px;
+    width:60%;
+    font-size:1em;
+    line-height:1em;
     left:50%;
-    margin-left:-25%;
+    margin-left:-30%;
     top:15%;
     text-align:center;
 }
@@ -308,18 +372,18 @@ body {
     font-family:digital;    
     width: 50%;
     margin: auto;
-    height:4em;
+    height:2em;
     position:absolute;
     top:50%;
     left:50%;
-    margin-top:-2em;
+    margin-top:-1em;
     margin-left:-25%;
 }
 
 #time .config_ellapsed_time input{
     font-family:digital;
     text-align: center;
-    font-size: 3em;
+    font-size: 2em;
     width: 100%;
 }
 
@@ -356,7 +420,7 @@ body {
     width: 200%;
     height: 200%;
     border-radius: 50%;
-    border: 15px solid;
+    border: 10px solid;
     box-sizing: border-box;
 }  
 
@@ -420,29 +484,56 @@ body {
  */
 
 .actionbar{
+    position: absolute;
+    top:0;
+    left:0;
     background:#fff;
-    height:50px;
+    height:7%;
     width:100%;    
     font-family:"Arial Black",Arial,sans-serif;   
-    font-size:24px;    
-    line-height:50px;
+    font-size:1.2em;    
+    line-height:1.2em;
 }
 
 .actionbar .title-abs{
     padding-left:10px;
     display:inline-block;
+    position:absolute;
+    top:50%;
+    margin-top:-3.5%;
+    left:0;
+    width:100%;
+}
+
+@media screen and (orientation:landscape){
+    .actionbar .title-abs{
+        margin-top:-1.5%;
+    }
 }
 
 .actionbar .icon-menu{
-    width:50px;
-    height:50px;
-    padding-left:25px;
     position:absolute;
-    line-height:50px;
     right:5px;
     top:0;
+    width:10%;
+    height:100%;
+    padding-left:5%;
+    padding-top:0.3em;
     border-left-style:solid;
     border-left-width:1px;
+}
+
+.actionbar i{
+    position:absolute;
+    top:50%;
+    margin-top:-25%;
+}
+
+@media screen and (orientation:landscape){
+    .actionbar i{
+        margin-top: -15%;   
+    }
+    
 }
 
 /**-----------------
@@ -451,26 +542,30 @@ body {
 */
 
 #time .actionbar, #notes .actionbar{
-    height:40px;
-    font-size:20px;
-    line-height:40px;
+    height:10%;
+    font-size:1em;
+    line-height:1em;
 }
 
 #time .actionbar .icon-menu{
-    width:40px;
-    height:40px;
-    padding-left:20px;
-    line-height:40px;
+    line-height:1em;
 }
 
 #time .actionbar .title-menu{
     width:100%;
-    height:40px;
+    height:100%;
     position:absolute;
-    line-height:40px;
+    font-size:0.8em;
+    line-height:0.8em;
     text-align:right;
     right:5px;
-    top:0;
+}
+
+.hractionbar{
+ position:absolute;
+    width:100%;
+    top:10%;
+    left:0;
 }
 
 /***
@@ -484,12 +579,14 @@ body {
  *                                         
  */
 
-#notes .slide-number{
+#notes .actionbar  .slide-number{
     position: absolute;
-    top : 0;
+    top : 50%;
+    margin-top:-4%;
     right:0;
     padding-right:15px;
-    height:30px;
+    height:100%;
+    font-size:0.8em;
 }
 
 #notes .curent-slide{
@@ -501,10 +598,13 @@ body {
 }
 
 #content-notes{
-    font-size:2.5em;
+    position:absolute;
+    top:10%;
+    left:0;
+    font-size:120%;
     line-height:1.2em;
     overflow:auto;
     height:100%;
-    width:calc(100% + 25px);
+    width:calc(100% + 20px);
 }
 

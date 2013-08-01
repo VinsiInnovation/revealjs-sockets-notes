@@ -14,8 +14,7 @@ var RevealSpeakerNotes = (function() {
         
         // Plug Fastclick module        
         FastClick.attach(document.body);
-
-
+        
         // Connection to socket to 
     
         // Read configuration file for getting server port
@@ -50,6 +49,7 @@ var RevealSpeakerNotes = (function() {
 
         var notes = $('#content-notes' );
         var curentSlideIndex = $('.curent-slide');
+        var nextSlideIndex = $('.next-slide');
         var totalSlideIndex = $('.nb-slides');
 
         var next = $( '#next' );
@@ -99,7 +99,8 @@ var RevealSpeakerNotes = (function() {
                 }else if (json.indices){
                     indices = json.indices;
                     fragment = 0;
-                    curentSlideIndex.html(indices.h+indices.v);                    
+                    curentSlideIndex.html(indices.h+indices.v);       
+                    nextSlideIndex.html(indices.h+indices.v+1);
                 }else if (json.fragment){
                     if (json.fragment === '+1'){
                         fragment++;
@@ -163,6 +164,7 @@ var RevealSpeakerNotes = (function() {
             $(".loader-spiner").addClass("loader-spiner");
             timeStart = false;
             totalTime  = 0;
+            renderProgress(0);
         });
         
         
