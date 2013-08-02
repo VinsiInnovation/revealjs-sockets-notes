@@ -8,6 +8,10 @@ var RevealClientNotes = (function() {
     var conf = null;
 	var socket = null;
     var showModif = window.location.hash === '#speakerNotes';
+    
+    if (showModif){
+        document.querySelector('.controls').style.display = "none";
+    }
 
     function ajaxJSONGet(url, callback){
         var http_request = new XMLHttpRequest();
@@ -16,7 +20,7 @@ var RevealClientNotes = (function() {
           var done = 4;
           var ok = 200;
           if (http_request.readyState === done && http_request.status === ok){
-        callback(JSON.parse(http_request.responseText));
+            callback(JSON.parse(http_request.responseText));
           }
         };
         http_request.send();

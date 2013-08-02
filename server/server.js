@@ -34,6 +34,7 @@ wsServer.sockets.on('connection', function(socket) {
     });    
 });
 
+
 // Service for rendering adresses
 var os = require('os');
 var ifaces=os.networkInterfaces();
@@ -54,10 +55,45 @@ for (var dev in ifaces) {
     }
   });
 }
-fs.writeFile("./plugin/sockets-notes/server/ips.json", JSON.stringify(jsonNetWork), function(err) {
-    if(err) {
-        console.log(err);
-    } else {
-        console.log("The file was saved!");
+var http = require('http');
+var wait = true;
+console.log("Check Public ip");
+http.get('http://api.externalip.net/ip'
+    , function(res){
+    res.on('data', function (data) {
+        try{
+            jsonNetWork.push({
+                id : jsonNetWork.length,
+                name : "public ip",
+                ip : ""+data
+            });
+            console.log("public ip found : "+data);
+            
+        }catch(e){
+            console.log('Warn : error geting ip from internet : '+e.message);      
+        }
+        wait = false;
+    });
+}).on('error',function(e){
+    console.log('Warn : error geting ip from internet : '+e.message);
+    wait = false;
+});
+
+
+function writeFile(){
+    if (wait){
+        setTimeout(writeFile,500);
+    }else{
+        console.log("Write ip file");
+        fs.writeFile("./plugin/sockets-notes/server/ips.json", JSON.stringify(jsonNetWork), function(err) {
+            if(err) {
+                console.log(err);
+            } else {
+                console.log("The file was saved!");
+            }
+            
+            console.log('Finish server loading');
+        }); 
     }
-}); 
+}
+writeFile();
