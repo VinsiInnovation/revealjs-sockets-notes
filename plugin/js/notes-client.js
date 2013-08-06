@@ -36,12 +36,22 @@ var RevealClientNotes = (function() {
     
 	
 	function initWS(){
-          // Read configuration file for getting server port
-            
+        // Get the number of slides
+        var nbSlides = 0;
+        var continueLoop = true;
+        while(continueLoop){
+            nbSlides++;                
+            continueLoop = Reveal.getSlide(nbSlides);
+        }
+        
+        // Connect to websocket
         socket = io.connect('http://'+window.location.hostname+':'+conf.port);
+        // On Connection message
         socket.on('connect', function(){            
-           socket.emit('message', {type :"config", url : window.location.pathname});
+           socket.emit('message', {type :"config", url : window.location.pathname, nbSlides : nbSlides-1});
+           socket.emit('message', {type :"config", indices : Reveal.getIndices()});
         });
+        // On message recieve
         socket.on('message', function (data) {
             if( data.type === "operation"){	  		
                 if (showModif && data.data === "next"){
@@ -55,13 +65,7 @@ var RevealClientNotes = (function() {
                 }else if (!showModif && data.data === "show"){
                     Reveal.slide( data.index.h, data.index.v, data.fragment );
                 }
-            }else if( data.type === "ping"){	  		
-                var nbSlides = 0;
-                var continueLoop = true;
-                while(continueLoop){
-                    nbSlides++;                
-                    continueLoop = Reveal.getSlide(nbSlides);
-                }
+            }else if( data.type === "ping"){	  		               
                 socket.emit('message', {type :"config", url : window.location.pathname, nbSlides : nbSlides-1});
                 socket.emit('message', {type :"config", indices : Reveal.getIndices()});
             }

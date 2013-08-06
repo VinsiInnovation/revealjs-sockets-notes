@@ -9,6 +9,7 @@ var RevealSpeakerNotes = (function() {
     var limitAlert = 1; // time before the end where we have to alert the speaker (if defaultInterval is upper limitAlert)
     var totalTime = 0; // Total time ellapsed during the presentation
     var timeStart = false; // true if the time loader is on
+    var couldUnlock = false; // true if the client is ready for websocket control
 
 	window.addEventListener( 'load', function() {
         
@@ -87,7 +88,11 @@ var RevealSpeakerNotes = (function() {
                 else {
                     notes.html(json.data.notes);
                 }
-            }else if (json.type === "config"){							
+            }else if (json.type === "config"){	
+                if (!couldUnlock){
+                    $("#show").removeAttr("disabled");
+                }
+                couldUnlock = couldUnlock || true;
                 if (json.url && !localUrl){
                    localUrl = "http://"+window.location.hostname+":"+conf.port+json.url+"#speakerNotes";
                    var iframe = document.getElementById("next-slide");                                              
