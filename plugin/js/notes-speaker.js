@@ -11,6 +11,7 @@ var RevealSpeakerNotes = (function() {
     var timeStart = false; // true if the time loader is on
     var couldUnlock = false; // true if the client is ready for websocket control
 
+    // Wait for load of document
 	window.addEventListener( 'load', function() {
         
         // Plug Fastclick module        
@@ -21,6 +22,7 @@ var RevealSpeakerNotes = (function() {
         // Read configuration file for getting server port
         $.getJSON('../conf/conf.json', function(data){              
             conf = data;
+            //Init the webSocket and time management
             init();
         }).error(function(e){
             console.log("Error during getting config file : "+e);
@@ -28,31 +30,37 @@ var RevealSpeakerNotes = (function() {
 
     }, false );
 
+    // String function for number formating
     function zeroPadInteger( num ) {
         var str = "00" + parseInt( num );
         return str.substring( str.length - 2 );
     }
     
+    // WebSocket initialisation and time management initialisation
     function init(){
         
         initSocket();
         timeManagement();
     }
     
+    
+    // Connect to websocket on host
     function initSocket(){
         var socket = io.connect('http://'+window.location.hostname+':'+conf.port);
         var localUrl = null;
         var indices = null;
         var fragment = 0;
+        // Socket IO connect
         socket.on('connect',function(){
+            // Send a ping message for getting config
            socket.emit('message', {type:'ping'}); 
         });
 
-        var notes = $('#content-notes' );
+        // Get all the html elementsto monitor
+        var notes = $('#content-notes' );        
         var curentSlideIndex = $('.curent-slide');
         var nextSlideIndex = $('.next-slide');
         var totalSlideIndex = $('.nb-slides');
-
         var next = $( '#next' );
         var prev = $( '#prev' );
         var up = $( '#up' );
@@ -60,7 +68,6 @@ var RevealSpeakerNotes = (function() {
         var show = $( '#show' );
 
         // Buttons interaction
-
         next.on('click', function(){
             socket.emit('message', {type : 'operation', data : 'next'});
         });
@@ -79,8 +86,8 @@ var RevealSpeakerNotes = (function() {
         });
 
         // Message from presentation
-
         socket.on("message", function(json){
+            // Message send when recieving notes
             if (json.type === "notes"){							
                 if( json.data.markdown ) {
                     notes.html(marked( json.data.notes ));
@@ -88,35 +95,52 @@ var RevealSpeakerNotes = (function() {
                 else {
                     notes.html(json.data.notes);
                 }
-            }else if (json.type === "config"){	
-                if (!couldUnlock){
-                    $("#show").removeAttr("disabled");
-                }
-                couldUnlock = couldUnlock || true;
-                if (json.url && !localUrl){
-                   localUrl = "http://"+window.location.hostname+":"+conf.port+json.url+"#speakerNotes";
-                   var iframe = document.getElementById("next-slide");                                              
-                   iframe.src = localUrl;
-                   iframe.onload = function(){
-                       
-                   }                   
-                   totalSlideIndex.html(json.nbSlides);
-                }else if (json.indices){
-                    indices = json.indices;
-                    fragment = 0;
-                    curentSlideIndex.html(indices.h+indices.v);       
-                    nextSlideIndex.html(indices.h+indices.v+1);
-                }else if (json.fragment){
-                    if (json.fragment === '+1'){
-                        fragment++;
-                    }else{
-                        fragment = Math.min(0, fragment++);
+            }else  // Message recieve on each change of slide
+                if (json.type === "config"){	
+                    // We unlock the presentation if we have a client
+                    if (!couldUnlock){
+                        $("#show").removeAttr("disabled");
                     }
-                }
+                    couldUnlock = couldUnlock || true;
+                    // If we have to load the speaker slide versions (recieve the url of presentation)
+                    if (json.url && !localUrl){
+                       localUrl = "http://"+window.location.hostname+":"+conf.port+json.url+"#speakerNotes";
+                       var iframe = document.getElementById("next-slide");                                              
+                       iframe.src = localUrl;
+                       iframe.onload = function(){
+                           
+                       }                   
+                       totalSlideIndex.html(json.nbSlides);
+                    }else  // If we recieve the index of presentation
+                        if (json.indices){
+                            indices = json.indices;
+                            fragment = 0;
+                            curentSlideIndex.html(indices.h+indices.v);       
+                            nextSlideIndex.html(indices.h+indices.v+1);       
+                            if (json.controls){
+                                if (json.controls.right) next.removeAttr("disabled"); 
+                                else next.attr("disabled", true); 
+                                if (json.controls.left) prev.removeAttr("disabled"); 
+                                else prev.attr("disabled", true); 
+                                if (json.controls.up) up.removeAttr("disabled"); 
+                                else up.attr("disabled", true); 
+                                if (json.controls.down) down.removeAttr("disabled"); 
+                                else down.attr("disabled", true); 
+                            }
+                            
+                    }else // If we recieve a fragment modification
+                        if (json.fragment){
+                            if (json.fragment === '+1'){
+                                fragment++;
+                            }else{
+                                fragment = Math.min(0, fragment++);
+                            }
+                    }
             }
         });
     }
     
+    // Time management
     function timeManagement(){
         // Time Management
         var start = new Date(),

@@ -13,8 +13,8 @@ This interface use the websocket to control your presentation and to communicate
 To use it you have to do severals things
 
 1. Copy this directory into : 'YourRevealPresentation/plugin/socket-notes'
-2. Install the node modules in the server (YourRevealPresentation/plugin/socket-notes/server) directory with : npm install
-3. Start the server from your revealPresentation folder root with "node plugin/socket-notes/server/server.js"
+2. Install the node modules in the server (YourRevealPresentation/plugin/sockets-notes/server) directory with : npm install
+3. Start the server from your revealPresentation folder root with "node plugin/sockets-notes/server/server.js"
 4. Launch your favorites browser and go to http://localhost:8080
 5. Select the right network and click on it
 6. Scan the QrCode with your smartphone

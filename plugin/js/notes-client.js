@@ -7,12 +7,15 @@ var RevealClientNotes = (function() {
 
     var conf = null;
 	var socket = null;
+    // look at the url passed to see if we're manipulating the client slides or the speakers slides
     var showModif = window.location.hash === '#speakerNotes';
     
+    // If we're manipulating the speakers slides, then we don't display the controls (we want to control it manualy)
     if (showModif){
         document.querySelector('.controls').style.display = "none";
     }
 
+    // Do an Ajax Call
     function ajaxJSONGet(url, callback){
         var http_request = new XMLHttpRequest();
         http_request.open("GET", url, true);
@@ -27,6 +30,7 @@ var RevealClientNotes = (function() {
     }
 
     
+    // Initialise with the configuration file
     function initConfig(){
           ajaxJSONGet('./plugin/sockets-notes/conf/conf.json', function(data){    
               conf = data;
@@ -35,6 +39,7 @@ var RevealClientNotes = (function() {
     }
     
 	
+    // Init the WebSocket connection
 	function initWS(){
         // Get the number of slides
         var nbSlides = 0;
@@ -48,8 +53,19 @@ var RevealClientNotes = (function() {
         socket = io.connect('http://'+window.location.hostname+':'+conf.port);
         // On Connection message
         socket.on('connect', function(){            
-           socket.emit('message', {type :"config", url : window.location.pathname, nbSlides : nbSlides-1});
-           socket.emit('message', {type :"config", indices : Reveal.getIndices()});
+            socket.emit('message', {
+               type :"config", 
+               url : window.location.pathname, 
+               nbSlides : nbSlides-1
+            });
+            // If we are on the slides of speaker, we specify the controls values
+            if (showModif){                
+               socket.emit('message', {
+                   type :"config", 
+                   indices : Reveal.getIndices(),
+                   controls : getControls()
+               });
+            }
         });
         // On message recieve
         socket.on('message', function (data) {
@@ -66,25 +82,61 @@ var RevealClientNotes = (function() {
                     Reveal.slide( data.index.h, data.index.v, data.fragment );
                 }
             }else if( data.type === "ping"){	  		               
-                socket.emit('message', {type :"config", url : window.location.pathname, nbSlides : nbSlides-1});
-                socket.emit('message', {type :"config", indices : Reveal.getIndices()});
+                 // We have to check the controls in order to show the correct directions
+              
+                socket.emit('message', {
+                    type :"config", 
+                    url : window.location.pathname, 
+                    nbSlides : nbSlides-1
+                });
+                socket.emit('message', {
+                    type :"config", 
+                    indices : Reveal.getIndices()
+                  
+                });
             }
         });
 	}
+    
+    
+    // Get the curent controls 
+    function getControls(){
+        var controls = document.querySelector('.controls');
+        var upControl = false,
+            downControl = false,
+            leftControl = false,
+            rightControl = false;                
+        if (controls){
+            upControl = controls.querySelector("div.navigate-up.enabled") ? true : false;
+            downControl = controls.querySelector("div.navigate-down.enabled") ? true : false;
+            leftControl = controls.querySelector("div.navigate-left.enabled") ? true : false;
+            rightControl = controls.querySelector("div.navigate-right.enabled") ? true : false;
+        }
+        return {
+            up : upControl,
+            down : downControl,
+            left : leftControl,
+            right : rightControl
+        }
+    }
 
 
+    // Listen to Reveal Events
 	function initRevealListener(){
 
 		Reveal.addEventListener( 'slidechanged', function( event ) {
+            // We get the curent slide 
 			var slideElement = Reveal.getCurrentSlide(),
-				messageData;
+				messageData = null;
 			
+            // We get the notes and init the indexs
 			var notes = slideElement.querySelector( 'aside.notes' ),
 				indexh = Reveal.getIndices().h,
 				indexv = Reveal.getIndices().v,
 				nextindexh,
 				nextindexv;
 
+            
 			if( slideElement.nextElementSibling && slideElement.parentNode.nodeName == 'SECTION' ) {
 				nextindexh = indexh;
 				nextindexv = indexv + 1;
@@ -93,6 +145,7 @@ var RevealClientNotes = (function() {
 				nextindexv = 0;
 			}
 
+            // We prepare the message data to send through websocket
 			messageData = {
 				notes : notes ? notes.innerHTML : '',
 				indexh : indexh,
@@ -102,15 +155,23 @@ var RevealClientNotes = (function() {
 				markdown : notes ? typeof notes.getAttribute( 'data-markdown' ) === 'string' : false
 			};
 
+            // If we're on client slides
 			if (!showModif && socket &&  messageData.notes !== undefined) {
 				socket.emit('message', {type : 'notes', data : messageData});				
 			}
-            if (showModif && socket){
-                socket.emit("message", {type:'config', indices : Reveal.getIndices()});
+            
+            // If we're on speaker slides
+            if (showModif && socket){               
+                socket.emit("message", {
+                    type:'config', 
+                    indices : Reveal.getIndices(),
+                    controls : getControls()
+                });
             }			
 			
 		} );
         
+        // We listen to fragments modifications
         Reveal.addEventListener( 'fragmentshown', function( event ) {
             socket.emit("message", {type:'config', fragment : '+1'});
         } );
@@ -119,6 +180,7 @@ var RevealClientNotes = (function() {
         } );
 	}
 
+    // We init the client side (websocket + reveal Listener)
 	function init(){
 		initConfig();
 		initRevealListener();
