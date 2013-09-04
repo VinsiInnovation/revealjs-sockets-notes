@@ -10,15 +10,6 @@ var RevealClientNotes = (function() {
     // look at the url passed to see if we're manipulating the client slides or the speakers slides
     var showModif = window.location.hash === '#speakerNotes';
     
-    // If we're manipulating the speakers slides, then we don't display the controls (we want to control it manualy)
-    if (showModif){
-        Reveal.initialize({
-           controls: true,
-           transition : 'default',
-           transitionSpeed : 'fast'
-        });
-    }
-
     // Do an Ajax Call
     function ajaxJSONGet(url, callback){
         var http_request = new XMLHttpRequest();
@@ -66,25 +57,14 @@ var RevealClientNotes = (function() {
             if (showModif){                
                socket.emit('message', {
                    type :"config", 
-                   indices : Reveal.getIndices(),
-                   controls : getControls()
+                   indices : Reveal.getIndices()
                });
             }
         });
         // On message recieve
         socket.on('message', function (data) {
-            if( data.type === "operation"){	  		
-                if (showModif && data.data === "next"){
-                    Reveal.next();
-                }else if (showModif && data.data === "prev"){
-                    Reveal.prev();
-                }else if (showModif && data.data === "up"){
-                    Reveal.up();
-                }else if (showModif && data.data === "down"){
-                    Reveal.down();
-                }else if (!showModif && data.data === "show"){
-                    Reveal.slide( data.index.h, data.index.v, data.fragment );
-                }
+            if( data.type === "operation" && !showModif && data.data === "show"){
+                Reveal.slide( data.index.h, data.index.v, data.fragment );
             }else if( data.type === "ping"){	  		               
                  // We have to check the controls in order to show the correct directions
               
@@ -103,28 +83,6 @@ var RevealClientNotes = (function() {
 	}
     
     
-    // Get the curent controls 
-    function getControls(){
-        var controls = document.querySelector('.controls');
-        controls.style.display = "none";
-        var upControl = false,
-            downControl = false,
-            leftControl = false,
-            rightControl = false;                
-        if (controls){
-            upControl = controls.querySelector("div.navigate-up.enabled") ? true : false;
-            downControl = controls.querySelector("div.navigate-down.enabled") ? true : false;
-            leftControl = controls.querySelector("div.navigate-left.enabled") ? true : false;
-            rightControl = controls.querySelector("div.navigate-right.enabled") ? true : false;
-        }
-        return {
-            up : upControl,
-            down : downControl,
-            left : leftControl,
-            right : rightControl
-        }
-    }
-
 
     // Listen to Reveal Events
 	function initRevealListener(){
@@ -171,8 +129,7 @@ var RevealClientNotes = (function() {
                 setTimeout(function(){                    
                     socket.emit("message", {
                         type:'config', 
-                        indices : Reveal.getIndices(),
-                        controls : getControls()
+                        indices : Reveal.getIndices()
                     });
                 }, 500);
             }			

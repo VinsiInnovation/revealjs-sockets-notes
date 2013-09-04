@@ -10,15 +10,16 @@ var RevealSpeakerNotes = (function() {
     var totalTime = 0; // Total time ellapsed during the presentation
     var timeStart = false; // true if the time loader is on
     var couldUnlock = false; // true if the client is ready for websocket control
-
+    var Reveal = null; // The Reveal Object of iframe presentation
+    var localUrl = null;// Var use in order to see if the presentation has already be loaded
+    
     // Wait for load of document
 	window.addEventListener( 'load', function() {
         
         // Plug Fastclick module        
         FastClick.attach(document.body);
         
-        // Connection to socket to 
-    
+        
         // Read configuration file for getting server port
         $.getJSON('../conf/conf.json', function(data){              
             conf = data;
@@ -40,14 +41,21 @@ var RevealSpeakerNotes = (function() {
     function init(){
         
         initSocket();
+        initElements();
         timeManagement();
+    }
+    
+    // Init all html elements
+    function initElements(){
+        
+        
     }
     
     
     // Connect to websocket on host
     function initSocket(){
         var socket = io.connect('http://'+window.location.hostname+':'+conf.port);
-        var localUrl = null;
+        
         var indices = null;
         var fragment = 0;
         // Socket IO connect
@@ -69,25 +77,30 @@ var RevealSpeakerNotes = (function() {
 
         // Buttons interaction
         next.on('click', function(){
-            socket.emit('message', {type : 'operation', data : 'next'});
+            if (Reveal) Reveal.right();
         });
         prev.on('click', function(){
-            socket.emit('message', {type : 'operation', data : 'prev'});
+            if (Reveal) Reveal.left();
         });
         up.on('click', function(){
-            socket.emit('message', {type : 'operation', data : 'up'});
+            if (Reveal) Reveal.up();
         });
         down.on('click', function(){
-            socket.emit('message', {type : 'operation', data : 'down'});
+            if (Reveal) Reveal.down();
         });
         show.on('click', function(){
+            if (Reveal) Reveal.next();
             socket.emit('message', {type : 'operation', data : 'show', index: indices, fragment : fragment});
-            socket.emit('message', {type : 'operation', data : 'next'});
         });
 
         // Message from presentation
-        socket.on("message", function(json){
-            // Message send when recieving notes
+        socket.on("message", onMessage);
+    }
+    
+    
+    // On WebSockets Messages
+    function onMessage(json){
+        // Message send when recieving notes
             if (json.type === "notes"){							
                 if( json.data.markdown ) {
                     notes.html(marked( json.data.notes ));
@@ -107,26 +120,15 @@ var RevealSpeakerNotes = (function() {
                        localUrl = "http://"+window.location.hostname+":"+conf.port+json.url+"#speakerNotes";
                        var iframe = document.getElementById("next-slide");                                              
                        iframe.src = localUrl;
-                       iframe.onload = function(){
-                           
-                       }                   
+                       iframe.onload = onIframeLoad;   
                        totalSlideIndex.html(json.nbSlides);
                     }else  // If we recieve the index of presentation
                         if (json.indices){
                             indices = json.indices;
                             fragment = 0;
                             curentSlideIndex.html(indices.h+indices.v);       
-                            nextSlideIndex.html(indices.h+indices.v+1);       
-                            if (json.controls){
-                                if (json.controls.right) next.removeAttr("disabled"); 
-                                else next.attr("disabled", true); 
-                                if (json.controls.left) prev.removeAttr("disabled"); 
-                                else prev.attr("disabled", true); 
-                                if (json.controls.up) up.removeAttr("disabled"); 
-                                else up.attr("disabled", true); 
-                                if (json.controls.down) down.removeAttr("disabled"); 
-                                else down.attr("disabled", true); 
-                            }
+                            nextSlideIndex.html(indices.h+indices.v+1);    
+                           
                             
                     }else // If we recieve a fragment modification
                         if (json.fragment){
@@ -137,7 +139,30 @@ var RevealSpeakerNotes = (function() {
                             }
                     }
             }
+    }
+    
+    function onIframeLoad(){
+        var iframe = document.getElementById("next-slide");     
+        // Configuration of presentation to hide controls
+        iframe.contentWindow.Reveal.initialize({
+            controls: true,
+            transition : 'default',
+            transitionSpeed : 'fast'
         });
+        Reveal = iframe.contentWindow.Reveal;
+        
+        Reveal.addEventListener( 'slidechanged', revealChangeListener);
+    }
+    
+    function revealChangeListener(event){
+         setTimeout(function(){          
+             updateControls();
+             /*
+            socket.emit("message", {
+                type:'config', 
+                indices : Reveal.getIndices()
+            });*/
+        }, 500);		
     }
     
     // Time management
@@ -230,6 +255,48 @@ var RevealSpeakerNotes = (function() {
                 }
             }
         }, 1000 );
+    }
+    
+    
+    function updateControls(){
+        var next = $( '#next' );
+        var prev = $( '#prev' );
+        var up = $( '#up' );
+        var down = $( '#down' );
+        var show = $( '#show' );
+
+        // We update the buttons
+        var controls = getControls();
+        if (controls.right) next.removeAttr("disabled"); 
+        else next.attr("disabled", true); 
+        if (controls.left) prev.removeAttr("disabled"); 
+        else prev.attr("disabled", true); 
+        if (controls.up) up.removeAttr("disabled"); 
+        else up.attr("disabled", true); 
+        if (controls.down) down.removeAttr("disabled"); 
+        else down.attr("disabled", true); 
+    }
+    
+    // Get the curent controls 
+    function getControls(){
+        var controls = document.querySelector('iframe').contentDocument.querySelector('.controls');
+        var upControl = false,
+            downControl = false,
+            leftControl = false,
+            rightControl = false;                
+        if (controls){
+            controls.style.display = "none";
+            upControl = controls.querySelector("div.navigate-up.enabled") ? true : false;
+            downControl = controls.querySelector("div.navigate-down.enabled") ? true : false;
+            leftControl = controls.querySelector("div.navigate-left.enabled") ? true : false;
+            rightControl = controls.querySelector("div.navigate-right.enabled") ? true : false;
+        }
+        return {
+            up : upControl,
+            down : downControl,
+            left : leftControl,
+            right : rightControl
+        }
     }
     
     function renderProgress(progress){
