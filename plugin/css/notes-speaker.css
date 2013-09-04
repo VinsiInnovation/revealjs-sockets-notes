@@ -59,14 +59,14 @@ body {
 }
 
 #notes {    
-    height:calc(50% - 7% - 20px - 50px);    
+    height:calc(50% - 7% - 20px - 40px);    
     top:7%;
     margin-bottom: 5px;    
-    margin-top:10px;
+    margin-top:5px;
 }
 
 #time {    
-    height:50px;
+    height:40px;
     bottom:50%;
     margin-bottom: 5px;    
     margin-top:5px;
@@ -169,15 +169,11 @@ body {
 }
 
 #next, #prev{
-    /*height:50px;
-    width:50px;*/
     top:50%;
     margin-top:-25px;
 }
 
 #up, #down{
-    /*height:50px;
-    width:50px;*/
     left:50%;
     margin-left:-25px;
 }
@@ -196,13 +192,13 @@ body {
 }
 
 #show{
-    height:30%;
-    width:20%;
-    font-size:2em;
+    height:60px;
+    width:60px;
+    font-size:25px;
     top:50%;
     left:50%;
-    margin-left:-10%;
-    margin-top:-15%;
+    margin-left:-30px;
+    margin-top:-30px;
 }
 
 @media screen and (orientation:landscape){
@@ -249,10 +245,10 @@ body {
 
 .elapsed {
     position:absolute;
-    width:calc(100% - 151px);
-    height:50px;
+    width:calc(100% - (40px * 3 + 1px));
+    height:40px;
     top:0;
-    left:101px;
+    left:calc(40px * 2 + 1px);
     color: #333;
     vertical-align:middle;
     
@@ -280,8 +276,8 @@ body {
 
 .timeEllapesd{
     font-family:digital;
-    font-size: 3em;
-    line-height:50px;
+    font-size: 30px;
+    line-height:40px;
     color:#333;
     position: absolute;
     width: 100%;
@@ -299,16 +295,16 @@ body {
     background-color:#3e3d40;
     bottom:0;
     left:0;
-    height:50px;
-    width:101px;
+    height:40px;
+    width:calc(40px * 2 + 1px);
 }
 
 #action_time_play, #action_time_stop, #action_time_pause{
     background-color: #009aa6;
     position:absolute;
     top: 0;
-    width:50px;
-    height:50px;    
+    width:40px;
+    height:40px;    
     text-align:center;
     color:#fff;
     font-size:150%;
@@ -317,8 +313,8 @@ body {
 }
 
 #time i{
-    font-size:1.2em;
-    line-height:50px;
+    font-size:20px;
+    line-height:40px;
     top:0;
     margin-top:0;
 }
@@ -327,7 +323,7 @@ body {
     left:0;
 }
 #action_time_stop{
-    left:51px;
+    left:41px;
 }
 
 /**-----------------
@@ -338,8 +334,8 @@ body {
 #config_ellapsed_cancel, #config_ellapsed_validate{
     background-color: #009aa6;
     position:absolute;
-    width:50px;
-    height:50px;
+    width:40px;
+    height:40px;
     top:0;   
     text-align:center;
     color:#fff;
@@ -348,7 +344,7 @@ body {
 }
 
 #config_ellapsed_cancel{
-    right: 51px;
+    right: 41px;
 }
 
 #config_ellapsed_validate{
@@ -367,25 +363,24 @@ body {
 
 #time .config_ellapsed_time{
     font-family:digital;    
-    width: 50%;
+    width: calc(100% - (40px * 2 + 1px) - 150px);
     margin: auto;
     height:2em;
     position:absolute;
     top:50%;
-    left:50%;
+    right:calc(40px * 2 + 5px);
     margin-top:-1em;
-    margin-left:-25%;
 }
 
 #time .config_ellapsed_time input{
     font-family:digital;
     text-align: center;
-    font-size: 2em;
+    font-size: 25px;
     width: 100%;
 }
 
 #configEllapsed .actions_times{
-    left:calc(100% - 101px);
+    left:calc(100% - (40px * 2 + 1px));
 }
 
 /**-----------------
@@ -426,26 +421,26 @@ body {
     top:0;
     left:0;
     background:#fff;
-    height:7%;
+    height:40px;
     width:100%;    
     font-family:"Arial Black",Arial,sans-serif;   
-    font-size:1.2em;    
-    line-height:1.2em;
+    font-size:20px;    
+    line-height:40px;
 }
 
 .actionbar .title-abs{
     padding-left:10px;
     display:inline-block;
     position:absolute;
-    top:50%;
-    margin-top:-3.5%;
+    top:0;
+    margin-top:0;
     left:0;
     width:100%;
 }
 
 @media screen and (orientation:landscape){
     .actionbar .title-abs{
-        margin-top:-1.5%;
+        margin-top:0;
     }
 }
 
@@ -481,22 +476,22 @@ body {
 **------------------
 */
 
-#time .actionbar, #notes .actionbar{
-    height:50px;
-    font-size:1em;
-    line-height:1em;
+#notes .actionbar{
+    height:20px;
+    font-size:10px;
+    line-height:20px;
 }
 
 #time .actionbar .icon-menu{
-    line-height:1em;
+    line-height:40px;
 }
 
 #time .actionbar .title-menu{
     width:100%;
     height:100%;
     position:absolute;
-    font-size:1em;
-    line-height:50px;
+    font-size:15px;
+    line-height:40px;
     text-align:left;
     left:5px;
 }
@@ -504,7 +499,7 @@ body {
 .hractionbar{
  position:absolute;
     width:100%;
-    top:10%;
+    top:20px;
     left:0;
 }
 
@@ -521,12 +516,10 @@ body {
 
 #notes .actionbar  .slide-number{
     position: absolute;
-    top : 50%;
-    margin-top:-4%;
     right:0;
     padding-right:15px;
     height:100%;
-    font-size:0.8em;
+    font-size:10px;
 }
 
 #notes .curent-slide{

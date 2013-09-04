@@ -12,7 +12,11 @@ var RevealClientNotes = (function() {
     
     // If we're manipulating the speakers slides, then we don't display the controls (we want to control it manualy)
     if (showModif){
-        document.querySelector('.controls').style.display = "none";
+        Reveal.initialize({
+           controls: true,
+           transition : 'default',
+           transitionSpeed : 'fast'
+        });
     }
 
     // Do an Ajax Call
@@ -102,6 +106,7 @@ var RevealClientNotes = (function() {
     // Get the curent controls 
     function getControls(){
         var controls = document.querySelector('.controls');
+        controls.style.display = "none";
         var upControl = false,
             downControl = false,
             leftControl = false,
@@ -161,12 +166,15 @@ var RevealClientNotes = (function() {
 			}
             
             // If we're on speaker slides
-            if (showModif && socket){               
-                socket.emit("message", {
-                    type:'config', 
-                    indices : Reveal.getIndices(),
-                    controls : getControls()
-                });
+            if (showModif && socket){ 
+                // We have to delay the send of this message beacause we have to wait that the transition has be done
+                setTimeout(function(){                    
+                    socket.emit("message", {
+                        type:'config', 
+                        indices : Reveal.getIndices(),
+                        controls : getControls()
+                    });
+                }, 500);
             }			
 			
 		} );
