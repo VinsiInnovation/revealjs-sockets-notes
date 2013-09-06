@@ -82,24 +82,21 @@ body {
 @media screen and (orientation:landscape){
     #notes, #time{
         width:calc(30% - 20px);
-        height:calc(50% - 7% - 20px);    
-        top:7%;
         left:0;
-    }
+    }    
     
     #notes {    
-        top:7%;        
+        height:calc(100% - 40px - 40px - 20px);       
     }
     
     #time {    
-        top:57%;
+        bottom:0;
     }
     
     #preview{
         width:calc(70% - 20px);
-        height:calc(100% - 7% - 20px);
+        height:calc(100% - 40px - 20px);
         bottom:0;
-        /*margin : 10px;*/
         left:30%;
     }   
 }
@@ -199,14 +196,6 @@ body {
     margin-top:-30px;
 }
 
-@media screen and (orientation:landscape){
-    #show{
-        height:15%;
-        margin-top:-10%;
-    }
-    
-}
-
 #preview .next-slide{
     color:#009aa6;
 }
@@ -252,6 +241,7 @@ body {
     
 }
 
+/*
 @media screen and (orientation:landscape){
     .elapsed {
         width:70%;
@@ -260,7 +250,7 @@ body {
         margin-left:-35%;
         
     }
-}
+}*/
 
 
 .elapsed_bg{
@@ -436,20 +426,16 @@ body {
     width:100%;
 }
 
-@media screen and (orientation:landscape){
-    .actionbar .title-abs{
-        margin-top:0;
-    }
-}
 
 .actionbar .icon-menu{
     position:absolute;
     right:5px;
     top:0;
-    width:10%;
+    width:40px;
     height:100%;
-    padding-left:5%;
-    padding-top:0.3em;
+    /*dding-left:5%;
+    padding-top:0.3em;*/
+    text-align:center;
     border-left-style:solid;
     border-left-width:1px;
 }
@@ -458,13 +444,6 @@ body {
     position:absolute;
     top:50%;
     margin-top:-25%;
-}
-
-@media screen and (orientation:landscape){
-    .actionbar i{
-        margin-top: -15%;   
-    }
-    
 }
 
 

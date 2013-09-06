@@ -1,17 +1,5 @@
-/**
- * Handles opening of and synchronization with the reveal.js
- * notes window.
- */
-var RevealClientNotes = (function() {
-
-
-    var conf = null;
-	var socket = null;
-    // look at the url passed to see if we're manipulating the client slides or the speakers slides
-    var showModif = window.location.hash === '#speakerNotes';
-    
-    // Do an Ajax Call
-    function ajaxJSONGet(url, callback){
+var UtilClientNotes = UtilClientNotes || {
+    ajaxJSONGet : function(url, callback){
         var http_request = new XMLHttpRequest();
         http_request.open("GET", url, true);
         http_request.onreadystatechange = function () {
@@ -23,19 +11,34 @@ var RevealClientNotes = (function() {
         };
         http_request.send();
     }
+};
 
+/**
+ * Handles opening of and synchronization with the reveal.js
+ * notes window.
+ */
+var RevealClientNotes = RevealClientNotes || {
     
+    conf : null,
+    socket : null,
+    // We init the client side (websocket + reveal Listener)
+	init : function(){
+         // look at the url passed to see if we're manipulating the client slides or the speakers slides
+        if (window.location.hash != '#speakerNotes'){
+            RevealClientNotes.initConfig();
+            RevealClientNotes.initRevealListener();
+        }
+	},    
     // Initialise with the configuration file
-    function initConfig(){
-          ajaxJSONGet('./plugin/sockets-notes/conf/conf.json', function(data){    
-              conf = data;
-              initWS();
+    initConfig : function(){
+          UtilClientNotes.ajaxJSONGet('./plugin/sockets-notes/conf/conf.json', function(data){    
+              RevealClientNotes.conf = data;
+              RevealClientNotes.initWS();
           });
-    }
-    
-	
+        
+    },    	
     // Init the WebSocket connection
-	function initWS(){
+	initWS : function(){
         // Get the number of slides
         var nbSlides = 0;
         var continueLoop = true;
@@ -45,47 +48,42 @@ var RevealClientNotes = (function() {
         }
         
         // Connect to websocket
-        socket = io.connect('http://'+window.location.hostname+':'+conf.port);
+        RevealClientNotes.socket = io.connect('http://'+window.location.hostname+':'+RevealClientNotes.conf.port);
         // On Connection message
-        socket.on('connect', function(){            
-            socket.emit('message', {
+        RevealClientNotes.socket.on('connect', function(){            
+            RevealClientNotes.socket.emit('message', {
                type :"config", 
                url : window.location.pathname, 
                nbSlides : nbSlides-1
             });
             // If we are on the slides of speaker, we specify the controls values
-            if (showModif){                
-               socket.emit('message', {
-                   type :"config", 
-                   indices : Reveal.getIndices()
-               });
-            }
+           RevealClientNotes.socket.emit('message', {
+               type :"config", 
+               indices : Reveal.getIndices()
+           });
         });
         // On message recieve
-        socket.on('message', function (data) {
-            if( data.type === "operation" && !showModif && data.data === "show"){
+        RevealClientNotes.socket.on('message', function (data) {
+            if( data.type === "operation" && data.data === "show"){
                 Reveal.slide( data.index.h, data.index.v, data.fragment );
             }else if( data.type === "ping"){	  		               
                  // We have to check the controls in order to show the correct directions
               
-                socket.emit('message', {
+                RevealClientNotes.socket.emit('message', {
                     type :"config", 
                     url : window.location.pathname, 
                     nbSlides : nbSlides-1
                 });
-                socket.emit('message', {
+                RevealClientNotes.socket.emit('message', {
                     type :"config", 
                     indices : Reveal.getIndices()
                   
                 });
             }
         });
-	}
-    
-    
-
+	}, 
     // Listen to Reveal Events
-	function initRevealListener(){
+	initRevealListener : function (){
 
 		Reveal.addEventListener( 'slidechanged', function( event ) {
             // We get the curent slide 
@@ -119,39 +117,23 @@ var RevealClientNotes = (function() {
 			};
 
             // If we're on client slides
-			if (!showModif && socket &&  messageData.notes !== undefined) {
-				socket.emit('message', {type : 'notes', data : messageData});				
+			if (RevealClientNotes.socket &&  messageData.notes !== undefined) {
+				RevealClientNotes.socket.emit('message', {type : 'notes', data : messageData});				
 			}
             
             // If we're on speaker slides
-            if (showModif && socket){ 
-                // We have to delay the send of this message beacause we have to wait that the transition has be done
-                setTimeout(function(){                    
-                    socket.emit("message", {
-                        type:'config', 
-                        indices : Reveal.getIndices()
-                    });
-                }, 500);
+            if (RevealClientNotes.socket){                            
+                RevealClientNotes.socket.emit("message", {
+                    type:'config', 
+                    indices : Reveal.getIndices()
+                });                
             }			
 			
 		} );
         
-        // We listen to fragments modifications
-        Reveal.addEventListener( 'fragmentshown', function( event ) {
-            socket.emit("message", {type:'config', fragment : '+1'});
-        } );
-        Reveal.addEventListener( 'fragmenthidden', function( event ) {
-            socket.emit("message", {type:'config', fragment : '-1'});
-        } );
+       
 	}
-
-    // We init the client side (websocket + reveal Listener)
-	function init(){
-		initConfig();
-		initRevealListener();
-	}
-
-	return { init: init };
-})();
+    
+};
 
 RevealClientNotes.init();

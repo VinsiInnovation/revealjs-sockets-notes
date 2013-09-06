@@ -1,179 +1,205 @@
+var UtilSpeakerNotes = UtilSpeakerNotes || {
+     // String function for number formating
+    zeroPadInteger : function(num){
+         var str = "00" + parseInt( num );
+        return str.substring( str.length - 2 );
+    }
+}
+
 /**
  * Handles opening of and synchronization with the reveal.js
  * notes window.
  */
-var RevealSpeakerNotes = (function() {
+var RevealSpeakerNotes = RevealSpeakerNotes || {
     
-    var conf = null; // parameters comming from conf.json (with port for WebSockets)
-    var defaultInterval = 2; // Time in minute of the conference
-    var limitAlert = 1; // time before the end where we have to alert the speaker (if defaultInterval is upper limitAlert)
-    var totalTime = 0; // Total time ellapsed during the presentation
-    var timeStart = false; // true if the time loader is on
-    var couldUnlock = false; // true if the client is ready for websocket control
-    var Reveal = null; // The Reveal Object of iframe presentation
-    var localUrl = null;// Var use in order to see if the presentation has already be loaded
-    
-    // Wait for load of document
-	window.addEventListener( 'load', function() {
-        
-        // Plug Fastclick module        
+    conf : null, // parameters comming from conf.json (with port for WebSockets)
+    Reveal : null, // The Reveal object of iframe for manipulating the api
+    uiElements : {
+        notes : null,
+        curentSlideIndex : null,
+        nextSlideIndex : null,
+        totalSlideIndex : null,
+        next : null,
+        prev : null,
+        up : null,
+        down : null,
+        show : null,
+        timeEl : null,
+        hoursEl : null,
+        minutesEl : null,
+        secondsEl : null
+    },
+    model : {
+        defaultInterval : 2, // Time in minute of the conference
+        limitAlert : 1, // time before the end where we have to alert the speaker (if defaultInterval is upper limitAlert)
+        totalTime : 0, // Total time ellapsed during the presentation
+        timeStart : false, // true if the time loader is on
+        couldUnlock : false, // true if the client is ready for websocket control
+        socket : null, // The webSocket
+        indices : null, // The indices of the presentation
+        fragment : 0, // The current fragment number
+        localUrl : null // Var use in order to see if the presentation has already be loaded       
+    },
+    // WebSocket initialisation and time management initialisation
+    init : function(){
+         // Plug Fastclick module        
         FastClick.attach(document.body);
         
         
         // Read configuration file for getting server port
         $.getJSON('../conf/conf.json', function(data){              
-            conf = data;
+            RevealSpeakerNotes.conf = data;
+            
             //Init the webSocket and time management
-            init();
+            RevealSpeakerNotes.initSocket();
+            RevealSpeakerNotes.initElements();
+            RevealSpeakerNotes.timeManagement();
         }).error(function(e){
             console.log("Error during getting config file : "+e);
         });
-
-    }, false );
-
-    // String function for number formating
-    function zeroPadInteger( num ) {
-        var str = "00" + parseInt( num );
-        return str.substring( str.length - 2 );
-    }
     
-    // WebSocket initialisation and time management initialisation
-    function init(){
-        
-        initSocket();
-        initElements();
-        timeManagement();
-    }
-    
+    },
     // Init all html elements
-    function initElements(){
+    initElements : function(){
         
+        RevealSpeakerNotes.uiElements.notes  =  $('#content-notes' );
+        RevealSpeakerNotes.uiElements.curentSlideIndex  =  $('.curent-slide');
+        RevealSpeakerNotes.uiElements.nextSlideIndex  =  $('.next-slide');
+        RevealSpeakerNotes.uiElements.totalSlideIndex  =  $('.nb-slides');
+        RevealSpeakerNotes.uiElements.next  =  $( '#next' );
+        RevealSpeakerNotes.uiElements.prev  =  $( '#prev' );
+        RevealSpeakerNotes.uiElements.up  =  $( '#up' );
+        RevealSpeakerNotes.uiElements.down  =  $( '#down' );
+        RevealSpeakerNotes.uiElements.show  =  $( '#show' );
+        RevealSpeakerNotes.uiElements.timeEl  =  $( '#time' );
+        RevealSpeakerNotes.uiElements.hoursEl  =  $( '#hours' );
+        RevealSpeakerNotes.uiElements.minutesEl  =  $( '#minutes' );
+        RevealSpeakerNotes.uiElements.secondsEl  =  $( '#seconds' );
         
-    }
-    
-    
+         // Buttons interaction
+        RevealSpeakerNotes.uiElements.next.on('click', function(){
+            if (RevealSpeakerNotes.Reveal && !this.hasAttribute('disabled')) 
+                RevealSpeakerNotes.Reveal.right();
+        });
+        RevealSpeakerNotes.uiElements.prev.on('click', function(){
+            if (RevealSpeakerNotes.Reveal && !this.hasAttribute('disabled')) 
+                RevealSpeakerNotes.Reveal.left();
+        });
+        RevealSpeakerNotes.uiElements.up.on('click', function(){
+            if (RevealSpeakerNotes.Reveal && !this.hasAttribute('disabled')) 
+                RevealSpeakerNotes.Reveal.up();
+        });
+        RevealSpeakerNotes.uiElements.down.on('click', function(){
+            if (RevealSpeakerNotes.Reveal && !this.hasAttribute('disabled')) 
+                RevealSpeakerNotes.Reveal.down();
+        });
+        RevealSpeakerNotes.uiElements.show.on('click', function(){
+            if (RevealSpeakerNotes.Reveal && !this.hasAttribute('disabled')) 
+                RevealSpeakerNotes.Reveal.next();
+            RevealSpeakerNotes.model.socket.emit('message', {
+                type : 'operation', 
+                data : 'show', 
+                index: RevealSpeakerNotes.model.indices, 
+                fragment : RevealSpeakerNotes.model.fragment
+            });
+        });
+        
+    },
     // Connect to websocket on host
-    function initSocket(){
-        var socket = io.connect('http://'+window.location.hostname+':'+conf.port);
+    initSocket : function(){
+        RevealSpeakerNotes.model.socket = io.connect('http://'+window.location.hostname+':'+RevealSpeakerNotes.conf.port);
         
-        var indices = null;
-        var fragment = 0;
         // Socket IO connect
-        socket.on('connect',function(){
+        RevealSpeakerNotes.model.socket.on('connect',function(){
             // Send a ping message for getting config
-           socket.emit('message', {type:'ping'}); 
+           RevealSpeakerNotes.model.socket.emit('message', {
+               type:'ping'
+           }); 
         });
 
-        // Get all the html elementsto monitor
-        var notes = $('#content-notes' );        
-        var curentSlideIndex = $('.curent-slide');
-        var nextSlideIndex = $('.next-slide');
-        var totalSlideIndex = $('.nb-slides');
-        var next = $( '#next' );
-        var prev = $( '#prev' );
-        var up = $( '#up' );
-        var down = $( '#down' );
-        var show = $( '#show' );
-
-        // Buttons interaction
-        next.on('click', function(){
-            if (Reveal) Reveal.right();
-        });
-        prev.on('click', function(){
-            if (Reveal) Reveal.left();
-        });
-        up.on('click', function(){
-            if (Reveal) Reveal.up();
-        });
-        down.on('click', function(){
-            if (Reveal) Reveal.down();
-        });
-        show.on('click', function(){
-            if (Reveal) Reveal.next();
-            socket.emit('message', {type : 'operation', data : 'show', index: indices, fragment : fragment});
-        });
+       
+       
 
         // Message from presentation
-        socket.on("message", onMessage);
-    }
-    
-    
+        RevealSpeakerNotes.model.socket.on("message", RevealSpeakerNotes.onMessage);
+    },
     // On WebSockets Messages
-    function onMessage(json){
+    onMessage : function(json){
         // Message send when recieving notes
             if (json.type === "notes"){							
                 if( json.data.markdown ) {
-                    notes.html(marked( json.data.notes ));
+                    RevealSpeakerNotes.uiElements.notes.html(marked( json.data.notes ));
                 }
                 else {
-                    notes.html(json.data.notes);
+                    RevealSpeakerNotes.uiElements.notes.html(json.data.notes);
                 }
             }else  // Message recieve on each change of slide
                 if (json.type === "config"){	
                     // We unlock the presentation if we have a client
-                    if (!couldUnlock){
+                    if (!RevealSpeakerNotes.model.couldUnlock){
                         $("#show").removeAttr("disabled");
                     }
-                    couldUnlock = couldUnlock || true;
+                    RevealSpeakerNotes.model.couldUnlock = RevealSpeakerNotes.model.couldUnlock || true;
                     // If we have to load the speaker slide versions (recieve the url of presentation)
-                    if (json.url && !localUrl){
-                       localUrl = "http://"+window.location.hostname+":"+conf.port+json.url+"#speakerNotes";
+                    if (json.url && !RevealSpeakerNotes.model.localUrl){
+                       RevealSpeakerNotes.model.localUrl = "http://"+window.location.hostname+":"+RevealSpeakerNotes.conf.port+json.url+"#speakerNotes";
+                        
                        var iframe = document.getElementById("next-slide");                                              
-                       iframe.src = localUrl;
-                       iframe.onload = onIframeLoad;   
-                       totalSlideIndex.html(json.nbSlides);
+                       iframe.src = RevealSpeakerNotes.model.localUrl;
+                       iframe.onload = RevealSpeakerNotes.onIframeLoad;   
+                       
+                        RevealSpeakerNotes.uiElements.totalSlideIndex.html(json.nbSlides);
                     }else  // If we recieve the index of presentation
                         if (json.indices){
-                            indices = json.indices;
-                            fragment = 0;
-                            curentSlideIndex.html(indices.h+indices.v);       
-                            nextSlideIndex.html(indices.h+indices.v+1);    
+                            RevealSpeakerNotes.model.indices = json.indices;
+                            RevealSpeakerNotes.model.fragment = 0;
+                            RevealSpeakerNotes.uiElements.curentSlideIndex.html(RevealSpeakerNotes.model.indices.h+RevealSpeakerNotes.model.indices.v);       
+                            RevealSpeakerNotes.uiElements.nextSlideIndex.html(RevealSpeakerNotes.model.indices.h+RevealSpeakerNotes.model.indices.v+1);    
                            
                             
                     }else // If we recieve a fragment modification
                         if (json.fragment){
                             if (json.fragment === '+1'){
-                                fragment++;
+                                RevealSpeakerNotes.model.fragment++;
                             }else{
-                                fragment = Math.min(0, fragment++);
+                                RevealSpeakerNotes.model.fragment = Math.min(0, RevealSpeakerNotes.model.fragment++);
                             }
                     }
             }
-    }
-    
-    function onIframeLoad(){
+    },
+    onIframeLoad : function(){
         var iframe = document.getElementById("next-slide");     
+        RevealSpeakerNotes.Reveal = iframe.contentWindow.Reveal;
         // Configuration of presentation to hide controls
-        iframe.contentWindow.Reveal.initialize({
+        RevealSpeakerNotes.Reveal.initialize({
             controls: true,
             transition : 'default',
             transitionSpeed : 'fast'
         });
-        Reveal = iframe.contentWindow.Reveal;
         
-        Reveal.addEventListener( 'slidechanged', revealChangeListener);
-    }
-    
-    function revealChangeListener(event){
+        // We listen to reaveal events in order to ajust the screen
+        RevealSpeakerNotes.Reveal.addEventListener( 'slidechanged', RevealSpeakerNotes.revealChangeListener);
+        RevealSpeakerNotes.Reveal.addEventListener( 'fragmentshown', RevealSpeakerNotes.revealFragementShowListener);
+        RevealSpeakerNotes.Reveal.addEventListener( 'fragmenthidden', RevealSpeakerNotes.revealFragementHiddeListener);
+        RevealSpeakerNotes.updateControls();
+    },
+    revealChangeListener : function(event){
          setTimeout(function(){          
-             updateControls();
-             /*
-            socket.emit("message", {
-                type:'config', 
-                indices : Reveal.getIndices()
-            });*/
+             RevealSpeakerNotes.updateControls();
+             RevealSpeakerNotes.model.indices = RevealSpeakerNotes.Reveal.getIndices();
+             RevealSpeakerNotes.uiElements.nextSlideIndex.html(RevealSpeakerNotes.model.indices.h+RevealSpeakerNotes.model.indices.v);                
         }, 500);		
-    }
-    
+    },
+    revealFragementShowListener : function(event){
+         RevealSpeakerNotes.model.fragment++;
+    },
+    revealFragementHiddeListener : function(event){
+        RevealSpeakerNotes.model.fragment = Math.min(0, RevealSpeakerNotes.model.fragment++);
+    },
     // Time management
-    function timeManagement(){
+    timeManagement : function(){
         // Time Management
-        var start = new Date(),
-        timeEl = document.querySelector( '#time' ),
-        //clockEl = document.getElementById( 'clock' ),
-        hoursEl = document.getElementById( 'hours' ),
-        minutesEl = document.getElementById( 'minutes' ),
-        secondsEl = document.getElementById( 'seconds' );
+        var start = new Date();
         
         
         // Show / Hide methods
@@ -188,7 +214,7 @@ var RevealSpeakerNotes = (function() {
             $('#ellapsedTime').show();
             $('#timeMenu').show();
             $('#timeTitleMenu').hide();
-            defaultInterval = $('#config_interval').val();
+            RevealSpeakerNotes.model.defaultInterval = $('#config_interval').val();
         });
         $('#timeMenu').on('click',function(){
             $('#ellapsedTime').hide();
@@ -202,23 +228,23 @@ var RevealSpeakerNotes = (function() {
         $('#action_time_play').on('click',function(){
             $('#action_time_pause').show();
             $('#action_time_play').hide();
-            timeStart = true;
+            RevealSpeakerNotes.model.timeStart = true;
             start  = new Date();
         });
         $('#action_time_pause').on('click',function(){
             $('#action_time_pause').hide();
             $('#action_time_play').show();
-            timeStart = false;
-            totalTime = totalTime + (new Date().getTime() - start.getTime());
+            RevealSpeakerNotes.model.timeStart = false;
+            RevealSpeakerNotes.model.totalTime = RevealSpeakerNotes.model.totalTime + (new Date().getTime() - start.getTime());
         });
         $('#action_time_stop').on('click',function(){
             $('#action_time_pause').hide();
             $('#action_time_play').show();
             $(".loader-spiner").removeClass("loader-spinner-alert");
             $(".loader-spiner").addClass("loader-spiner");
-            timeStart = false;
-            totalTime  = 0;
-            renderProgress(0);
+            RevealSpeakerNotes.model.timeStart = false;
+            RevealSpeakerNotes.model.totalTime  = 0;
+            RevealSpeakerNotes.renderProgress(0);
         });
         
         
@@ -226,59 +252,68 @@ var RevealSpeakerNotes = (function() {
         // Time interval for management of time
         setInterval( function() {
         
-            timeEl.style.opacity = 1;
+            RevealSpeakerNotes.uiElements.timeEl.css('opacity',1);
         
-            var diff, hours, minutes, seconds,
+            var diff, 
+                hours, 
+                minutes, 
+                seconds,
                 now = new Date();
-            if (timeStart){
+            if (RevealSpeakerNotes.model.timeStart){
                 diff = now.getTime() - start.getTime();
-                defaultInterval = defaultInterval > 0 ? defaultInterval : 60;
-                var totalDiff = diff + totalTime;
-                var alertTime = (defaultInterval * 60 * 1000) - (limitAlert * 60 * 1000);
+                RevealSpeakerNotes.model.defaultInterval = RevealSpeakerNotes.model.defaultInterval > 0 ? RevealSpeakerNotes.model.defaultInterval : 60;
+                var totalDiff = diff + RevealSpeakerNotes.model.totalTime;
+                var alertTime = (RevealSpeakerNotes.model.defaultInterval * 60 * 1000) - (RevealSpeakerNotes.model.limitAlert * 60 * 1000);
                 hours = parseInt( totalDiff / ( 1000 * 60 * 60 ) );
                 minutes = parseInt( ( totalDiff / ( 1000 * 60 ) ) % 60 );
                 seconds = parseInt( ( totalDiff / 1000 ) % 60 );
             
-                hoursEl.innerHTML = zeroPadInteger( hours );
-                hoursEl.className = hours > 0 ? "" : "mute";
-                minutesEl.innerHTML = ":" + zeroPadInteger( minutes );
-                minutesEl.className = minutes > 0 ? "" : "mute";
-                secondsEl.innerHTML = ":" + zeroPadInteger( seconds );
+                RevealSpeakerNotes.uiElements.hoursEl.html(UtilSpeakerNotes.zeroPadInteger( hours ));
+                if (hours > 0 && RevealSpeakerNotes.uiElements.hoursEl.hasClass("mute"))
+                    RevealSpeakerNotes.uiElements.hoursEl.removeClass("mute");
+                else if(!RevealSpeakerNotes.uiElements.hoursEl.hasClass("mute"))
+                    RevealSpeakerNotes.uiElements.hoursEl.addClass("mute");                
                 
-                var diffPercent = (totalDiff / (defaultInterval * 60 * 1000)) * 100;                
-                renderProgress(diffPercent % 100);
+                RevealSpeakerNotes.uiElements.minutesEl.html(":" + UtilSpeakerNotes.zeroPadInteger( minutes ));
+                if (minutes > 0 && RevealSpeakerNotes.uiElements.minutesEl.hasClass("mute"))
+                    RevealSpeakerNotes.uiElements.minutesEl.removeClass("mute");
+                else if(!RevealSpeakerNotes.uiElements.minutesEl.hasClass("mute"))
+                    RevealSpeakerNotes.uiElements.minutesEl.addClass("mute");
+                
+                RevealSpeakerNotes.uiElements.secondsEl.html(":" + UtilSpeakerNotes.zeroPadInteger( seconds ));
+                
+                var diffPercent = (totalDiff / (RevealSpeakerNotes.model.defaultInterval * 60 * 1000)) * 100;                
+                RevealSpeakerNotes.renderProgress(diffPercent % 100);
                 
                 
-                if (totalDiff > alertTime && !$(".loader-spiner").hasClass("loader-spinner-alert")){
+                if (totalDiff > RevealSpeakerNotes.model.alertTime && !$(".loader-spiner").hasClass("loader-spinner-alert")){
                     $(".loader-spiner").addClass("loader-spinner-alert");
                     $(".loader-spiner").removeClass("loader-spiner");
                 }
             }
         }, 1000 );
-    }
-    
-    
-    function updateControls(){
-        var next = $( '#next' );
-        var prev = $( '#prev' );
-        var up = $( '#up' );
-        var down = $( '#down' );
-        var show = $( '#show' );
-
+    },
+    updateControls : function(){
         // We update the buttons
-        var controls = getControls();
-        if (controls.right) next.removeAttr("disabled"); 
-        else next.attr("disabled", true); 
-        if (controls.left) prev.removeAttr("disabled"); 
-        else prev.attr("disabled", true); 
-        if (controls.up) up.removeAttr("disabled"); 
-        else up.attr("disabled", true); 
-        if (controls.down) down.removeAttr("disabled"); 
-        else down.attr("disabled", true); 
-    }
-    
-    // Get the curent controls 
-    function getControls(){
+        var controls = RevealSpeakerNotes.getControls();
+        if (controls.right) 
+            RevealSpeakerNotes.uiElements.next.removeAttr("disabled"); 
+        else 
+            RevealSpeakerNotes.uiElements.next.attr("disabled", true); 
+        if (controls.left) 
+            RevealSpeakerNotes.uiElements.prev.removeAttr("disabled"); 
+        else 
+            RevealSpeakerNotes.uiElements.prev.attr("disabled", true); 
+        if (controls.up) 
+            RevealSpeakerNotes.uiElements.up.removeAttr("disabled"); 
+        else 
+            RevealSpeakerNotes.uiElements.up.attr("disabled", true); 
+        if (controls.down) 
+            RevealSpeakerNotes.uiElements.down.removeAttr("disabled"); 
+        else 
+            RevealSpeakerNotes.uiElements.down.attr("disabled", true); 
+    },// Get the curent controls 
+    getControls : function(){
         var controls = document.querySelector('iframe').contentDocument.querySelector('.controls');
         var upControl = false,
             downControl = false,
@@ -297,9 +332,8 @@ var RevealSpeakerNotes = (function() {
             left : leftControl,
             right : rightControl
         }
-    }
-    
-    function renderProgress(progress){
+    },
+    renderProgress : function(progress){
         progress = Math.floor(progress);
         if(progress<25){
             var angle = -90 + (progress/100)*360;
@@ -327,9 +361,11 @@ var RevealSpeakerNotes = (function() {
                                                   .css("transform","rotate(0deg)");
             $(".animate-75-100-b").css("transform","rotate("+angle+"deg)");
         }
-    }
-    
+    }    
+};
 
 
-	return {};
-})();
+$(function() {    
+    // TODO manage navigator with incompatible proerties
+    RevealSpeakerNotes.init();    
+});
