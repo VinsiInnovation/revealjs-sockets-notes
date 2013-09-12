@@ -1,6 +1,6 @@
 {
-  "author": "SNCF SV.SI",
-  "name": "RealTimeInnov",
+  "author": "JefBinomed",
+  "name": "SpeakerWS",
   "version": "1.0.0",
   "dependencies": {},
   "devDependencies": {
@@ -14,9 +14,6 @@
     "grunt-contrib-csslint": "~0.1.2",
     "grunt-contrib-jshint": "~0.6.0",
     "grunt-contrib-watch": "~0.4.4",
-    "grunt-contrib-compass": "~0.2.0",
-    "grunt-oversprite" : "~0.1.4",
-    "canvas": "1.0.3",
-    "gm": "1.10.0"
+    "grunt-contrib-compass": "~0.2.0"
   }
 }
