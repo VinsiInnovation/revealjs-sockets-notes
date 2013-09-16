@@ -10,18 +10,18 @@ module.exports = function (grunt) {
         basedir : 'server',  
         html: {
           index:    '<%= server.basedir %>/index.html',
-          all :     "<%= server.basedir %>/**/*.html"
+          all :     '<%= server.basedir %>/**/*.html'
         },
-        js:   ['<%= server.basedir %>/js/**/*.js'],
+        js:   '<%= server.basedir %>/js/**/*.js',
         css: {
           all :'<%= server.basedir %>/css/**/*.css',
-          dir: '<%= server.basedir %>/css/',
+          dir: '<%= server.basedir %>/css',
           app: '<%= server.basedir %>/css/server.css',
-          libs: '<%= server.basedir %>/lib/'
+          libs: '<%= server.basedir %>/libs'
         },
         sass: {
-          all :'<%= server.basedir %>/scss/**/*.scss',
-          dir: '<%= server.basedir %>/scss'
+          all :'<%= server.basedir %>/sass/**/*.scss',
+          dir: '<%= server.basedir %>/sass'
         },
         assets: {
           font:     '<%= server.basedir %>/font',
@@ -32,18 +32,18 @@ module.exports = function (grunt) {
         basedir : 'plugin',
         html: {
           index:    '<%= plugin.basedir %>/index.html',
-          all :     "<%= plugin.basedir %>/**/*.html"
+          all : '<%= plugin.basedir %>/**/*.html'
         },
-        js:   ['<%= plugin.basedir %>/js/**/*.js'],
+        js:   '<%= plugin.basedir %>/js/**/*.js',
         css: {
           all :'<%= plugin.basedir %>/css/**/*.css',
-          dir: '<%= plugin.basedir %>/css/',
+          dir: '<%= plugin.basedir %>/css',
           app: '<%= plugin.basedir %>/css/plugin.css',
-          libs: '<%= plugin.basedir %>/lib/'
+          libs: '<%= plugin.basedir %>/libs/'
         },
         sass: {
-          all :'<%= plugin.basedir %>/scss/**/*.scss',
-          dir: '<%= plugin.basedir %>/scss'
+          all :'<%= plugin.basedir %>/sass/**/*.scss',
+          dir: '<%= plugin.basedir %>/sass'
         },
         assets: {
           font:     '<%= plugin.basedir %>/font',
@@ -62,70 +62,63 @@ module.exports = function (grunt) {
 
     copy: {
         server: {
-            css: {
-                files: [
-                    {expand: true, cwd: '<%= server.css.libs %>', src: ['**/*.css'], dest: '<%= server.css.dir %>'}
-                ]
-            }
+            files: [
+                {expand: true, cwd: '<%= server.css.libs %>', src: ['**/*.css'], dest: '<%= server.css.dir %>'}
+            ]
+            
         },
         plugin: {
-            css: {
-                files: [
-                    {expand: true, cwd: '<%= plugin.css.libs %>', src: ['**/*.css'], dest: '<%= plugin.css.dir %>'}
-                ]
-            }
+            files: [
+                {expand: true, cwd: '<%= plugin.css.libs %>', src: ['**/*.css'], dest: '<%= plugin.css.dir %>'}
+            ]            
         }      
     },
 
     
     // Configuration du watch
     watch: {
-        server: {            
-            html: {
-                files: ['<%= server.html.all %>'],
-                options: {
-                  livereload: true
-                }
-            },
-            css: {
-                files: ['<%= server.css.all %>'],
-                options: {
-                  livereload: true
-                }
-            },
-            sass: {
-                files: ['<%= server.sass.all %>'],
-                task: 'compass.server'
-            },
-            js: {
-                files: ['<%= server.js %>'],
-                options: {
-                  livereload: true
-                }
+        server_html: {            
+            files: ['<%= server.html.all %>'],
+            options: {
+              livereload: true
             }
         },
-        plugin: {
-            html: {
-                files: ['<%= plugin.html.all %>'],
-                options: {
-                  livereload: true
-                }
-            },
-            css: {
-                files: ['<%= plugin.css.all %>'],
-                options: {
-                  livereload: true
-                }
-            },
-            sass: {
-                files: ['<%= plugin.sass.all %>'],
-                task: 'compass.server'
-            },
-            js: {
-                files: ['<%= plugin.js %>'],
-                options: {
-                  livereload: true
-                }
+        server_css: {
+            files: ['<%= server.css.all %>'],
+            options: {
+              livereload: true
+            }
+        },
+        server_sass: {
+            files: ['<%= server.sass.all %>'],
+            tasks: ['compass:server']
+        },
+        server_js: {
+            files: ['<%= server.js %>'],
+            options: {
+              livereload: true
+            }
+        },
+        plugin_html: {
+            files: ['<%= plugin.html.all %>'],
+            options: {
+              livereload: true
+            }
+        },
+        plugin_css: {
+            files: ['<%= plugin.css.all %>'],
+            options: {
+              livereload: true
+            }
+        },
+        plugin_sass: {
+            files: ['<%= plugin.sass.all %>'],
+            tasks: ['compass:plugin']
+        },
+        plugin_js: {
+            files: ['<%= plugin.js %>'],
+            options: {
+              livereload: true
             }
         
         }

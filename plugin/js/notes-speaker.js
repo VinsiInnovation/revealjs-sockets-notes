@@ -16,14 +16,18 @@ var RevealSpeakerNotes = RevealSpeakerNotes || {
     Reveal : null, // The Reveal object of iframe for manipulating the api
     uiElements : {
         notes : null,
+        nbSlides : -1,
         curentSlideIndex : null,
         nextSlideIndex : null,
         totalSlideIndex : null,
         next : null,
         prev : null,
+        left : null,
+        right : null,
         up : null,
         down : null,
         show : null,
+        reset : null,
         timeEl : null,
         hoursEl : null,
         minutesEl : null,
@@ -42,6 +46,21 @@ var RevealSpeakerNotes = RevealSpeakerNotes || {
     },
     // WebSocket initialisation and time management initialisation
     init : function(){
+        // Add Fullscreen experience
+        setTimeout(function(){
+            
+        var docElm = document.documentElement;
+        if (docElm.requestFullscreen) {
+            docElm.requestFullscreen();
+        }
+        else if (docElm.mozRequestFullScreen) {
+            docElm.mozRequestFullScreen();
+        }
+        else if (docElm.webkitRequestFullScreen) {
+            docElm.webkitRequestFullScreen();
+        }
+        },500);
+        
          // Plug Fastclick module        
         FastClick.attach(document.body);
         
@@ -68,7 +87,10 @@ var RevealSpeakerNotes = RevealSpeakerNotes || {
         RevealSpeakerNotes.uiElements.totalSlideIndex  =  $('.nb-slides');
         RevealSpeakerNotes.uiElements.next  =  $( '#next' );
         RevealSpeakerNotes.uiElements.prev  =  $( '#prev' );
+        RevealSpeakerNotes.uiElements.left  =  $( '#left' );
+        RevealSpeakerNotes.uiElements.right  =  $( '#right' );
         RevealSpeakerNotes.uiElements.up  =  $( '#up' );
+        RevealSpeakerNotes.uiElements.reset  =  $( '#reset' );
         RevealSpeakerNotes.uiElements.down  =  $( '#down' );
         RevealSpeakerNotes.uiElements.show  =  $( '#show' );
         RevealSpeakerNotes.uiElements.timeEl  =  $( '#time' );
@@ -79,11 +101,19 @@ var RevealSpeakerNotes = RevealSpeakerNotes || {
          // Buttons interaction
         RevealSpeakerNotes.uiElements.next.on('click', function(){
             if (RevealSpeakerNotes.Reveal && !this.hasAttribute('disabled')) 
-                RevealSpeakerNotes.Reveal.right();
+                RevealSpeakerNotes.Reveal.next();
         });
         RevealSpeakerNotes.uiElements.prev.on('click', function(){
             if (RevealSpeakerNotes.Reveal && !this.hasAttribute('disabled')) 
+                RevealSpeakerNotes.Reveal.prev();
+        });
+        RevealSpeakerNotes.uiElements.left.on('click', function(){
+            if (RevealSpeakerNotes.Reveal && !this.hasAttribute('disabled')) 
                 RevealSpeakerNotes.Reveal.left();
+        });
+        RevealSpeakerNotes.uiElements.right.on('click', function(){
+            if (RevealSpeakerNotes.Reveal && !this.hasAttribute('disabled')) 
+                RevealSpeakerNotes.Reveal.right();
         });
         RevealSpeakerNotes.uiElements.up.on('click', function(){
             if (RevealSpeakerNotes.Reveal && !this.hasAttribute('disabled')) 
@@ -92,6 +122,10 @@ var RevealSpeakerNotes = RevealSpeakerNotes || {
         RevealSpeakerNotes.uiElements.down.on('click', function(){
             if (RevealSpeakerNotes.Reveal && !this.hasAttribute('disabled')) 
                 RevealSpeakerNotes.Reveal.down();
+        });
+        RevealSpeakerNotes.uiElements.reset.on('click', function(){
+            if (RevealSpeakerNotes.Reveal && !this.hasAttribute('disabled')) 
+                RevealSpeakerNotes.Reveal.slide( 0, 0, 0 );
         });
         RevealSpeakerNotes.uiElements.show.on('click', function(){
             if (RevealSpeakerNotes.Reveal && !this.hasAttribute('disabled')) 
@@ -147,8 +181,8 @@ var RevealSpeakerNotes = RevealSpeakerNotes || {
                        var iframe = document.getElementById("next-slide");                                              
                        iframe.src = RevealSpeakerNotes.model.localUrl;
                        iframe.onload = RevealSpeakerNotes.onIframeLoad;   
-                       
-                        RevealSpeakerNotes.uiElements.totalSlideIndex.html(json.nbSlides);
+                       RevealSpeakerNotes.model.nbSlides = json.nbSlides;
+                       RevealSpeakerNotes.uiElements.totalSlideIndex.html(json.nbSlides);
                     }else  // If we recieve the index of presentation
                         if (json.indices){
                             RevealSpeakerNotes.model.indices = json.indices;
@@ -297,21 +331,36 @@ var RevealSpeakerNotes = RevealSpeakerNotes || {
         // We update the buttons
         var controls = RevealSpeakerNotes.getControls();
         if (controls.right) 
-            RevealSpeakerNotes.uiElements.next.removeAttr("disabled"); 
+            RevealSpeakerNotes.uiElements.right.removeAttr("disabled"); 
         else 
-            RevealSpeakerNotes.uiElements.next.attr("disabled", true); 
+            RevealSpeakerNotes.uiElements.right.attr("disabled", true); 
+        
         if (controls.left) 
-            RevealSpeakerNotes.uiElements.prev.removeAttr("disabled"); 
+            RevealSpeakerNotes.uiElements.left.removeAttr("disabled"); 
         else 
-            RevealSpeakerNotes.uiElements.prev.attr("disabled", true); 
+            RevealSpeakerNotes.uiElements.left.attr("disabled", true); 
+        
         if (controls.up) 
             RevealSpeakerNotes.uiElements.up.removeAttr("disabled"); 
         else 
             RevealSpeakerNotes.uiElements.up.attr("disabled", true); 
+        
         if (controls.down) 
             RevealSpeakerNotes.uiElements.down.removeAttr("disabled"); 
         else 
             RevealSpeakerNotes.uiElements.down.attr("disabled", true); 
+        
+        if (RevealSpeakerNotes.model.indices.h+RevealSpeakerNotes.model.indices.v+1 > RevealSpeakerNotes.model.nbSlides)
+            RevealSpeakerNotes.uiElements.next.attr("disabled", true);
+        else
+            RevealSpeakerNotes.uiElements.next.removeAttr("disabled");
+        
+        if (RevealSpeakerNotes.model.indices.h+RevealSpeakerNotes.model.indices.v <= 0)
+            RevealSpeakerNotes.uiElements.prev.attr("disabled", true);
+        else
+            RevealSpeakerNotes.uiElements.prev.removeAttr("disabled");
+            
+        
     },// Get the curent controls 
     getControls : function(){
         var controls = document.querySelector('iframe').contentDocument.querySelector('.controls');

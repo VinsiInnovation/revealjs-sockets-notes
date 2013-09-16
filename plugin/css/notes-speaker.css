@@ -1,4 +1,419 @@
 /***
+ *       _____ ____  _      ____  _____   _____ 
+ *      / ____/ __ \| |    / __ \|  __ \ / ____|
+ *     | |   | |  | | |   | |  | | |__) | (___  
+ *     | |   | |  | | |   | |  | |  _  / \___ \ 
+ *     | |___| |__| | |___| |__| | | \ \ ____) |
+ *      \_____\____/|______\____/|_|  \_\_____/ 
+ *                                              
+ *                                              
+ */
+/***
+ *     __      __     _____   _____ 
+ *     \ \    / /\   |  __ \ / ____|
+ *      \ \  / /  \  | |__) | (___  
+ *       \ \/ / /\ \ |  _  / \___ \ 
+ *        \  / ____ \| | \ \ ____) |
+ *         \/_/    \_\_|  \_\_____/ 
+ *                                  
+ *                                  
+ */
+/***
+ *       _____ ____  _      ____  _____   _____ 
+ *      / ____/ __ \| |    / __ \|  __ \ / ____|
+ *     | |   | |  | | |   | |  | | |__) | (___  
+ *     | |   | |  | | |   | |  | |  _  / \___ \ 
+ *     | |___| |__| | |___| |__| | | \ \ ____) |
+ *      \_____\____/|______\____/|_|  \_\_____/ 
+ *                                              
+ *                                              
+ */
+/***
+ *     __      __     _____   _____ 
+ *     \ \    / /\   |  __ \ / ____|
+ *      \ \  / /  \  | |__) | (___  
+ *       \ \/ / /\ \ |  _  / \___ \ 
+ *        \  / ____ \| | \ \ ____) |
+ *         \/_/    \_\_|  \_\_____/ 
+ *                                  
+ *                                  
+ */
+/**-----------------
+* Navigation buttons
+**------------------
+*/
+/* line 9, ../sass/nav.scss */
+#next, #prev, #up, #down, #show, #left, #right, #reset {
+  position: absolute;
+  background-color: #fff;
+  -moz-box-shadow: 1px 1px 5px 1px #3e3d40;
+  -webkit-box-shadow: 1px 1px 5px 1px #3e3d40;
+  -o-box-shadow: 1px 1px 5px 1px #3e3d40;
+  box-shadow: 1px 1px 5px 1px #3e3d40;
+  filter: progid:DXImageTransform.Microsoft.Shadow(color=#3e3d40, Direction=134, Strength=5);
+}
+
+/* line 19, ../sass/nav.scss */
+#left, #right {
+  top: 50%;
+  margin-top: -25px;
+}
+
+/* line 25, ../sass/nav.scss */
+#up, #down {
+  left: 50%;
+  margin-left: -25px;
+}
+
+/* line 30, ../sass/nav.scss */
+#next, #right {
+  right: 10px;
+}
+
+/* line 33, ../sass/nav.scss */
+#prev, #left, #reset {
+  left: 10px;
+}
+
+/* line 37, ../sass/nav.scss */
+#up, #next, #prev {
+  top: 10px;
+}
+
+/* line 40, ../sass/nav.scss */
+#down, #reset {
+  bottom: 10px;
+}
+
+/* line 44, ../sass/nav.scss */
+#show {
+  height: 60px;
+  width: 60px;
+  font-size: 25px;
+  top: 50%;
+  left: 50%;
+  margin-left: -30px;
+  margin-top: -30px;
+}
+
+/* line 54, ../sass/nav.scss */
+#preview .next-slide {
+  color: #009aa6;
+}
+
+/* line 58, ../sass/nav.scss */
+#preview .slide-preview-number {
+  font-size: 0.5em;
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  margin-left: -25%;
+}
+
+/***
+ *       _____ ____  _      ____  _____   _____ 
+ *      / ____/ __ \| |    / __ \|  __ \ / ____|
+ *     | |   | |  | | |   | |  | | |__) | (___  
+ *     | |   | |  | | |   | |  | |  _  / \___ \ 
+ *     | |___| |__| | |___| |__| | | \ \ ____) |
+ *      \_____\____/|______\____/|_|  \_\_____/ 
+ *                                              
+ *                                              
+ */
+/***
+ *     __      __     _____   _____ 
+ *     \ \    / /\   |  __ \ / ____|
+ *      \ \  / /  \  | |__) | (___  
+ *       \ \/ / /\ \ |  _  / \___ \ 
+ *        \  / ____ \| | \ \ ____) |
+ *         \/_/    \_\_|  \_\_____/ 
+ *                                  
+ *                                  
+ */
+/***
+ *      _   _  ____ _______ ______  _____  
+ *     | \ | |/ __ \__   __|  ____|/ ____| 
+ *     |  \| | |  | | | |  | |__  | (___   
+ *     | . ` | |  | | | |  |  __|  \___ \  
+ *     | |\  | |__| | | |  | |____ ____) | 
+ *     |_| \_|\____/  |_|  |______|_____/  
+ *                                         
+ *                                         
+ */
+/* line 16, ../sass/notes.scss */
+#notes .actionbar {
+  height: 30px;
+  font-size: 15px;
+  line-height: 30px;
+}
+
+/* line 22, ../sass/notes.scss */
+#notes .actionbar .slide-number {
+  position: absolute;
+  right: 0;
+  padding-right: 15px;
+  height: 100%;
+  font-size: 15px;
+}
+
+/* line 30, ../sass/notes.scss */
+#notes .curent-slide {
+  color: #009aa6;
+}
+
+/* line 34, ../sass/notes.scss */
+#notes {
+  overflow: hidden;
+}
+
+/* line 38, ../sass/notes.scss */
+#content-notes {
+  position: absolute;
+  top: 30px;
+  left: 0;
+  font-size: 2em;
+  line-height: 1.2em;
+  overflow: auto;
+  height: calc(100% - 30px);
+  width: calc(100%);
+}
+
+/* line 50, ../sass/notes.scss */
+.hractionbar {
+  position: absolute;
+  width: 100%;
+  top: 30px;
+  left: 0;
+}
+
+/***
+ *       _____ ____  _      ____  _____   _____ 
+ *      / ____/ __ \| |    / __ \|  __ \ / ____|
+ *     | |   | |  | | |   | |  | | |__) | (___  
+ *     | |   | |  | | |   | |  | |  _  / \___ \ 
+ *     | |___| |__| | |___| |__| | | \ \ ____) |
+ *      \_____\____/|______\____/|_|  \_\_____/ 
+ *                                              
+ *                                              
+ */
+/***
+ *     __      __     _____   _____ 
+ *     \ \    / /\   |  __ \ / ____|
+ *      \ \  / /  \  | |__) | (___  
+ *       \ \/ / /\ \ |  _  / \___ \ 
+ *        \  / ____ \| | \ \ ____) |
+ *         \/_/    \_\_|  \_\_____/ 
+ *                                  
+ *                                  
+ */
+/***
+ *      _______ _____ __  __ ______         _      ____          _____  ______ _____  
+ *     |__   __|_   _|  \/  |  ____|       | |    / __ \   /\   |  __ \|  ____|  __ \ 
+ *        | |    | | | \  / | |__          | |   | |  | | /  \  | |  | | |__  | |__) |
+ *        | |    | | | |\/| |  __|         | |   | |  | |/ /\ \ | |  | |  __| |  _  / 
+ *        | |   _| |_| |  | | |____        | |___| |__| / ____ \| |__| | |____| | \ \ 
+ *        |_|  |_____|_|  |_|______|       |______\____/_/    \_\_____/|______|_|  \_\
+ *                                                                                    
+ *                                                                                    
+ */
+/**-----------------
+* Ellapsed
+**------------------
+*/
+/* line 23, ../sass/timer.scss */
+.elapsed {
+  position: absolute;
+  width: calc(100% - (40px * 3 + 1px));
+  height: 40px;
+  top: 0;
+  left: calc(40px * 2 + 1px);
+  color: #3e3d40;
+  vertical-align: middle;
+}
+
+/*
+@media screen and (orientation:landscape){
+    .elapsed {
+        width:70%;
+        border-radius:70%;
+        padding-bottom:70%;
+        margin-left:-35%;
+        
+    }
+}*/
+/* line 46, ../sass/timer.scss */
+.elapsed_bg {
+  color: #009aa6;
+  position: absolute;
+  height: 5px;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+}
+
+/* line 55, ../sass/timer.scss */
+.timeEllapesd {
+  font-family: digital;
+  font-size: 30px;
+  line-height: 40px;
+  color: #3e3d40;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  text-align: center;
+}
+
+/* line 67, ../sass/timer.scss */
+.elapsed .mute {
+  color: #dddddd;
+}
+
+/* line 71, ../sass/timer.scss */
+.actions_times {
+  position: absolute;
+  background-color: #3e3d40;
+  bottom: 0;
+  left: 0;
+  height: 40px;
+  width: calc(40px * 2 + 1px);
+}
+
+/* line 80, ../sass/timer.scss */
+#action_time_play, #action_time_stop, #action_time_pause {
+  background-color: #009aa6;
+  position: absolute;
+  top: 0;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  color: #fff;
+  font-size: 150%;
+  line-height: 150%;
+  margin: auto;
+}
+
+/* line 93, ../sass/timer.scss */
+#time i {
+  font-size: 20px;
+  line-height: 40px;
+  top: 0;
+  margin-top: 0;
+}
+
+/* line 100, ../sass/timer.scss */
+#time .actionbar .icon-menu {
+  line-height: 40px;
+}
+
+/* line 104, ../sass/timer.scss */
+#time .actionbar .title-menu {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  font-size: 15px;
+  line-height: 40px;
+  text-align: left;
+  left: 5px;
+}
+
+/* line 114, ../sass/timer.scss */
+#action_time_play, #action_time_pause {
+  left: 0;
+}
+
+/* line 117, ../sass/timer.scss */
+#action_time_stop {
+  left: calc(40px + 1px);
+}
+
+/**-----------------
+* Config
+**------------------
+*/
+/* line 126, ../sass/timer.scss */
+#config_ellapsed_cancel, #config_ellapsed_validate {
+  background-color: #009aa6;
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  top: 0;
+  text-align: center;
+  color: #fff;
+  font-size: 1em;
+  margin: auto;
+}
+
+/* line 138, ../sass/timer.scss */
+#config_ellapsed_cancel {
+  right: calc(40px + 1px);
+}
+
+/* line 142, ../sass/timer.scss */
+#config_ellapsed_validate {
+  right: 0;
+}
+
+/* line 146, ../sass/timer.scss */
+.config_ellapsed_lbl {
+  position: absolute;
+  width: 60%;
+  font-size: 1em;
+  line-height: 1em;
+  left: 5px;
+  top: 0;
+  text-align: center;
+}
+
+/* line 156, ../sass/timer.scss */
+#time .config_ellapsed_time {
+  font-family: digital;
+  width: calc(100% - (40px * 2 + 1px) - 150px);
+  margin: auto;
+  height: 2em;
+  position: absolute;
+  top: 50%;
+  right: calc(40px * 2 + 5px);
+  margin-top: -1em;
+}
+
+/* line 167, ../sass/timer.scss */
+#time .config_ellapsed_time input {
+  font-family: digital;
+  text-align: center;
+  font-size: 25px;
+  width: 100%;
+}
+
+/* line 174, ../sass/timer.scss */
+#configEllapsed .actions_times {
+  left: calc(100% - (40px * 2 + 1px));
+}
+
+/**-----------------
+* Spinner
+**------------------
+*/
+/* line 184, ../sass/timer.scss */
+.loader-spiner, .loader-spinner-alert {
+  width: 200%;
+  height: 200%;
+  border-radius: 50%;
+  border: 10px solid;
+  box-sizing: border-box;
+}
+
+/* line 192, ../sass/timer.scss */
+.loader-spinner-alert {
+  border-color: #be233a;
+}
+
+/* line 196, ../sass/timer.scss */
+.loader-spiner {
+  border-color: #009aa6;
+}
+
+/***
  *      ______ ____  _   _ _______ _____ 
  *     |  ____/ __ \| \ | |__   __/ ____|
  *     | |__ | |  | |  \| |  | | | (___  
@@ -23,7 +438,7 @@
  *                                                                                                                          
  *                                                                                                                          
  */
-/* line 28, ../sass/notes-speaker.scss */
+/* line 34, ../sass/notes-speaker.scss */
 body {
   font-family: Arial, sans-serif;
   height: 100%;
@@ -31,13 +446,13 @@ body {
   color: #3e3d40;
 }
 
-/* line 35, ../sass/notes-speaker.scss */
+/* line 41, ../sass/notes-speaker.scss */
 .border {
   border-style: solid;
   border-width: 0px;
   border-radius: 5px;
   position: absolute;
-  background-color: #fff;
+  background-color: white;
   margin-left: 10px;
   margin-right: 10px;
 }
@@ -52,57 +467,57 @@ body {
  *                                                                                                               
  *                                                                                                               
  */
-/* line 56, ../sass/notes-speaker.scss */
+/* line 62, ../sass/notes-speaker.scss */
 #notes, #time, #preview {
-  width: calc(100% - 20px);
+  width: calc(100% - (10px * 2));
   left: 0;
 }
 
-/* line 61, ../sass/notes-speaker.scss */
+/* line 67, ../sass/notes-speaker.scss */
 #notes {
-  height: calc(50% - 40px - 20px - 40px);
+  height: calc(50% - 40px - 10px - 10px - 40px);
   top: 40px;
-  margin-bottom: 5px;
+  margin-bottom: calc($margin / 2);
   margin-top: 10px;
 }
 
-/* line 68, ../sass/notes-speaker.scss */
+/* line 74, ../sass/notes-speaker.scss */
 #time {
   height: 40px;
   bottom: 50%;
-  margin-bottom: 5px;
-  margin-top: 5px;
+  margin-bottom: calc(10px / 2);
+  margin-top: calc(10px / 2);
 }
 
-/* line 75, ../sass/notes-speaker.scss */
+/* line 81, ../sass/notes-speaker.scss */
 #preview {
   margin-bottom: 10px;
-  margin-top: 5px;
+  margin-top: calc(10px  /2);
   height: calc(50% - 10px);
   bottom: 0;
 }
 
 @media screen and (orientation: landscape) {
-  /* line 83, ../sass/notes-speaker.scss */
+  /* line 89, ../sass/notes-speaker.scss */
   #notes, #time {
-    width: calc(30% - 20px);
+    width: calc(30% - 10px - 10px);
     left: 0;
   }
 
-  /* line 88, ../sass/notes-speaker.scss */
+  /* line 94, ../sass/notes-speaker.scss */
   #notes {
-    height: calc(100% - 40px - 40px - 20px);
+    height: calc(100% - 40px - 40px - 10px - 10px);
   }
 
-  /* line 92, ../sass/notes-speaker.scss */
+  /* line 98, ../sass/notes-speaker.scss */
   #time {
     bottom: 0;
   }
 
-  /* line 96, ../sass/notes-speaker.scss */
+  /* line 102, ../sass/notes-speaker.scss */
   #preview {
-    width: calc(70% - 20px);
-    height: calc(100% - 40px - 20px);
+    width: calc(70% - 10px - 10px);
+    height: calc(100% - 40px - 10px - 10px);
     bottom: 0;
     left: 30%;
   }
@@ -117,14 +532,14 @@ body {
  *                                                              
  *                                                              
  */
-/* line 116, ../sass/notes-speaker.scss */
+/* line 122, ../sass/notes-speaker.scss */
 #wrap-next-slide {
   position: absolute;
   width: 100%;
   height: 100%;
 }
 
-/* line 122, ../sass/notes-speaker.scss */
+/* line 128, ../sass/notes-speaker.scss */
 .slides {
   position: relative;
   margin-bottom: 10px;
@@ -133,7 +548,7 @@ body {
   background: #1c1e20;
 }
 
-/* line 130, ../sass/notes-speaker.scss */
+/* line 136, ../sass/notes-speaker.scss */
 .slides span {
   position: absolute;
   top: 3px;
@@ -143,7 +558,7 @@ body {
   color: rgba(255, 255, 255, 0.9);
 }
 
-/* line 139, ../sass/notes-speaker.scss */
+/* line 145, ../sass/notes-speaker.scss */
 .error {
   font-weight: bold;
   color: red;
@@ -152,272 +567,9 @@ body {
   margin-top: 10%;
 }
 
-/* line 147, ../sass/notes-speaker.scss */
+/* line 153, ../sass/notes-speaker.scss */
 .error code {
   font-family: monospace;
-}
-
-/**-----------------
-* Navigation buttons
-**------------------
-*/
-/* line 156, ../sass/notes-speaker.scss */
-#next, #prev, #up, #down, #show {
-  position: absolute;
-  background-color: #fff;
-  -moz-box-shadow: 1px 1px 5px 1px #3e3d40;
-  -webkit-box-shadow: 1px 1px 5px 1px #3e3d40;
-  -o-box-shadow: 1px 1px 5px 1px #3e3d40;
-  box-shadow: 1px 1px 5px 1px #3e3d40;
-  filter: progid:DXImageTransform.Microsoft.Shadow(color=#3e3d40, Direction=134, Strength=5);
-}
-
-/* line 166, ../sass/notes-speaker.scss */
-#next, #prev {
-  top: 50%;
-  margin-top: -25px;
-}
-
-/* line 171, ../sass/notes-speaker.scss */
-#up, #down {
-  left: 50%;
-  margin-left: -25px;
-}
-
-/* line 176, ../sass/notes-speaker.scss */
-#next {
-  right: 10px;
-}
-
-/* line 179, ../sass/notes-speaker.scss */
-#prev {
-  left: 10px;
-}
-
-/* line 182, ../sass/notes-speaker.scss */
-#up {
-  top: 10px;
-}
-
-/* line 185, ../sass/notes-speaker.scss */
-#down {
-  bottom: 10px;
-}
-
-/* line 189, ../sass/notes-speaker.scss */
-#show {
-  height: 60px;
-  width: 60px;
-  font-size: 25px;
-  top: 50%;
-  left: 50%;
-  margin-left: -30px;
-  margin-top: -30px;
-}
-
-/* line 199, ../sass/notes-speaker.scss */
-#preview .next-slide {
-  color: #009aa6;
-}
-
-/* line 203, ../sass/notes-speaker.scss */
-#preview .slide-preview-number {
-  font-size: 0.5em;
-  position: absolute;
-  bottom: 2px;
-  left: 50%;
-  margin-left: -25%;
-}
-
-/***
- *      _______ _____ __  __ ______         _      ____          _____  ______ _____  
- *     |__   __|_   _|  \/  |  ____|       | |    / __ \   /\   |  __ \|  ____|  __ \ 
- *        | |    | | | \  / | |__          | |   | |  | | /  \  | |  | | |__  | |__) |
- *        | |    | | | |\/| |  __|         | |   | |  | |/ /\ \ | |  | |  __| |  _  / 
- *        | |   _| |_| |  | | |____        | |___| |__| / ____ \| |__| | |____| | \ \ 
- *        |_|  |_____|_|  |_|______|       |______\____/_/    \_\_____/|______|_|  \_\
- *                                                                                    
- *                                                                                    
- */
-/**-----------------
-* Ellapsed
-**------------------
-*/
-/* line 233, ../sass/notes-speaker.scss */
-.elapsed {
-  position: absolute;
-  width: calc(100% - (40px * 3 + 1px));
-  height: 40px;
-  top: 0;
-  left: calc(40px * 2 + 1px);
-  color: #333;
-  vertical-align: middle;
-}
-
-/*
-@media screen and (orientation:landscape){
-    .elapsed {
-        width:70%;
-        border-radius:70%;
-        padding-bottom:70%;
-        margin-left:-35%;
-        
-    }
-}*/
-/* line 256, ../sass/notes-speaker.scss */
-.elapsed_bg {
-  color: #009aa6;
-  position: absolute;
-  height: 5px;
-  width: 100%;
-  bottom: 0;
-  left: 0;
-}
-
-/* line 265, ../sass/notes-speaker.scss */
-.timeEllapesd {
-  font-family: digital;
-  font-size: 30px;
-  line-height: 40px;
-  color: #333;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  text-align: center;
-}
-
-/* line 277, ../sass/notes-speaker.scss */
-.elapsed .mute {
-  color: #ddd;
-}
-
-/* line 281, ../sass/notes-speaker.scss */
-.actions_times {
-  position: absolute;
-  background-color: #3e3d40;
-  bottom: 0;
-  left: 0;
-  height: 40px;
-  width: calc(40px * 2 + 1px);
-}
-
-/* line 290, ../sass/notes-speaker.scss */
-#action_time_play, #action_time_stop, #action_time_pause {
-  background-color: #009aa6;
-  position: absolute;
-  top: 0;
-  width: 40px;
-  height: 40px;
-  text-align: center;
-  color: #fff;
-  font-size: 150%;
-  line-height: 150%;
-  margin: auto;
-}
-
-/* line 303, ../sass/notes-speaker.scss */
-#time i {
-  font-size: 20px;
-  line-height: 40px;
-  top: 0;
-  margin-top: 0;
-}
-
-/* line 310, ../sass/notes-speaker.scss */
-#action_time_play, #action_time_pause {
-  left: 0;
-}
-
-/* line 313, ../sass/notes-speaker.scss */
-#action_time_stop {
-  left: 41px;
-}
-
-/**-----------------
-* Config
-**------------------
-*/
-/* line 322, ../sass/notes-speaker.scss */
-#config_ellapsed_cancel, #config_ellapsed_validate {
-  background-color: #009aa6;
-  position: absolute;
-  width: 40px;
-  height: 40px;
-  top: 0;
-  text-align: center;
-  color: #fff;
-  font-size: 1em;
-  margin: auto;
-}
-
-/* line 334, ../sass/notes-speaker.scss */
-#config_ellapsed_cancel {
-  right: 41px;
-}
-
-/* line 338, ../sass/notes-speaker.scss */
-#config_ellapsed_validate {
-  right: 0;
-}
-
-/* line 342, ../sass/notes-speaker.scss */
-.config_ellapsed_lbl {
-  position: absolute;
-  width: 60%;
-  font-size: 1em;
-  line-height: 1em;
-  left: 5px;
-  top: 0;
-  text-align: center;
-}
-
-/* line 352, ../sass/notes-speaker.scss */
-#time .config_ellapsed_time {
-  font-family: digital;
-  width: calc(100% - (40px * 2 + 1px) - 150px);
-  margin: auto;
-  height: 2em;
-  position: absolute;
-  top: 50%;
-  right: calc(40px * 2 + 5px);
-  margin-top: -1em;
-}
-
-/* line 363, ../sass/notes-speaker.scss */
-#time .config_ellapsed_time input {
-  font-family: digital;
-  text-align: center;
-  font-size: 25px;
-  width: 100%;
-}
-
-/* line 370, ../sass/notes-speaker.scss */
-#configEllapsed .actions_times {
-  left: calc(100% - (40px * 2 + 1px));
-}
-
-/**-----------------
-* Spinner
-**------------------
-*/
-/* line 380, ../sass/notes-speaker.scss */
-.loader-spiner, .loader-spinner-alert {
-  width: 200%;
-  height: 200%;
-  border-radius: 50%;
-  border: 10px solid;
-  box-sizing: border-box;
-}
-
-/* line 388, ../sass/notes-speaker.scss */
-.loader-spinner-alert {
-  border-color: #be233a;
-}
-
-/* line 392, ../sass/notes-speaker.scss */
-.loader-spiner {
-  border-color: #009aa6;
 }
 
 /***
@@ -430,12 +582,12 @@ body {
  *                                                                                   
  *                                                                                   
  */
-/* line 407, ../sass/notes-speaker.scss */
+/* line 174, ../sass/notes-speaker.scss */
 .actionbar {
   position: absolute;
   top: 0;
   left: 0;
-  background: #fff;
+  background: white;
   height: 40px;
   width: 100%;
   font-family: "Arial Black",Arial,sans-serif;
@@ -443,7 +595,7 @@ body {
   line-height: 40px;
 }
 
-/* line 419, ../sass/notes-speaker.scss */
+/* line 186, ../sass/notes-speaker.scss */
 .actionbar .title-abs {
   padding-left: 10px;
   display: inline-block;
@@ -454,99 +606,21 @@ body {
   width: 100%;
 }
 
-/* line 430, ../sass/notes-speaker.scss */
+/* line 197, ../sass/notes-speaker.scss */
 .actionbar .icon-menu {
   position: absolute;
   right: 5px;
   top: 0;
   width: 40px;
   height: 100%;
-  /*dding-left:5%;
-  padding-top:0.3em;*/
   text-align: center;
   border-left-style: solid;
   border-left-width: 1px;
 }
 
-/* line 443, ../sass/notes-speaker.scss */
+/* line 208, ../sass/notes-speaker.scss */
 .actionbar i {
   position: absolute;
   top: 50%;
   margin-top: -25%;
-}
-
-/**-----------------
-* time loader / notes
-**------------------
-*/
-/* line 456, ../sass/notes-speaker.scss */
-#notes .actionbar {
-  height: 20px;
-  font-size: 10px;
-  line-height: 20px;
-}
-
-/* line 462, ../sass/notes-speaker.scss */
-#time .actionbar .icon-menu {
-  line-height: 40px;
-}
-
-/* line 466, ../sass/notes-speaker.scss */
-#time .actionbar .title-menu {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  font-size: 15px;
-  line-height: 40px;
-  text-align: left;
-  left: 5px;
-}
-
-/* line 476, ../sass/notes-speaker.scss */
-.hractionbar {
-  position: absolute;
-  width: 100%;
-  top: 20px;
-  left: 0;
-}
-
-/***
- *      _   _  ____ _______ ______  _____  
- *     | \ | |/ __ \__   __|  ____|/ ____| 
- *     |  \| | |  | | | |  | |__  | (___   
- *     | . ` | |  | | | |  |  __|  \___ \  
- *     | |\  | |__| | | |  | |____ ____) | 
- *     |_| \_|\____/  |_|  |______|_____/  
- *                                         
- *                                         
- */
-/* line 494, ../sass/notes-speaker.scss */
-#notes .actionbar .slide-number {
-  position: absolute;
-  right: 0;
-  padding-right: 15px;
-  height: 100%;
-  font-size: 10px;
-}
-
-/* line 502, ../sass/notes-speaker.scss */
-#notes .curent-slide {
-  color: #009aa6;
-}
-
-/* line 506, ../sass/notes-speaker.scss */
-#notes {
-  overflow: hidden;
-}
-
-/* line 510, ../sass/notes-speaker.scss */
-#content-notes {
-  position: absolute;
-  top: 10%;
-  left: 0;
-  font-size: 120%;
-  line-height: 1.2em;
-  overflow: auto;
-  height: 100%;
-  width: calc(100% + 20px);
 }

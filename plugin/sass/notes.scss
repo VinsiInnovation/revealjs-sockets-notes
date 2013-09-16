@@ -1,0 +1,55 @@
+@import "colors";
+@import "vars";
+
+/***
+ *      _   _  ____ _______ ______  _____  
+ *     | \ | |/ __ \__   __|  ____|/ ____| 
+ *     |  \| | |  | | | |  | |__  | (___   
+ *     | . ` | |  | | | |  |  __|  \___ \  
+ *     | |\  | |__| | | |  | |____ ____) | 
+ *     |_| \_|\____/  |_|  |______|_____/  
+ *                                         
+ *                                         
+ */
+
+
+#notes .actionbar{
+    height:$abs-notes-height;
+    font-size:$font-size-abs-notes;
+    line-height:$abs-notes-height;
+}
+
+#notes .actionbar  .slide-number{
+    position: absolute;
+    right:0;
+    padding-right:15px;
+    height:100%;
+    font-size:$font-size-abs-notes;
+}
+
+#notes .curent-slide{
+    color:$color-actions;
+}
+
+#notes{
+    overflow:hidden;
+}
+
+#content-notes{
+    position:absolute;
+    top:$abs-notes-height;
+    left:0;
+    font-size:$font-size-notes;
+    line-height:1.2em;
+    overflow:auto;
+    height:calc(100% - #{$abs-notes-height});
+    width:calc(100%); // scrollbar
+}
+
+
+.hractionbar{
+    position:absolute;
+    width:100%;
+    top:$abs-notes-height;
+    left:0;
+}

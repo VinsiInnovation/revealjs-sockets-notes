@@ -1,4 +1,10 @@
+@import "colors";
+@import "vars";
+@import "nav";
+@import "notes";
+@import "timer";
 
+    
 /***
  *      ______ ____  _   _ _______ _____ 
  *     |  ____/ __ \| \ | |__   __/ ____|
@@ -28,8 +34,8 @@
 body {
     font-family: Arial, sans-serif;
     height:100%;
-    background-color:#3e3d40;
-    color : #3e3d40;
+    background-color:$bg-color;
+    color : $font-color;
 }
 
 .border{
@@ -37,9 +43,9 @@ body {
     border-width:0px;
     border-radius:5px;
     position: absolute;    
-    background-color:#fff;
-    margin-left:10px;
-    margin-right:10px;
+    background-color:$panel-color;
+    margin-left:$margin;
+    margin-right:$margin;
 }
 
 /***
@@ -54,39 +60,39 @@ body {
  */
 
 #notes, #time, #preview{
-    width:calc(100% - 20px);
+    width:calc(100% - (#{$margin} * 2));
     left:0;
 }
 
 #notes {    
-    height:calc(50% - 40px - 20px - 40px);    
-    top:40px;
-    margin-bottom: 5px;    
-    margin-top:10px;
+    height:calc(50% - #{$abs-height} - #{$margin} - #{$margin} - #{$abs-height});    
+    top: $abs-height;
+    margin-bottom: calc($margin / 2);    
+    margin-top:$margin;
 }
 
 #time {    
-    height:40px;
+    height:$abs-height;
     bottom:50%;
-    margin-bottom: 5px;    
-    margin-top:5px;
+    margin-bottom: calc(#{$margin} / 2);    
+    margin-top:calc(#{$margin} / 2);
 }
 
 #preview{
-    margin-bottom: 10px;    
-    margin-top:5px;
-    height:calc(50% - 10px);
+    margin-bottom: $margin;    
+    margin-top:calc(#{$margin}  /2);
+    height:calc(50% - #{$margin});
     bottom:0;
 }
 
 @media screen and (orientation:landscape){
     #notes, #time{
-        width:calc(30% - 20px);
+        width:calc(30% - #{$margin} - #{$margin});
         left:0;
     }    
     
     #notes {    
-        height:calc(100% - 40px - 40px - 20px);       
+        height:calc(100% - #{$abs-height} - #{$abs-height} - #{$margin} - #{$margin});       
     }
     
     #time {    
@@ -94,8 +100,8 @@ body {
     }
     
     #preview{
-        width:calc(70% - 20px);
-        height:calc(100% - 40px - 20px);
+        width:calc(70% - #{$margin} - #{$margin});
+        height:calc(100% - #{$abs-height} - #{$margin} - #{$margin});
         bottom:0;
         left:30%;
     }   
@@ -121,7 +127,7 @@ body {
 
 .slides {
     position: relative;
-    margin-bottom: 10px;
+    margin-bottom: $margin;
     border: 1px solid black;
     border-radius: 2px;
     background: rgb(28, 30, 32);
@@ -148,250 +154,11 @@ body {
     font-family: monospace;
 }
 
-/**-----------------
-* Navigation buttons
-**------------------
-*/
-
-#next, #prev, #up, #down, #show{
-    position:absolute;
-    background-color:#fff;
-    -moz-box-shadow: 1px 1px 5px 1px #3e3d40;
-    -webkit-box-shadow: 1px 1px 5px 1px #3e3d40;
-    -o-box-shadow: 1px 1px 5px 1px #3e3d40;
-    box-shadow: 1px 1px 5px 1px #3e3d40;
-    filter:progid:DXImageTransform.Microsoft.Shadow(color=#3e3d40, Direction=134, Strength=5);
-}
-
-#next, #prev{
-    top:50%;
-    margin-top:-25px;
-}
-
-#up, #down{
-    left:50%;
-    margin-left:-25px;
-}
-
-#next{
-    right:10px;
-}
-#prev{
-    left:10px;
-}
-#up{
-    top:10px;
-}
-#down{
-    bottom:10px;
-}
-
-#show{
-    height:60px;
-    width:60px;
-    font-size:25px;
-    top:50%;
-    left:50%;
-    margin-left:-30px;
-    margin-top:-30px;
-}
-
-#preview .next-slide{
-    color:#009aa6;
-}
-
-#preview .slide-preview-number{
-    font-size:0.5em;
-    position:absolute;
-    bottom:2px;
-    left:50%;
-    margin-left:-25%;
-    
-}
 
 
 
-/***
- *      _______ _____ __  __ ______         _      ____          _____  ______ _____  
- *     |__   __|_   _|  \/  |  ____|       | |    / __ \   /\   |  __ \|  ____|  __ \ 
- *        | |    | | | \  / | |__          | |   | |  | | /  \  | |  | | |__  | |__) |
- *        | |    | | | |\/| |  __|         | |   | |  | |/ /\ \ | |  | |  __| |  _  / 
- *        | |   _| |_| |  | | |____        | |___| |__| / ____ \| |__| | |____| | \ \ 
- *        |_|  |_____|_|  |_|______|       |______\____/_/    \_\_____/|______|_|  \_\
- *                                                                                    
- *                                                                                    
- */
 
 
-/**-----------------
-* Ellapsed
-**------------------
-*/
-
-
-
-.elapsed {
-    position:absolute;
-    width:calc(100% - (40px * 3 + 1px));
-    height:40px;
-    top:0;
-    left:calc(40px * 2 + 1px);
-    color: #333;
-    vertical-align:middle;
-    
-}
-
-/*
-@media screen and (orientation:landscape){
-    .elapsed {
-        width:70%;
-        border-radius:70%;
-        padding-bottom:70%;
-        margin-left:-35%;
-        
-    }
-}*/
-
-
-.elapsed_bg{
-    color: #009aa6;
-    position: absolute;    
-    height:5px;
-    width:100%;
-    bottom:0;
-    left:0;
-}
-
-.timeEllapesd{
-    font-family:digital;
-    font-size: 30px;
-    line-height:40px;
-    color:#333;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;    
-    text-align: center;
-}
-
-.elapsed .mute {
-    color: #ddd;
-}
-
-.actions_times{
-    position: absolute;
-    background-color:#3e3d40;
-    bottom:0;
-    left:0;
-    height:40px;
-    width:calc(40px * 2 + 1px);
-}
-
-#action_time_play, #action_time_stop, #action_time_pause{
-    background-color: #009aa6;
-    position:absolute;
-    top: 0;
-    width:40px;
-    height:40px;    
-    text-align:center;
-    color:#fff;
-    font-size:150%;
-    line-height:150%;
-    margin:auto;    
-}
-
-#time i{
-    font-size:20px;
-    line-height:40px;
-    top:0;
-    margin-top:0;
-}
-
-#action_time_play, #action_time_pause{
-    left:0;
-}
-#action_time_stop{
-    left:41px;
-}
-
-/**-----------------
-* Config
-**------------------
-*/
-
-#config_ellapsed_cancel, #config_ellapsed_validate{
-    background-color: #009aa6;
-    position:absolute;
-    width:40px;
-    height:40px;
-    top:0;   
-    text-align:center;
-    color:#fff;
-    font-size:1em;
-    margin:auto;    
-}
-
-#config_ellapsed_cancel{
-    right: 41px;
-}
-
-#config_ellapsed_validate{
-    right:0;  
-}
-
-.config_ellapsed_lbl{
-    position:absolute;
-    width:60%;
-    font-size:1em;
-    line-height:1em;
-    left:5px;
-    top:0;
-    text-align:center;
-}
-
-#time .config_ellapsed_time{
-    font-family:digital;    
-    width: calc(100% - (40px * 2 + 1px) - 150px);
-    margin: auto;
-    height:2em;
-    position:absolute;
-    top:50%;
-    right:calc(40px * 2 + 5px);
-    margin-top:-1em;
-}
-
-#time .config_ellapsed_time input{
-    font-family:digital;
-    text-align: center;
-    font-size: 25px;
-    width: 100%;
-}
-
-#configEllapsed .actions_times{
-    left:calc(100% - (40px * 2 + 1px));
-}
-
-/**-----------------
-* Spinner
-**------------------
-*/
-
-.loader-spiner, .loader-spinner-alert
-{
-    width: 200%;
-    height: 200%;
-    border-radius: 50%;
-    border: 10px solid;
-    box-sizing: border-box;
-}  
-
-.loader-spinner-alert{
-    border-color:#be233a;
-}
-.loader-spiner
-{
-    border-color:#009aa6;
-}  
 
 /***
  *               _____ _______ _____ ____  _   _         ____          _____   _____ 
@@ -408,12 +175,12 @@ body {
     position: absolute;
     top:0;
     left:0;
-    background:#fff;
-    height:40px;
+    background:$panel-color;
+    height:$abs-height;
     width:100%;    
     font-family:"Arial Black",Arial,sans-serif;   
-    font-size:20px;    
-    line-height:40px;
+    font-size:$font-size-abs;    
+    line-height:$abs-height;
 }
 
 .actionbar .title-abs{
@@ -431,10 +198,8 @@ body {
     position:absolute;
     right:5px;
     top:0;
-    width:40px;
+    width:$abs-height;
     height:100%;
-    /*dding-left:5%;
-    padding-top:0.3em;*/
     text-align:center;
     border-left-style:solid;
     border-left-width:1px;
@@ -448,73 +213,6 @@ body {
 
 
 
-/**-----------------
-* time loader / notes
-**------------------
-*/
 
-#notes .actionbar{
-    height:20px;
-    font-size:10px;
-    line-height:20px;
-}
 
-#time .actionbar .icon-menu{
-    line-height:40px;
-}
-
-#time .actionbar .title-menu{
-    width:100%;
-    height:100%;
-    position:absolute;
-    font-size:15px;
-    line-height:40px;
-    text-align:left;
-    left:5px;
-}
-
-.hractionbar{
- position:absolute;
-    width:100%;
-    top:20px;
-    left:0;
-}
-
-/***
- *      _   _  ____ _______ ______  _____  
- *     | \ | |/ __ \__   __|  ____|/ ____| 
- *     |  \| | |  | | | |  | |__  | (___   
- *     | . ` | |  | | | |  |  __|  \___ \  
- *     | |\  | |__| | | |  | |____ ____) | 
- *     |_| \_|\____/  |_|  |______|_____/  
- *                                         
- *                                         
- */
-
-#notes .actionbar  .slide-number{
-    position: absolute;
-    right:0;
-    padding-right:15px;
-    height:100%;
-    font-size:10px;
-}
-
-#notes .curent-slide{
-    color:#009aa6;
-}
-
-#notes{
-    overflow:hidden;
-}
-
-#content-notes{
-    position:absolute;
-    top:10%;
-    left:0;
-    font-size:120%;
-    line-height:1.2em;
-    overflow:auto;
-    height:100%;
-    width:calc(100% + 20px);
-}
 
