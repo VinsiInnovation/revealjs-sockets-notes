@@ -22,7 +22,7 @@
 
 .elapsed {
     position:absolute;
-    width:calc(100% - (#{$abs-height} * 3 + 1px));
+    width:calc(100% - (#{$abs-height} * 3 + 2px));
     height:$abs-height;
     top:0;
     left:calc(#{$abs-height} * 2 + 1px);
@@ -44,12 +44,19 @@
 
 
 .elapsed_bg{
-    color: $color-actions;
+    background-color: $color-actions;
     position: absolute;    
     height:5px;
     width:100%;
     bottom:0;
     left:0;
+}
+
+.elapsed_bg.alert{
+    background-color:$color-alert;
+}
+.elapsed_bg.advanced{
+    background-color:$color-avanced;
 }
 
 .timeEllapesd{

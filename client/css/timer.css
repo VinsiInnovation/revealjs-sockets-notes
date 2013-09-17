@@ -35,7 +35,7 @@
 /* line 23, ../sass/timer.scss */
 .elapsed {
   position: absolute;
-  width: calc(100% - (40px * 3 + 1px));
+  width: calc(100% - (40px * 3 + 2px));
   height: 40px;
   top: 0;
   left: calc(40px * 2 + 1px);
@@ -55,7 +55,7 @@
 }*/
 /* line 46, ../sass/timer.scss */
 .elapsed_bg {
-  color: #009aa6;
+  background-color: #009aa6;
   position: absolute;
   height: 5px;
   width: 100%;
@@ -64,6 +64,16 @@
 }
 
 /* line 55, ../sass/timer.scss */
+.elapsed_bg.alert {
+  background-color: #be233a;
+}
+
+/* line 58, ../sass/timer.scss */
+.elapsed_bg.advanced {
+  background-color: #ffbb33;
+}
+
+/* line 62, ../sass/timer.scss */
 .timeEllapesd {
   font-family: digital;
   font-size: 30px;
@@ -76,12 +86,12 @@
   text-align: center;
 }
 
-/* line 67, ../sass/timer.scss */
+/* line 74, ../sass/timer.scss */
 .elapsed .mute {
   color: #dddddd;
 }
 
-/* line 71, ../sass/timer.scss */
+/* line 78, ../sass/timer.scss */
 .actions_times {
   position: absolute;
   background-color: #3e3d40;
@@ -91,7 +101,7 @@
   width: calc(40px * 2 + 1px);
 }
 
-/* line 80, ../sass/timer.scss */
+/* line 87, ../sass/timer.scss */
 #action_time_play, #action_time_stop, #action_time_pause {
   background-color: #009aa6;
   position: absolute;
@@ -105,7 +115,7 @@
   margin: auto;
 }
 
-/* line 93, ../sass/timer.scss */
+/* line 100, ../sass/timer.scss */
 #time i {
   font-size: 20px;
   line-height: 40px;
@@ -113,12 +123,12 @@
   margin-top: 0;
 }
 
-/* line 100, ../sass/timer.scss */
+/* line 107, ../sass/timer.scss */
 #time .actionbar .icon-menu {
   line-height: 40px;
 }
 
-/* line 104, ../sass/timer.scss */
+/* line 111, ../sass/timer.scss */
 #time .actionbar .title-menu {
   width: 100%;
   height: 100%;
@@ -129,12 +139,12 @@
   left: 5px;
 }
 
-/* line 114, ../sass/timer.scss */
+/* line 121, ../sass/timer.scss */
 #action_time_play, #action_time_pause {
   left: 0;
 }
 
-/* line 117, ../sass/timer.scss */
+/* line 124, ../sass/timer.scss */
 #action_time_stop {
   left: calc(40px + 1px);
 }
@@ -143,7 +153,7 @@
 * Config
 **------------------
 */
-/* line 126, ../sass/timer.scss */
+/* line 133, ../sass/timer.scss */
 #config_ellapsed_cancel, #config_ellapsed_validate {
   background-color: #009aa6;
   position: absolute;
@@ -156,17 +166,17 @@
   margin: auto;
 }
 
-/* line 138, ../sass/timer.scss */
+/* line 145, ../sass/timer.scss */
 #config_ellapsed_cancel {
   right: calc(40px + 1px);
 }
 
-/* line 142, ../sass/timer.scss */
+/* line 149, ../sass/timer.scss */
 #config_ellapsed_validate {
   right: 0;
 }
 
-/* line 146, ../sass/timer.scss */
+/* line 153, ../sass/timer.scss */
 .config_ellapsed_lbl {
   position: absolute;
   width: 60%;
@@ -177,7 +187,7 @@
   text-align: center;
 }
 
-/* line 156, ../sass/timer.scss */
+/* line 163, ../sass/timer.scss */
 #time .config_ellapsed_time {
   font-family: digital;
   width: calc(100% - (40px * 2 + 1px) - 150px);
@@ -189,7 +199,7 @@
   margin-top: -1em;
 }
 
-/* line 167, ../sass/timer.scss */
+/* line 174, ../sass/timer.scss */
 #time .config_ellapsed_time input {
   font-family: digital;
   text-align: center;
@@ -197,7 +207,7 @@
   width: 100%;
 }
 
-/* line 174, ../sass/timer.scss */
+/* line 181, ../sass/timer.scss */
 #configEllapsed .actions_times {
   left: calc(100% - (40px * 2 + 1px));
 }
@@ -206,7 +216,7 @@
 * Spinner
 **------------------
 */
-/* line 184, ../sass/timer.scss */
+/* line 191, ../sass/timer.scss */
 .loader-spiner, .loader-spinner-alert {
   width: 200%;
   height: 200%;
@@ -215,12 +225,12 @@
   box-sizing: border-box;
 }
 
-/* line 192, ../sass/timer.scss */
+/* line 199, ../sass/timer.scss */
 .loader-spinner-alert {
   border-color: #be233a;
 }
 
-/* line 196, ../sass/timer.scss */
+/* line 203, ../sass/timer.scss */
 .loader-spiner {
   border-color: #009aa6;
 }

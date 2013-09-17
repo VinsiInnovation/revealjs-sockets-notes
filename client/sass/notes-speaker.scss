@@ -38,6 +38,7 @@ body {
     color : $font-color;
 }
 
+
 .border{
     border-style:solid;
     border-width:0px;
@@ -67,7 +68,7 @@ body {
 #notes {    
     height:calc(50% - #{$abs-height} - #{$margin} - #{$margin} - #{$abs-height});    
     top: $abs-height;
-    margin-bottom: calc($margin / 2);    
+    margin-bottom: calc(#{$margin} / 2);    
     margin-top:$margin;
 }
 
@@ -196,7 +197,7 @@ body {
 
 .actionbar .icon-menu{
     position:absolute;
-    right:5px;
+    right:0;
     top:0;
     width:$abs-height;
     height:100%;
@@ -204,11 +205,22 @@ body {
     border-left-style:solid;
     border-left-width:1px;
 }
+.actionbar .icon-full-screen{
+    position:absolute;
+    top:0;
+    width:$abs-height;
+    height:$abs-height;
+    line-height: $abs-height;
+    margin: auto;
+    right:calc(#{$abs-height} + 1px);
+    text-align:center;
+    border-left-style:solid;
+    border-left-width:1px;
+}
 
 .actionbar i{
-    position:absolute;
-    top:50%;
-    margin-top:-25%;
+    line-height: $abs-height;
+    font-size: $font-size-abs;
 }
 
 ul.plugin-list{
