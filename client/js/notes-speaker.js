@@ -33,7 +33,9 @@ var RevealSpeakerNotes = RevealSpeakerNotes || {
         timeEl : null,
         hoursEl : null,
         minutesEl : null,
-        secondsEl : null
+        secondsEl : null,
+        progressEl : null,
+        fullScreenEl : null
     },
     model : {
         defaultInterval : 2, // Time in minute of the conference
@@ -48,21 +50,6 @@ var RevealSpeakerNotes = RevealSpeakerNotes || {
     },
     // WebSocket initialisation and time management initialisation
     init : function(){
-        // Add Fullscreen experience
-        setTimeout(function(){
-            
-        var docElm = document.documentElement;
-        if (docElm.requestFullscreen) {
-            docElm.requestFullscreen();
-        }
-        else if (docElm.mozRequestFullScreen) {
-            docElm.mozRequestFullScreen();
-        }
-        else if (docElm.webkitRequestFullScreen) {
-            docElm.webkitRequestFullScreen();
-        }
-        },500);
-        
          // Plug Fastclick module        
         FastClick.attach(document.body);
         
@@ -115,6 +102,8 @@ var RevealSpeakerNotes = RevealSpeakerNotes || {
         RevealSpeakerNotes.uiElements.secondsEl  =  $( '#seconds' );
         RevealSpeakerNotes.uiElements.options  =  $( '#options' );
         RevealSpeakerNotes.uiElements.pluginList  =  $( '#plugin-list' );
+        RevealSpeakerNotes.uiElements.progressEl  =  $( '#progress_elapsed_time' );
+        RevealSpeakerNotes.uiElements.fullScreenEl  =  $( '#full-screen' );
         
          // Buttons interaction
         RevealSpeakerNotes.uiElements.next.on('click', function(){
@@ -159,7 +148,39 @@ var RevealSpeakerNotes = RevealSpeakerNotes || {
         // Add options management
         RevealSpeakerNotes.uiElements.options.on('click', function(){
             RevealSpeakerNotes.uiElements.pluginList.show();
+
         });
+
+        // Add full screen management
+        RevealSpeakerNotes.uiElements.fullScreenEl.on('click', function(){
+            if (document.fullscreenElement || 
+                document.webkitFullscreenElement ||
+                document.mozFullscreenElement){
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+                else if (document.mozCancelFullScreen) {
+                    document.mozCancelFullScreen();
+                }
+                else if (document.webkitExitFullscreen) {
+                    document.webkitExitFullscreen();
+                }
+            }else{
+                var docElm = document.getElementById("main-content");
+                if (docElm.requestFullscreen) {
+                    docElm.requestFullscreen();
+                }
+                else if (docElm.mozRequestFullScreen) {
+                    docElm.mozRequestFullScreen();
+                }
+                else if (docElm.webkitRequestFullscreen) {
+                    docElm.webkitRequestFullscreen();
+                }
+            }
+
+        });
+
+        RevealSpeakerNotes.renderProgress(0);
         
     },
     // Connect to websocket on host
@@ -342,7 +363,7 @@ var RevealSpeakerNotes = RevealSpeakerNotes || {
                 RevealSpeakerNotes.uiElements.secondsEl.html(":" + UtilSpeakerNotes.zeroPadInteger( seconds ));
                 
                 var diffPercent = (totalDiff / (RevealSpeakerNotes.model.defaultInterval * 60 * 1000)) * 100;                
-                RevealSpeakerNotes.renderProgress(diffPercent % 100);
+                RevealSpeakerNotes.renderProgress(Math.min(diffPercent, 100));
                 
                 
                 if (totalDiff > RevealSpeakerNotes.model.alertTime && !$(".loader-spiner").hasClass("loader-spinner-alert")){
@@ -409,7 +430,20 @@ var RevealSpeakerNotes = RevealSpeakerNotes || {
     },
     renderProgress : function(progress){
         progress = Math.floor(progress);
-        if(progress<25){
+        RevealSpeakerNotes.uiElements.progressEl.css("width", progress+"%");
+        var alertClass = RevealSpeakerNotes.uiElements.progressEl.hasClass("alert");
+        var advancedClass = RevealSpeakerNotes.uiElements.progressEl.hasClass("advanced");
+        if (progress < 75 && (alertClass || advancedClass)){
+            RevealSpeakerNotes.uiElements.progressEl.removeClass("alert");
+            RevealSpeakerNotes.uiElements.progressEl.removeClass("advanced");
+        }else if(progress >= 75 && progress < 90 && !advancedClass){
+            RevealSpeakerNotes.uiElements.progressEl.addClass("advanced");
+            RevealSpeakerNotes.uiElements.progressEl.removeClass("alert");
+        }else if(progress >= 90 && !alertClass){
+            RevealSpeakerNotes.uiElements.progressEl.addClass("alert");
+            RevealSpeakerNotes.uiElements.progressEl.removeClass("advanced");
+        }
+        /*if(progress<25){
             var angle = -90 + (progress/100)*360;
             $(".animate-0-25-b").css("transform","rotate("+angle+"deg)");
             $(".animate-25-50-b").css("transform","rotate(-90deg)");
@@ -434,7 +468,7 @@ var RevealSpeakerNotes = RevealSpeakerNotes || {
             $(".animate-50-75-b, .animate-25-50-b, .animate-0-25-b")
                                                   .css("transform","rotate(0deg)");
             $(".animate-75-100-b").css("transform","rotate("+angle+"deg)");
-        }
+        }*/
     }    
 };
 
