@@ -18,3 +18,11 @@ To use it you have to do severals things
 4. Launch your favorites browser and go to http://localhost:8080
 5. Select the right network and click on it
 6. Scan the QrCode with your smartphone
+
+# In the presentation
+
+You have to add thoses line in your html
+1. { src: 'plugin/sockets-notes/client/js/notes-client.js', async: true, condition: function() { return !!document.body.classList; } } in the dependancies of Reveal
+2. <script src="/socket.io/socket.io.js"></script> in the import section of your javascripts
+3. You have to check that markdown plugin is present in your presentation
+4. You have to check that you have the file lib/js/head.min.js in your presentation

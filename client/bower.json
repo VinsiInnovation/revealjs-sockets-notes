@@ -1,0 +1,8 @@
+{
+  "name": "Speaker WS - Client",
+  "version": "1.0.0",
+  "dependencies": {
+    "jquery": "2.0.3",
+    "fastclick": "latest"
+  }
+}

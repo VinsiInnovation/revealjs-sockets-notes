@@ -28,26 +28,26 @@ module.exports = function (grunt) {
           images:   '<%= server.basedir %>/images'
         }
     },
-    plugin : {
-        basedir : 'plugin',
+    client : {
+        basedir : 'client',
         html: {
-          index:    '<%= plugin.basedir %>/index.html',
-          all : '<%= plugin.basedir %>/**/*.html'
+          index:    '<%= client.basedir %>/index.html',
+          all : '<%= client.basedir %>/**/*.html'
         },
-        js:   '<%= plugin.basedir %>/js/**/*.js',
+        js:   '<%= client.basedir %>/js/**/*.js',
         css: {
-          all :'<%= plugin.basedir %>/css/**/*.css',
-          dir: '<%= plugin.basedir %>/css',
-          app: '<%= plugin.basedir %>/css/plugin.css',
-          libs: '<%= plugin.basedir %>/libs/'
+          all :'<%= client.basedir %>/css/**/*.css',
+          dir: '<%= client.basedir %>/css',
+          app: '<%= client.basedir %>/css/client.css',
+          libs: '<%= client.basedir %>/libs/'
         },
         sass: {
-          all :'<%= plugin.basedir %>/sass/**/*.scss',
-          dir: '<%= plugin.basedir %>/sass'
+          all :'<%= client.basedir %>/sass/**/*.scss',
+          dir: '<%= client.basedir %>/sass'
         },
         assets: {
-          font:     '<%= plugin.basedir %>/font',
-          images:   '<%= plugin.basedir %>/images'
+          font:     '<%= client.basedir %>/font',
+          images:   '<%= client.basedir %>/images'
         }
     },
    
@@ -55,8 +55,8 @@ module.exports = function (grunt) {
       server: {
         css:   '<%= server.css.dir %>'
       },
-      plugin: {
-        css:   '<%= plugin.css.dir %>'
+      client: {
+        css:   '<%= client.css.dir %>'
       }
     },
 
@@ -67,9 +67,9 @@ module.exports = function (grunt) {
             ]
             
         },
-        plugin: {
+        client: {
             files: [
-                {expand: true, cwd: '<%= plugin.css.libs %>', src: ['**/*.css'], dest: '<%= plugin.css.dir %>'}
+                {expand: true, cwd: '<%= client.css.libs %>', src: ['**/*.css'], dest: '<%= client.css.dir %>'}
             ]            
         }      
     },
@@ -99,24 +99,24 @@ module.exports = function (grunt) {
               livereload: true
             }
         },
-        plugin_html: {
-            files: ['<%= plugin.html.all %>'],
+        client_html: {
+            files: ['<%= client.html.all %>'],
             options: {
               livereload: true
             }
         },
-        plugin_css: {
-            files: ['<%= plugin.css.all %>'],
+        client_css: {
+            files: ['<%= client.css.all %>'],
             options: {
               livereload: true
             }
         },
-        plugin_sass: {
-            files: ['<%= plugin.sass.all %>'],
-            tasks: ['compass:plugin']
+        client_sass: {
+            files: ['<%= client.sass.all %>'],
+            tasks: ['compass:client']
         },
-        plugin_js: {
-            files: ['<%= plugin.js %>'],
+        client_js: {
+            files: ['<%= client.js %>'],
             options: {
               livereload: true
             }
@@ -137,10 +137,10 @@ module.exports = function (grunt) {
             }
         },
         
-        plugin: {
+        client: {
             options:{
-                sassDir: 'plugin/sass',
-                cssDir : '<%= plugin.css.dir %>'
+                sassDir: 'client/sass',
+                cssDir : '<%= client.css.dir %>'
             }
         }
         
@@ -148,7 +148,7 @@ module.exports = function (grunt) {
 
   });
 
-  // Chargement des plugins
+  // Chargement des clients
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-copy');
   /*grunt.loadNpmTasks('grunt-contrib-concat');

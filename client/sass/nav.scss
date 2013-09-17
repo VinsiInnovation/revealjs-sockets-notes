@@ -1,0 +1,65 @@
+@import "colors";
+@import "vars";
+
+/**-----------------
+* Navigation buttons
+**------------------
+*/
+
+#next, #prev, #up, #down, #show, #left, #right, #reset{
+    position:absolute;
+    background-color:#fff;
+    -moz-box-shadow: 1px 1px 5px 1px #3e3d40;
+    -webkit-box-shadow: 1px 1px 5px 1px #3e3d40;
+    -o-box-shadow: 1px 1px 5px 1px #3e3d40;
+    box-shadow: 1px 1px 5px 1px #3e3d40;
+    filter:progid:DXImageTransform.Microsoft.Shadow(color=#3e3d40, Direction=134, Strength=5);
+}
+
+#left, #right{
+    top:50%;
+    margin-top:-25px;
+}
+
+
+#up, #down{
+    left:50%;
+    margin-left:-25px;
+}
+
+#next,  #right{
+    right:$margin-nav;
+}
+#prev, #left, #reset{
+    left:$margin-nav;
+}
+
+#up, #next, #prev{
+    top:$margin-nav;
+}
+#down, #reset{
+    bottom:$margin-nav;
+}
+
+#show{
+    height:60px;
+    width:60px;
+    font-size:25px;
+    top:50%;
+    left:50%;
+    margin-left:-30px;
+    margin-top:-30px;
+}
+
+#preview .next-slide{
+    color:$color-actions;
+}
+
+#preview .slide-preview-number{
+    font-size:0.5em;
+    position:absolute;
+    bottom:2px;
+    left:50%;
+    margin-left:-25%;
+    
+}

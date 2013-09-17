@@ -1,0 +1,91 @@
+/***
+ *       _____ ____  _      ____  _____   _____ 
+ *      / ____/ __ \| |    / __ \|  __ \ / ____|
+ *     | |   | |  | | |   | |  | | |__) | (___  
+ *     | |   | |  | | |   | |  | |  _  / \___ \ 
+ *     | |___| |__| | |___| |__| | | \ \ ____) |
+ *      \_____\____/|______\____/|_|  \_\_____/ 
+ *                                              
+ *                                              
+ */
+/***
+ *     __      __     _____   _____ 
+ *     \ \    / /\   |  __ \ / ____|
+ *      \ \  / /  \  | |__) | (___  
+ *       \ \/ / /\ \ |  _  / \___ \ 
+ *        \  / ____ \| | \ \ ____) |
+ *         \/_/    \_\_|  \_\_____/ 
+ *                                  
+ *                                  
+ */
+/**-----------------
+* Navigation buttons
+**------------------
+*/
+/* line 9, ../sass/nav.scss */
+#next, #prev, #up, #down, #show, #left, #right, #reset {
+  position: absolute;
+  background-color: #fff;
+  -moz-box-shadow: 1px 1px 5px 1px #3e3d40;
+  -webkit-box-shadow: 1px 1px 5px 1px #3e3d40;
+  -o-box-shadow: 1px 1px 5px 1px #3e3d40;
+  box-shadow: 1px 1px 5px 1px #3e3d40;
+  filter: progid:DXImageTransform.Microsoft.Shadow(color=#3e3d40, Direction=134, Strength=5);
+}
+
+/* line 19, ../sass/nav.scss */
+#left, #right {
+  top: 50%;
+  margin-top: -25px;
+}
+
+/* line 25, ../sass/nav.scss */
+#up, #down {
+  left: 50%;
+  margin-left: -25px;
+}
+
+/* line 30, ../sass/nav.scss */
+#next, #right {
+  right: 10px;
+}
+
+/* line 33, ../sass/nav.scss */
+#prev, #left, #reset {
+  left: 10px;
+}
+
+/* line 37, ../sass/nav.scss */
+#up, #next, #prev {
+  top: 10px;
+}
+
+/* line 40, ../sass/nav.scss */
+#down, #reset {
+  bottom: 10px;
+}
+
+/* line 44, ../sass/nav.scss */
+#show {
+  height: 60px;
+  width: 60px;
+  font-size: 25px;
+  top: 50%;
+  left: 50%;
+  margin-left: -30px;
+  margin-top: -30px;
+}
+
+/* line 54, ../sass/nav.scss */
+#preview .next-slide {
+  color: #009aa6;
+}
+
+/* line 58, ../sass/nav.scss */
+#preview .slide-preview-number {
+  font-size: 0.5em;
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  margin-left: -25%;
+}
