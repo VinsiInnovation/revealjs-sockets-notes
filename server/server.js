@@ -2,7 +2,7 @@
 var fs = require('fs');
 // If set as parameters, we get the reveal directory path
 var revealPath = process.argv.length > 2 ? '/'+process.argv[2] : '';
-var confFile = process.cwd()+'/plugin/sockets-notes/conf/conf.json';
+var confFile = process.cwd()+revealPath+'/plugin/sockets-notes/conf/conf.json';
 var conf = null;
 try{    
     conf = JSON.parse(fs.readFileSync(confFile));
