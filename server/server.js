@@ -1,5 +1,7 @@
 // Configuration part
 var fs = require('fs');
+// If set as parameters, we get the reveal directory path
+var revealPath = process.argv.length > 2 ? '/'+process.argv[2] : '';
 var confFile = process.cwd()+'/plugin/sockets-notes/conf/conf.json';
 var conf = null;
 try{    
@@ -10,7 +12,7 @@ try{
 }
 
 if (!conf){
-    console.log("No configuration file found");
+    console.log('No configuration file found');
     return;
 }
 
@@ -21,7 +23,7 @@ console.log(process.cwd());
 var app = connect.createServer(
     connect.static(process.cwd())
 ).listen(conf.port);
-console.log("Start server on port : "+conf.port);
+console.log('Start server on port : '+conf.port);
 
 // Define socket part
 var io   = require('socket.io');
@@ -57,17 +59,17 @@ for (var dev in ifaces) {
 }
 var http = require('http');
 var wait = true;
-console.log("Check Public ip");
+console.log('Check Public ip');
 http.get('http://api.externalip.net/ip'
     , function(res){
     res.on('data', function (data) {
         try{
             jsonNetWork.push({
                 id : jsonNetWork.length,
-                name : "public ip",
-                ip : ""+data
+                name : 'public ip',
+                ip : ''+data
             });
-            console.log("public ip found : "+data);
+            console.log('public ip found : '+data);
             
         }catch(e){
             console.log('Warn : error geting ip from internet : '+e.message);      
@@ -84,12 +86,12 @@ function writeFile(){
     if (wait){
         setTimeout(writeFile,500);
     }else{
-        console.log("Write ip file");
-        fs.writeFile("./plugin/sockets-notes/server/ips.json", JSON.stringify(jsonNetWork), function(err) {
+        console.log('Write ip file');
+        fs.writeFile('.'+revealPath+'/plugin/sockets-notes/server/ips.json', JSON.stringify(jsonNetWork), function(err) {
             if(err) {
                 console.log(err);
             } else {
-                console.log("The file was saved!");
+                console.log('The file was saved!');
             }
             
             console.log('Finish server loading');

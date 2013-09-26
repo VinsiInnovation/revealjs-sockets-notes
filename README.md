@@ -14,7 +14,7 @@ To use it you have to do severals things
 
 1. Copy this directory into : 'YourRevealPresentation/plugin/sockets-notes'
 2. Install the node modules in the server (YourRevealPresentation/plugin/sockets-notes/server) directory with : npm install
-3. Start the server from your revealPresentation folder root with "node plugin/sockets-notes/server/server.js"
+3. Start the server from your revealPresentation folder root with "node plugin/sockets-notes/server/server.js REVEAL_DIRECTORY_PATH" (The REVEAL_DIRECTORY_PATH is corresponding to the relative path according to the curent directory where the reveal presentation with the plugin is present (A directory where plugin/sockets-notes is present))
 4. Launch your favorites browser and go to http://localhost:8080
 5. Select the right network and click on it
 6. Scan the QrCode with your smartphone
