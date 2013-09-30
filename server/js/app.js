@@ -42,8 +42,8 @@ var App = App || {
                 $('#'+data[i].id).on('click',function(event){
                     console.log("pouet");
                     qrCode.clear();
-                    qrCode.makeCode("http://"+datas[event.target.id].ip+":"+App.conf.port+"/plugin/sockets-notes/client/notes-speaker.html");
-                    $("#qrCodeLink").attr("href","http://"+datas[event.target.id].ip+":"+App.conf.port+"/plugin/sockets-notes/client/notes-speaker.html");
+                    qrCode.makeCode("http://"+datas[event.target.id].ip+":"+App.conf.port+datas[event.target.id].revealPath+"/plugin/sockets-notes/client/notes-speaker.html");
+                    $("#qrCodeLink").attr("href","http://"+datas[event.target.id].ip+":"+App.conf.port+datas[event.target.id].revealPath+"/plugin/sockets-notes/client/notes-speaker.html");
                 });
             }
         

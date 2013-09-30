@@ -67,7 +67,8 @@ http.get('http://api.externalip.net/ip'
             jsonNetWork.push({
                 id : jsonNetWork.length,
                 name : 'public ip',
-                ip : ''+data
+                ip : ''+data, 
+                revealPath : revealPath
             });
             console.log('public ip found : '+data);
             
