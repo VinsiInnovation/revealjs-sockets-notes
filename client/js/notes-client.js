@@ -46,7 +46,7 @@ var RevealClientNotes = RevealClientNotes || {
 	},    
     // Initialise with the configuration file
     initConfig : function(){
-          UtilClientNotes.ajaxJSONGet(UtilClientNotes.extractPath()'/conf/conf.json', function(data){    
+          UtilClientNotes.ajaxJSONGet(UtilClientNotes.extractPath()+'/conf/conf.json', function(data){    
               RevealClientNotes.conf = data;
               RevealClientNotes.initWS();
           });
