@@ -10,6 +10,21 @@ var UtilClientNotes = UtilClientNotes || {
           }
         };
         http_request.send();
+    },
+    extractPath : function(){
+      var scripts = document.getElementsByTagName("script");
+
+        for(idx = 0; idx < scripts.length; idx++)
+        {
+          var script = scripts.item(idx);
+
+          if(script.src && script.src.match(/notes-client\.js$/))
+          { 
+            var path = script.src;
+            return path.substring(0, path.indexOf('client'));
+          }
+        }
+      return "";
     }
 };
 
@@ -31,7 +46,7 @@ var RevealClientNotes = RevealClientNotes || {
 	},    
     // Initialise with the configuration file
     initConfig : function(){
-          UtilClientNotes.ajaxJSONGet('./plugin/sockets-notes/conf/conf.json', function(data){    
+          UtilClientNotes.ajaxJSONGet(UtilClientNotes.extractPath()'/conf/conf.json', function(data){    
               RevealClientNotes.conf = data;
               RevealClientNotes.initWS();
           });
