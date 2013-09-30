@@ -49,7 +49,8 @@ for (var dev in ifaces) {
         jsonNetWork.push({
             id: index,
             name:dev,
-            ip : details.address
+            ip : details.address, 
+            revealPath : revealPath
         });
       console.log(dev+(alias?':'+alias:''),details.address);
       index++;
