@@ -1,13 +1,28 @@
 module.exports = function (grunt) {
 
-  // Configuration du build
+  // Build configuration
   grunt.initConfig({
 
-    // Paramétrage
+    //////////////////////////////////////////////////
+    //////////////////////////////////////////////////
+    //// PARAMETERS FOR TASK
+    //////////////////////////////////////////////////
+    //////////////////////////////////////////////////
+
+
+    /*
+    * SOURCE
+    **/
+    src: {
+      basedir: 'src/main'
+    },
 
     
+    /*
+    * SERVER CONFIGURATION
+    **/
     server : {
-        basedir : 'server',  
+        basedir : '<%= src.basedir %>/server',  
         html: {
           index:    '<%= server.basedir %>/index.html',
           all :     '<%= server.basedir %>/**/*.html'
@@ -28,13 +43,20 @@ module.exports = function (grunt) {
           images:   '<%= server.basedir %>/images'
         }
     },
+
+    /*
+    * MOBILE CONFIGURATION
+    **/
     client : {
-        basedir : 'client',
+        basedir : '<%= src.basedir %>/mobile',
         html: {
           index:    '<%= client.basedir %>/index.html',
           all : '<%= client.basedir %>/**/*.html'
         },
-        js:   '<%= client.basedir %>/js/**/*.js',
+        js:   {
+          all: '<%= client.basedir %>/js/**/*.js',
+          dir: '<%= client.basedir %>/js'
+        },
         css: {
           all :'<%= client.basedir %>/css/**/*.css',
           dir: '<%= client.basedir %>/css',
@@ -51,6 +73,23 @@ module.exports = function (grunt) {
         }
     },
    
+    /*
+    * TARGET
+    **/
+    dist:{
+      basedir: 'dist'
+    },
+
+    //////////////////////////////////////////////////
+    //////////////////////////////////////////////////
+    //// BUILD TASKS
+    //////////////////////////////////////////////////
+    //////////////////////////////////////////////////
+
+    /*
+    * CLEAN DIRECTORIES
+    **/
+
     clean: {
       server: {
         css:   '<%= server.css.dir %>'
@@ -60,6 +99,10 @@ module.exports = function (grunt) {
       }
     },
 
+
+    /*
+    * COPY FILES
+    **/
     copy: {
         server: {
             files: [
@@ -75,7 +118,35 @@ module.exports = function (grunt) {
     },
 
     
-    // Configuration du watch
+    //////////////////////////////////////////////////
+    //////////////////////////////////////////////////
+    //// DEVELOPMENT TASKS
+    //////////////////////////////////////////////////
+    //////////////////////////////////////////////////
+
+    /*
+    * Compass Task
+    */
+    compass:{
+        
+        server:{
+
+            options:{
+                sassDir: 'server/sass',
+                cssDir : '<%= server.css.dir %>'
+            }
+        },
+        
+        client: {
+            options:{
+                sassDir: 'client/sass',
+                cssDir : '<%= client.css.dir %>'
+            }
+        }
+        
+    }
+
+    // Watch Configuration : compilation sass/compass + livereload 
     watch: {
         server_html: {            
             files: ['<%= server.html.all %>'],
@@ -124,39 +195,17 @@ module.exports = function (grunt) {
         }
     },
     
-      
-    // Sass configuration
-      
-    compass:{
-        
-        server:{
-
-            options:{
-                sassDir: 'server/sass',
-                cssDir : '<%= server.css.dir %>'
-            }
-        },
-        
-        client: {
-            options:{
-                sassDir: 'client/sass',
-                cssDir : '<%= client.css.dir %>'
-            }
-        }
-        
-    }
-
   });
 
   // Chargement des clients
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-copy');
-  /*grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-usemin');
   grunt.loadNpmTasks('grunt-contrib-csslint');
-  grunt.loadNpmTasks('grunt-contrib-jshint');*/
+  grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-compass');
   /*grunt.loadNpmTasks('grunt-oversprite');*/

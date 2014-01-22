@@ -14,7 +14,7 @@ var App = App || {
             App.init();
         })
         .error(function(e){
-            console.log("Erro when trying to load config file : "+e);
+            console.log("Error when trying to load config file : "+e);
         })
         ;
     },
@@ -42,8 +42,8 @@ var App = App || {
                 $('#'+data[i].id).on('click',function(event){
                     console.log("pouet");
                     qrCode.clear();
-                    qrCode.makeCode("http://"+datas[event.target.id].ip+":"+App.conf.port+datas[event.target.id].revealPath+"/plugin/sockets-notes/client/notes-speaker.html");
-                    $("#qrCodeLink").attr("href","http://"+datas[event.target.id].ip+":"+App.conf.port+datas[event.target.id].revealPath+"/plugin/sockets-notes/client/notes-speaker.html");
+                    qrCode.makeCode("http://"+datas[event.target.id].ip+":"+App.conf.port+window.location.pathname+"../mobile/notes-speaker.html");
+                    $("#qrCodeLink").attr("href","http://"+datas[event.target.id].ip+":"+App.conf.port+window.location.pathname+"../mobile/notes-speaker.html");
                 });
             }
         

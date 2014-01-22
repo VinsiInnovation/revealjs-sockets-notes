@@ -1,5 +1,8 @@
 node_modules
 .sass-cache
-server/node_modules
-server/ips.json
-server/npm-debug.log
+dist/server/node_modules
+dist/server/ips.json
+dist/server/npm-debug.log
+src/main/server/node_modules
+src/main/server/ips.json
+src/main/server/npm-debug.log
