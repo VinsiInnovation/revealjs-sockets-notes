@@ -14,7 +14,7 @@ module.exports = function (grunt) {
     * SOURCE
     **/
     src: {
-      basedir: 'src/main'
+      basedir: 'src/main/'
     },
 
     
@@ -22,17 +22,20 @@ module.exports = function (grunt) {
     * SERVER CONFIGURATION
     **/
     server : {
-        basedir : '<%= src.basedir %>/server',  
+        basedir : 'server',  
         html: {
           index:    '<%= server.basedir %>/index.html',
+          partials: '<%= server.basedir %>/partials'
           all :     '<%= server.basedir %>/**/*.html'
         },
-        js:   '<%= server.basedir %>/js/**/*.js',
+        js:   {
+          all: '<%= server.basedir %>/js/**/*.js',
+          dir: '<%= server.basedir %>/js',
+        },
         css: {
           all :'<%= server.basedir %>/css/**/*.css',
           dir: '<%= server.basedir %>/css',
-          app: '<%= server.basedir %>/css/server.css',
-          libs: '<%= server.basedir %>/libs'
+          app: '<%= server.basedir %>/css/server.css'
         },
         sass: {
           all :'<%= server.basedir %>/sass/**/*.scss',
@@ -48,9 +51,10 @@ module.exports = function (grunt) {
     * MOBILE CONFIGURATION
     **/
     client : {
-        basedir : '<%= src.basedir %>/mobile',
+        basedir : 'mobile',
         html: {
-          index:    '<%= client.basedir %>/index.html',
+          index:    '<%= client.basedir %>/notes-speaker.html',
+          partials:    '<%= client.basedir %>/partials',
           all : '<%= client.basedir %>/**/*.html'
         },
         js:   {
@@ -60,8 +64,7 @@ module.exports = function (grunt) {
         css: {
           all :'<%= client.basedir %>/css/**/*.css',
           dir: '<%= client.basedir %>/css',
-          app: '<%= client.basedir %>/css/client.css',
-          libs: '<%= client.basedir %>/libs/'
+          app: '<%= client.basedir %>/css/notes-speaker.css'
         },
         sass: {
           all :'<%= client.basedir %>/sass/**/*.scss',
@@ -74,10 +77,21 @@ module.exports = function (grunt) {
     },
    
     /*
+    * Commons
+    **/
+
+    commons: {
+      components: 'components',
+      bower_components: 'bower_components',
+      conf: 'conf'
+    }
+
+
+    /*
     * TARGET
     **/
     dist:{
-      basedir: 'dist'
+      basedir: 'dist/'
     },
 
     //////////////////////////////////////////////////
@@ -91,12 +105,13 @@ module.exports = function (grunt) {
     **/
 
     clean: {
-      server: {
-        css:   '<%= server.css.dir %>'
-      },
-      client: {
-        css:   '<%= client.css.dir %>'
-      }
+      tmp:      ['.tmp'],
+      all:      ['<%= dist.basedir %> '],
+      commons:  ['<%= dist.basedir %><%= commons.components %>',
+                '<%= dist.basedir %><%= commons.bower_components %>',
+                '<%= dist.basedir %><%= commons.conf %>']
+      server:   ['<%= dist.basedir %><%= server.basedir %>'],
+      client:   ['<%= dist.basedir %><%= client.basedir %>']
     },
 
 
@@ -104,15 +119,26 @@ module.exports = function (grunt) {
     * COPY FILES
     **/
     copy: {
+        commons: {
+          {expand: true, cwd: '<%= src.basedir %><%= commons.components %>', src: ['**'], dest: '<%= dist.basedir %><%= commons.components %>'},
+          {expand: true, cwd: '<%= src.basedir %><%= commons.bower_components %>', src: ['**'], dest: '<%= dist.basedir %><%= commons.bower_components %>'},
+          {expand: true, cwd: '<%= src.basedir %><%= commons.conf %>', src: ['**'], dest: '<%= dist.basedir %><%= commons.conf %>'}
+        },
         server: {
             files: [
-                {expand: true, cwd: '<%= server.css.libs %>', src: ['**/*.css'], dest: '<%= server.css.dir %>'}
+                { src: '<%= src.basedir %><%= server.html.index %>', dest: '<%= dist.basedir %><%= server.html.index %>' },
+                {expand: true, cwd: '<%= src.basedir %><%= server.html.partials %>', src: ['**'], dest: '<%= dist.basedir %><%= server.html.partials %>'},
+                {expand: true, cwd: '<%= src.basedir %><%= server.assets.font %>', src: ['**'], dest: '<%= dist.basedir %><%= server.assets.font %>'},
+                {expand: true, cwd: '<%= src.basedir %><%= server.assets.images %>', src: ['**'], dest: '<%= dist.basedir %><%= server.assets.images %>'}
             ]
             
         },
         client: {
             files: [
-                {expand: true, cwd: '<%= client.css.libs %>', src: ['**/*.css'], dest: '<%= client.css.dir %>'}
+                { src: '<%= src.basedir %><%= client.html.index %>', dest: '<%= dist.basedir %><%= client.html.index %>' },
+                {expand: true, cwd: '<%= src.basedir %><%= client.html.partials %>', src: ['**'], dest: '<%= dist.basedir %><%= client.html.partials %>'},
+                {expand: true, cwd: '<%= src.basedir %><%= client.assets.font %>', src: ['**'], dest: '<%= dist.basedir %><%= client.assets.font %>'},
+                {expand: true, cwd: '<%= src.basedir %><%= client.assets.images %>', src: ['**'], dest: '<%= dist.basedir %><%= client.assets.images %>'}
             ]            
         }      
     },

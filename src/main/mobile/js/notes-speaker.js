@@ -62,6 +62,12 @@ var RevealSpeakerNotes = RevealSpeakerNotes || {
             RevealSpeakerNotes.initSocket();
             RevealSpeakerNotes.initElements();
             RevealSpeakerNotes.timeManagement();
+
+            // Load markdown reveal js
+            $.getScript('http://'+window.location.hostname+':'+data.port+data.revealPath+'/plugin/markdown/marked.js', function(){
+                console.log("Script markdown loaded and executed.");
+            // Here you can use anything you defined in the loaded script
+            });
         }).error(function(e){
             console.log("Error during getting config file : "+e);
         });
