@@ -25,7 +25,7 @@ module.exports = function (grunt) {
         basedir : 'server',  
         html: {
           index:    '<%= server.basedir %>/index.html',
-          partials: '<%= server.basedir %>/partials'
+          partials: '<%= server.basedir %>/partials',
           all :     '<%= server.basedir %>/**/*.html'
         },
         js:   {
@@ -44,6 +44,10 @@ module.exports = function (grunt) {
         assets: {
           font:     '<%= server.basedir %>/font',
           images:   '<%= server.basedir %>/images'
+        },
+        nodeServer: {
+          server: '<%= server.basedir %>/server.js',
+          npm:    '<%= server.basedir %>/package.json',
         }
     },
 
@@ -84,7 +88,7 @@ module.exports = function (grunt) {
       components: 'components',
       bower_components: 'bower_components',
       conf: 'conf'
-    }
+    },
 
 
     /*
@@ -109,7 +113,7 @@ module.exports = function (grunt) {
       all:      ['<%= dist.basedir %> '],
       commons:  ['<%= dist.basedir %><%= commons.components %>',
                 '<%= dist.basedir %><%= commons.bower_components %>',
-                '<%= dist.basedir %><%= commons.conf %>']
+                '<%= dist.basedir %><%= commons.conf %>'],
       server:   ['<%= dist.basedir %><%= server.basedir %>'],
       client:   ['<%= dist.basedir %><%= client.basedir %>']
     },
@@ -120,13 +124,17 @@ module.exports = function (grunt) {
     **/
     copy: {
         commons: {
-          {expand: true, cwd: '<%= src.basedir %><%= commons.components %>', src: ['**'], dest: '<%= dist.basedir %><%= commons.components %>'},
-          {expand: true, cwd: '<%= src.basedir %><%= commons.bower_components %>', src: ['**'], dest: '<%= dist.basedir %><%= commons.bower_components %>'},
-          {expand: true, cwd: '<%= src.basedir %><%= commons.conf %>', src: ['**'], dest: '<%= dist.basedir %><%= commons.conf %>'}
+          files: [
+            {expand: true, cwd: '<%= src.basedir %><%= commons.components %>', src: ['**'], dest: '<%= dist.basedir %><%= commons.components %>'},
+            {expand: true, cwd: '<%= src.basedir %><%= commons.bower_components %>', src: ['**'], dest: '<%= dist.basedir %><%= commons.bower_components %>'},
+            {expand: true, cwd: '<%= src.basedir %><%= commons.conf %>', src: ['**'], dest: '<%= dist.basedir %><%= commons.conf %>'}
+          ]
         },
         server: {
             files: [
                 { src: '<%= src.basedir %><%= server.html.index %>', dest: '<%= dist.basedir %><%= server.html.index %>' },
+                { src: '<%= src.basedir %><%= server.nodeServer.server %>', dest: '<%= dist.basedir %><%= server.nodeServer.server %>' },
+                { src: '<%= src.basedir %><%= server.nodeServer.npm %>', dest: '<%= dist.basedir %><%= server.nodeServer.npm %>' },
                 {expand: true, cwd: '<%= src.basedir %><%= server.html.partials %>', src: ['**'], dest: '<%= dist.basedir %><%= server.html.partials %>'},
                 {expand: true, cwd: '<%= src.basedir %><%= server.assets.font %>', src: ['**'], dest: '<%= dist.basedir %><%= server.assets.font %>'},
                 {expand: true, cwd: '<%= src.basedir %><%= server.assets.images %>', src: ['**'], dest: '<%= dist.basedir %><%= server.assets.images %>'}
@@ -141,6 +149,32 @@ module.exports = function (grunt) {
                 {expand: true, cwd: '<%= src.basedir %><%= client.assets.images %>', src: ['**'], dest: '<%= dist.basedir %><%= client.assets.images %>'}
             ]            
         }      
+    },
+
+    /* Config auto des taches concat, uglify et cssmin */
+    useminPrepare: {
+      server: {
+        src: ['<%= dist.basedir %><%= server.html.index %>'],
+        options: {
+          dest : '<%= dist.basedir %><%= server.basedir %>',
+          root : '<%= src.basedir %><%= server.basedir %>'
+        }
+        
+      },
+      client: {
+        src: ['<%= dist.basedir %><%= client.html.index %>'],
+        options: {
+          dest : '<%= dist.basedir %><%= client.basedir %>',
+          root : '<%= src.basedir %><%= client.basedir %>'
+        }
+        
+      }
+    },
+
+    /* Usemin task */
+    usemin: {
+      html:['<%= dist.basedir %><%= server.html.index %>',
+          '<%= dist.basedir %><%= client.html.index %>']
     },
 
     
@@ -158,19 +192,19 @@ module.exports = function (grunt) {
         server:{
 
             options:{
-                sassDir: 'server/sass',
-                cssDir : '<%= server.css.dir %>'
+                sassDir: 'src/main/server/sass',
+                cssDir : '<%= src.basedir %><%= server.css.dir %>'
             }
         },
         
         client: {
             options:{
-                sassDir: 'client/sass',
-                cssDir : '<%= client.css.dir %>'
+                sassDir: 'src/main/mobile/sass',
+                cssDir : '<%= src.basedir %><%= client.css.dir %>'
             }
         }
         
-    }
+    },
 
     // Watch Configuration : compilation sass/compass + livereload 
     watch: {
@@ -238,7 +272,9 @@ module.exports = function (grunt) {
 
   // Déclaration des taches
   /*grunt.registerTask('lint',    ['jshint', 'csslint']);*/
-  grunt.registerTask('prod',    ['clean', 'copy', 'compass']);
-  grunt.registerTask('default', ['prod']);
+  grunt.registerTask('dist_server',    ['compass', 'clean', 'copy:commons', 'copy:server', 'useminPrepare:server', 'concat', 'uglify', 'cssmin', 'usemin', 'clean:tmp']);
+  grunt.registerTask('dist_client',    ['compass', 'clean', 'copy:commons', 'copy:client', 'useminPrepare:client', 'concat', 'uglify', 'cssmin', 'usemin', 'clean:tmp']);
+  grunt.registerTask('release',    ['compass', 'clean', 'copy', 'useminPrepare', 'concat', 'uglify', 'cssmin', 'usemin', 'clean:tmp']);
+  grunt.registerTask('default', ['release']);
 
 };
