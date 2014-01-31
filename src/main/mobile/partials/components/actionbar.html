@@ -1,13 +1,8 @@
 <div class="actionbar">
     <div class="title-abs">SPEAKER WS</div>
-    <div id="full-screen" class="icon-full-screen"><i class="fa fa-expand"></i></div>
-    <div id="options" class="icon-menu"><i class="fa fa-ellipsis-v"></i></div>
-    <ul id="plugin-list" class="plugin-list" style="display:none">
-        <!--
-        <li class="plugin"><a href="#" id="plugin-play-video"><i class="icon-youtube-play"></i>&nbsp play video</a>
-        </li>
-        <li class="plugin"><a  href="#" id="plugin-detect-gestures"><i class="icon-hand-up"></i> &nbsp detect gestures</a>
-        </li>
-        -->
+    <div id="full-screen" class="icon-full-screen" ng-click='fullscreen()'><i class="fa fa-expand"></i></div>
+    <div id="options" class="icon-menu" ng-click='togglePluginList()' ><i class="fa fa-ellipsis-v"></i></div>
+    <ul id="plugin-list" class="plugin-list" ng-show='showList'>
+        <li class="plugin" ng-repeat="plugin in model.pluginList | filter:activeFilter" id="plugin.id" ng-click='pluginClicked(plugin)' ><i class="fa {{plugin.icon}}"></i>&nbsp {{plugin.name}}</li>        
     </ul>
 </div>

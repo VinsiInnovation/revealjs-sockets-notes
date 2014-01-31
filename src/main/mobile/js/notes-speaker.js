@@ -21,21 +21,19 @@ var RevealSpeakerNotes = RevealSpeakerNotes || {
         nextSlideIndex : null,
         totalSlideIndex : null,
         options : null,
-        pluginList : null,
-        next : null,
+        /*next : null,
         prev : null,
         left : null,
         right : null,
         up : null,
         down : null,
         show : null,
-        reset : null,
+        reset : null,*/
         timeEl : null,
         hoursEl : null,
         minutesEl : null,
         secondsEl : null,
-        progressEl : null,
-        fullScreenEl : null
+        progressEl : null
     },
     model : {
         defaultInterval : 2, // Time in minute of the conference
@@ -51,11 +49,11 @@ var RevealSpeakerNotes = RevealSpeakerNotes || {
     // WebSocket initialisation and time management initialisation
     init : function(){
          // Plug Fastclick module        
-        FastClick.attach(document.body);
+        //FastClick.attach(document.body);
         
         
         // Read configuration file for getting server port
-        $.getJSON('../conf/conf.json', function(data){              
+        /*$.getJSON('../conf/conf.json', function(data){              
             RevealSpeakerNotes.conf = data;
             
             //Init the webSocket and time management
@@ -70,11 +68,11 @@ var RevealSpeakerNotes = RevealSpeakerNotes || {
             });
         }).error(function(e){
             console.log("Error during getting config file : "+e);
-        });
+        });*/
     
     },// Init all the plugins
     initPlugins : function(){
-        RevealSpeakerNotes.model.socket.emit('message', {
+        /*RevealSpeakerNotes.model.socket.emit('message', {
            type:'ping-plugin'
        }); 
 
@@ -85,7 +83,7 @@ var RevealSpeakerNotes = RevealSpeakerNotes || {
                type:'activate-plugin',
                id: evt.target.id
            }); 
-        });
+        });*/
     },
     // Init all html elements
     initElements : function(){
@@ -94,25 +92,23 @@ var RevealSpeakerNotes = RevealSpeakerNotes || {
         RevealSpeakerNotes.uiElements.curentSlideIndex  =  $('.curent-slide');
         RevealSpeakerNotes.uiElements.nextSlideIndex  =  $('.next-slide');
         RevealSpeakerNotes.uiElements.totalSlideIndex  =  $('.nb-slides');
-        RevealSpeakerNotes.uiElements.next  =  $( '#next' );
+        /*RevealSpeakerNotes.uiElements.next  =  $( '#next' );
         RevealSpeakerNotes.uiElements.prev  =  $( '#prev' );
         RevealSpeakerNotes.uiElements.left  =  $( '#left' );
         RevealSpeakerNotes.uiElements.right  =  $( '#right' );
         RevealSpeakerNotes.uiElements.up  =  $( '#up' );
         RevealSpeakerNotes.uiElements.reset  =  $( '#reset' );
         RevealSpeakerNotes.uiElements.down  =  $( '#down' );
-        RevealSpeakerNotes.uiElements.show  =  $( '#show' );
+        RevealSpeakerNotes.uiElements.show  =  $( '#show' );*/
         RevealSpeakerNotes.uiElements.timeEl  =  $( '#time' );
         RevealSpeakerNotes.uiElements.hoursEl  =  $( '#hours' );
         RevealSpeakerNotes.uiElements.minutesEl  =  $( '#minutes' );
         RevealSpeakerNotes.uiElements.secondsEl  =  $( '#seconds' );
         RevealSpeakerNotes.uiElements.options  =  $( '#options' );
-        RevealSpeakerNotes.uiElements.pluginList  =  $( '#plugin-list' );
         RevealSpeakerNotes.uiElements.progressEl  =  $( '#progress_elapsed_time' );
-        RevealSpeakerNotes.uiElements.fullScreenEl  =  $( '#full-screen' );
         
          // Buttons interaction
-        RevealSpeakerNotes.uiElements.next.on('click', function(){
+        /*RevealSpeakerNotes.uiElements.next.on('click', function(){
             if (RevealSpeakerNotes.Reveal && !this.hasAttribute('disabled')) 
                 RevealSpeakerNotes.Reveal.next();
         });
@@ -149,49 +145,14 @@ var RevealSpeakerNotes = RevealSpeakerNotes || {
                 index: RevealSpeakerNotes.model.indices, 
                 fragment : RevealSpeakerNotes.model.fragment
             });
-        });
+        });*/
         
-        // Add options management
-        RevealSpeakerNotes.uiElements.options.on('click', function(){
-            RevealSpeakerNotes.uiElements.pluginList.show();
-
-        });
-
-        // Add full screen management
-        RevealSpeakerNotes.uiElements.fullScreenEl.on('click', function(){
-            if (document.fullscreenElement || 
-                document.webkitFullscreenElement ||
-                document.mozFullscreenElement){
-                if (document.exitFullscreen) {
-                    document.exitFullscreen();
-                }
-                else if (document.mozCancelFullScreen) {
-                    document.mozCancelFullScreen();
-                }
-                else if (document.webkitExitFullscreen) {
-                    document.webkitExitFullscreen();
-                }
-            }else{
-                var docElm = document.getElementById("main-content");
-                if (docElm.requestFullscreen) {
-                    docElm.requestFullscreen();
-                }
-                else if (docElm.mozRequestFullScreen) {
-                    docElm.mozRequestFullScreen();
-                }
-                else if (docElm.webkitRequestFullscreen) {
-                    docElm.webkitRequestFullscreen();
-                }
-            }
-
-        });
-
         RevealSpeakerNotes.renderProgress(0);
         
     },
     // Connect to websocket on host
     initSocket : function(){
-        RevealSpeakerNotes.model.socket = io.connect('http://'+window.location.hostname+':'+RevealSpeakerNotes.conf.port);
+        /*RevealSpeakerNotes.model.socket = io.connect('http://'+window.location.hostname+':'+RevealSpeakerNotes.conf.port);
         
         // Socket IO connect
         RevealSpeakerNotes.model.socket.on('connect',function(){
@@ -207,12 +168,12 @@ var RevealSpeakerNotes = RevealSpeakerNotes || {
        
 
         // Message from presentation
-        RevealSpeakerNotes.model.socket.on("message", RevealSpeakerNotes.onMessage);
+        RevealSpeakerNotes.model.socket.on("message", RevealSpeakerNotes.onMessage);*/
     },
     // On WebSockets Messages
     onMessage : function(json){
         // Message send when recieving notes
-            if (json.type === "notes"){							
+            /*if (json.type === "notes"){							
                 if( json.data.markdown ) {
                     RevealSpeakerNotes.uiElements.notes.html(marked( json.data.notes ));
                 }
@@ -251,10 +212,10 @@ var RevealSpeakerNotes = RevealSpeakerNotes || {
                                 RevealSpeakerNotes.model.fragment = Math.min(0, RevealSpeakerNotes.model.fragment++);
                             }
                     }
-            }
+            }*/
     },
     onIframeLoad : function(){
-        var iframe = document.getElementById("next-slide");     
+        /*var iframe = document.getElementById("next-slide");     
         RevealSpeakerNotes.Reveal = iframe.contentWindow.Reveal;
         // Configuration of presentation to hide controls
         RevealSpeakerNotes.Reveal.initialize({
@@ -267,20 +228,20 @@ var RevealSpeakerNotes = RevealSpeakerNotes || {
         RevealSpeakerNotes.Reveal.addEventListener( 'slidechanged', RevealSpeakerNotes.revealChangeListener);
         RevealSpeakerNotes.Reveal.addEventListener( 'fragmentshown', RevealSpeakerNotes.revealFragementShowListener);
         RevealSpeakerNotes.Reveal.addEventListener( 'fragmenthidden', RevealSpeakerNotes.revealFragementHiddeListener);
-        RevealSpeakerNotes.updateControls();
+        RevealSpeakerNotes.updateControls();*/
     },
     revealChangeListener : function(event){
-         setTimeout(function(){          
+         /*setTimeout(function(){          
              RevealSpeakerNotes.updateControls();
              RevealSpeakerNotes.model.indices = RevealSpeakerNotes.Reveal.getIndices();
              RevealSpeakerNotes.uiElements.nextSlideIndex.html(RevealSpeakerNotes.model.indices.h+RevealSpeakerNotes.model.indices.v);                
-        }, 500);		
+        }, 500);		*/
     },
     revealFragementShowListener : function(event){
-         RevealSpeakerNotes.model.fragment++;
+         /*RevealSpeakerNotes.model.fragment++;*/
     },
     revealFragementHiddeListener : function(event){
-        RevealSpeakerNotes.model.fragment = Math.min(0, RevealSpeakerNotes.model.fragment++);
+        /*RevealSpeakerNotes.model.fragment = Math.min(0, RevealSpeakerNotes.model.fragment++);*/
     },
     // Time management
     timeManagement : function(){
@@ -380,7 +341,7 @@ var RevealSpeakerNotes = RevealSpeakerNotes || {
         }, 1000 );
     },
     updateControls : function(){
-        // We update the buttons
+        /*// We update the buttons
         var controls = RevealSpeakerNotes.getControls();
         if (controls.right) 
             RevealSpeakerNotes.uiElements.right.removeAttr("disabled"); 
@@ -411,11 +372,11 @@ var RevealSpeakerNotes = RevealSpeakerNotes || {
             RevealSpeakerNotes.uiElements.prev.attr("disabled", true);
         else
             RevealSpeakerNotes.uiElements.prev.removeAttr("disabled");
-            
+            */
         
     },// Get the curent controls 
     getControls : function(){
-        var controls = document.querySelector('iframe').contentDocument.querySelector('.controls');
+        /*var controls = document.querySelector('iframe').contentDocument.querySelector('.controls');
         var upControl = false,
             downControl = false,
             leftControl = false,
@@ -432,7 +393,7 @@ var RevealSpeakerNotes = RevealSpeakerNotes || {
             down : downControl,
             left : leftControl,
             right : rightControl
-        }
+        }*/
     },
     renderProgress : function(progress){
         progress = Math.floor(progress);

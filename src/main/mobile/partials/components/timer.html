@@ -1,0 +1,36 @@
+<div id="time" class="border">
+    <!-- Common time loader actionbar-->
+    <div class="actionbar">
+        <div id="timeMenu" class="icon-menu"><i class="fa fa-ellipsis-v"></i></div>
+        <div id="timeTitleMenu"  class="title-menu" style="display:none">Duration (min) </div>
+    </div>
+    <!-- ellapse time -->
+    <div id="ellapsedTime">
+        <div class="elapsed">
+            <div class="timeEllapesd">
+                <span id="hours">00</span><span id="minutes">:00</span><span id="seconds">:00</span>
+            </div>
+            <div id="progress_elapsed_time" class="elapsed_bg">
+            </div>                    
+        </div>
+        <div class="actions_times">
+            <div id="action_time_play">
+                <i class="fa fa-play"></i>
+            </div>
+            <div id="action_time_pause" style="display:none">
+                <i class="fa fa-pause"></i>
+            </div>
+            <div id="action_time_stop">
+                <i class="fa fa-stop"></i>
+            </div>
+        </div>
+    </div>
+    <!-- config time -->
+    <div id="configEllapsed" style="display:none">
+            <div  class="config_ellapsed_time"><input id="config_interval" type="number" value="60"></div>
+            <div class="actions_times">
+                <div id="config_ellapsed_cancel"><i class="fa fa-times"></i></div>
+                <div id="config_ellapsed_validate"><i class="fa fa-check"></i></div>                    
+            </div>
+    </div>
+</div>

@@ -209,45 +209,47 @@ module.exports = function (grunt) {
     // Watch Configuration : compilation sass/compass + livereload 
     watch: {
         server_html: {            
-            files: ['<%= server.html.all %>'],
+            files: ['<%= src.basedir %><%= server.html.index %>',
+                '<%= src.basedir %><%= server.html.all %>'],
             options: {
               livereload: true
             }
         },
         server_css: {
-            files: ['<%= server.css.all %>'],
+            files: ['<%= src.basedir %><%= server.css.all %>'],
             options: {
               livereload: true
             }
         },
         server_sass: {
-            files: ['<%= server.sass.all %>'],
+            files: ['<%= src.basedir %><%= server.sass.all %>'],
             tasks: ['compass:server']
         },
         server_js: {
-            files: ['<%= server.js %>'],
+            files: ['<%= src.basedir %><%= server.js.all %>'],
             options: {
               livereload: true
             }
         },
         client_html: {
-            files: ['<%= client.html.all %>'],
+            files: ['<%= src.basedir %><%= client.html.index %>',
+                  '<%= src.basedir %><%= client.html.all %>'],
             options: {
               livereload: true
             }
         },
         client_css: {
-            files: ['<%= client.css.all %>'],
+            files: ['<%= src.basedir %><%= client.css.all %>'],
             options: {
               livereload: true
             }
         },
         client_sass: {
-            files: ['<%= client.sass.all %>'],
+            files: ['<%= src.basedir %><%= client.sass.all %>'],
             tasks: ['compass:client']
         },
         client_js: {
-            files: ['<%= client.js %>'],
+            files: ['<%= src.basedir %><%= client.js.all %>'],
             options: {
               livereload: true
             }

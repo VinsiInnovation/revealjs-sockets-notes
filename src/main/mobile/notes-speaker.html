@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 
-		<title>reveal.js - WebSocket Speaker Notes</title>
+		<title>Speaker WS</title>
 
         <!-- build:css css/app.css -->
         <!-- Cardinal Css-->
@@ -22,7 +22,7 @@
         <script src="../bower_components/jquery/jquery.min.js"></script>
         <!-- Use for mobile use -->
         <script src="../bower_components/fastclick/lib/fastclick.js"></script>
-        <!-- Use for prefix free css management-->
+        <!-- Use for prefix free css management--> 
         <script src="../bower_components/prefix-free/prefixfree.min.js"></script>
         <!-- Angular JS dependencies -->
         <script src="../bower_components/angular/angular.min.js"></script>
@@ -31,94 +31,35 @@
         <!--<script src="../../../../plugin/markdown/marked.js"></script>-->
         <!-- Main script-->
         <script src="js/notes-speaker.js"></script>
+
+        <!-- Angular Modules -->
+        <script src="js/sws/sws.js"></script> 
+        <script src="js/components/components.js"></script>
+
+        <!-- Angular Directives -->
+        <script src="js/components/sws.js"></script>
+        <script src="js/components/actionbar.js"></script>
+        <script src="js/components/notes.js"></script>
+        <script src="js/components/timer.js"></script>
+        <script src="js/components/controls.js"></script>
+        <script src="js/components/iframe.js"></script>
+        
+        <!-- Angular Services -->
+
+
+        <!-- Angular Controlers -->
+        <script src="js/sws/controlers/main.js"></script>
+
+        <!-- Plugins -->
+        <script src="js/plugins/plugins.js"></script>
+        <script src="js/plugins/video-play-plugin.js"></script>
+        
+        <!-- Angular App -->
         <script src="js/notes-speaker-ang.js"></script>
         <!-- endbuild --> 
 	</head>
 
-	<body ng-controller="SwsCtrl">
-        <div id="main-content">
-            <!-- Main Action Bar -->
-            <div class="actionbar">
-                <div class="title-abs">SPEAKER WS</div>
-                <div id="full-screen" class="icon-full-screen"><i class="fa fa-expand"></i></div>
-                <div id="options" class="icon-menu"><i class="fa fa-ellipsis-v"></i></div>
-                <ul id="plugin-list" class="plugin-list" style="display:none">
-                    <!--
-                    <li class="plugin"><a href="#" id="plugin-play-video"><i class="icon-youtube-play"></i>&nbsp play video</a>
-                    </li>
-                    <li class="plugin"><a  href="#" id="plugin-detect-gestures"><i class="icon-hand-up"></i> &nbsp detect gestures</a>
-                    </li>
-                    -->
-                </ul>
-            </div>
-            
-            <!-- Time Loader part -->
-            <div id="time" class="border">
-                <!-- Common time loader actionbar-->
-                <div class="actionbar">
-                    <div id="timeMenu" class="icon-menu"><i class="fa fa-ellipsis-v"></i></div>
-                    <div id="timeTitleMenu"  class="title-menu" style="display:none">Duration (min) </div>
-                </div>
-                <!-- ellapse time -->
-                <div id="ellapsedTime">
-                    <div class="elapsed">
-                        <div class="timeEllapesd">
-                            <span id="hours">00</span><span id="minutes">:00</span><span id="seconds">:00</span>
-                        </div>
-                        <div id="progress_elapsed_time" class="elapsed_bg">
-                        </div>                    
-                    </div>
-                    <div class="actions_times">
-                        <div id="action_time_play">
-                            <i class="fa fa-play"></i>
-                        </div>
-                        <div id="action_time_pause" style="display:none">
-                            <i class="fa fa-pause"></i>
-                        </div>
-                        <div id="action_time_stop">
-                            <i class="fa fa-stop"></i>
-                        </div>
-                    </div>
-                </div>
-                <!-- config time -->
-                <div id="configEllapsed" style="display:none">
-                        <div  class="config_ellapsed_time"><input id="config_interval" type="number" value="60"></div>
-                        <div class="actions_times">
-                            <div id="config_ellapsed_cancel"><i class="fa fa-times"></i></div>
-                            <div id="config_ellapsed_validate"><i class="fa fa-check"></i></div>                    
-                        </div>
-                </div>
-            </div>
-            
-            <!-- Notes -->
-            <div id="notes" class="border">
-                <div class="actionbar">
-                    <div class="title-abs">NOTES</div>
-                    <div class="slide-number">
-                        Slide <span class="curent-slide">8</span> / <span class="nb-slides">35</span>
-                    </div>
-                </div>
-                <hr class="hractionbar">
-                <div id="content-notes">
-                </div>
-            </div>
-            
-            <!--  Preview -->
-            <div id="preview" class="border">
-                <div id="wrap-next-slide" class="slides">
-                    <script>document.write( '<iframe width="100%" height="100%" id="next-slide" src=""></iframe>' );</script>
-                </div>
-                <a href="#" id="reset" class="button"><i class="fa fa-undo"></i></a>
-                <a href="#" id="next" class="button" disabled><i class="fa fa-step-forward"></i></a>
-                <a href="#" id="prev" class="button" disabled><i class="fa fa-step-backward"></i></a>
-                <a href="#" id="left" class="button" disabled><i class="fa fa-caret-left"></i></a>
-                <a href="#" id="right" class="button" disabled><i class="fa fa-caret-right"></i></a>
-                <a href="#" id="up" class="button" disabled><i class="fa fa-caret-up"></i></a>
-                <a href="#" id="down" class="button" disabled><i class="fa fa-caret-down"></i></a>
-                <a href="#" id="show" class="button" disabled><i class="fa fa-share"></i>
-                    <div class="slide-preview-number"><span class="next-slide">8</span> / <span class="nb-slides">35</div>
-                </a>                			
-            </div>
-        </div>
+	<body ng-view sws vp-plugin>
+        
     </body>
 </html>

@@ -1,7 +1,7 @@
 /* exported app */
 'use strict';
 
-var app = angular.module('sws', ['ngRoute', 'sws.main', 'sws.components']);
+var app = angular.module('sws', ['ngRoute', 'sws.main', 'sws.components', 'sws.plugins']);
 
 app.config(['$routeProvider', function($routeProvider) {
     $routeProvider

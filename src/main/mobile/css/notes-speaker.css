@@ -404,7 +404,7 @@
 * Spinner
 **------------------
 */
-/* line 191, ../sass/timer.scss */
+/* line 190, ../sass/timer.scss */
 .loader-spiner, .loader-spinner-alert {
   width: 200%;
   height: 200%;
@@ -418,7 +418,7 @@
   border-color: #be233a;
 }
 
-/* line 203, ../sass/timer.scss */
+/* line 202, ../sass/timer.scss */
 .loader-spiner {
   border-color: #009aa6;
 }
@@ -437,7 +437,6 @@
   font-family: digital;
   src: url("../font/DS-DIGII.TTF");
 }
-
 /***
  *       _____ ____  __  __ __  __  ____  _   _        _____  _____   ____  _____  ______ _____ _______ _____ ______  _____ 
  *      / ____/ __ \|  \/  |  \/  |/ __ \| \ | |      |  __ \|  __ \ / __ \|  __ \|  ____|  __ \__   __|_   _|  ____|/ ____|
@@ -560,12 +559,12 @@ body {
 
 /* line 137, ../sass/notes-speaker.scss */
 .slides span {
-  position: absolute;
+  /*position: absolute;*/
   top: 3px;
   left: 3px;
   font-weight: bold;
   font-size: 14px;
-  color: rgba(255, 255, 255, 0.9);
+  /*    color: rgba( 255, 255, 255, 0.9 );*/
 }
 
 /* line 146, ../sass/notes-speaker.scss */

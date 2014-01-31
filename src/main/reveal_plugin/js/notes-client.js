@@ -46,7 +46,7 @@ var RevealClientNotes = RevealClientNotes || {
 	},    
     // Initialise with the configuration file
     initConfig : function(){
-          UtilClientNotes.ajaxJSONGet(UtilClientNotes.extractPath()+'/conf/conf.json', function(data){    
+          UtilClientNotes.ajaxJSONGet(UtilClientNotes.extractPath()+'/../../../conf/conf.json', function(data){    
               RevealClientNotes.conf = data;
               RevealClientNotes.initWS();
           });
@@ -94,6 +94,11 @@ var RevealClientNotes = RevealClientNotes || {
                     indices : Reveal.getIndices()
                   
                 });
+            }else if( data.type === "ping-plugin"){                      
+                 // We have to check the controls in order to show the correct directions
+              
+                // Delegate to plugins 
+                
             }
         });
 	}, 

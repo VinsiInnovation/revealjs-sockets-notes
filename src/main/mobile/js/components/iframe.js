@@ -1,0 +1,110 @@
+components.directive('iframeControl', ['$rootScope', '$timeout'
+  ,function ($rootScope, $timeout ) {
+
+    
+   var revealIFrame = null;
+
+   var directiveDefinitionObject = {
+    restrict: 'A',
+    scope: false,    
+    controller: function($scope){
+
+      this.revealAction = function(action){
+        if (action === 'next'){
+          revealIFrame.next();
+        }else if (action === 'prev'){
+          revealIFrame.prev();          
+        }else if (action === 'up'){
+          revealIFrame.up();          
+        }else if (action === 'down'){
+          revealIFrame.down();          
+        }else if (action === 'left'){
+          revealIFrame.left();          
+        }else if (action === 'right'){
+          revealIFrame.right();          
+        }else if (action === 'reset'){
+          revealIFrame.slide( 0, 0, 0 );          
+        }
+      }
+    },
+    link: function postLink($scope, iElement, iAttrs) { 
+
+      var iframe = iElement.find('iframe')[0];
+
+      $rootScope.$on('loadIframeEvt', function(evt, url){
+        iframe.src = url;
+      });  
+
+
+      // Scope method
+
+      var updateControls = function(){
+        var controls = iframe.contentDocument.querySelector('.controls');
+        var upControl = true,
+            downControl = true,
+            leftControl = true,
+            rightControl = true;                
+        if (controls){
+            controls.style.display = "none";
+            upControl = controls.querySelector("div.navigate-up.enabled") ? false : true;
+            downControl = controls.querySelector("div.navigate-down.enabled") ? false : true;
+            leftControl = controls.querySelector("div.navigate-left.enabled") ? false : true;
+            rightControl = controls.querySelector("div.navigate-right.enabled") ? false : true;
+        }
+        $scope.model.controls = {
+            reset : false,
+            show : false,
+            up : upControl,
+            down : downControl,
+            left : leftControl,
+            right : rightControl,
+            next :  $scope.model.indices.h+$scope.model.indices.v+1 > $scope.model.nbSlides,
+            prev : $scope.model.indices.h+$scope.model.indices.v <= 0
+        };
+
+      }
+
+      // Directive Methods
+
+      var onIFrameLoad = function(){
+        revealIFrame = iframe.contentWindow.Reveal;
+        // Configuration of presentation to hide controls
+        revealIFrame.initialize({
+            controls: true,
+            transition : 'default',
+            transitionSpeed : 'fast'
+        });
+        
+        // We listen to reaveal events in order to ajust the screen
+        revealIFrame.addEventListener( 'slidechanged', revealChangeListener);
+        revealIFrame.addEventListener( 'fragmentshown', revealFragementShowListener);
+        revealIFrame.addEventListener( 'fragmenthidden', revealFragementHiddeListener);
+        
+
+        updateControls();
+      }
+
+      var revealChangeListener = function(event){
+         $timeout(function(){          
+            $scope.model.indices = revealIFrame.getIndices();
+            $scope.model.nextSlideNumber = $scope.model.indices.h+$scope.model.indices.v;
+            updateControls();
+          }, 500);    
+      }
+
+
+      var revealFragementShowListener = function(event){
+          $scope.model.fragment++;
+      }
+
+
+      var revealFragementHiddeListener = function(event){
+          $scope.model.fragment = Math.min(0, $scope.model.fragment++);
+      }
+
+      iframe.onload = onIFrameLoad;
+      
+    }
+  };
+  return directiveDefinitionObject;
+}]);
