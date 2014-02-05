@@ -88,11 +88,11 @@ var RevealSpeakerNotes = RevealSpeakerNotes || {
     // Init all html elements
     initElements : function(){
         
-        RevealSpeakerNotes.uiElements.notes  =  $('#content-notes' );
+        /*RevealSpeakerNotes.uiElements.notes  =  $('#content-notes' );
         RevealSpeakerNotes.uiElements.curentSlideIndex  =  $('.curent-slide');
         RevealSpeakerNotes.uiElements.nextSlideIndex  =  $('.next-slide');
         RevealSpeakerNotes.uiElements.totalSlideIndex  =  $('.nb-slides');
-        /*RevealSpeakerNotes.uiElements.next  =  $( '#next' );
+        RevealSpeakerNotes.uiElements.next  =  $( '#next' );
         RevealSpeakerNotes.uiElements.prev  =  $( '#prev' );
         RevealSpeakerNotes.uiElements.left  =  $( '#left' );
         RevealSpeakerNotes.uiElements.right  =  $( '#right' );
@@ -245,7 +245,7 @@ var RevealSpeakerNotes = RevealSpeakerNotes || {
     },
     // Time management
     timeManagement : function(){
-        // Time Management
+        /*// Time Management
         var start = new Date();
         
         
@@ -338,7 +338,7 @@ var RevealSpeakerNotes = RevealSpeakerNotes || {
                     $(".loader-spiner").removeClass("loader-spiner");
                 }
             }
-        }, 1000 );
+        }, 1000 );*/
     },
     updateControls : function(){
         /*// We update the buttons
@@ -396,7 +396,7 @@ var RevealSpeakerNotes = RevealSpeakerNotes || {
         }*/
     },
     renderProgress : function(progress){
-        progress = Math.floor(progress);
+       /* progress = Math.floor(progress);
         RevealSpeakerNotes.uiElements.progressEl.css("width", progress+"%");
         var alertClass = RevealSpeakerNotes.uiElements.progressEl.hasClass("alert");
         var advancedClass = RevealSpeakerNotes.uiElements.progressEl.hasClass("advanced");
@@ -409,7 +409,8 @@ var RevealSpeakerNotes = RevealSpeakerNotes || {
         }else if(progress >= 90 && !alertClass){
             RevealSpeakerNotes.uiElements.progressEl.addClass("alert");
             RevealSpeakerNotes.uiElements.progressEl.removeClass("advanced");
-        }
+        }*/
+        
         /*if(progress<25){
             var angle = -90 + (progress/100)*360;
             $(".animate-0-25-b").css("transform","rotate("+angle+"deg)");
