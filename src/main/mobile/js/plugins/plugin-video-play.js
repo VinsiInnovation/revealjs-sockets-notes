@@ -14,6 +14,7 @@ plugins.directive('vpPlugin', ['$rootScope'
       
 
       $scope.vpClick = function(){
+        $scope.pluginClicked('vp', 'hello VP Plugin ! ');
         //alert('I was clicked ! ');
       }
     }

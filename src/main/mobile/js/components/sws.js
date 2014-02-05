@@ -154,6 +154,14 @@ components.directive('sws', ['$rootScope'
         $scope.sendMessage = function(message){
             socketIO.emit('message', message);
         }
+
+        $scope.pluginClicked = function(id, data){
+          socketIO.emit('message', {
+              type : 'click-plugin',
+              'id'  : id,
+              'data': data
+          }); 
+        }
           
         $scope.register = function(plugin){
           plugin.active = false;

@@ -1,5 +1,5 @@
-var UtilClientNotes = UtilClientNotes || {
-    ajaxJSONGet : function(url, callback){
+var UtilClientNotes = (function () {
+    var ajaxJSONGet = function(url, callback){
         var http_request = new XMLHttpRequest();
         http_request.open("GET", url, true);
         http_request.onreadystatechange = function () {
@@ -10,8 +10,9 @@ var UtilClientNotes = UtilClientNotes || {
           }
         };
         http_request.send();
-    },
-    extractPath : function(){
+    };
+
+    var extractPath = function(){
       var scripts = document.getElementsByTagName("script");
 
         for(idx = 0; idx < scripts.length; idx++)
@@ -25,35 +26,56 @@ var UtilClientNotes = UtilClientNotes || {
           }
         }
       return "";
+    };
+
+    return {
+      ajaxJSONGet : ajaxJSONGet,
+      extractPath : extractPath
     }
-};
+})();
 
 /**
  * Handles opening of and synchronization with the reveal.js
  * notes window.
  */
-var RevealClientNotes = RevealClientNotes || {
-    
-    conf : null,
-    socket : null,
-    // We init the client side (websocket + reveal Listener)
-	init : function(){
+var RevealClientNotes = (function () {
+
+  /*
+  * **************************************
+  * ---------------MODEL------------------
+  * **************************************
+  */
+
+  var conf = null,
+    socket = null,
+    pluginList = {};
+
+  /*
+  * **************************************
+  * ---------INNER METHODS----------------
+  * **************************************
+  */
+  
+  // We init the client side (websocket + reveal Listener)
+	var init = function(){
          // look at the url passed to see if we're manipulating the client slides or the speakers slides
         if (window.location.hash != '#speakerNotes'){
-            RevealClientNotes.initConfig();
-            RevealClientNotes.initRevealListener();
+            initConfig();
+            initRevealListener();
         }
-	},    
-    // Initialise with the configuration file
-    initConfig : function(){
-          UtilClientNotes.ajaxJSONGet(UtilClientNotes.extractPath()+'/../../../conf/conf.json', function(data){    
-              RevealClientNotes.conf = data;
-              RevealClientNotes.initWS();
-          });
-        
-    },    	
-    // Init the WebSocket connection
-	initWS : function(){
+	};    
+  
+  // Initialise with the configuration file
+  var initConfig = function(){
+        UtilClientNotes.ajaxJSONGet(UtilClientNotes.extractPath()+'/../../../conf/conf.json', function(data){    
+            conf = data;
+            initWS();
+        });
+      
+  };    	
+  
+  // Init the WebSocket connection
+	var initWS = function(){
         // Get the number of slides
         var nbSlides = 0;
         var continueLoop = true;
@@ -63,47 +85,63 @@ var RevealClientNotes = RevealClientNotes || {
         }
         
         // Connect to websocket
-        RevealClientNotes.socket = io.connect('http://'+window.location.hostname+':'+RevealClientNotes.conf.port);
+        socket = io.connect('http://'+window.location.hostname+':'+conf.port);
         // On Connection message
-        RevealClientNotes.socket.on('connect', function(){            
-            RevealClientNotes.socket.emit('message', {
+        socket.on('connect', function(){            
+            socket.emit('message', {
                type :"config", 
                url : window.location.pathname, 
                nbSlides : nbSlides-1
             });
             // If we are on the slides of speaker, we specify the controls values
-           RevealClientNotes.socket.emit('message', {
+           socket.emit('message', {
                type :"config", 
                indices : Reveal.getIndices()
            });
         });
         // On message recieve
-        RevealClientNotes.socket.on('message', function (data) {
+        socket.on('message', function (data) {
             if( data.type === "operation" && data.data === "show"){
                 Reveal.slide( data.index.h, data.index.v, data.fragment );
             }else if( data.type === "ping"){	  		               
                  // We have to check the controls in order to show the correct directions
               
-                RevealClientNotes.socket.emit('message', {
+                socket.emit('message', {
                     type :"config", 
                     url : window.location.pathname, 
                     nbSlides : nbSlides-1
                 });
-                RevealClientNotes.socket.emit('message', {
+                socket.emit('message', {
                     type :"config", 
                     indices : Reveal.getIndices()
                   
                 });
             }else if( data.type === "ping-plugin"){                      
-                 // We have to check the controls in order to show the correct directions
+                // We have to check the controls in order to show the correct directions
               
+                var pluginIds = Object.keys(pluginList);
+                for (var i =0; i < pluginIds.length; i++){
+                  socket.emit('message', {
+                    type :"plugin", 
+                    action :"activate", 
+                    id : pluginIds[i]
+                  });
+                }
                 // Delegate to plugins 
+                
+            }else if( data.type === "click-plugin"){                      
+                // We have to check the controls in order to show the correct directions              
+                if (data.id && pluginList[data.id] ){
+                  pluginList[data.id](data.data);
+                }
+                
                 
             }
         });
-	}, 
-    // Listen to Reveal Events
-	initRevealListener : function (){
+	}; 
+
+  // Listen to Reveal Events
+	var initRevealListener = function (){
 
 		Reveal.addEventListener( 'slidechanged', function( event ) {
             // We get the curent slide 
@@ -137,23 +175,42 @@ var RevealClientNotes = RevealClientNotes || {
 			};
 
             // If we're on client slides
-			if (RevealClientNotes.socket &&  messageData.notes !== undefined) {
-				RevealClientNotes.socket.emit('message', {type : 'notes', data : messageData});				
+			if (socket &&  messageData.notes !== undefined) {
+				socket.emit('message', {type : 'notes', data : messageData});				
 			}
-            
             // If we're on speaker slides
-            if (RevealClientNotes.socket){                            
-                RevealClientNotes.socket.emit("message", {
+            if (socket){                            
+                socket.emit("message", {
                     type:'config', 
                     indices : Reveal.getIndices()
                 });                
             }			
-			
 		} );
-        
-       
-	}
-    
-};
+	};
 
-RevealClientNotes.init();
+  /*
+  * **************************************
+  * --------EXPOSED METHODS----------------
+  * **************************************
+  */
+
+  
+
+  var registerPlugin = function (id, callbackAction){
+    pluginList[id] = callbackAction;
+  }
+
+
+  /*
+  * **************************************
+  * --------INITIALIZATION----------------
+  * **************************************
+  */
+
+  init();
+
+  return {
+    registerPlugin : registerPlugin
+  };
+    
+})();
