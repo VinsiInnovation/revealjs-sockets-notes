@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Server presentation</title>
+
+        <!-- build:css css/app.css -->
+		<!-- Main Css-->
+        <link rel="stylesheet" href="css/main.css">
+        <!-- endbuild --> 
+
+        <!-- build:js js/app.js -->
+        <!-- Qr Code -->
+		<script src="components/qrcode/qrcode.min.js"></script>
+        <script src="bower_components/jquery/jquery.min.js"></script>
+        <!-- Socket IO mandatory import -->
+		<script src="/socket.io/socket.io.js"></script>
+        
+        <!-- Application -->
+        <script src="js/app.js"></script>
+        <!-- endbuild --> 
+	</head>
+	<body>
+    <div>
+        <h1>Click on the choose network to start the speaker presentation</h1>
+    </div>
+    <div id="listIp"></div>
+    <a id="qrCodeLink"><div id="qrCode"></div></a>
+        
+	<div>	
+        <span>Where you are ready, you can click on this link to start the presentation</span>
+		<a target="_blank"  id="revealPrezLink" href="/index.html">Start the presentation</a>
+	</div>
+        
+    <!--<a href="#" id="revealPrezLink" style="display:none" target="_blank">RevealPresentation</a>-->
+
+	</body>
+</html>
