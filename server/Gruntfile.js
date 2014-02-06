@@ -176,6 +176,7 @@ module.exports = function (grunt) {
 
   // Déclaration des taches
   /*grunt.registerTask('lint',    ['jshint', 'csslint']);*/
+  grunt.registerTask('release_build',    ['clean', 'copy', 'useminPrepare', 'concat', 'uglify', 'cssmin', 'usemin', 'clean:tmp']);
   grunt.registerTask('release',    ['compass', 'clean', 'copy', 'useminPrepare', 'concat', 'uglify', 'cssmin', 'usemin', 'clean:tmp']);
   grunt.registerTask('default', ['release']);
 

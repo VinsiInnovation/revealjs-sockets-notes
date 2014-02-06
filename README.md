@@ -83,5 +83,9 @@ Here is the list of plugin and their paths (according to reveal\_plugins/plugins
 
 # Use the development version
 
-TODO
+If you want to work with the source, you will have to install [Compass](http://compass-style.org/install/)
+
+The build task use previously don't use compass, so if you want to build a part of the project, you have to run ```grunt release``` instead of ```grunt release_build```
+
+When you will work with the server, don't forget to specify that your are in development mode : ```node plugin/sockets-notes/dist/server/server.js -d true```
 

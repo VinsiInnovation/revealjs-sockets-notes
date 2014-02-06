@@ -2,7 +2,7 @@ echo "Start Remote build"
 cd remote 
 call npm install 
 call bower install
-call grunt release 
+call grunt release_build 
 echo "Remote build done"
 echo ""
 echo "Start Reveal build"
@@ -15,7 +15,7 @@ echo "Start Server build"
 cd ../server 
 call npm install 
 call bower install
-call grunt release 
+call grunt release_build 
 echo "Server build done"
 echo ""
 cd ../dist/server
