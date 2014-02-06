@@ -129,7 +129,7 @@ var RevealClientNotes = (function () {
                 }
                 // Delegate to plugins 
                 
-            }else if( data.type === "click-plugin"){                      
+            }else if( data.type === "communicate-plugin"){                      
                 // We have to check the controls in order to show the correct directions              
                 if (data.id && pluginList[data.id] ){
                   pluginList[data.id](data.data);

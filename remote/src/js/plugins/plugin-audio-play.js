@@ -1,23 +1,23 @@
 /*
-* Video Play plugin
+* Audio Play plugin
 */
-plugins.directive('vpPlugin', ['$rootScope'
+plugins.directive('apPlugin', ['$rootScope'
   ,function ($rootScope) {
    var directiveDefinitionObject = {
     restrict: 'A',
-    priority : 100,
+    priority : 101,
     scope: false,    
     link: function postLink($scope, iElement, iAttrs) { 
 
       $scope.register({
-        name : 'play video',
-        icon : 'fa-youtube-play',
-        id : 'vp'
+        name : 'play audio',
+        icon : 'fa-music',
+        id : 'ap'
       });
 
 
-      $scope.vpClick = function(){
-        $scope.pluginCommunication('vp', {});
+      $scope.apClick = function(){
+        $scope.pluginCommunication('ap', {});
       }
     }
   };

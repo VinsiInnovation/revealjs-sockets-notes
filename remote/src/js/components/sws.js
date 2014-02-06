@@ -155,9 +155,9 @@ components.directive('sws', ['$rootScope'
             socketIO.emit('message', message);
         }
 
-        $scope.pluginClicked = function(id, data){
+        $scope.pluginCommunication = function(id, data){
           socketIO.emit('message', {
-              type : 'click-plugin',
+              type : 'communicate-plugin',
               'id'  : id,
               'data': data
           }); 

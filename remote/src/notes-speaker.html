@@ -20,6 +20,8 @@
         <script src="/socket.io/socket.io.js"></script>
         <!-- Use for selections css manipulations -->
         <script src="bower_components/jquery/jquery.min.js"></script>
+        <!-- Use for tactil interactions -->
+        <script src="bower_components/jquery-hammerjs/jquery.hammer.min.js"></script>
         <!-- Use for mobile use -->
         <script src="bower_components/fastclick/lib/fastclick.js"></script>
         <!-- Use for prefix free css management--> 
@@ -28,7 +30,6 @@
         <script src="bower_components/angular/angular.min.js"></script>
         <script src="bower_components/angular-route/angular-route.min.js"></script>
         <!-- Use for decryption of markdown -->
-        <!--<script src="../../../../plugin/markdown/marked.js"></script>-->
         <!-- Main script-->
         <script src="js/notes-speaker.js"></script>
 
@@ -53,13 +54,15 @@
         <!-- Plugins -->
         <script src="js/plugins/plugins.js"></script>
         <script src="js/plugins/plugin-video-play.js"></script>
+        <script src="js/plugins/plugin-audio-play.js"></script>
+        <script src="js/plugins/plugin-remote-pointer.js"></script>
         
         <!-- Angular App -->
         <script src="js/notes-speaker-ang.js"></script>
         <!-- endbuild --> 
 	</head>
 
-	<body ng-view sws vp-plugin>
+	<body ng-view sws vp-plugin ap-plugin rp-plugin>
         
     </body>
 </html>
