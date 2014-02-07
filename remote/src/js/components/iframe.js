@@ -35,6 +35,8 @@ components.directive('iframeControl', ['$rootScope', '$timeout'
         iframe.src = url;
       });  
 
+      // We specify in localstorage that we are in a remote control context
+      document.body.setAttribute('sws-remote-iframe-desactiv', true);
 
       // Scope method
 
@@ -67,6 +69,7 @@ components.directive('iframeControl', ['$rootScope', '$timeout'
       // Directive Methods
 
       var onIFrameLoad = function(){
+        console.log('IFrame load ! ');
         revealIFrame = iframe.contentWindow.Reveal;
         // Configuration of presentation to hide controls
         revealIFrame.initialize({
@@ -80,8 +83,8 @@ components.directive('iframeControl', ['$rootScope', '$timeout'
         revealIFrame.addEventListener( 'fragmentshown', revealFragementShowListener);
         revealIFrame.addEventListener( 'fragmenthidden', revealFragementHiddeListener);
         
-
         updateControls();
+        $scope.model.iframeLoad = true;
       }
 
       var revealChangeListener = function(event){

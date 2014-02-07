@@ -1,9 +1,9 @@
 /*
-* Remote Pointer plugin
+* Remote Pointer plugin based on phone sensor
 *
-* Will show a pointer on reveal presentation corresponding to move of finger on mobile 
+* Will show a pointer on reveal presentation corresponding to move of mobile 
 */
-SWSRemotePointer = (function(){
+SWSRemoteSensorPointer = (function(){
 
 	var pointerDiv = null;
 
@@ -30,7 +30,7 @@ SWSRemotePointer = (function(){
 		
 	}
 
-	RevealClientNotes.registerPlugin('rp', callBack);
+	RevealClientNotes.registerPlugin('sp', callBack);
 
 	return{
 

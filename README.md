@@ -67,6 +67,8 @@ According to the number of plugins you want to use with the remote control, add 
 Here is the list of plugin and their paths (according to reveal\_plugins/plugins directory) : 
 
  * ```sws-plugin-video-play.js``` : Could play or pause a html5 video tag in the current slide show on screen
+ * ```sws-plugin-audio-play.js``` : Could play or pause a html5 audio tag in the current slide show on screen
+ * ```sws-plugin-remote-pointer.js``` : Allow you to use your finger as laser pointer on the client presentation.
  *  More to come soon
 
 ### Use it

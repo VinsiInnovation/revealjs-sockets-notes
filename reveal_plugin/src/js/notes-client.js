@@ -58,11 +58,13 @@ var RevealClientNotes = (function () {
   
   // We init the client side (websocket + reveal Listener)
 	var init = function(){
-         // look at the url passed to see if we're manipulating the client slides or the speakers slides
-        if (window.location.hash != '#speakerNotes'){
-            initConfig();
-            initRevealListener();
-        }
+
+    // We check if this script ins't in the iframe of the remote control
+    if(!window.parent || !window.parent.document.body.getAttribute('sws-remote-iframe-desactiv')){
+        console.log('Initialize Client side')
+        initConfig();
+        initRevealListener();
+    }        
 	};    
   
   // Initialise with the configuration file
@@ -140,52 +142,53 @@ var RevealClientNotes = (function () {
         });
 	}; 
 
+  var reavealCallBack = function(event){
+    // We get the curent slide 
+    var slideElement = Reveal.getCurrentSlide(),
+      messageData = null;
+    
+          // We get the notes and init the indexs
+    var notes = slideElement.querySelector( 'aside.notes' ),
+      indexh = Reveal.getIndices().h,
+      indexv = Reveal.getIndices().v,
+      nextindexh,
+      nextindexv;
+
+          
+    if( slideElement.nextElementSibling && slideElement.parentNode.nodeName == 'SECTION' ) {
+      nextindexh = indexh;
+      nextindexv = indexv + 1;
+    } else {
+      nextindexh = indexh + 1;
+      nextindexv = 0;
+    }
+
+          // We prepare the message data to send through websocket
+    messageData = {
+      notes : notes ? notes.innerHTML : '',
+      indexh : indexh,
+      indexv : indexv,
+      nextindexh : nextindexh,
+      nextindexv : nextindexv,
+      markdown : notes ? typeof notes.getAttribute( 'data-markdown' ) === 'string' : false
+    };
+
+          // If we're on client slides
+    if (socket &&  messageData.notes !== undefined) {
+      socket.emit('message', {type : 'notes', data : messageData});       
+    }
+    // If we're on speaker slides
+    if (socket){                            
+        socket.emit("message", {
+            type:'config', 
+            indices : Reveal.getIndices()
+        });                
+    }   
+  }
+
   // Listen to Reveal Events
 	var initRevealListener = function (){
-
-		Reveal.addEventListener( 'slidechanged', function( event ) {
-            // We get the curent slide 
-			var slideElement = Reveal.getCurrentSlide(),
-				messageData = null;
-			
-            // We get the notes and init the indexs
-			var notes = slideElement.querySelector( 'aside.notes' ),
-				indexh = Reveal.getIndices().h,
-				indexv = Reveal.getIndices().v,
-				nextindexh,
-				nextindexv;
-
-            
-			if( slideElement.nextElementSibling && slideElement.parentNode.nodeName == 'SECTION' ) {
-				nextindexh = indexh;
-				nextindexv = indexv + 1;
-			} else {
-				nextindexh = indexh + 1;
-				nextindexv = 0;
-			}
-
-            // We prepare the message data to send through websocket
-			messageData = {
-				notes : notes ? notes.innerHTML : '',
-				indexh : indexh,
-				indexv : indexv,
-				nextindexh : nextindexh,
-				nextindexv : nextindexv,
-				markdown : notes ? typeof notes.getAttribute( 'data-markdown' ) === 'string' : false
-			};
-
-            // If we're on client slides
-			if (socket &&  messageData.notes !== undefined) {
-				socket.emit('message', {type : 'notes', data : messageData});				
-			}
-            // If we're on speaker slides
-            if (socket){                            
-                socket.emit("message", {
-                    type:'config', 
-                    indices : Reveal.getIndices()
-                });                
-            }			
-		} );
+		Reveal.addEventListener( 'slidechanged', reavealCallBack);
 	};
 
   /*
@@ -199,7 +202,6 @@ var RevealClientNotes = (function () {
   var registerPlugin = function (id, callbackAction){
     pluginList[id] = callbackAction;
   }
-
 
   /*
   * **************************************

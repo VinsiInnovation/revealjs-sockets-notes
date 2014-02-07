@@ -22,6 +22,7 @@ components.directive('sws', ['$rootScope'
           indices : null, // The indices of the presentation
           fragment : 0, // The current fragment number
           localUrl : null, // var in order to see if the presentation has already be loaded    
+          iframeLoad : false, // var to know if the iframe was load
           controls : {
             reset : true,
             show : true,
@@ -72,7 +73,7 @@ components.directive('sws', ['$rootScope'
               $scope.model.couldUnlock = $scope.model.couldUnlock || true;
               // If we have to load the speaker slide versions (recieve the url of presentation)
               if (json.url && !$scope.model.localUrl){
-                $scope.model.localUrl = "http://"+window.location.hostname+":"+$scope.model.conf.port+json.url+"#speakerNotes";
+                $scope.model.localUrl = "http://"+window.location.hostname+":"+$scope.model.conf.port+json.url;
 
                 $rootScope.$broadcast('loadIframeEvt', $scope.model.localUrl);
                   

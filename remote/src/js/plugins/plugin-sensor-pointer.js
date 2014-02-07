@@ -1,46 +1,82 @@
 /*
 * Remote pointer plugin
 */
-plugins.directive('rpPlugin', ['$rootScope'
+plugins.directive('spPlugin', ['$rootScope'
   ,function ($rootScope) {
    var directiveDefinitionObject = {
     restrict: 'A',
-    priority : 102,
+    priority : 103,
     scope: false,    
     link: function postLink($scope, iElement, iAttrs) { 
 
       $scope.register({
-        name : 'remote pointer',
-        icon : 'fa-pencil',
-        id : 'rp'
+        name : 'sensor pointer',
+        icon : 'fa-compass',
+        id : 'sp'
       });
 
       var previewElement = iElement.find('#preview');
       var areaPointer = null;
       var currentColor = 'red';
 
-      function touchFeedback(event){
-        if (event.gesture && event.gesture.center){
-          // We get the position of finger on page, and we have to calculate it's position on preview area
-          var x = event.gesture.center.pageX,
-              y = event.gesture.center.pageY,
-              rect = previewElement[0].getClientRects()[0];
+      function motionFeedback(event){
+        var x = event.accelerationIncludingGravity.x; //inclinaison of phone (right / left)
+        var y = event.accelerationIncludingGravity.y; // inclinaison of phone (top / bottom)
+        var z = event.accelerationIncludingGravity.z; 
 
-          var percentX = ((x-rect.left) / rect.width) * 100;
-          var percentY = ((y-rect.top) / rect.height) * 100;
-          //console.log((event.gesture.center.pageX / previewElement.width())+ '|'+ Math.round(event.gesture.center.pageX / previewElement.width()));
-          $scope.pluginCommunication('rp', {
+        x = (x < 0 ? Math.max(-3, x) : Math.min(3,x)) +3;
+        y = Math.max(0, Math.min(7, y));
+
+        if (lastX === -1 || Math.abs(lastX - x) < 10){
+          lastX = x;
+        }
+
+        // We have to inverse due to acceleration negativ
+        var percentX = 100 - Math.round((lastX / 6) * 100);
+        var percentY = 100 - Math.round((y / 7) * 100);
+
+        $scope.pluginCommunication('sp', {
+            hide : false,
+            x : percentX,
+            y : percentY,
+            color : currentColor
+        });
+
+
+      }
+
+       function orientationFeedback(event){
+        if (lastX === -1){
+          lastX = event.alpha;
+        }
+        var x = lastX - event.alpha; //inclinaison of phone (right / left)
+        var y = event.beta; // inclinaison of phone (top / bottom)
+        var z = event.gamma; 
+
+        //x = (x < 0 ? Math.max(-3, x) : Math.min(3,x)) +3;
+        y = Math.max(0, Math.min(70, y));
+    
+    
+        var percentY = 100 - Math.round((y / 70) * 100);
+        var maxX = 10 + ((25 - 10) * (y / 70));
+    
+        x = (x < 0 ? Math.max(-maxX, x) : Math.min(maxX,x)) +maxX;
+        var percentX = Math.round((lastX / (maxX*2)) * 100);
+
+        $scope.pluginCommunication('sp', {
             hide : false,
             x : Math.round(percentX),
             y : Math.round(percentY),
             color : currentColor
-          });
-        }
+        });
+
+
+
       }
 
       function boxClicked(event){
-        if (event.target.id === 'sws-rp-box-close'){
-          $(areaPointer).hammer().off('drag', touchFeedback);
+        if (event.target.id === 'sws-sp-box-close'){
+          window.removeEventListener('devicemotion', motionFeedback, false);
           areaPointer.style.display = 'none';
         }else{
           currentColor = event.target.getAttribute('sws-color');
@@ -50,7 +86,11 @@ plugins.directive('rpPlugin', ['$rootScope'
       }
 
 
-      $scope.rpClick = function(){
+      $scope.spClick = function(){
+        if (!window.DeviceMotionEvent){
+          alert('Device Motion not available');
+          return;
+        }
 
         if (!areaPointer){
           areaPointer = document.createElement('DIV');
@@ -68,7 +108,7 @@ plugins.directive('rpPlugin', ['$rootScope'
           // We add color div to change the color of pointer
           function addBox(id, color, icon, left){
             var boxDiv = document.createElement('DIV');
-            boxDiv.setAttribute('id', 'sws-rp-box-'+id);
+            boxDiv.setAttribute('id', 'sws-sp-box-'+id);
             boxDiv.setAttribute('sws-color', color);
             boxDiv.style.position = 'absolute';
             boxDiv.style.width = '40px';
@@ -92,18 +132,18 @@ plugins.directive('rpPlugin', ['$rootScope'
           areaPointer.appendChild(addBox('blue', 'blue', 'fa-circle','150px'));
           areaPointer.appendChild(addBox('close', 'black', 'fa-times','calc(100% - 50px)'));
 
-          iElement.find('#sws-rp-box-red').bind('click', boxClicked);
-          iElement.find('#sws-rp-box-white').bind('click', boxClicked);
-          iElement.find('#sws-rp-box-black').bind('click', boxClicked);
-          iElement.find('#sws-rp-box-blue').bind('click', boxClicked);
-          iElement.find('#sws-rp-box-close').bind('click', boxClicked);
+          iElement.find('#sws-sp-box-red').bind('click', boxClicked);
+          iElement.find('#sws-sp-box-white').bind('click', boxClicked);
+          iElement.find('#sws-sp-box-black').bind('click', boxClicked);
+          iElement.find('#sws-sp-box-blue').bind('click', boxClicked);
+          iElement.find('#sws-sp-box-close').bind('click', boxClicked);
         }
         
         areaPointer.style.display = '';
         
-
-        $(areaPointer).hammer().off('drag', touchFeedback);
-        $(areaPointer).hammer().on('drag', touchFeedback);
+        lastX = -1;
+        window.removeEventListener('devicemotion', motionFeedback, false);
+        window.addEventListener('devicemotion', motionFeedback, false);
 
       }
     }
