@@ -126,6 +126,7 @@ module.exports = function (grunt) {
 
             options:{
                 sassDir: 'src/sass',
+                sourcemap: true,
                 cssDir : '<%= src.basedir %><%= server.css.dir %>'
             }
         }

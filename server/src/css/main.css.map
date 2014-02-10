@@ -1,0 +1,6 @@
+{
+"version": 3,
+"mappings": ";AAAA,OAAO;EACN,MAAM,EAAE,IAAI",
+"sources": ["../sass/main.scss"],
+"file": "main.css"
+}

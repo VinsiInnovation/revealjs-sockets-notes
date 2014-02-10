@@ -41,8 +41,8 @@ var App = (function (){
              for (var i = 0; i < data.length; i++){
                 $('#'+data[i].id).on('click',function(event){
                     qrCode.clear();
-                    qrCode.makeCode("http://"+datas[event.target.id].ip+":"+conf.port+window.location.pathname+(conf.devMode ?"../../" : "../")+"remote/notes-speaker.html");
-                    $("#qrCodeLink").attr("href","http://"+datas[event.target.id].ip+":"+conf.port+window.location.pathname+(conf.devMode ?"../../" : "../")+"remote/notes-speaker.html");
+                    qrCode.makeCode("http://"+datas[event.target.id].ip+":"+conf.port+window.location.pathname+(conf.devMode ?"../../remote/src/" : "../remote/")+"notes-speaker.html");
+                    $("#qrCodeLink").attr("href","http://"+datas[event.target.id].ip+":"+conf.port+window.location.pathname+(conf.devMode ?"../../remote/src/" : "../remote/")+"notes-speaker.html");
                 });
             }
         

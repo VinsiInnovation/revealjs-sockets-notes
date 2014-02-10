@@ -119,6 +119,7 @@ module.exports = function (grunt) {
         remote: {
             options:{
                 sassDir: 'src/sass',
+                sourcemap: true,
                 cssDir : '<%= src.basedir %><%= remote.css.dir %>'
             }
         }
