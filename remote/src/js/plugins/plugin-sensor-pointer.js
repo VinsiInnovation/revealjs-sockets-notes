@@ -15,9 +15,18 @@ plugins.directive('spPlugin', ['$rootScope'
         id : 'sp'
       });
 
+      // y = 0 xLeft =  315 xCenter = 280 xRight =  245
+      // y = 50 xLeft =  320 xCenter = 255 xRight =  215
+
       var previewElement = iElement.find('#preview');
       var areaPointer = null;
       var currentColor = 'red';
+      var initialX = -1;
+      var initialY = -1;
+      var initialYPercent = -1;
+      var maxY = 50;
+      var deltaX = 40;
+      var deltaY = 30;
 
       function motionFeedback(event){
         var x = event.accelerationIncludingGravity.x; //inclinaison of phone (right / left)
@@ -27,12 +36,12 @@ plugins.directive('spPlugin', ['$rootScope'
         x = (x < 0 ? Math.max(-3, x) : Math.min(3,x)) +3;
         y = Math.max(0, Math.min(7, y));
 
-        if (lastX === -1 || Math.abs(lastX - x) < 10){
-          lastX = x;
+        if (initialX === -1 || Math.abs(initialX - x) < 10){
+          initialX = x;
         }
 
         // We have to inverse due to acceleration negativ
-        var percentX = 100 - Math.round((lastX / 6) * 100);
+        var percentX = 100 - Math.round((initialX / 6) * 100);
         var percentY = 100 - Math.round((y / 7) * 100);
 
         $scope.pluginCommunication('sp', {
@@ -46,22 +55,35 @@ plugins.directive('spPlugin', ['$rootScope'
       }
 
        function orientationFeedback(event){
-        if (lastX === -1){
-          lastX = event.alpha;
+        // We don't allow the pointer if the smartphone is directed to the bottom
+        if (
+          (initialX === -1 || !initialX) 
+          && (event.beta < 0 || event.beta > maxY)
+            ){
+          return;
         }
-        var x = lastX - event.alpha; //inclinaison of phone (right / left)
-        var y = event.beta; // inclinaison of phone (top / bottom)
-        var z = event.gamma; 
+
+        if (initialX === -1 || !initialX){
+          initialX = event.alpha;
+          initialY = event.beta;
+          // We calculate the position of smartphone use as reference in Y;
+          initialY = Math.max(0, Math.min(maxY, initialY));
+          initialYPercent = 100 - Math.round((initialY / maxY) * 100);
+          initialYPercent = initialYPercent === 0 ? 1 : initialYPercent;
+        }
+        var y = event.beta; // inclinaison of phone (top / bottom)        
 
         //x = (x < 0 ? Math.max(-3, x) : Math.min(3,x)) +3;
-        y = Math.max(0, Math.min(70, y));
-    
-    
-        var percentY = 100 - Math.round((y / 70) * 100);
-        var maxX = 10 + ((25 - 10) * (y / 70));
+        y = Math.max(0, Math.min(maxY, y));   
+        // We calculate the percent of Y to evaluate the X
+        var percentY = 100 - Math.round((y / maxY) * 100);
+
+        var xRef = (initialX * percentY) / initialYPercent;
+        var x = xRef - event.alpha; //inclinaison of phone (right / left)
+        var maxX = 20; //10 + ((25 - 10) * (y / maxY));
     
         x = (x < 0 ? Math.max(-maxX, x) : Math.min(maxX,x)) +maxX;
-        var percentX = Math.round((lastX / (maxX*2)) * 100);
+        var percentX = Math.round((x / (maxX*2)) * 100);
 
         $scope.pluginCommunication('sp', {
             hide : false,
@@ -76,7 +98,7 @@ plugins.directive('spPlugin', ['$rootScope'
 
       function boxClicked(event){
         if (event.target.id === 'sws-sp-box-close'){
-          window.removeEventListener('devicemotion', motionFeedback, false);
+          window.removeEventListener('deviceorientation', orientationFeedback, false);
           areaPointer.style.display = 'none';
         }else{
           currentColor = event.target.getAttribute('sws-color');
@@ -87,7 +109,7 @@ plugins.directive('spPlugin', ['$rootScope'
 
 
       $scope.spClick = function(){
-        if (!window.DeviceMotionEvent){
+        if (!window.DeviceOrientationEvent){
           alert('Device Motion not available');
           return;
         }
@@ -141,9 +163,9 @@ plugins.directive('spPlugin', ['$rootScope'
         
         areaPointer.style.display = '';
         
-        lastX = -1;
-        window.removeEventListener('devicemotion', motionFeedback, false);
-        window.addEventListener('devicemotion', motionFeedback, false);
+        initialX = -1;
+        window.removeEventListener('deviceorientation', orientationFeedback, false);
+        window.addEventListener('deviceorientation', orientationFeedback, false);
 
       }
     }
