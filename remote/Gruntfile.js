@@ -119,6 +119,12 @@ module.exports = function (grunt) {
         remote: {
             options:{
                 sassDir: 'src/sass',
+                cssDir : '<%= src.basedir %><%= remote.css.dir %>'
+            }
+        },
+        remote_sourcemap: {
+            options:{
+                sassDir: 'src/sass',
                 sourcemap: true,
                 cssDir : '<%= src.basedir %><%= remote.css.dir %>'
             }
@@ -143,7 +149,7 @@ module.exports = function (grunt) {
         },
         remote_sass: {
             files: ['<%= src.basedir %><%= remote.sass.all %>'],
-            tasks: ['compass:remote']
+            tasks: ['compass:remote_sourcemap']
         },
         remote_js: {
             files: ['<%= src.basedir %><%= remote.js.all %>'],
@@ -172,7 +178,7 @@ module.exports = function (grunt) {
   // Déclaration des taches
   /*grunt.registerTask('lint',    ['jshint', 'csslint']);*/
   grunt.registerTask('release_build',    ['clean', 'copy', 'useminPrepare', 'concat', 'uglify', 'cssmin', 'usemin', 'clean:tmp']);
-  grunt.registerTask('release',    ['compass', 'clean', 'copy', 'useminPrepare', 'concat', 'uglify', 'cssmin', 'usemin', 'clean:tmp']);
+  grunt.registerTask('release',    ['compass:remote', 'clean', 'copy', 'useminPrepare', 'concat', 'uglify', 'cssmin', 'usemin', 'clean:tmp']);
   grunt.registerTask('default', ['release']);
 
 };

@@ -18,6 +18,17 @@ plugins.directive('spPlugin', ['$rootScope'
       // y = 0 xLeft =  315 xCenter = 280 xRight =  245
       // y = 50 xLeft =  320 xCenter = 255 xRight =  215
 
+      // y = 0 xLeft = 99 xCenter = 70 xRight =  40
+      // y = 50 xLeft =  115 xCenter = 77 xRight =  30
+
+      // We have to adjust the limits of the remote
+      var xLeftBottom = 99;
+      var xLeftTop = 115;
+      var xRightBottom = 40;
+      var xRightTop = 30;
+      var deltaXBottom = xLeftBottom - xRightBottom;
+      var deltaXTop = xLeftTop - xRightTop;
+
       var previewElement = iElement.find('#preview');
       var areaPointer = null;
       var currentColor = 'red';
@@ -78,9 +89,10 @@ plugins.directive('spPlugin', ['$rootScope'
         // We calculate the percent of Y to evaluate the X
         var percentY = 100 - Math.round((y / maxY) * 100);
 
+        var deltaXTmp = deltaXBottom + (deltaXTop - deltaXBottom) * (y / maxY);
         var xRef = (initialX * percentY) / initialYPercent;
         var x = xRef - event.alpha; //inclinaison of phone (right / left)
-        var maxX = 20; //10 + ((25 - 10) * (y / maxY));
+        var maxX = deltaXTmp / 2; //10 + ((25 - 10) * (y / maxY));
     
         x = (x < 0 ? Math.max(-maxX, x) : Math.min(maxX,x)) +maxX;
         var percentX = Math.round((x / (maxX*2)) * 100);

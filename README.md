@@ -85,9 +85,11 @@ Here is the list of plugin and their paths (according to reveal\_plugins/plugins
 
 # Use the development version
 
-If you want to work with the source, you will have to install [Compass](http://compass-style.org/install/)
+If you want to work with the source, you will have to install [Compass](http://compass-style.org/install/). And you have to install the sourcemaps for compass : ```gem install compass-sourcemaps --pre``` and ```gem install compass --pre```
 
-The build task use previously don't use compass, so if you want to build a part of the project, you have to run ```grunt release``` instead of ```grunt release_build```
+The build task use previously don't use compass, so if you want to build a part of the project, you have to run ```grunt release``` instead of ```grunt release_build``` (cf [https://github.com/chriseppstein/compass/issues/1108](https://github.com/chriseppstein/compass/issues/1108))
 
 When you will work with the server, don't forget to specify that your are in development mode : ```node plugin/sockets-notes/dist/server/server.js -d true```
+
+
 
