@@ -29,6 +29,8 @@ plugins.directive('spPlugin', ['$rootScope'
       var deltaXBottom = xLeftBottom - xRightBottom;
       var deltaXTop = xLeftTop - xRightTop;
 
+      // TODO : We Have to persit on localstorage the callibration for the phone
+
       var previewElement = iElement.find('#preview');
       var areaPointer = null;
       var currentColor = 'red';
