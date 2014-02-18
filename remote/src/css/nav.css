@@ -22,10 +22,55 @@
 * Navigation buttons
 **------------------
 */
-/* line 9, ../sass/nav.scss */
+/* line 12, ../sass/nav.scss */
+#preview .button {
+  background: none;
+}
+
+/* line 16, ../sass/nav.scss */
+#up, #down, #show, #left, #right {
+  color: white;
+}
+
+/* line 20, ../sass/nav.scss */
 #next, #prev, #up, #down, #show, #left, #right, #reset {
   position: absolute;
-  background-color: #fff;
+}
+
+/* line 24, ../sass/nav.scss */
+#left, #right {
+  top: 50%;
+  margin-top: -25px;
+}
+
+/* line 30, ../sass/nav.scss */
+#up, #down {
+  left: 50%;
+  margin-left: -25px;
+}
+
+/* line 35, ../sass/nav.scss */
+#next, #right {
+  right: 10px;
+}
+
+/* line 38, ../sass/nav.scss */
+#prev, #left, #reset {
+  left: 10px;
+}
+
+/* line 42, ../sass/nav.scss */
+#up, #next, #prev {
+  top: 10px;
+}
+
+/* line 45, ../sass/nav.scss */
+#down, #reset {
+  bottom: 10px;
+}
+
+/* line 49, ../sass/nav.scss */
+#reset, #show {
   -moz-box-shadow: 1px 1px 5px 1px #3e3d40;
   -webkit-box-shadow: 1px 1px 5px 1px #3e3d40;
   -o-box-shadow: 1px 1px 5px 1px #3e3d40;
@@ -33,59 +78,43 @@
   filter: progid:DXImageTransform.Microsoft.Shadow(color=#3e3d40, Direction=134, Strength=5);
 }
 
-/* line 19, ../sass/nav.scss */
-#left, #right {
-  top: 50%;
-  margin-top: -25px;
+/* line 57, ../sass/nav.scss */
+#preview a[disabled] {
+  opacity: 0.1;
 }
 
-/* line 25, ../sass/nav.scss */
-#up, #down {
-  left: 50%;
-  margin-left: -25px;
+/* line 61, ../sass/nav.scss */
+#preview #reset {
+  background-color: white;
+  line-height: 30px;
+  text-align: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 30px;
 }
 
-/* line 30, ../sass/nav.scss */
-#next, #right {
-  right: 10px;
-}
-
-/* line 33, ../sass/nav.scss */
-#prev, #left, #reset {
-  left: 10px;
-}
-
-/* line 37, ../sass/nav.scss */
-#up, #next, #prev {
-  top: 10px;
-}
-
-/* line 40, ../sass/nav.scss */
-#down, #reset {
-  bottom: 10px;
-}
-
-/* line 44, ../sass/nav.scss */
-#show {
-  height: 60px;
-  width: 60px;
-  font-size: 25px;
+/* line 70, ../sass/nav.scss */
+#preview #show {
+  background-color: white;
+  opacity: 0.7;
+  border-radius: 75px;
+  height: 75px;
+  width: 75px;
+  text-align: center;
+  font-size: 20pt;
   top: 50%;
   left: 50%;
-  margin-left: -30px;
-  margin-top: -30px;
+  margin-left: -37.5px;
+  margin-top: -37.5px;
+  color: black;
 }
 
-/* line 54, ../sass/nav.scss */
-#preview .next-slide {
-  color: #009aa6;
-}
-
-/* line 58, ../sass/nav.scss */
+/* line 85, ../sass/nav.scss */
 #preview .slide-preview-number {
-  font-size: 0.5em;
   position: absolute;
-  bottom: 2px;
+  bottom: 9px;
   left: 50%;
   margin-left: -25%;
 }
+
+/*# sourceMappingURL=nav.css.map */

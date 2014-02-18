@@ -19,6 +19,33 @@
  *                                  
  */
 /***
+ *      ______ ____  _   _ _______ _____ 
+ *     |  ____/ __ \| \ | |__   __/ ____|
+ *     | |__ | |  | |  \| |  | | | (___  
+ *     |  __|| |  | | . ` |  | |  \___ \ 
+ *     | |   | |__| | |\  |  | |  ____) |
+ *     |_|    \____/|_| \_|  |_| |_____/ 
+ *                                       
+ *                                       
+ */
+@font-face {
+  font-family: digital;
+  src: url("../font/DS-DIGII.TTF");
+}
+@font-face {
+  font-family: "Abel";
+  src: url("../font/Abel-Regular.eot");
+  src: url("../font/Abel-Regular.eot?#iefix") format("embedded-opentype"), url("../font/Abel-Regular.svg#Abel") format("svg"), url("../font/Abel-Regular.woff") format("woff"), url("../font/Abel-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+/* line 35, ../sass/fonts.scss */
+body {
+  font-family: "Abel";
+  font-weight: 800;
+}
+
+/***
  *      _   _  ____ _______ ______  _____  
  *     | \ | |/ __ \__   __|  ____|/ ____| 
  *     |  \| | |  | | | |  | |__  | (___   
@@ -28,37 +55,42 @@
  *                                         
  *                                         
  */
-/* line 16, ../sass/notes.scss */
-#notes .actionbar {
-  height: 30px;
-  font-size: 15px;
-  line-height: 30px;
-}
-
-/* line 22, ../sass/notes.scss */
-#notes .actionbar .slide-number {
-  position: absolute;
-  right: 0;
-  padding-right: 15px;
-  height: 100%;
-  font-size: 15px;
-}
-
-/* line 30, ../sass/notes.scss */
-#notes .curent-slide {
-  color: #009aa6;
-}
-
-/* line 34, ../sass/notes.scss */
+/* line 17, ../sass/notes.scss */
 #notes {
   overflow: hidden;
+  background-color: #fff;
+  -moz-box-shadow: rgba(0, 0, 0, 0.75) 0px 0px 5px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.75) 0px 0px 5px;
+  box-shadow: rgba(0, 0, 0, 0.75) 0px 0px 5px;
 }
 
-/* line 38, ../sass/notes.scss */
+/* line 24, ../sass/notes.scss */
+#notes .title-abs {
+  position: absolute;
+  color: #675C53;
+  font-size: 19.5pt;
+  left: calc(30px + 10px);
+  line-height: 30px;
+  height: 30px;
+}
+
+/* line 33, ../sass/notes.scss */
+#notes i {
+  position: absolute;
+  left: 10px;
+  font-size: 19.5pt;
+  text-align: center;
+  height: 30px;
+  line-height: 30px;
+  color: #E0DAC7;
+}
+
+/* line 44, ../sass/notes.scss */
 #content-notes {
   position: absolute;
   top: 30px;
   left: 0;
+  font-family: Arial, sans-serif;
   font-size: 2em;
   line-height: 1.2em;
   overflow: auto;
@@ -66,10 +98,12 @@
   width: calc(100%);
 }
 
-/* line 50, ../sass/notes.scss */
+/* line 57, ../sass/notes.scss */
 .hractionbar {
   position: absolute;
   width: 100%;
   top: 30px;
   left: 0;
 }
+
+/*# sourceMappingURL=notes.css.map */

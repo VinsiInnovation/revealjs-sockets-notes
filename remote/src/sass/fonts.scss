@@ -1,0 +1,38 @@
+@import "compass";
+
+
+/***
+ *      ______ ____  _   _ _______ _____ 
+ *     |  ____/ __ \| \ | |__   __/ ____|
+ *     | |__ | |  | |  \| |  | | | (___  
+ *     |  __|| |  | | . ` |  | |  \___ \ 
+ *     | |   | |__| | |\  |  | |  ____) |
+ *     |_|    \____/|_| \_|  |_| |_____/ 
+ *                                       
+ *                                       
+ */
+
+@font-face{
+    font-family: digital;
+    src:url('../font/DS-DIGII.TTF');
+}
+
+
+@font-face {
+        font-family: "Abel";
+        src: url('../font/Abel-Regular.eot');
+        src: url('../font/Abel-Regular.eot?#iefix') format('embedded-opentype'),
+        url('../font/Abel-Regular.svg#Abel') format('svg'),
+        url('../font/Abel-Regular.woff') format('woff'),
+        url('../font/Abel-Regular.ttf') format('truetype');
+        font-weight: normal;
+        font-style: normal;
+    }
+
+$default-font : "Abel";
+$font-notes : Arial,sans-serif;
+
+body{
+	font-family: $default-font;
+	font-weight: 800;
+}

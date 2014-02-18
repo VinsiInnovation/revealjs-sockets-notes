@@ -13,7 +13,7 @@ components.directive('sws', ['$rootScope'
         var socketIO = null;
 
         $scope.model = {
-          defaultInterval : 2, // Time in minute of the conference
+          defaultInterval : 60, // Time in minute of the conference
           limitAlert : 1, // time before the end where we have to alert the speaker (if defaultInterval is upper limitAlert)
           totalTime : 0, // Total time ellapsed during the presentation
           timeStart : false, // true if the time loader is on
@@ -23,6 +23,7 @@ components.directive('sws', ['$rootScope'
           fragment : 0, // The current fragment number
           localUrl : null, // var in order to see if the presentation has already be loaded    
           iframeLoad : false, // var to know if the iframe was load
+          showMenuClass : 'collapse', // expand if we show the menu / collapse else
           controls : {
             reset : true,
             show : true,

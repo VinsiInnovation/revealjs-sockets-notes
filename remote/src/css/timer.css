@@ -94,7 +94,7 @@
 /* line 78, ../sass/timer.scss */
 .actions_times {
   position: absolute;
-  background-color: #3e3d40;
+  background-color: #e0dac7;
   bottom: 0;
   left: 0;
   height: 40px;
@@ -216,7 +216,7 @@
 * Spinner
 **------------------
 */
-/* line 191, ../sass/timer.scss */
+/* line 190, ../sass/timer.scss */
 .loader-spiner, .loader-spinner-alert {
   width: 200%;
   height: 200%;
@@ -230,7 +230,9 @@
   border-color: #be233a;
 }
 
-/* line 203, ../sass/timer.scss */
+/* line 202, ../sass/timer.scss */
 .loader-spiner {
   border-color: #009aa6;
 }
+
+/*# sourceMappingURL=timer.css.map */

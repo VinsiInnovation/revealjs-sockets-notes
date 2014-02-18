@@ -1,0 +1,28 @@
+/***
+ *      ______ ____  _   _ _______ _____ 
+ *     |  ____/ __ \| \ | |__   __/ ____|
+ *     | |__ | |  | |  \| |  | | | (___  
+ *     |  __|| |  | | . ` |  | |  \___ \ 
+ *     | |   | |__| | |\  |  | |  ____) |
+ *     |_|    \____/|_| \_|  |_| |_____/ 
+ *                                       
+ *                                       
+ */
+@font-face {
+  font-family: digital;
+  src: url("../font/DS-DIGII.TTF");
+}
+@font-face {
+  font-family: "Abel";
+  src: url("../font/Abel-Regular.eot");
+  src: url("../font/Abel-Regular.eot?#iefix") format("embedded-opentype"), url("../font/Abel-Regular.svg#Abel") format("svg"), url("../font/Abel-Regular.woff") format("woff"), url("../font/Abel-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+/* line 35, ../sass/fonts.scss */
+body {
+  font-family: "Abel";
+  font-weight: 800;
+}
+
+/*# sourceMappingURL=fonts.css.map */

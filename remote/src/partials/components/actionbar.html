@@ -1,8 +1,25 @@
 <div class="actionbar">
-    <div class="title-abs">SPEAKER WS</div>
-    <div id="full-screen" class="icon-full-screen" ng-click='fullscreen()'><i class="fa fa-expand"></i></div>
-    <div id="options" class="icon-menu" ng-click='togglePluginList()' ><i class="fa fa-ellipsis-v"></i></div>
-    <ul id="plugin-list" class="plugin-list" ng-show='showList'>
-        <li class="plugin" ng-repeat="plugin in model.pluginList | filter:activeFilter" id="plugin.id" ng-click='pluginClicked(plugin)' ><i class="fa {{plugin.icon}}"></i>&nbsp {{plugin.name}}</li>        
-    </ul>
+	<div class="slide-number">
+        <span class="curent-slide">{{model.currentSlideNumber}}</span> / <span class="nb-slides">{{model.nbSlides}}</span>
+    </div>
+    <div id="ellapsedTime">
+        <div class="elapsed" ng-show="showTime">
+            <div class="timeEllapesd">
+                <span id="hours" ng-class="classHours" ng-show="showHours">{{hours}} : </span><span id="minutes" ng-class="classMinutes">{{minutes}}</span><span id="seconds"> : {{seconds}}</span><span class="totalTime">&nbsp;/&nbsp;{{model.defaultInterval}}:00</span>
+            </div>
+        </div>
+        <div class="elapsed_bg">
+        </div>                    
+        <div id="progress_elapsed_time" class="elapsed_time">
+        </div>                    
+        <div class="actions_times" ng-show="showTime">
+            <div id="action_time_play" ng-show="showPlay" ng-click='play()'>
+                <i class="fa fa-play"></i>
+            </div>
+            <div id="action_time_pause" ng-hide="showPlay" ng-click='pause()'>
+                <i class="fa fa-pause"></i>
+            </div>            
+        </div>
+    </div>
+    <div id="options" class="icon-menu" ng-click='toggleMenu()' ng-class='model.showMenuClass' ><i class="fa fa-bars"></i></div>    
 </div>

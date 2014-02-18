@@ -1,0 +1,272 @@
+/***
+ *       _____ ____  _      ____  _____   _____ 
+ *      / ____/ __ \| |    / __ \|  __ \ / ____|
+ *     | |   | |  | | |   | |  | | |__) | (___  
+ *     | |   | |  | | |   | |  | |  _  / \___ \ 
+ *     | |___| |__| | |___| |__| | | \ \ ____) |
+ *      \_____\____/|______\____/|_|  \_\_____/ 
+ *                                              
+ *                                              
+ */
+/***
+ *     __      __     _____   _____ 
+ *     \ \    / /\   |  __ \ / ____|
+ *      \ \  / /  \  | |__) | (___  
+ *       \ \/ / /\ \ |  _  / \___ \ 
+ *        \  / ____ \| | \ \ ____) |
+ *         \/_/    \_\_|  \_\_____/ 
+ *                                  
+ *                                  
+ */
+/***
+ *               _____ _______ _____ ____  _   _         ____          _____   _____ 
+ *         /\   / ____|__   __|_   _/ __ \| \ | |       |  _ \   /\   |  __ \ / ____|
+ *        /  \ | |       | |    | || |  | |  \| |       | |_) | /  \  | |__) | (___  
+ *       / /\ \| |       | |    | || |  | | . ` |       |  _ < / /\ \ |  _  / \___ \ 
+ *      / ____ \ |____   | |   _| || |__| | |\  |       | |_) / ____ \| | \ \ ____) |
+ *     /_/    \_\_____|  |_|  |_____\____/|_| \_|       |____/_/    \_\_|  \_\_____/ 
+ *                                                                                   
+ *                                                                                   
+ */
+/* line 18, ../sass/actionbar.scss */
+.actionbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #e0dac7;
+  height: 40px;
+  width: 100%;
+  font-size: 20px;
+  line-height: 40px;
+}
+
+/* line 30, ../sass/actionbar.scss */
+.actionbar .icon-menu {
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #939183;
+  width: 40px;
+  height: 100%;
+  text-align: center;
+}
+
+/* line 40, ../sass/actionbar.scss */
+.actionbar .icon-menu.expand {
+  background-color: #939183;
+  color: white;
+}
+
+/* line 46, ../sass/actionbar.scss */
+.actionbar i {
+  line-height: 40px;
+  font-size: 20px;
+}
+
+/* line 51, ../sass/actionbar.scss */
+.slide-number {
+  position: absolute;
+  left: calc(40px + 20px);
+  height: 100%;
+  font-size: 12pt;
+  color: #2da594;
+}
+
+/* line 59, ../sass/actionbar.scss */
+.curent-slide {
+  color: #b7183b;
+  font-size: 19.5pt;
+}
+
+/***
+ *      _______ _____ __  __ ______         _      ____          _____  ______ _____  
+ *     |__   __|_   _|  \/  |  ____|       | |    / __ \   /\   |  __ \|  ____|  __ \ 
+ *        | |    | | | \  / | |__          | |   | |  | | /  \  | |  | | |__  | |__) |
+ *        | |    | | | |\/| |  __|         | |   | |  | |/ /\ \ | |  | |  __| |  _  / 
+ *        | |   _| |_| |  | | |____        | |___| |__| / ____ \| |__| | |____| | \ \ 
+ *        |_|  |_____|_|  |_|______|       |______\____/_/    \_\_____/|______|_|  \_\
+ *                                                                                    
+ *                                                                                    
+ */
+/**-----------------
+* Ellapsed
+**------------------
+*/
+/* line 86, ../sass/actionbar.scss */
+.elapsed {
+  position: absolute;
+  width: calc(100% - (40px * 3 + 2px));
+  height: 40px;
+  top: 0;
+  left: calc(40px * 2 + 1px);
+  color: #3e3d40;
+  vertical-align: middle;
+}
+
+/* line 99, ../sass/actionbar.scss */
+.elapsed_time, .elapsed_bg {
+  background-image: -moz-linear-gradient(top, #a4ff00, #7bba09);
+  background-image: -o-linear-gradient(top, #a4ff00, #7bba09);
+  background-image: -webkit-linear-gradient(top, #a4ff00, #7bba09);
+  background-image: linear-gradient(to bottom, #a4ff00, #7bba09);
+  position: absolute;
+  height: 7px;
+  width: 100%;
+  top: 40px;
+  left: 0;
+}
+
+/* line 108, ../sass/actionbar.scss */
+.elapsed_bg {
+  background-image: none;
+  background-color: white;
+}
+
+/* line 113, ../sass/actionbar.scss */
+.elapsed_time.alert {
+  background-image: -moz-linear-gradient(top, #ff8d00, #ff0000);
+  background-image: -o-linear-gradient(top, #ff8d00, #ff0000);
+  background-image: -webkit-linear-gradient(top, #ff8d00, #ff0000);
+  background-image: linear-gradient(to bottom, #ff8d00, #ff0000);
+}
+
+/* line 116, ../sass/actionbar.scss */
+.elapsed_time.advanced {
+  background-image: -moz-linear-gradient(top, #ffdd00, #dd9700);
+  background-image: -o-linear-gradient(top, #ffdd00, #dd9700);
+  background-image: -webkit-linear-gradient(top, #ffdd00, #dd9700);
+  background-image: linear-gradient(to bottom, #ffdd00, #dd9700);
+}
+
+/* line 120, ../sass/actionbar.scss */
+.timeEllapesd {
+  font-weight: 400;
+  font-size: 30pt;
+  line-height: 40px;
+  color: #2da594;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  text-align: center;
+}
+
+/* line 132, ../sass/actionbar.scss */
+.totalTime {
+  font-weight: 400;
+  font-size: 12pt;
+  color: #2da594;
+}
+
+/* line 139, ../sass/actionbar.scss */
+.elapsed .mute {
+  color: #939183;
+}
+
+/* line 143, ../sass/actionbar.scss */
+.actions_times {
+  position: absolute;
+  background-color: #e0dac7;
+  top: 0;
+  right: 0;
+  height: 40px;
+  width: 40px;
+}
+
+/* line 152, ../sass/actionbar.scss */
+#action_time_play, #action_time_pause {
+  position: absolute;
+  top: 0;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  color: #939183;
+}
+
+/**-----------------
+* Config
+**------------------
+*/
+/* line 167, ../sass/actionbar.scss */
+#config_ellapsed_cancel, #config_ellapsed_validate {
+  background-color: #939183;
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  top: 0;
+  text-align: center;
+  color: #fff;
+  font-size: 1em;
+  margin: auto;
+}
+
+/* line 179, ../sass/actionbar.scss */
+#config_ellapsed_cancel {
+  right: calc(40px + 1px);
+}
+
+/* line 183, ../sass/actionbar.scss */
+#config_ellapsed_validate {
+  right: 0;
+}
+
+/* line 187, ../sass/actionbar.scss */
+.config_ellapsed_lbl {
+  position: absolute;
+  width: 60%;
+  font-size: 1em;
+  line-height: 1em;
+  left: 5px;
+  top: 0;
+  text-align: center;
+}
+
+/* line 197, ../sass/actionbar.scss */
+#time .config_ellapsed_time {
+  font-family: digital;
+  width: calc(100% - (40px * 2 + 1px) - 150px);
+  margin: auto;
+  height: 2em;
+  position: absolute;
+  top: 50%;
+  right: calc(40px * 2 + 5px);
+  margin-top: -1em;
+}
+
+/* line 208, ../sass/actionbar.scss */
+#time .config_ellapsed_time input {
+  font-family: digital;
+  text-align: center;
+  font-size: 25px;
+  width: 100%;
+}
+
+/* line 215, ../sass/actionbar.scss */
+#configEllapsed .actions_times {
+  left: calc(100% - (40px * 2 + 1px));
+}
+
+/**-----------------
+* Spinner
+**------------------
+*/
+/* line 224, ../sass/actionbar.scss */
+.loader-spiner, .loader-spinner-alert {
+  width: 200%;
+  height: 200%;
+  border-radius: 50%;
+  border: 10px solid;
+  box-sizing: border-box;
+}
+
+/* line 233, ../sass/actionbar.scss */
+.loader-spinner-alert {
+  border-color: #be233a;
+}
+
+/* line 236, ../sass/actionbar.scss */
+.loader-spiner {
+  border-color: #939183;
+}
+
+/*# sourceMappingURL=actionbar.css.map */

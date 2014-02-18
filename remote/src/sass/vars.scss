@@ -10,6 +10,7 @@
  */
 
 $margin: 10px;
+$margin-timer: 7px;
 $margin-nav : $margin;
 
 
@@ -17,6 +18,11 @@ $abs-height: 40px;
 $abs-notes-height: 30px;
 
 $font-size-abs : 20px;
-$font-size-abs-notes : 15px;
+$font-size-abs-notes : 20px;
 $font-size-notes : 2em;
-$font-size-menu : 10px;
+$font-size-menu : 18pt;
+$font-size-submenu : 14pt;
+
+$font-size-timer : 30pt;
+$font-size-current-slide : 19.5pt;
+$font-size-slide-number : 12pt;

@@ -1,11 +1,6 @@
- <div id="notes" class="border">
-    <div class="actionbar">
-        <div class="title-abs">NOTES</div>
-        <div class="slide-number">
-            Slide <span class="curent-slide">{{model.currentSlideNumber}}</span> / <span class="nb-slides">{{model.nbSlides}}</span>
-        </div>
-    </div>
-    <hr class="hractionbar">
+ <div id="notes" class="border" ng-class='noteFullClass'>
+    <i class="fa fa-play-circle-o" ng-class="iconClass" ng-click='toggleNotes()'></i>
+    <div class="title-abs">Notes</div>
     <div id="content-notes">
     {{model.contentNotes}}
     </div>

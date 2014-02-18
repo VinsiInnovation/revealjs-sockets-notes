@@ -1,0 +1,32 @@
+<div class="sliding-menu" ng-class="model.showMenuClass">
+	<div class="menu-title">Presentation</div>
+	<div id="full-screen" class="menu-icon" ng-click='fullscreen()'>
+		<i class="fa fa-expand"></i> 
+		<div class='menu-icon-text'>			
+			Full Screen
+		</div>
+	</div>
+	<div id="action_time_stop" class="menu-icon" ng-click='stop()'>
+		<span class="fa-stack">
+			<i class="fa fa-circle fa-stack-2x"></i>
+			<i class="fa fa-step-backward fa-inverse fa-stack-1x"></i>
+		</span> 
+		<div class='menu-icon-text'>
+		Reset timer
+		</div>
+	</div>
+	<div id="action_time_stop" class="menu-icon" ng-click='stop()'>
+		<i class="fa fa-clock-o"></i>
+		<div class='menu-icon-text'>
+		Duration
+		<input id="config_interval" type="number" ng-model="model.defaultInterval">
+		mn.
+		</div>
+	</div>
+	<br>
+	<div class="menu-title" ng-show='model.pluginList.length > 0'>Plug-Ins</div>
+	
+    <ul id="plugin-list" class="plugin-list">
+        <li class="plugin" ng-repeat="plugin in model.pluginList | filter:activeFilter" id="plugin.id" ng-click='pluginClicked(plugin)' ><i class="fa {{plugin.icon}}"></i>&nbsp {{plugin.name}}</li>        
+    </ul>
+</div>

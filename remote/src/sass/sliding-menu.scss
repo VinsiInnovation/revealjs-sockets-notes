@@ -1,0 +1,121 @@
+@import 'colors';
+@import 'vars';
+@import "compass/css3";
+
+$menu-title-height : 50px;
+$row-height : 40px;
+$icon-padding-left : 2.5em;
+
+.sliding-menu{
+	position: absolute;
+	top: calc(#{$abs-height} + #{$margin-timer});
+	height : calc(100% - #{$abs-height} - #{$margin-timer});
+	background-color: $bg-color-menu;
+	color: $font-color-menu;
+	@include transition-property(width, opacity);
+  	@include transition-duration(0.5s);
+  	@include transition-timing-function(ease-in);
+  	z-index:100;
+  	overflow:hidden;
+  	padding-left:$margin;
+  	font-size: $font-size-menu;
+  	font-weight:400;
+
+  	.menu-title{
+  		text-transform: uppercase;
+  		height: $menu-title-height;
+  		line-height: $menu-title-height;
+  	}
+
+  	.menu-icon{
+  		position: relative;
+  		border-top: thin solid white;
+  		color: white;
+  		line-height: $row-height;
+  		height: $row-height;
+  		font-size: $font-size-submenu;
+
+  		.fa{
+  			color: $font-color-menu;
+  		}
+
+  		.fa-stack{
+  			width: 1em;
+  			height: 1em;
+  			line-height: 1em;
+  		}
+
+  		.fa-stack-2x{
+  			font-size: 1em;
+  		}
+
+  		.fa-stack-1x{
+  			font-size: 0.8em;
+  		}
+
+  		.fa.fa-inverse{
+  			color : $bg-color-menu;
+  		}
+
+  		.menu-icon-text{
+  			position: absolute;  			
+  			top: 0;
+  			left: $icon-padding-left;
+
+  		}
+  	}
+
+}
+
+.sliding-menu.collapse{
+	width:0;		
+	opacity: 0;
+}
+
+.sliding-menu.expand{
+	width:80%;	
+}
+
+
+#config_interval{
+	width: 4.5em;
+	display: inline;
+}
+
+
+
+ul.plugin-list{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    
+    .plugin{
+    	position: relative;    	
+        width: auto;
+        height: auto;
+        font-size: $font-size-submenu;
+        border-top: thin solid white;
+        text-align: left;
+        padding-left: $icon-padding-left;
+        color: white;
+  		line-height: $row-height;
+  		height: $row-height;
+
+        a{
+            text-decoration: none;
+        }
+
+        a:link, a:visited, a:hover, a:active{
+            color: $font-color;
+        }
+
+        i{
+            position: absolute;
+        	color: $font-color-menu;
+        	line-height: $row-height;
+        	left: 0;
+        }
+
+    }
+}
+

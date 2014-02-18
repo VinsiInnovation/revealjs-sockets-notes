@@ -1,12 +1,12 @@
 <div ng-show="model.iframeLoad">
-	<a id="reset" class="button" ng-disabled="model.controls.reset" ng-click="resetClick($event)"><i class="fa fa-undo"></i></a>
-	<a id="next" class="button" ng-disabled="model.controls.next" ng-click="nextClick($event)"><i class="fa fa-step-forward"></i></a>
-	<a id="prev" class="button" ng-disabled="model.controls.prev" ng-click="prevClick($event)"><i class="fa fa-step-backward"></i></a>
-	<a id="left" class="button" ng-disabled="model.controls.left" ng-click="leftClick($event)"><i class="fa fa-caret-left"></i></a>
-	<a id="right" class="button" ng-disabled="model.controls.right" ng-click="rightClick($event)"><i class="fa fa-caret-right"></i></a>
-	<a id="up" class="button" ng-disabled="model.controls.up" ng-click="upClick($event)"><i class="fa fa-caret-up"></i></a>
-	<a id="down" class="button" ng-disabled="model.controls.down" ng-click="downClick($event)"><i class="fa fa-caret-down"></i></a>
-	<a id="show" class="button" ng-disabled="model.controls.show" ng-click="showClick($event)"><i class="fa fa-share"></i>
+	<a id="reset"  ng-disabled="model.controls.reset" ng-click="resetClick($event)"><i class="fa fa-undo"></i></a>
+	<!--<a id="next"  ng-disabled="model.controls.next" ng-click="nextClick($event)"><i class="fa fa-step-forward fa-3x"></i></a>
+	<a id="prev"  ng-disabled="model.controls.prev" ng-click="prevClick($event)"><i class="fa fa-step-backward fa-3x"></i></a>-->
+	<a id="left"  ng-disabled="model.controls.left" ng-click="leftClick($event)"><i class="fa fa-caret-left fa-3x"></i></a>
+	<a id="right"  ng-disabled="model.controls.right" ng-click="rightClick($event)"><i class="fa fa-caret-right fa-3x"></i></a>
+	<a id="up"  ng-disabled="model.controls.up" ng-click="upClick($event)"><i class="fa fa-caret-up fa-3x"></i></a>
+	<a id="down"  ng-disabled="model.controls.down" ng-click="downClick($event)"><i class="fa fa-caret-down fa-3x"></i></a>
+	<a id="show"  ng-disabled="model.controls.show" ng-click="showClick($event)"><i class="fa fa-share"></i>
 	    <div class="slide-preview-number"><span class="next-slide">{{model.nextSlideNumber}}</span> / <span class="nb-slides">{{model.nbSlides}}</div>
 	</a>                			
 </div>

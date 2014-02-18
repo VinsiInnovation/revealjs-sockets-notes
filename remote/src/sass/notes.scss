@@ -1,5 +1,7 @@
+@import "compass/css3";
 @import "colors";
 @import "vars";
+@import "fonts";
 
 /***
  *      _   _  ____ _______ ______  _____  
@@ -12,33 +14,38 @@
  *                                         
  */
 
-
-#notes .actionbar{
-    height:$abs-notes-height;
-    font-size:$font-size-abs-notes;
-    line-height:$abs-notes-height;
-}
-
-#notes .actionbar  .slide-number{
-    position: absolute;
-    right:0;
-    padding-right:15px;
-    height:100%;
-    font-size:$font-size-abs-notes;
-}
-
-#notes .curent-slide{
-    color:$color-actions;
-}
-
 #notes{
     overflow:hidden;
+    background-color: #fff;
+    @include shadow;
 }
+
+
+#notes .title-abs{
+    position: absolute;
+    color: #675C53;
+    font-size: 19.5pt;
+    left: calc(#{$abs-notes-height} + #{$margin});
+    line-height: $abs-notes-height;
+    height: $abs-notes-height;
+}
+
+#notes  i{
+    position: absolute;
+    left: $margin;
+    font-size: 19.5pt;
+    text-align: center;
+    height: $abs-notes-height;
+    line-height: $abs-notes-height;
+    color: #E0DAC7;
+}
+
 
 #content-notes{
     position:absolute;
     top:$abs-notes-height;
     left:0;
+    font-family: $font-notes;
     font-size:$font-size-notes;
     line-height:1.2em;
     overflow:auto;

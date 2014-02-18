@@ -9,7 +9,7 @@ components.directive('controls', ['$rootScope'
     link: function postLink($scope, iElement, iAttrs, iframeCtrl) { 
 
     
-      $scope.nextClick = function($event){
+      /*$scope.nextClick = function($event){
         if (!$event.target.hasAttribute('disabled')) 
           iframeCtrl.revealAction('next');
       }
@@ -17,7 +17,7 @@ components.directive('controls', ['$rootScope'
       $scope.prevClick = function($event){
         if (!$event.target.hasAttribute('disabled')) 
           iframeCtrl.revealAction('prev');
-      }
+      }*/
       
       $scope.leftClick = function($event){
         if (!$event.target.hasAttribute('disabled')) 

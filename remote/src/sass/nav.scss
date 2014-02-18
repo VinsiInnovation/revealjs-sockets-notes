@@ -6,14 +6,19 @@
 **------------------
 */
 
+$size-show:75px;
+$size-reset : 30px;
+
+#preview .button{
+    background: none;
+}
+
+#up, #down, #show, #left, #right{
+    color : white;
+}
+
 #next, #prev, #up, #down, #show, #left, #right, #reset{
-    position:absolute;
-    background-color:#fff;
-    -moz-box-shadow: 1px 1px 5px 1px #3e3d40;
-    -webkit-box-shadow: 1px 1px 5px 1px #3e3d40;
-    -o-box-shadow: 1px 1px 5px 1px #3e3d40;
-    box-shadow: 1px 1px 5px 1px #3e3d40;
-    filter:progid:DXImageTransform.Microsoft.Shadow(color=#3e3d40, Direction=134, Strength=5);
+    position:absolute;    
 }
 
 #left, #right{
@@ -41,24 +46,45 @@
     bottom:$margin-nav;
 }
 
-#show{
-    height:60px;
-    width:60px;
-    font-size:25px;
-    top:50%;
-    left:50%;
-    margin-left:-30px;
-    margin-top:-30px;
+#reset, #show{
+    -moz-box-shadow: 1px 1px 5px 1px #3e3d40;
+    -webkit-box-shadow: 1px 1px 5px 1px #3e3d40;
+    -o-box-shadow: 1px 1px 5px 1px #3e3d40;
+    box-shadow: 1px 1px 5px 1px #3e3d40;
+    filter:progid:DXImageTransform.Microsoft.Shadow(color=#3e3d40, Direction=134, Strength=5);
 }
 
-#preview .next-slide{
-    color:$color-actions;
+#preview a[disabled]{
+    opacity: 0.1;
+}
+
+#preview #reset{
+    background-color: white;
+    line-height: $size-reset;
+    text-align: center;
+    width: $size-reset;
+    height: $size-reset;
+    border-radius: $size-reset;
+}
+
+#preview #show{
+    background-color: white;
+    opacity: 0.7;
+    border-radius: $size-show;
+    height:$size-show;
+    width:$size-show;
+    text-align: center;
+    font-size:20pt;
+    top:50%;
+    left:50%;
+    margin-left:-($size-show/2);
+    margin-top:-($size-show/2);
+    color:black;
 }
 
 #preview .slide-preview-number{
-    font-size:0.5em;
     position:absolute;
-    bottom:2px;
+    bottom:9px;
     left:50%;
     margin-left:-25%;
     
