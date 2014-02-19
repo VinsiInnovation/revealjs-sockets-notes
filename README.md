@@ -57,7 +57,7 @@ This should create a "dist" directory with the project compile and it has normal
 You have to add thoses line in your html
 
 1. ```{ src: '*{$REVEAL_HOME_DIRECTORY}*/plugin/sockets-notes/dist/reveal_plugin/js/notes-client.js', async: true, condition: function() { return !!document.body.classList; } }``` in the dependancies of Reveal
-2. <script src="/socket.io/socket.io.js"></script> in the import section of your javascripts
+2. ```<script src="/socket.io/socket.io.js"></script>``` in the import section of your javascripts
 3. You have to check that markdown plugin is present in your presentation
 4. You have to check that you have the file lib/js/head.min.js in your presentation
 
