@@ -3,7 +3,7 @@ components.directive('slidingMenu', ['$rootScope','$injector'
    var directiveDefinitionObject = {
     templateUrl: 'partials/components/slidingmenu.html',
     replace: true,
-    priority : 51,
+    priority : 903,
     restrict: 'E',
     scope: true,    
     link: function postLink($scope, iElement, iAttrs) { 

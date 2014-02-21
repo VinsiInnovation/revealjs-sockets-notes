@@ -4,6 +4,7 @@ components.directive('timer', ['$rootScope', '$interval'
     templateUrl: 'partials/components/timer.html',
     replace: true,
     restrict: 'E',
+    priority : 904,
     scope: true,    
     link: function postLink($scope, iElement, iAttrs) { 
 

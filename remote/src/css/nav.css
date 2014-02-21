@@ -22,54 +22,67 @@
 * Navigation buttons
 **------------------
 */
-/* line 12, ../sass/nav.scss */
+/* line 13, ../sass/nav.scss */
 #preview .button {
   background: none;
 }
 
-/* line 16, ../sass/nav.scss */
+/* line 17, ../sass/nav.scss */
+#controls {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* line 25, ../sass/nav.scss */
 #up, #down, #show, #left, #right {
   color: white;
 }
 
-/* line 20, ../sass/nav.scss */
+/* line 29, ../sass/nav.scss */
 #next, #prev, #up, #down, #show, #left, #right, #reset {
   position: absolute;
 }
 
-/* line 24, ../sass/nav.scss */
+/* line 33, ../sass/nav.scss */
 #left, #right {
+  height: 50px;
   top: 50%;
   margin-top: -25px;
+  line-height: 50px;
 }
 
-/* line 30, ../sass/nav.scss */
+/* line 41, ../sass/nav.scss */
 #up, #down {
+  width: 50px;
   left: 50%;
   margin-left: -25px;
+  text-align: center;
 }
 
-/* line 35, ../sass/nav.scss */
+/* line 48, ../sass/nav.scss */
 #next, #right {
   right: 10px;
 }
 
-/* line 38, ../sass/nav.scss */
+/* line 51, ../sass/nav.scss */
 #prev, #left, #reset {
   left: 10px;
 }
 
-/* line 42, ../sass/nav.scss */
+/* line 55, ../sass/nav.scss */
 #up, #next, #prev {
   top: 10px;
 }
 
-/* line 45, ../sass/nav.scss */
+/* line 58, ../sass/nav.scss */
 #down, #reset {
   bottom: 10px;
 }
 
-/* line 49, ../sass/nav.scss */
+/* line 62, ../sass/nav.scss */
 #reset, #show {
   -moz-box-shadow: 1px 1px 5px 1px #3e3d40;
   -webkit-box-shadow: 1px 1px 5px 1px #3e3d40;
@@ -78,12 +91,12 @@
   filter: progid:DXImageTransform.Microsoft.Shadow(color=#3e3d40, Direction=134, Strength=5);
 }
 
-/* line 57, ../sass/nav.scss */
+/* line 70, ../sass/nav.scss */
 #preview a[disabled] {
   opacity: 0.1;
 }
 
-/* line 61, ../sass/nav.scss */
+/* line 74, ../sass/nav.scss */
 #preview #reset {
   background-color: white;
   line-height: 30px;
@@ -93,7 +106,7 @@
   border-radius: 30px;
 }
 
-/* line 70, ../sass/nav.scss */
+/* line 83, ../sass/nav.scss */
 #preview #show {
   background-color: white;
   opacity: 0.7;
@@ -109,12 +122,29 @@
   color: black;
 }
 
-/* line 85, ../sass/nav.scss */
+/* line 98, ../sass/nav.scss */
 #preview .slide-preview-number {
   position: absolute;
   bottom: 9px;
   left: 50%;
   margin-left: -25%;
+}
+
+/* line 106, ../sass/nav.scss */
+#preview #show.hide {
+  -moz-transition-property: opacity;
+  -o-transition-property: opacity;
+  -webkit-transition-property: opacity;
+  transition-property: opacity;
+  -moz-transition-duration: 6s;
+  -o-transition-duration: 6s;
+  -webkit-transition-duration: 6s;
+  transition-duration: 6s;
+  -moz-transition-timing-function: ease-in;
+  -o-transition-timing-function: ease-in;
+  -webkit-transition-timing-function: ease-in;
+  transition-timing-function: ease-in;
+  opacity: 0.2;
 }
 
 /*# sourceMappingURL=nav.css.map */

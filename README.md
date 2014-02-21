@@ -56,13 +56,13 @@ This should create a "dist" directory with the project compile and it has normal
 
 You have to add thoses line in your html
 
-1. ```{ src: '*{$REVEAL_HOME_DIRECTORY}*/plugin/sockets-notes/dist/reveal_plugin/js/notes-client.js', async: true, condition: function() { return !!document.body.classList; } }``` in the dependancies of Reveal
+1. ```{ src: '{$REVEAL_HOME_DIRECTORY}/plugin/sockets-notes/dist/reveal_plugin/js/notes-client.js', async: true, condition: function() { return !!document.body.classList; } }``` in the dependancies of Reveal
 2. ```<script src="/socket.io/socket.io.js"></script>``` in the import section of your javascripts
 3. You have to check that markdown plugin is present in your presentation
 4. You have to check that you have the file lib/js/head.min.js in your presentation
 
 According to the number of plugins you want to use with the remote control, add as many lines as you want somes plugins in the reveal dependancies : 
-```{ src: '*{$REVEAL\_HOME\_DIRECTORY}*/plugin/sockets-notes/dist/reveal_plugin/plugins/*{thePluginYouWant}*.js', async: true, condition: function() { return !!document.body.classList; } }```
+```{ src: '{$REVEAL\_HOME\_DIRECTORY}/plugin/sockets-notes/dist/reveal_plugin/plugins/*{thePluginYouWant}*.js', async: true, condition: function() { return !!document.body.classList; } }```
 
 Here is the list of plugin and their paths (according to reveal\_plugins/plugins directory) : 
 
@@ -74,8 +74,8 @@ Here is the list of plugin and their paths (according to reveal\_plugins/plugins
 ### Use it
 
 1. Start the server from your revealPresentation folder root with ```node plugin/sockets-notes/dist/server/server.js -r REVEAL_DIRECTORY_PATH``` (The REVEAL\_DIRECTORY\_PATH is corresponding to the relative path according to the curent directory where the reveal presentation with the plugin is present (A directory where plugin/sockets-notes is present)). If your reveal presentation is on the root of the server (I.E. the plugin directory is aside of the index.html) juste start the server with ```node plugin/sockets-notes/dist/server/server.js```
-2. Launch your reveal presentation on http://localhost:8080/*{youRevealPresentation}*.html
-2. Launch your favorites browser and go to http://localhost:8080/*{REVEAL\_DIRECTORY\_PATH}*/plugin/sockets-notes/dist/server
+2. Launch your reveal presentation on http://localhost:8080/{youRevealPresentation}.html
+2. Launch your favorites browser and go to http://localhost:8080/{REVEAL\_DIRECTORY\_PATH}/plugin/sockets-notes/dist/server
 3. Select the right network and click on it
 4. Scan the QrCode with your smartphone
 5. Enjoy ! 

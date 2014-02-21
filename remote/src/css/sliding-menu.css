@@ -43,13 +43,13 @@
   font-size: 18pt;
   font-weight: 400;
 }
-/* line 24, ../sass/sliding-menu.scss */
+/* line 25, ../sass/sliding-menu.scss */
 .sliding-menu .menu-title {
   text-transform: uppercase;
   height: 50px;
   line-height: 50px;
 }
-/* line 30, ../sass/sliding-menu.scss */
+/* line 31, ../sass/sliding-menu.scss */
 .sliding-menu .menu-icon {
   position: relative;
   border-top: thin solid white;
@@ -58,59 +58,62 @@
   height: 40px;
   font-size: 14pt;
 }
-/* line 38, ../sass/sliding-menu.scss */
+/* line 39, ../sass/sliding-menu.scss */
 .sliding-menu .menu-icon .fa {
   color: #cac3ad;
 }
-/* line 42, ../sass/sliding-menu.scss */
+/* line 43, ../sass/sliding-menu.scss */
 .sliding-menu .menu-icon .fa-stack {
   width: 1em;
   height: 1em;
   line-height: 1em;
 }
-/* line 48, ../sass/sliding-menu.scss */
+/* line 49, ../sass/sliding-menu.scss */
 .sliding-menu .menu-icon .fa-stack-2x {
   font-size: 1em;
 }
-/* line 52, ../sass/sliding-menu.scss */
+/* line 53, ../sass/sliding-menu.scss */
 .sliding-menu .menu-icon .fa-stack-1x {
   font-size: 0.8em;
 }
-/* line 56, ../sass/sliding-menu.scss */
+/* line 57, ../sass/sliding-menu.scss */
 .sliding-menu .menu-icon .fa.fa-inverse {
   color: #939183;
 }
-/* line 60, ../sass/sliding-menu.scss */
+/* line 61, ../sass/sliding-menu.scss */
 .sliding-menu .menu-icon .menu-icon-text {
   position: absolute;
   top: 0;
   left: 2.5em;
 }
 
-/* line 70, ../sass/sliding-menu.scss */
+/* line 71, ../sass/sliding-menu.scss */
 .sliding-menu.collapse {
   width: 0;
   opacity: 0;
 }
 
-/* line 75, ../sass/sliding-menu.scss */
+/* line 76, ../sass/sliding-menu.scss */
 .sliding-menu.expand {
   width: 80%;
+  -moz-box-shadow: rgba(0, 0, 0, 0.75) 2px 0px 5px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.75) 2px 0px 5px;
+  box-shadow: rgba(0, 0, 0, 0.75) 2px 0px 5px;
 }
 
-/* line 80, ../sass/sliding-menu.scss */
+/* line 82, ../sass/sliding-menu.scss */
 #config_interval {
   width: 4.5em;
   display: inline;
 }
 
-/* line 87, ../sass/sliding-menu.scss */
+/* line 89, ../sass/sliding-menu.scss */
 ul.plugin-list {
   list-style: none;
   padding: 0;
   margin: 0;
 }
-/* line 92, ../sass/sliding-menu.scss */
+/* line 94, ../sass/sliding-menu.scss */
 ul.plugin-list .plugin {
   position: relative;
   width: auto;
@@ -123,18 +126,20 @@ ul.plugin-list .plugin {
   line-height: 40px;
   height: 40px;
 }
-/* line 104, ../sass/sliding-menu.scss */
+/* line 106, ../sass/sliding-menu.scss */
 ul.plugin-list .plugin a {
   text-decoration: none;
 }
-/* line 108, ../sass/sliding-menu.scss */
+/* line 110, ../sass/sliding-menu.scss */
 ul.plugin-list .plugin a:link, ul.plugin-list .plugin a:visited, ul.plugin-list .plugin a:hover, ul.plugin-list .plugin a:active {
   color: #3e3d40;
 }
-/* line 112, ../sass/sliding-menu.scss */
+/* line 114, ../sass/sliding-menu.scss */
 ul.plugin-list .plugin i {
   position: absolute;
   color: #cac3ad;
   line-height: 40px;
   left: 0;
 }
+
+/*# sourceMappingURL=sliding-menu.css.map */

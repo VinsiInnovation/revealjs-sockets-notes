@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "dependencies": {
     "fastclick": "latest",
-    "hammerjs":"latest",
-    "jquery-hammerjs":"latest",
     "prefix-free": "gh-pages",
+    "hammerjs":"1.0.6",
+    "jquery-hammerjs":"1.0.6",
     "jquery": "2.0.3",
     "angular": "1.2.1",
     "angular-route": "1.2.1",

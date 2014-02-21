@@ -3,7 +3,7 @@ components.directive('actionBar', ['$rootScope','$injector', '$interval'
    var directiveDefinitionObject = {
     templateUrl: 'partials/components/actionbar.html',
     replace: true,
-    priority : 50,
+    priority : 900,
     restrict: 'E',
     scope: true,    
     link: function postLink($scope, iElement, iAttrs) { 

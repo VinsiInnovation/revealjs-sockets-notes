@@ -99,6 +99,8 @@
 .elapsed_time, .elapsed_bg{
     @include background-image(linear-gradient(top, $color-normal-stop-1, $color-normal-stop-2));
     position: absolute;    
+    border-top: thin solid black;
+    border-bottom: thin solid black;
     height:$margin-timer;
     width:100%;
     top:$abs-height;

@@ -4,6 +4,7 @@ components.directive('notes', ['$rootScope'
     templateUrl: 'partials/components/notes.html',
     replace: true,
     restrict: 'E',
+    priority : 902,
     scope: true,    
     link: function postLink($scope, iElement, iAttrs) { 
         $scope.iconClass = 'fa-rotate-90';

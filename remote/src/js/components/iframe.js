@@ -6,6 +6,7 @@ components.directive('iframeControl', ['$rootScope', '$timeout'
 
    var directiveDefinitionObject = {
     restrict: 'A',
+    priority : 950,
     scope: false,    
     controller: function($scope){
 
