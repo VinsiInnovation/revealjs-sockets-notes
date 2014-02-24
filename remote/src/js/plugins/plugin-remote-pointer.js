@@ -3,7 +3,7 @@
 */
 plugins.directive('rpPlugin', ['$rootScope'
   ,function ($rootScope) {
-   var directiveDefinitionObject = {
+  var directiveDefinitionObject = {
     restrict: 'A',
     priority : 102,
     scope: false,    
@@ -19,6 +19,8 @@ plugins.directive('rpPlugin', ['$rootScope'
       var notesElement = null;
       var areaPointer = null;
       var currentColor = 'red';
+      var lastTarget = null;
+      
 
       function touchFeedback(event){
         if (event.gesture && event.gesture.center){
@@ -29,7 +31,6 @@ plugins.directive('rpPlugin', ['$rootScope'
 
           var percentX = ((x-rect.left) / rect.width) * 100;
           var percentY = ((y-rect.top) / rect.height) * 100;
-          //console.log((event.gesture.center.pageX / previewElement.width())+ '|'+ Math.round(event.gesture.center.pageX / previewElement.width()));
           $scope.pluginCommunication('rp', {
             hide : false,
             x : Math.round(percentX),
@@ -48,7 +49,9 @@ plugins.directive('rpPlugin', ['$rootScope'
           $scope.model.showControls = true;
         }else{
           currentColor = event.target.getAttribute('sws-color');
-          areaPointer.style.border = 'solid '+currentColor+' 5px';
+          lastTarget.classList.remove('activ');
+          event.target.classList.add('activ');
+          lastTarget = event.target;
         }
         console.log(event);
       }
@@ -67,40 +70,31 @@ plugins.directive('rpPlugin', ['$rootScope'
           areaPointer.style.left = previewElement.position().left+'px';
           areaPointer.style['margin'] = previewElement.css('margin');
           areaPointer.style['background-color'] = 'rgba(0,0,0,0)';
-          //areaPointer.style.border = 'solid red 5px';
 
           iElement.find('#main-content')[0].appendChild(areaPointer);
 
           // We add color div to change the color of pointer
           function addBox(id, color, icon, left){
-            var size = 40;
+            
             var boxDiv = document.createElement('DIV');
             boxDiv.setAttribute('id', 'sws-rp-box-'+id);
             boxDiv.setAttribute('sws-color', color);
-            boxDiv.style.position = 'absolute';
-            boxDiv.style.width = size+'px';
-            boxDiv.style.height = size+'px';
-            boxDiv.style.top = '-'+(size+20)+'px';
+            boxDiv.classList.add('sws-plugin-rp-box');
             boxDiv.style.left = left;
-            boxDiv.style['text-align'] = 'center';
-            boxDiv.style['font-size'] = '25px';
-            boxDiv.style['line-height'] = size+'px';
             if (icon){              
-              boxDiv.style['background-color'] = '#7F89A5';
               boxDiv.classList.add('fa');
               boxDiv.classList.add(icon);
-              boxDiv.style.color = 'white';
             }else{
-              boxDiv.style[Modernizr.prefixed('boxShadow')] = '0px 0px 10px 0 black';
-              boxDiv.style['border-radius'] = size+'px';
-              boxDiv.style.border = 'solid 1px white';
-              boxDiv.style['background-color'] = color;
+              boxDiv.classList.add('color');              
+              boxDiv.classList.add(id);              
             }
             return boxDiv;
           }
 
           //fa-circle
-          areaPointer.appendChild(addBox('red', '#FF0000', null,'0'));
+          lastTarget = addBox('red', '#FF0000', null,'0');
+          lastTarget.classList.add('activ');
+          areaPointer.appendChild(lastTarget);
           areaPointer.appendChild(addBox('white', '#FFFFFF', null,'20%'));
           areaPointer.appendChild(addBox('black', '#000000', null,'40%'));
           areaPointer.appendChild(addBox('blue', '#005FFF', null,'60%'));
@@ -121,6 +115,83 @@ plugins.directive('rpPlugin', ['$rootScope'
 
         $(areaPointer).hammer().off('drag', touchFeedback);
         $(areaPointer).hammer().on('drag', touchFeedback);
+
+        /*
+        **************************************
+        **************************************
+        * Style Sheet Management
+        **************************************
+        **************************************
+        */
+        var pluginStyleSheet = (function() {
+          // Create the <style> tag
+          var style = document.createElement("style");
+
+          // Add a media (and/or media query) here if you'd like!
+          style.setAttribute("media", "screen");
+          style.setAttribute("id", "style-sheet-sws-remote");
+
+          // WebKit hack :(
+          style.appendChild(document.createTextNode(""));
+
+          // Add the <style> element to the page
+          document.head.appendChild(style);
+
+          return style.sheet ? style.sheet : style.styleSheet;
+        })();
+
+        function cssProp(properties){
+          return Modernizr.prefixed(properties).replace(/([A-Z])/g, function(str,m1){ return '-' + m1.toLowerCase(); }).replace(/^ms-/,'-ms-');
+        }
+
+        var size = 40;      
+        pluginStyleSheet.insertRule('.sws-plugin-rp-box {'+
+          'position : absolute;'+
+          'width : '+size+'px;'+
+          'height : '+size+'px;'+
+          'top : -'+(size+20)+'px;'+
+          'text-align : center;'+
+          'font-size : 25px;'+
+          'line-height : '+size+'px;'+
+        '}',0);
+
+        pluginStyleSheet.insertRule('.sws-plugin-rp-box.fa {'+
+          'background-color : #7F89A5;'+
+          'color : white;'+          
+        '}',0);
+
+        pluginStyleSheet.insertRule('.sws-plugin-rp-box.color {'+
+          cssProp('boxShadow')+' : 0px 0px 10px 0 black; '+
+          'border-radius : '+size+'px; '+
+          'border : solid 1px white; '+
+        '}',0);
+
+         pluginStyleSheet.insertRule('.sws-plugin-rp-box.color.activ::after {'+
+          'content : \'\'; '+
+          'position : absolute; '+
+          'top : '+(size+5)+'px; '+
+          'left : 5px; '+
+          'width : '+(size-10)+'px; '+
+          'height : 5px; '+
+        '}',0);
+
+        pluginStyleSheet.insertRule('.sws-plugin-rp-box.color.red::after, .sws-plugin-rp-box.color.red {'+
+          'background-color : #FF0000; '+
+        '}',0);
+
+        pluginStyleSheet.insertRule('.sws-plugin-rp-box.color.white::after, .sws-plugin-rp-box.color.white {'+
+          'background-color : #FFFFFF; '+
+        '}',0);
+
+        pluginStyleSheet.insertRule('.sws-plugin-rp-box.color.black::after, .sws-plugin-rp-box.color.black {'+
+          'background-color : #000000; '+
+        '}',0);
+
+        pluginStyleSheet.insertRule('.sws-plugin-rp-box.color.blue::after, .sws-plugin-rp-box.color.blue {'+
+          'background-color : #005FFF; '+
+        '}',0);
+
+
 
       }
     }

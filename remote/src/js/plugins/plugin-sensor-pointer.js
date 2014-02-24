@@ -32,8 +32,10 @@ plugins.directive('spPlugin', ['$rootScope'
       // TODO : We Have to persit on localstorage the callibration for the phone
 
       var previewElement = iElement.find('#preview');
+      var notesElement = null;
       var areaPointer = null;
       var currentColor = 'red';
+      var lastTarget = null;
       var initialX = -1;
       var initialY = -1;
       var initialYPercent = -1;
@@ -114,9 +116,14 @@ plugins.directive('spPlugin', ['$rootScope'
         if (event.target.id === 'sws-sp-box-close'){
           window.removeEventListener('deviceorientation', orientationFeedback, false);
           areaPointer.style.display = 'none';
+          notesElement.css('top','');
+          notesElement.css('zIndex','');
+          $scope.model.showControls = true;
         }else{
           currentColor = event.target.getAttribute('sws-color');
-          areaPointer.style.border = 'solid '+currentColor+' 5px';
+          lastTarget.classList.remove('activ');
+          event.target.classList.add('activ');
+          lastTarget = event.target;
         }
         console.log(event);
       }
@@ -129,6 +136,8 @@ plugins.directive('spPlugin', ['$rootScope'
         }
 
         if (!areaPointer){
+          notesElement = iElement.find('#notes');
+
           areaPointer = document.createElement('DIV');
           areaPointer.style.position = 'absolute';
           areaPointer.style.width = previewElement.width()+'px';
@@ -137,7 +146,7 @@ plugins.directive('spPlugin', ['$rootScope'
           areaPointer.style.left = previewElement.position().left+'px';
           areaPointer.style['margin'] = previewElement.css('margin');
           areaPointer.style['background-color'] = 'rgba(0,0,0,0)';
-          areaPointer.style.border = 'solid red 5px';
+          //areaPointer.style.border = 'solid red 5px';
 
           iElement.find('#main-content')[0].appendChild(areaPointer);
 
@@ -146,27 +155,25 @@ plugins.directive('spPlugin', ['$rootScope'
             var boxDiv = document.createElement('DIV');
             boxDiv.setAttribute('id', 'sws-sp-box-'+id);
             boxDiv.setAttribute('sws-color', color);
-            boxDiv.style.position = 'absolute';
-            boxDiv.style.width = '40px';
-            boxDiv.style.height = '40px';
-            boxDiv.style.top = '-45px';
+            boxDiv.classList.add('sws-plugin-sp-box');
             boxDiv.style.left = left;
-            boxDiv.style.color = color;
-            boxDiv.style['text-align'] = 'center';
-            boxDiv.style['font-size'] = '30px';
-            boxDiv.style['line-height'] = '40px';
-            boxDiv.style['background-color'] = 'lightgray';
-            boxDiv.style[Modernizr.prefixed('boxShadow')] = '1px 1px 2px 0 #656565';
-            boxDiv.classList.add('fa');
-            boxDiv.classList.add(icon);
+            if (icon){              
+              boxDiv.classList.add('fa');
+              boxDiv.classList.add(icon);
+            }else{
+              boxDiv.classList.add('color');              
+              boxDiv.classList.add(id);              
+            }
             return boxDiv;
           }
 
-          areaPointer.appendChild(addBox('red', 'red', 'fa-circle','0'));
-          areaPointer.appendChild(addBox('white', 'white', 'fa-circle','50px'));
-          areaPointer.appendChild(addBox('black', 'black', 'fa-circle','100px'));
-          areaPointer.appendChild(addBox('blue', 'blue', 'fa-circle','150px'));
-          areaPointer.appendChild(addBox('close', 'black', 'fa-times','calc(100% - 50px)'));
+          lastTarget = addBox('red', '#FF0000', null,'0');
+          lastTarget.classList.add('activ');
+          areaPointer.appendChild(lastTarget);
+          areaPointer.appendChild(addBox('white', '#FFFFFF', null,'20%'));
+          areaPointer.appendChild(addBox('black', '#000000', null,'40%'));
+          areaPointer.appendChild(addBox('blue', '#005FFF', null,'60%'));
+          areaPointer.appendChild(addBox('close', 'black', 'fa-times','calc(100% - 30px)'));
 
           iElement.find('#sws-sp-box-red').bind('click', boxClicked);
           iElement.find('#sws-sp-box-white').bind('click', boxClicked);
@@ -175,13 +182,94 @@ plugins.directive('spPlugin', ['$rootScope'
           iElement.find('#sws-sp-box-close').bind('click', boxClicked);
         }
         
+        $scope.model.showControls = false;
         areaPointer.style.display = '';
+        notesElement.css('top', (notesElement.position().top - 70)+'px');
+        notesElement.css('zIndex',-100);
         
         initialX = -1;
         window.removeEventListener('deviceorientation', orientationFeedback, false);
         window.addEventListener('deviceorientation', orientationFeedback, false);
 
       }
+
+
+       /*
+        **************************************
+        **************************************
+        * Style Sheet Management
+        **************************************
+        **************************************
+        */
+        var pluginStyleSheet = (function() {
+          // Create the <style> tag
+          var style = document.createElement("style");
+
+          // Add a media (and/or media query) here if you'd like!
+          style.setAttribute("media", "screen");
+          style.setAttribute("id", "style-sheet-sws-remote");
+
+          // WebKit hack :(
+          style.appendChild(document.createTextNode(""));
+
+          // Add the <style> element to the page
+          document.head.appendChild(style);
+
+          return style.sheet ? style.sheet : style.styleSheet;
+        })();
+
+        function cssProp(properties){
+          return Modernizr.prefixed(properties).replace(/([A-Z])/g, function(str,m1){ return '-' + m1.toLowerCase(); }).replace(/^ms-/,'-ms-');
+        }
+
+        var size = 40;      
+        pluginStyleSheet.insertRule('.sws-plugin-sp-box {'+
+          'position : absolute;'+
+          'width : '+size+'px;'+
+          'height : '+size+'px;'+
+          'top : -'+(size+20)+'px;'+
+          'text-align : center;'+
+          'font-size : 25px;'+
+          'line-height : '+size+'px;'+
+        '}',0);
+
+        pluginStyleSheet.insertRule('.sws-plugin-sp-box.fa {'+
+          'background-color : #7F89A5;'+
+          'color : white;'+          
+        '}',0);
+
+        pluginStyleSheet.insertRule('.sws-plugin-sp-box.color {'+
+          cssProp('boxShadow')+' : 0px 0px 10px 0 black; '+
+          'border-radius : '+size+'px; '+
+          'border : solid 1px white; '+
+        '}',0);
+
+         pluginStyleSheet.insertRule('.sws-plugin-sp-box.color.activ::after {'+
+          'content : \'\'; '+
+          'position : absolute; '+
+          'top : '+(size+5)+'px; '+
+          'left : 5px; '+
+          'width : '+(size-10)+'px; '+
+          'height : 5px; '+
+        '}',0);
+
+        pluginStyleSheet.insertRule('.sws-plugin-sp-box.color.red::after, .sws-plugin-sp-box.color.red {'+
+          'background-color : #FF0000; '+
+        '}',0);
+
+        pluginStyleSheet.insertRule('.sws-plugin-sp-box.color.white::after, .sws-plugin-sp-box.color.white {'+
+          'background-color : #FFFFFF; '+
+        '}',0);
+
+        pluginStyleSheet.insertRule('.sws-plugin-sp-box.color.black::after, .sws-plugin-sp-box.color.black {'+
+          'background-color : #000000; '+
+        '}',0);
+
+        pluginStyleSheet.insertRule('.sws-plugin-sp-box.color.blue::after, .sws-plugin-sp-box.color.blue {'+
+          'background-color : #005FFF; '+
+        '}',0);
+
+
     }
   };
   return directiveDefinitionObject;
