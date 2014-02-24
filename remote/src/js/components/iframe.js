@@ -86,6 +86,9 @@ components.directive('iframeControl', ['$rootScope', '$timeout'
         
         updateControls();
         $scope.model.iframeLoad = true;
+
+        iframe.contentWindow.document.documentElement.style.overflow = '';
+        iframe.contentWindow.document.body.style.height = '100%';
       }
 
       var revealChangeListener = function(event){

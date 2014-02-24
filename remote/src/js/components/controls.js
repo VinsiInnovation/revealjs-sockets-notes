@@ -70,7 +70,7 @@ components.directive('controls', ['$rootScope', '$timeout'
 
       // We add a managment of gesture in order to control the reveal presentation
       $(iElement[0]).hammer().on('release', function(event){
-        if (event.gesture && event.gesture.direction && event.gesture.distance > 10){
+        if (event.gesture && event.gesture.direction && event.gesture.distance > 1){
           $scope.classShow = '';
           if (event.gesture.direction === 'left'){
             iframeCtrl.revealAction('next');
