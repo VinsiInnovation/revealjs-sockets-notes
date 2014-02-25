@@ -8,6 +8,8 @@ components.directive('timer', ['$rootScope', '$interval'
     scope: true,    
     link: function postLink($scope, iElement, iAttrs) { 
 
+      navigator.vibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate;
+
       $scope.showPlay = true;
       $scope.showTime = true;
       $scope.hours = "00";
@@ -67,20 +69,20 @@ components.directive('timer', ['$rootScope', '$interval'
           progressEl.removeClass("advanced");
         }else if(progress >= 75 && progress < 90 && !advancedClass){
           fullTime = false;
-          if (window.navigator.vibrate){
-            window.navigator.vibrate(100);
+          if (navigator.vibrate){
+            navigator.vibrate(100);
           }
           progressEl.addClass("advanced");
           progressEl.removeClass("alert");
         }else if(progress >= 90 && !alertClass){
           fullTime = false;
-          if (window.navigator.vibrate){
-            window.navigator.vibrate(500);
+          if (navigator.vibrate){
+            navigator.vibrate(500);
           }
           progressEl.addClass("alert");
           progressEl.removeClass("advanced");
-        }else if (progress === 100 && !fullTime && window.navigator.vibrate){
-          window.navigator.vibrate(1000);
+        }else if (progress === 100 && !fullTime && navigator.vibrate){
+          navigator.vibrate(1000);
         }
       }
 

@@ -23,6 +23,22 @@ body {
     color : $font-color;
 }
 
+@mixin fullScreenConf{
+    background-color: $bg-color;
+    height: 100%;
+    width: 100%;
+}
+
+#main-content:-webkit-full-screen{
+    @include fullScreenConf;
+}
+#main-content:fullscreen{
+    @include fullScreenConf;
+}
+#main-content:-moz-full-screen {
+    @include fullScreenConf;
+}
+
 
 .border{
     border-style:solid;

@@ -47,6 +47,9 @@ plugins.directive('rpPlugin', ['$rootScope'
           notesElement.css('top','');
           notesElement.css('zIndex','');
           $scope.model.showControls = true;
+          $scope.pluginCommunication('rp', {
+            hide : true
+          });
         }else{
           currentColor = event.target.getAttribute('sws-color');
           lastTarget.classList.remove('activ');
@@ -113,8 +116,8 @@ plugins.directive('rpPlugin', ['$rootScope'
         notesElement.css('zIndex',-100);
         
 
-        $(areaPointer).hammer().off('drag', touchFeedback);
-        $(areaPointer).hammer().on('drag', touchFeedback);
+        $(areaPointer).hammer().off('drag dragright dragleft dragup dragdown', touchFeedback);
+        $(areaPointer).hammer().on('drag dragright dragleft dragup dragdown', touchFeedback);
 
         /*
         **************************************

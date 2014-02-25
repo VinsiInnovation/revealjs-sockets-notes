@@ -38,6 +38,7 @@ components.directive('slidingMenu', ['$rootScope','$injector'
             }
         }else{
             var docElm = document.getElementById("main-content");
+            //var docElm = document.body;// document.getElementById("main-content");
             if (docElm.requestFullscreen) {
                 docElm.requestFullscreen();
             }
