@@ -13,7 +13,7 @@ $icon-padding-left : 2.5em;
 	height : calc(100% - #{$abs-height} - #{$margin-timer});
 	background-color: $bg-color-menu;
 	color: $font-color-menu;
-	@include transition-property(width, opacity);
+	@include transition-property(width, opacity, left);
 	@include transition-duration(0.5s);
 	@include transition-timing-function(ease-in);
 	z-index:100;
@@ -69,8 +69,13 @@ $icon-padding-left : 2.5em;
 
 }
 
+.sliding-menu.move{
+  width:80%;    
+  left: -80%;
+}
+
 .sliding-menu.collapse{
-	width:0;		
+	width:0;
 	opacity: 0;
 }
 

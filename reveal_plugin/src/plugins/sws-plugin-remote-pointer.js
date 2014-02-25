@@ -23,6 +23,7 @@ SWSRemotePointer = (function(){
 		if (positionObject.hide){
 			pointerDiv.style.display = 'none';			
 		}else{
+			pointerDiv.style.display = '';			
 			pointerDiv.style.top = positionObject.y+'%';
 			pointerDiv.style.left = positionObject.x+'%';
 			pointerDiv.style['background-color'] = positionObject.color;

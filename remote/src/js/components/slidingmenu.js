@@ -50,6 +50,31 @@ components.directive('slidingMenu', ['$rootScope','$injector'
             }
         }
       }
+
+      // We add a managment of gesture in order to control the reveal presentation
+      $(iElement[0]).hammer().on('drag dragleft dragright release', function(event){
+        if (event.gesture && event.gesture.direction && event.gesture.distance > 1){
+          event.gesture.preventDefault();
+          $scope.$apply(function(){
+            if (event.type === 'release'){
+              if (event.gesture.direction === 'left'){
+                $scope.model.showMenuClass = 'collapse';                
+                iElement.css('width', '');
+              }else if (event.gesture.direction === 'right'){
+                $scope.model.showMenuClass = 'expand';
+                iElement.css('width', '');
+              }
+            }else if (event.gesture.direction === 'left'){
+              $scope.model.showMenuClass = '';
+              iElement.css('width', event.gesture.distance+'px');
+            }else if (event.gesture.direction === 'right'){
+              $scope.model.showMenuClass = '';
+              iElement.css('width', event.gesture.distance+'px');
+            }
+            console.log(event.type+":"+event.gesture.direction+":"+event.gesture.distance);
+          });
+        }
+      });
       
     }
   };

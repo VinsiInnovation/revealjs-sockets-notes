@@ -60,6 +60,40 @@ components.directive('actionBar', ['$rootScope','$injector', '$interval'
         $scope.model.defaultInterval = $scope.interval;
       }
 
+      // We add a gesture to switch to fullscreen
+      $(iElement[0]).hammer().on('release', function(event){
+        if (event.gesture && event.gesture.direction && event.gesture.distance > 1){
+          if (event.gesture.direction === 'up'){
+            // We to toggle to fullscreen
+            var docElm = document.getElementById("main-content");
+            if (docElm.requestFullscreen) {
+                docElm.requestFullscreen();
+            }
+            else if (docElm.mozRequestFullScreen) {
+                docElm.mozRequestFullScreen();
+            }
+            else if (docElm.webkitRequestFullscreen) {
+                docElm.webkitRequestFullscreen();
+            }        
+          }else if (event.gesture.direction === 'down'){
+            // We exit fullscreen
+            if (document.fullscreenElement || 
+                document.webkitFullscreenElement ||
+                document.mozFullscreenElement){
+              if (document.exitFullscreen) {
+                  document.exitFullscreen();
+              }
+              else if (document.mozCancelFullScreen) {
+                  document.mozCancelFullScreen();
+              }
+              else if (document.webkitExitFullscreen) {
+                  document.webkitExitFullscreen();
+              }
+            }
+          }
+        }
+      });
+
       // Time Management
       var start = new Date();
         

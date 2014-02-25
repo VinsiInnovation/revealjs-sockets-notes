@@ -24,6 +24,7 @@ plugins.directive('rpPlugin', ['$rootScope'
 
       function touchFeedback(event){
         if (event.gesture && event.gesture.center){
+          event.gesture.preventDefault();
           // We get the position of finger on page, and we have to calculate it's position on preview area
           var x = event.gesture.center.pageX,
               y = event.gesture.center.pageY,

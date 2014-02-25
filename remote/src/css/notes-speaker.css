@@ -652,10 +652,10 @@ body {
   height: calc(100% - 40px - 7px);
   background-color: #939183;
   color: #cac3ad;
-  -moz-transition-property: width, opacity;
-  -o-transition-property: width, opacity;
-  -webkit-transition-property: width, opacity;
-  transition-property: width, opacity;
+  -moz-transition-property: width, opacity, left;
+  -o-transition-property: width, opacity, left;
+  -webkit-transition-property: width, opacity, left;
+  transition-property: width, opacity, left;
   -moz-transition-duration: 0.5s;
   -o-transition-duration: 0.5s;
   -webkit-transition-duration: 0.5s;
@@ -715,12 +715,18 @@ body {
 }
 
 /* line 72, ../sass/sliding-menu.scss */
+.sliding-menu.move {
+  width: 80%;
+  left: -80%;
+}
+
+/* line 77, ../sass/sliding-menu.scss */
 .sliding-menu.collapse {
   width: 0;
   opacity: 0;
 }
 
-/* line 77, ../sass/sliding-menu.scss */
+/* line 82, ../sass/sliding-menu.scss */
 .sliding-menu.expand {
   width: 80%;
   -moz-box-shadow: rgba(0, 0, 0, 0.75) 2px 0px 5px;
@@ -728,19 +734,19 @@ body {
   box-shadow: rgba(0, 0, 0, 0.75) 2px 0px 5px;
 }
 
-/* line 83, ../sass/sliding-menu.scss */
+/* line 88, ../sass/sliding-menu.scss */
 #config_interval {
   width: 4.5em;
   display: inline;
 }
 
-/* line 90, ../sass/sliding-menu.scss */
+/* line 95, ../sass/sliding-menu.scss */
 ul.plugin-list {
   list-style: none;
   padding: 0;
   margin: 0;
 }
-/* line 95, ../sass/sliding-menu.scss */
+/* line 100, ../sass/sliding-menu.scss */
 ul.plugin-list .plugin {
   position: relative;
   width: auto;
@@ -753,15 +759,15 @@ ul.plugin-list .plugin {
   line-height: 40px;
   height: 40px;
 }
-/* line 107, ../sass/sliding-menu.scss */
+/* line 112, ../sass/sliding-menu.scss */
 ul.plugin-list .plugin a {
   text-decoration: none;
 }
-/* line 111, ../sass/sliding-menu.scss */
+/* line 116, ../sass/sliding-menu.scss */
 ul.plugin-list .plugin a:link, ul.plugin-list .plugin a:visited, ul.plugin-list .plugin a:hover, ul.plugin-list .plugin a:active {
   color: #3e3d40;
 }
-/* line 115, ../sass/sliding-menu.scss */
+/* line 120, ../sass/sliding-menu.scss */
 ul.plugin-list .plugin i {
   position: absolute;
   color: #cac3ad;
