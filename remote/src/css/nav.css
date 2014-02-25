@@ -22,12 +22,12 @@
 * Navigation buttons
 **------------------
 */
-/* line 13, ../sass/nav.scss */
+/* line 15, ../sass/nav.scss */
 #preview .button {
   background: none;
 }
 
-/* line 17, ../sass/nav.scss */
+/* line 19, ../sass/nav.scss */
 #controls {
   position: absolute;
   top: 0;
@@ -36,17 +36,17 @@
   height: 100%;
 }
 
-/* line 25, ../sass/nav.scss */
+/* line 27, ../sass/nav.scss */
 #up, #down, #show, #left, #right {
   color: white;
 }
 
-/* line 29, ../sass/nav.scss */
-#next, #prev, #up, #down, #show, #left, #right, #reset {
+/* line 31, ../sass/nav.scss */
+#next, #prev, #up, #down, #show, #left, #right, #reset, #back {
   position: absolute;
 }
 
-/* line 33, ../sass/nav.scss */
+/* line 35, ../sass/nav.scss */
 #left, #right {
   height: 50px;
   top: 50%;
@@ -54,7 +54,7 @@
   line-height: 50px;
 }
 
-/* line 41, ../sass/nav.scss */
+/* line 43, ../sass/nav.scss */
 #up, #down {
   width: 50px;
   left: 50%;
@@ -62,28 +62,28 @@
   text-align: center;
 }
 
-/* line 48, ../sass/nav.scss */
+/* line 50, ../sass/nav.scss */
 #next, #right {
   right: 10px;
 }
 
-/* line 51, ../sass/nav.scss */
+/* line 53, ../sass/nav.scss */
 #prev, #left, #reset {
   left: 10px;
 }
 
-/* line 55, ../sass/nav.scss */
+/* line 57, ../sass/nav.scss */
 #up, #next, #prev {
   top: 10px;
 }
 
-/* line 58, ../sass/nav.scss */
+/* line 60, ../sass/nav.scss */
 #down, #reset {
   bottom: 10px;
 }
 
-/* line 62, ../sass/nav.scss */
-#reset, #show {
+/* line 64, ../sass/nav.scss */
+#reset, #show, #back {
   -moz-box-shadow: 1px 1px 5px 1px #3e3d40;
   -webkit-box-shadow: 1px 1px 5px 1px #3e3d40;
   -o-box-shadow: 1px 1px 5px 1px #3e3d40;
@@ -91,12 +91,12 @@
   filter: progid:DXImageTransform.Microsoft.Shadow(color=#3e3d40, Direction=134, Strength=5);
 }
 
-/* line 70, ../sass/nav.scss */
+/* line 72, ../sass/nav.scss */
 #preview a[disabled] {
   opacity: 0.1;
 }
 
-/* line 74, ../sass/nav.scss */
+/* line 76, ../sass/nav.scss */
 #preview #reset {
   background-color: white;
   line-height: 30px;
@@ -106,7 +106,55 @@
   border-radius: 30px;
 }
 
-/* line 83, ../sass/nav.scss */
+/* line 85, ../sass/nav.scss */
+#preview #back {
+  background-color: white;
+  opacity: 0;
+  padding-left: 5px;
+  height: 30px;
+  width: 70px;
+  text-align: left;
+  font-size: 15pt;
+  line-height: 30px;
+  top: 50%;
+  left: 75%;
+  margin-left: -100px;
+  margin-top: -15px;
+  color: black;
+  -moz-transition-property: opacity, left;
+  -o-transition-property: opacity, left;
+  -webkit-transition-property: opacity, left;
+  transition-property: opacity, left;
+  -moz-transition-duration: 0.2s;
+  -o-transition-duration: 0.2s;
+  -webkit-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+  -moz-transition-timing-function: ease-in;
+  -o-transition-timing-function: ease-in;
+  -webkit-transition-timing-function: ease-in;
+  transition-timing-function: ease-in;
+}
+
+/* line 104, ../sass/nav.scss */
+#preview #back.visible {
+  opacity: 0.7;
+  left: 50%;
+}
+
+/* line 109, ../sass/nav.scss */
+#preview #back:before {
+  content: '';
+  width: 0;
+  height: 0;
+  position: absolute;
+  left: -15px;
+  border-top: 15px solid transparent;
+  border-bottom: 15px solid transparent;
+  border-right: 15px solid white;
+  top: 0;
+}
+
+/* line 121, ../sass/nav.scss */
 #preview #show {
   background-color: white;
   opacity: 0.7;
@@ -122,16 +170,17 @@
   color: black;
 }
 
-/* line 98, ../sass/nav.scss */
+/* line 136, ../sass/nav.scss */
 #preview .slide-preview-number {
   position: absolute;
   bottom: 9px;
   left: 50%;
   margin-left: -25%;
+  font-size: 16pt;
 }
 
-/* line 106, ../sass/nav.scss */
-#preview #show.hide {
+/* line 145, ../sass/nav.scss */
+#preview #show.hide, #preview #back.visible.hide {
   -moz-transition-property: opacity;
   -o-transition-property: opacity;
   -webkit-transition-property: opacity;

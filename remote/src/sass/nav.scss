@@ -9,6 +9,8 @@
 
 $size-show:75px;
 $size-reset : 30px;
+$width-back : 70px;
+$height-back : 30px;
 
 #preview .button{
     background: none;
@@ -26,7 +28,7 @@ $size-reset : 30px;
     color : white;
 }
 
-#next, #prev, #up, #down, #show, #left, #right, #reset{
+#next, #prev, #up, #down, #show, #left, #right, #reset, #back{
     position:absolute;    
 }
 
@@ -59,7 +61,7 @@ $size-reset : 30px;
     bottom:$margin-nav;
 }
 
-#reset, #show{
+#reset, #show, #back{
     -moz-box-shadow: 1px 1px 5px 1px #3e3d40;
     -webkit-box-shadow: 1px 1px 5px 1px #3e3d40;
     -o-box-shadow: 1px 1px 5px 1px #3e3d40;
@@ -78,6 +80,42 @@ $size-reset : 30px;
     width: $size-reset;
     height: $size-reset;
     border-radius: $size-reset;
+}
+
+#preview #back{
+    background-color: white;
+    opacity: 0;    
+    padding-left: 5px;
+    height:$height-back;
+    width:$width-back;
+    text-align: left;
+    font-size:15pt;
+    line-height: $height-back;
+    top:50%;
+    left:75%;
+    margin-left:-($width-back + 30px);
+    margin-top:-($height-back / 2);
+    color:black;
+    @include transition-property(opacity, left);
+    @include transition-duration(0.2s);
+    @include transition-timing-function(ease-in);
+}
+
+#preview #back.visible{
+    opacity: 0.7;    
+    left:50%;    
+}
+
+#preview #back:before{
+    content: '';
+    width: 0;
+    height: 0;
+    position: absolute;
+    left: -($height-back / 2);
+    border-top: ($height-back / 2) solid transparent;
+    border-bottom: ($height-back / 2) solid transparent;
+    border-right: ($height-back / 2) solid white;
+    top: 0;    
 }
 
 #preview #show{
@@ -100,12 +138,14 @@ $size-reset : 30px;
     bottom:9px;
     left:50%;
     margin-left:-25%;
+    font-size: 16pt;
     
 }
 
-#preview #show.hide{
+#preview #show.hide, #preview #back.visible.hide{
     @include transition-property(opacity);
     @include transition-duration(6s);
     @include transition-timing-function(ease-in);
     opacity: 0.2;
 }
+

@@ -54,6 +54,7 @@ components.directive('timer', ['$rootScope', '$interval'
 
       // Time Management
       var start = new Date();
+      var fullTime = false;
         
       function renderProgress(progress){
         progress = Math.floor(progress);
@@ -61,14 +62,25 @@ components.directive('timer', ['$rootScope', '$interval'
         var alertClass = progressEl.hasClass("alert");
         var advancedClass = progressEl.hasClass("advanced");
         if (progress < 75 && (alertClass || advancedClass)){
-            progressEl.removeClass("alert");
-            progressEl.removeClass("advanced");
+          fullTime = false;
+          progressEl.removeClass("alert");
+          progressEl.removeClass("advanced");
         }else if(progress >= 75 && progress < 90 && !advancedClass){
-            progressEl.addClass("advanced");
-            progressEl.removeClass("alert");
+          fullTime = false;
+          if (window.navigator.vibrate){
+            window.navigator.vibrate(100);
+          }
+          progressEl.addClass("advanced");
+          progressEl.removeClass("alert");
         }else if(progress >= 90 && !alertClass){
-            progressEl.addClass("alert");
-            progressEl.removeClass("advanced");
+          fullTime = false;
+          if (window.navigator.vibrate){
+            window.navigator.vibrate(500);
+          }
+          progressEl.addClass("alert");
+          progressEl.removeClass("advanced");
+        }else if (progress === 100 && !fullTime && window.navigator.vibrate){
+          window.navigator.vibrate(1000);
         }
       }
 

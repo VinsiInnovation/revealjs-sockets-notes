@@ -6,6 +6,7 @@
 	<a id="right"  ng-disabled="model.controls.right" ng-click="rightClick($event)"><i class="fa fa-caret-right fa-3x"></i></a>
 	<a id="up"  ng-disabled="model.controls.up" ng-click="upClick($event)"><i class="fa fa-caret-up fa-3x"></i></a>
 	<a id="down"  ng-disabled="model.controls.down" ng-click="downClick($event)"><i class="fa fa-caret-down fa-3x"></i></a>
+	<a id="back" ng-show="showBack" ng-click="back()" ng-class="classBack">Back</a>
 	<a id="show"  ng-disabled="model.controls.show" ng-click="showClick($event)" ng-class="classShow"><i class="fa fa-share"></i>
 	    <div class="slide-preview-number"><span class="next-slide">{{model.nextSlideNumber}}</span> / <span class="nb-slides">{{model.nbSlides}}</div>
 	</a>                			

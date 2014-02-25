@@ -25,6 +25,8 @@ components.directive('iframeControl', ['$rootScope', '$timeout'
           revealIFrame.right();          
         }else if (action === 'reset'){
           revealIFrame.slide( 0, 0, 0 );          
+        }else if (action === 'back'){
+          revealIFrame.slide( $scope.model.indices.h, $scope.model.indices.v, 0 );          
         }
       }
     },
