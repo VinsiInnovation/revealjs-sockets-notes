@@ -139,6 +139,7 @@ plugins.directive('spPlugin', ['$rootScope'
           notesElement = iElement.find('#notes');
 
           areaPointer = document.createElement('DIV');
+          areaPointer.style.display = 'none';
           areaPointer.style.position = 'absolute';
           areaPointer.style.width = previewElement.width()+'px';
           areaPointer.style.height = previewElement.height()+'px';
@@ -182,10 +183,11 @@ plugins.directive('spPlugin', ['$rootScope'
           iElement.find('#sws-sp-box-close').bind('click', boxClicked);
         }
         
+        if (areaPointer.style.display === 'none'){
+          notesElement.css('top', (notesElement.position().top - 70)+'px');
+        }
         $scope.model.showControls = false;
         areaPointer.style.display = '';
-        notesElement.css('top', (notesElement.position().top - 70)+'px');
-        notesElement.css('zIndex',-100);
         
         initialX = -1;
         window.removeEventListener('deviceorientation', orientationFeedback, false);

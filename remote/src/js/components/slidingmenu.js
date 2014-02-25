@@ -53,10 +53,11 @@ components.directive('slidingMenu', ['$rootScope','$injector'
 
       // We add a managment of gesture in order to control the reveal presentation
       // We have to avoid to detect drag on controls (except when controls are not shown)
-      $(document.body).hammer().on('drag dragleft dragright release', function(event){
+
+      var eventHammer = function(event){
         if (event.gesture && event.gesture.direction && event.gesture.distance > 1 
             && ((event.target.id && event.target.id != "controls")
-               || !$scope.model.showControls)
+               || !event.target.id)
               ){
           event.gesture.preventDefault();
           $scope.$apply(function(){
@@ -78,8 +79,11 @@ components.directive('slidingMenu', ['$rootScope','$injector'
             //console.log(event.type+":"+event.gesture.direction+":"+event.gesture.distance);
           });
         }
-      });
-      
+      }
+
+      $(document.body).hammer().on('drag dragleft dragright release', eventHammer);
+      $(iElement[0]).hammer().on('drag dragleft dragright release', eventHammer);
+
     }
   };
   return directiveDefinitionObject;

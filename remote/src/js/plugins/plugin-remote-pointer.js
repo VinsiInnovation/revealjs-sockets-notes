@@ -67,6 +67,7 @@ plugins.directive('rpPlugin', ['$rootScope'
           notesElement = iElement.find('#notes');
 
           areaPointer = document.createElement('DIV');
+          areaPointer.style.display = 'none';
           areaPointer.style.position = 'absolute';
           areaPointer.style.width = previewElement.width()+'px';
           areaPointer.style.height = previewElement.height()+'px';
@@ -111,10 +112,11 @@ plugins.directive('rpPlugin', ['$rootScope'
           iElement.find('#sws-rp-box-close').bind('click', boxClicked);
         }
         
-        $scope.model.showControls = false;
+        if (areaPointer.style.display === 'none'){
+          notesElement.css('top', (notesElement.position().top - 70)+'px');
+        }
         areaPointer.style.display = '';
-        notesElement.css('top', (notesElement.position().top - 70)+'px');
-        notesElement.css('zIndex',-100);
+        $scope.model.showControls = false;
         
 
         $(areaPointer).hammer().off('drag dragright dragleft dragup dragdown', touchFeedback);
