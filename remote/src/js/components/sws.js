@@ -24,7 +24,7 @@ components.directive('sws', ['$rootScope'
           localUrl : null, // var in order to see if the presentation has already be loaded    
           showControls : true, // var to know if the iframe was load
           iframeLoad : false, // var to know if the iframe was load
-          showMenuClass : 'collapse', // expand if we show the menu / collapse else
+          showMenuClass : 'collapse', // expand if we show the menu / collapse else          
           controls : {
             reset : true,
             show : true,
