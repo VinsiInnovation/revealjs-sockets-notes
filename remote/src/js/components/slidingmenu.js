@@ -38,7 +38,6 @@ components.directive('slidingMenu', ['$rootScope','$injector'
             }
         }else{
             var docElm = document.getElementById("main-content");
-            //var docElm = document.body;// document.getElementById("main-content");
             if (docElm.requestFullscreen) {
                 docElm.requestFullscreen();
             }
@@ -53,8 +52,8 @@ components.directive('slidingMenu', ['$rootScope','$injector'
 
       // We add a managment of gesture in order to control the reveal presentation
       // We have to avoid to detect drag on controls (except when controls are not shown)
-
-      var eventHammer = function(event){
+      var expandDirection = true;
+      $(document.body).hammer().on('touch drag dragstart dragleft dragright release', function(event){
         if (event.gesture && event.gesture.direction && event.gesture.distance > 1 
             && ((event.target.id && event.target.id != "controls")
                || !event.target.id)
@@ -62,27 +61,23 @@ components.directive('slidingMenu', ['$rootScope','$injector'
           event.gesture.preventDefault();
           $scope.$apply(function(){
             if (event.type === 'release'){
+              iElement[0].style[Modernizr.prefixed('transform')] = '';
               if (event.gesture.direction === 'left'){
                 $scope.model.showMenuClass = 'collapse';                
-                iElement.css('width', '');
               }else if (event.gesture.direction === 'right'){
                 $scope.model.showMenuClass = 'expand';
-                iElement.css('width', '');
+                iElement.css('left', '');
               }
-            }else if (event.gesture.direction === 'left'){
+            }else if (event.type === 'dragstart' || event.type === 'touch'){
+              expandDirection = $scope.model.showMenuClass === 'collapse';
+            }else if (event.type === 'drags' || event.type === 'dragleft'  || event.type === 'dragright'){
               $scope.model.showMenuClass = '';
-              iElement.css('width', event.gesture.distance+'px');
-            }else if (event.gesture.direction === 'right'){
-              $scope.model.showMenuClass = '';
-              iElement.css('width', event.gesture.distance+'px');
+              var delta = expandDirection ? event.gesture.deltaX : Math.round( (screen.width * 0.8) + event.gesture.deltaX);
+              iElement[0].style[Modernizr.prefixed('transform')] = 'translateX('+delta+'px)';
             }
-            //console.log(event.type+":"+event.gesture.direction+":"+event.gesture.distance);
           });
         }
-      }
-
-      $(document.body).hammer().on('drag dragleft dragright release', eventHammer);
-      $(iElement[0]).hammer().on('drag dragleft dragright release', eventHammer);
+      }); 
 
     }
   };

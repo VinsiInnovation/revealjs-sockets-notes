@@ -21,36 +21,26 @@
 /* line 9, ../sass/sliding-menu.scss */
 .sliding-menu {
   position: absolute;
-  left: 0;
+  /*left: 0;*/
   top: calc(40px + 7px);
+  width: 80%;
   height: calc(100% - 40px - 7px);
   background-color: #939183;
   color: #cac3ad;
-  -moz-transition-property: width, opacity, left;
-  -o-transition-property: width, opacity, left;
-  -webkit-transition-property: width, opacity, left;
-  transition-property: width, opacity, left;
-  -moz-transition-duration: 0.5s;
-  -o-transition-duration: 0.5s;
-  -webkit-transition-duration: 0.5s;
-  transition-duration: 0.5s;
-  -moz-transition-timing-function: ease-in;
-  -o-transition-timing-function: ease-in;
-  -webkit-transition-timing-function: ease-in;
-  transition-timing-function: ease-in;
+  left: -80%;
   z-index: 100;
-  overflow: hidden;
+  overflow: auto;
   padding-left: 10px;
   font-size: 18pt;
   font-weight: 400;
 }
-/* line 26, ../sass/sliding-menu.scss */
+/* line 25, ../sass/sliding-menu.scss */
 .sliding-menu .menu-title {
   text-transform: uppercase;
   height: 50px;
   line-height: 50px;
 }
-/* line 32, ../sass/sliding-menu.scss */
+/* line 31, ../sass/sliding-menu.scss */
 .sliding-menu .menu-icon {
   position: relative;
   border-top: thin solid white;
@@ -59,68 +49,101 @@
   height: 40px;
   font-size: 14pt;
 }
-/* line 40, ../sass/sliding-menu.scss */
+/* line 39, ../sass/sliding-menu.scss */
 .sliding-menu .menu-icon .fa {
   color: #cac3ad;
 }
-/* line 44, ../sass/sliding-menu.scss */
+/* line 43, ../sass/sliding-menu.scss */
 .sliding-menu .menu-icon .fa-stack {
   width: 1em;
   height: 1em;
   line-height: 1em;
 }
-/* line 50, ../sass/sliding-menu.scss */
+/* line 49, ../sass/sliding-menu.scss */
 .sliding-menu .menu-icon .fa-stack-2x {
   font-size: 1em;
 }
-/* line 54, ../sass/sliding-menu.scss */
+/* line 53, ../sass/sliding-menu.scss */
 .sliding-menu .menu-icon .fa-stack-1x {
   font-size: 0.8em;
 }
-/* line 58, ../sass/sliding-menu.scss */
+/* line 57, ../sass/sliding-menu.scss */
 .sliding-menu .menu-icon .fa.fa-inverse {
   color: #939183;
 }
-/* line 62, ../sass/sliding-menu.scss */
+/* line 61, ../sass/sliding-menu.scss */
 .sliding-menu .menu-icon .menu-icon-text {
   position: absolute;
   top: 0;
   left: 2.5em;
 }
 
-/* line 72, ../sass/sliding-menu.scss */
-.sliding-menu.move {
-  width: 80%;
+/*.sliding-menu.move{
+  width:80%;    
   left: -80%;
 }
-
-/* line 77, ../sass/sliding-menu.scss */
+*/
+/* line 76, ../sass/sliding-menu.scss */
 .sliding-menu.collapse {
-  width: 0;
-  opacity: 0;
+  /*left:-80%;*/
+  -moz-transition-property: width, opacity, left, -moz-transform;
+  -o-transition-property: width, opacity, left, -o-transform;
+  -webkit-transition-property: width, opacity, left, -webkit-transform;
+  transition-property: width, opacity, left, transform;
+  -moz-transition-duration: 0.5s;
+  -o-transition-duration: 0.5s;
+  -webkit-transition-duration: 0.5s;
+  transition-duration: 0.5s;
+  -moz-transition-timing-function: ease-in;
+  -o-transition-timing-function: ease-in;
+  -webkit-transition-timing-function: ease-in;
+  transition-timing-function: ease-in;
+  -moz-transform: translateX(0);
+  -ms-transform: translateX(0);
+  -o-transform: translateX(0);
+  -webkit-transform: translateX(0);
+  transform: translateX(0);
+  /*opacity: 0;*/
 }
 
-/* line 82, ../sass/sliding-menu.scss */
+/* line 85, ../sass/sliding-menu.scss */
 .sliding-menu.expand {
-  width: 80%;
+  -moz-transition-property: width, opacity, left, -moz-transform;
+  -o-transition-property: width, opacity, left, -o-transform;
+  -webkit-transition-property: width, opacity, left, -webkit-transform;
+  transition-property: width, opacity, left, transform;
+  -moz-transition-duration: 0.5s;
+  -o-transition-duration: 0.5s;
+  -webkit-transition-duration: 0.5s;
+  transition-duration: 0.5s;
+  -moz-transition-timing-function: ease-in;
+  -o-transition-timing-function: ease-in;
+  -webkit-transition-timing-function: ease-in;
+  transition-timing-function: ease-in;
+  -moz-transform: translateX(100%);
+  -ms-transform: translateX(100%);
+  -o-transform: translateX(100%);
+  -webkit-transform: translateX(100%);
+  transform: translateX(100%);
+  /*width:80%;	*/
   -moz-box-shadow: rgba(0, 0, 0, 0.75) 2px 0px 5px;
   -webkit-box-shadow: rgba(0, 0, 0, 0.75) 2px 0px 5px;
   box-shadow: rgba(0, 0, 0, 0.75) 2px 0px 5px;
 }
 
-/* line 88, ../sass/sliding-menu.scss */
+/* line 96, ../sass/sliding-menu.scss */
 #config_interval {
   width: 4.5em;
   display: inline;
 }
 
-/* line 95, ../sass/sliding-menu.scss */
+/* line 103, ../sass/sliding-menu.scss */
 ul.plugin-list {
   list-style: none;
   padding: 0;
   margin: 0;
 }
-/* line 100, ../sass/sliding-menu.scss */
+/* line 108, ../sass/sliding-menu.scss */
 ul.plugin-list .plugin {
   position: relative;
   width: auto;
@@ -133,15 +156,15 @@ ul.plugin-list .plugin {
   line-height: 40px;
   height: 40px;
 }
-/* line 112, ../sass/sliding-menu.scss */
+/* line 120, ../sass/sliding-menu.scss */
 ul.plugin-list .plugin a {
   text-decoration: none;
 }
-/* line 116, ../sass/sliding-menu.scss */
+/* line 124, ../sass/sliding-menu.scss */
 ul.plugin-list .plugin a:link, ul.plugin-list .plugin a:visited, ul.plugin-list .plugin a:hover, ul.plugin-list .plugin a:active {
   color: #3e3d40;
 }
-/* line 120, ../sass/sliding-menu.scss */
+/* line 128, ../sass/sliding-menu.scss */
 ul.plugin-list .plugin i {
   position: absolute;
   color: #cac3ad;

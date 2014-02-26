@@ -8,16 +8,15 @@ $icon-padding-left : 2.5em;
 
 .sliding-menu{
 	position: absolute;
-  left: 0;
+  /*left: 0;*/
 	top: calc(#{$abs-height} + #{$margin-timer});
+  width:80%;    
 	height : calc(100% - #{$abs-height} - #{$margin-timer});
 	background-color: $bg-color-menu;
 	color: $font-color-menu;
-	@include transition-property(width, opacity, left);
-	@include transition-duration(0.5s);
-	@include transition-timing-function(ease-in);
+	left:-80%;
 	z-index:100;
-	overflow:hidden;
+	overflow:auto;
 	padding-left:$margin;
 	font-size: $font-size-menu;
 	font-weight:400;
@@ -69,18 +68,27 @@ $icon-padding-left : 2.5em;
 
 }
 
-.sliding-menu.move{
+/*.sliding-menu.move{
   width:80%;    
   left: -80%;
 }
-
+*/
 .sliding-menu.collapse{
-	width:0;
-	opacity: 0;
+	/*left:-80%;*/
+  @include transition-property(width, opacity, left, transform);
+  @include transition-duration(0.5s);
+  @include transition-timing-function(ease-in);
+  @include translateX(0);
+	/*opacity: 0;*/
 }
 
 .sliding-menu.expand{
-	width:80%;	
+  
+  @include transition-property(width, opacity, left, transform);
+  @include transition-duration(0.5s);
+  @include transition-timing-function(ease-in);
+  @include translateX(100%);
+	/*width:80%;	*/
   @include box-shadow(rgba(black, 0.75) 2px 0px 5px);
 }
 
