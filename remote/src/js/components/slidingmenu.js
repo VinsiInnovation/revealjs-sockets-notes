@@ -4,9 +4,10 @@ components.directive('slidingMenu', ['$rootScope','$injector'
     templateUrl: 'partials/components/slidingmenu.html',
     replace: true,
     priority : 903,
+    require: '^sws',
     restrict: 'E',
     scope: true,    
-    link: function postLink($scope, iElement, iAttrs) { 
+    link: function postLink($scope, iElement, iAttrs, swsControl) { 
 
       
       $scope.activeFilter = function(plugin){
@@ -20,6 +21,11 @@ components.directive('slidingMenu', ['$rootScope','$injector'
 
       $scope.stop = function(){
         $rootScope.$broadcast('resetTimer');  
+      }
+
+      $scope.reset = function(){
+        swsControl.revealAction('reset')
+        $scope.model.showMenuClass = 'collapse';
       }
 
 
@@ -55,7 +61,7 @@ components.directive('slidingMenu', ['$rootScope','$injector'
       var expandDirection = true;
       $(document.body).hammer().on('touch drag dragstart dragleft dragright release', function(event){
         if (event.gesture && event.gesture.direction && event.gesture.distance > 1 
-            && ((event.target.id && event.target.id != "controls")
+            && ((event.target.id && $scope.model.excludeArray.indexOf(event.target.id) === -1)
                || !event.target.id)
               ){
           event.gesture.preventDefault();

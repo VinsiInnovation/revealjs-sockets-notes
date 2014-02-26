@@ -6,7 +6,7 @@
 			Full Screen
 		</div>
 	</div>
-	<div id="action_time_stop" class="menu-icon" ng-click='stop()'>
+	<div class="menu-icon" ng-click='stop()'>
 		<span class="fa-stack">
 			<i class="fa fa-circle fa-stack-2x"></i>
 			<i class="fa fa-step-backward fa-inverse fa-stack-1x"></i>
@@ -15,12 +15,18 @@
 		Reset timer
 		</div>
 	</div>
-	<div id="action_time_stop" class="menu-icon" ng-click='stop()'>
+	<div class="menu-icon">
 		<i class="fa fa-clock-o"></i>
 		<div class='menu-icon-text'>
 		Duration
 		<input id="config_interval" type="number" ng-model="model.defaultInterval">
 		mn.
+		</div>
+	</div>
+	<div class="menu-icon" ng-click='reset()'>
+		<i class="fa fa-undo"></i> 
+		<div class='menu-icon-text'>			
+			Go to first slide
 		</div>
 	</div>
 	<br>

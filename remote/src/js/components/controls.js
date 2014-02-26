@@ -52,12 +52,13 @@ components.directive('controls', ['$rootScope', '$timeout'
         }
       }
       
+      /*
       $scope.resetClick = function($event){
         if (!$event.target.hasAttribute('disabled')) {
           reset();
           iframeCtrl.revealAction('reset');
         }
-      }
+      }*/
       
       $scope.showClick = function($event){
         if (!$event.target.hasAttribute('disabled')) {
@@ -78,7 +79,7 @@ components.directive('controls', ['$rootScope', '$timeout'
         $scope.classBack = '';
         $scope.model.indices.h = indices.h;
         $scope.model.indices.v = indices.v;
-        iframeCtrl.revealAction('back');
+        iframeCtrl.revealAction('show');
       }
 
       function reset(){
@@ -98,13 +99,21 @@ components.directive('controls', ['$rootScope', '$timeout'
         if (event.gesture && event.gesture.direction && event.gesture.distance > 1){
           event.gesture.preventDefault();
           reset();
-          if (event.gesture.direction === 'left'){
-            iframeCtrl.revealAction('next');
-          }else if (event.gesture.direction === 'right'){
-            iframeCtrl.revealAction('prev');
+          if (event.gesture.direction === 'left' && !$scope.model.controls.right){
+            //$scope.model.indices.h++;
+            //iframeCtrl.revealAction('show');
+            iframeCtrl.revealAction('right');
+          }else if (event.gesture.direction === 'right' && !$scope.model.controls.left){
+            //$scope.model.indices.h--;
+            //iframeCtrl.revealAction('show');
+            iframeCtrl.revealAction('left');
           }else if (event.gesture.direction === 'up' && !$scope.model.controls.down){
+            //$scope.model.indices.v++;
+            //iframeCtrl.revealAction('show');
             iframeCtrl.revealAction('down');
           }else if (event.gesture.direction === 'down' && !$scope.model.controls.up){
+            //$scope.model.indices.v--;
+            //iframeCtrl.revealAction('show');
             iframeCtrl.revealAction('up');
           }
 

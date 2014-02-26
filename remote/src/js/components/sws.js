@@ -1,9 +1,19 @@
 components.directive('sws', ['$rootScope'
   ,function ($rootScope) {
    var directiveDefinitionObject = {
-    restrict: 'A',
+    restrict: 'A',    
     priority : 1000,
-    scope: false,    
+    scope: false,   
+    controller: function($scope){
+      var revealIframeAction = null;
+      this.registerControl = function(controlRevealDistant){
+        revealIframeAction = controlRevealDistant;
+      }
+
+      this.revealAction = function(action){
+        revealIframeAction(action, $scope);
+      }
+    }, 
     link: function postLink($scope, iElement, iAttrs) { 
 
 
@@ -25,6 +35,7 @@ components.directive('sws', ['$rootScope'
           showControls : true, // var to know if the iframe was load
           iframeLoad : false, // var to know if the iframe was load
           showMenuClass : 'collapse', // expand if we show the menu / collapse else          
+          excludeArray : ['controls','show','back'], // Array of id to exclude
           controls : {
             reset : true,
             show : true,

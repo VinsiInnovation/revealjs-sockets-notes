@@ -4,14 +4,36 @@ components.directive('iframeControl', ['$rootScope', '$timeout'
     
    var revealIFrame = null;
 
+   var revealIFrameAction = function(action, $scope){
+      if (action === 'next'){
+        revealIFrame.next();
+      }else if (action === 'prev'){
+        revealIFrame.prev();          
+      }else if (action === 'up'){
+        revealIFrame.up();          
+      }else if (action === 'down'){
+        revealIFrame.down();          
+      }else if (action === 'left'){
+        revealIFrame.left();          
+      }else if (action === 'right'){
+        revealIFrame.right();          
+      }else if (action === 'reset'){
+        revealIFrame.slide( 0, 0, 0 );          
+      }else if (action === 'show'){
+        revealIFrame.slide( $scope.model.indices.h, $scope.model.indices.v, 0 );          
+      }
+   }
+
    var directiveDefinitionObject = {
     restrict: 'A',
+    require: '^sws',
     priority : 950,
     scope: false,    
     controller: function($scope){
 
       this.revealAction = function(action){
-        if (action === 'next'){
+        revealIFrameAction(action,$scope);
+        /*if (action === 'next'){
           revealIFrame.next();
         }else if (action === 'prev'){
           revealIFrame.prev();          
@@ -25,12 +47,14 @@ components.directive('iframeControl', ['$rootScope', '$timeout'
           revealIFrame.right();          
         }else if (action === 'reset'){
           revealIFrame.slide( 0, 0, 0 );          
-        }else if (action === 'back'){
+        }else if (action === 'show'){
           revealIFrame.slide( $scope.model.indices.h, $scope.model.indices.v, 0 );          
-        }
+        }*/
       }
     },
-    link: function postLink($scope, iElement, iAttrs) { 
+    link: function postLink($scope, iElement, iAttrs, swsControl) { 
+
+      swsControl.registerControl(revealIFrameAction);
 
       var iframe = iElement.find('iframe')[0];
 

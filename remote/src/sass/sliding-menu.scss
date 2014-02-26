@@ -3,7 +3,7 @@
 @import "compass/css3";
 
 $menu-title-height : 50px;
-$row-height : 40px;
+$row-height : 45px;
 $icon-padding-left : 2.5em;
 
 .sliding-menu{
@@ -17,19 +17,23 @@ $icon-padding-left : 2.5em;
 	left:-80%;
 	z-index:100;
 	overflow:auto;
-	padding-left:$margin;
-	font-size: $font-size-menu;
-	font-weight:400;
+  font-size: $font-size-menu;
+  font-weight:400;
 
 
-  	.menu-title{
-  		text-transform: uppercase;
-  		height: $menu-title-height;
-  		line-height: $menu-title-height;
-  	}
+    .menu-title{
+      padding-left:$margin;
+      margin-bottom: -10px;
+      text-transform: uppercase;
+      height: $menu-title-height;
+      line-height: $menu-title-height;
+    }
 
-  	.menu-icon{
+    .menu-icon{
+      font-family: 'open_sansregular';
+      padding-left:$margin;
   		position: relative;
+      @include box-shadow(rgba(black, 0.75) 0px -1px 1px);
   		border-top: thin solid white;
   		color: white;
   		line-height: $row-height;
@@ -106,10 +110,12 @@ ul.plugin-list{
     margin: 0;
     
     .plugin{
+      font-family: 'open_sansregular';
     	position: relative;    	
         width: auto;
         height: auto;
         font-size: $font-size-submenu;
+        @include box-shadow(rgba(black, 0.75) 0px -1px 1px);
         border-top: thin solid white;
         text-align: left;
         padding-left: $icon-padding-left;
@@ -129,7 +135,7 @@ ul.plugin-list{
             position: absolute;
         	color: $font-color-menu;
         	line-height: $row-height;
-        	left: 0;
+        	left: $margin;
         }
 
     }

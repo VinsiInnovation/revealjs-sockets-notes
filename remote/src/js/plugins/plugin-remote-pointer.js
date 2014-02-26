@@ -67,6 +67,8 @@ plugins.directive('rpPlugin', ['$rootScope'
           notesElement = iElement.find('#notes');
 
           areaPointer = document.createElement('DIV');
+          areaPointer.setAttribute('id', 'sws-rp-area');
+          $scope.model.excludeArray.push('sws-rp-area');
           areaPointer.style.display = 'none';
           areaPointer.style.position = 'absolute';
           areaPointer.style.width = previewElement.width()+'px';
