@@ -72,23 +72,64 @@ plugins.directive('spPlugin', ['$rootScope'
 
        function orientationFeedback(event){
 
+
+
+        /**
+
+          Axes Used for rotation
+
+          z
+          ^  y
+          |  ^ 
+          | /
+          |/
+          ------>x
+
+         Event Alpha is used for rotateZ 
+         Event Beta is used for rotateX
+         Event Gamma is used for rotateY
+
+          When the phone is put horizontaly alpha / beta / gamma are with 0 (if the phone is pointing to the right direction)
+          http://www.html5rocks.com/en/tutorials/device/orientation/
+
+        */
+
+
+        // The screen will go in Beta from 0 to 50deg (with the phone) but we have to have a number between -90 and -40
+        // The screen will go in Gamma from -55deg to 55deg (we have to manage a reference point)
+
+
+        // We don't allow the pointer if the smartphone has no referenced point (when the user hold the screen)
+        if (initialX === -1 || !initialX){
+          initialX = event.gamma;
+        }
+        if (initialX === -1 || !initialX){
+          return;
+        }
+
+         // We calculate the position of smartphone use as reference in Y;
+        var initialY = event.beta;
+        initialY = Math.max(0, Math.min(maxY, initialY));
+        var beta = -90 + initialY;
+
+        var deltaXTmp = initialX - event.gamma;
+        var gamma = 0;
+        if (deltaXTmp<0){
+          gamma = Math.max(-55, deltaXTmp);
+        }else{
+          gamma = Math.min(55, deltaXTmp);
+        }
+
         $scope.pluginCommunication('sp', {
             hide : false,
-            alpha : event.alpha,
-            beta : event.beta,
-            gamma : event.gamma,
+            'alpha' : event.alpha,
+            'beta' : beta,
+            'gamma' : gamma,
             color : currentColor
         });
         return;
 
-        // We don't allow the pointer if the smartphone is directed to the bottom
-        if (
-          (initialX === -1 || !initialX) 
-          && (event.beta < 0 || event.beta > maxY)
-            ){
-          return;
-        }
-
+      
         if (initialX === -1 || !initialX){
           initialX = event.alpha;
           initialY = event.beta;
