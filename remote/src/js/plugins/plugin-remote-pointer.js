@@ -5,9 +5,10 @@ plugins.directive('rpPlugin', ['$rootScope'
   ,function ($rootScope) {
   var directiveDefinitionObject = {
     restrict: 'A',
+    require: '^sws',
     priority : 102,
     scope: false,    
-    link: function postLink($scope, iElement, iAttrs) { 
+    link: function postLink($scope, iElement, iAttrs, swsControl) { 
 
       $scope.register({
         name : 'remote pointer',
@@ -48,6 +49,7 @@ plugins.directive('rpPlugin', ['$rootScope'
           notesElement.css('top','');
           notesElement.css('zIndex','');
           $scope.model.showControls = true;
+          swsControl.restoreSlideState();
           $scope.pluginCommunication('rp', {
             hide : true
           });
@@ -119,6 +121,7 @@ plugins.directive('rpPlugin', ['$rootScope'
         }
         areaPointer.style.display = '';
         $scope.model.showControls = false;
+        swsControl.syncToDist();
         
 
         $(areaPointer).hammer().off('drag dragright dragleft dragup dragdown', touchFeedback);

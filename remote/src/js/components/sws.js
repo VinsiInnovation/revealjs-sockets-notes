@@ -6,12 +6,38 @@ components.directive('sws', ['$rootScope'
     scope: false,   
     controller: function($scope){
       var revealIframeAction = null;
+      // Register the iframe controller for manipulating the reveal presentation in the iframe
       this.registerControl = function(controlRevealDistant){
         revealIframeAction = controlRevealDistant;
       }
 
+      //  Call the reveal action (left / right / next / prev / up / down / show (current indices from scope) / reset (go to slide 0))
       this.revealAction = function(action){
         revealIframeAction(action, $scope);
+      }
+
+      var indicesSav = null;
+      // Switch the iframe to the same slide as the distant slide
+      this.syncToDist = function(){
+        if (!indicesSav){
+          indicesSav = {
+            h : $scope.model.indices.h,
+            v : $scope.model.indices.v
+          };
+          $scope.model.indices.h = $scope.model.indicesDist.h;
+          $scope.model.indices.v = $scope.model.indicesDist.v;
+          revealIframeAction('show', $scope);
+        }
+      }
+
+      // Restore the iframe slide to the state it was before sync with distant slide
+      this.restoreSlideState = function(){
+        if (indicesSav){
+          $scope.model.indices.h = indicesSav.h;
+          $scope.model.indices.v = indicesSav.v;
+          revealIframeAction('show', $scope);
+          indicesSav = null;
+        }
       }
     }, 
     link: function postLink($scope, iElement, iAttrs) { 

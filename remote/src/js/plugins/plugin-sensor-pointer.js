@@ -5,9 +5,10 @@ plugins.directive('spPlugin', ['$rootScope'
   ,function ($rootScope) {
    var directiveDefinitionObject = {
     restrict: 'A',
+    require: '^sws',
     priority : 103,
     scope: false,    
-    link: function postLink($scope, iElement, iAttrs) { 
+    link: function postLink($scope, iElement, iAttrs, swsControl) { 
 
       $scope.register({
         name : 'sensor pointer',
@@ -70,6 +71,16 @@ plugins.directive('spPlugin', ['$rootScope'
       }
 
        function orientationFeedback(event){
+
+        $scope.pluginCommunication('sp', {
+            hide : false,
+            alpha : event.alpha,
+            beta : event.beta,
+            gamma : event.gamma,
+            color : currentColor
+        });
+        return;
+
         // We don't allow the pointer if the smartphone is directed to the bottom
         if (
           (initialX === -1 || !initialX) 
@@ -101,10 +112,20 @@ plugins.directive('spPlugin', ['$rootScope'
         x = (x < 0 ? Math.max(-maxX, x) : Math.min(maxX,x)) +maxX;
         var percentX = Math.round((x / (maxX*2)) * 100);
 
-        $scope.pluginCommunication('sp', {
+        /*$scope.pluginCommunication('sp', {
             hide : false,
             x : Math.round(percentX),
             y : Math.round(percentY),
+            color : currentColor
+        });*/
+
+        var deltaY = 130 - 45; 
+
+        $scope.pluginCommunication('sp', {
+            hide : false,
+            alpha : event.alpha,
+            beta : -130 + ((initialY / maxY)*deltaY),// event.beta,
+            gamma : event.gamma,
             color : currentColor
         });
 
@@ -119,6 +140,10 @@ plugins.directive('spPlugin', ['$rootScope'
           notesElement.css('top','');
           notesElement.css('zIndex','');
           $scope.model.showControls = true;
+          swsControl.restoreSlideState();
+          $scope.pluginCommunication('sp', {
+            hide : true
+          });
         }else{
           currentColor = event.target.getAttribute('sws-color');
           lastTarget.classList.remove('activ');
@@ -188,6 +213,7 @@ plugins.directive('spPlugin', ['$rootScope'
         }
         $scope.model.showControls = false;
         areaPointer.style.display = '';
+        swsControl.syncToDist();
         
         initialX = -1;
         window.removeEventListener('deviceorientation', orientationFeedback, false);
