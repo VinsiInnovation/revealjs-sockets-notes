@@ -41,14 +41,10 @@ plugins.directive('spPlugin', ['$rootScope'
       var release = false;
       var initialX = -1;
       var initialY = -1;
-      var initialYPercent = -1;
-      var maxY = 50;
-      var deltaX = 40;
-      var deltaY = 30;
-
+      
       function touchFeedback(event){        
-        touch = event.type === 'touch';        
-        release = event.type === 'release';        
+        touch = !touch;
+        release = !touch;
       }
 
       function orientationFeedback(event){
@@ -92,70 +88,19 @@ plugins.directive('spPlugin', ['$rootScope'
         }
 
          // We calculate the position of smartphone use as reference in Y;
-        var initialY = event.beta;
-        //initialY = Math.max(0, Math.min(maxY, initialY));
-        //initialY = Math.max(0, initialY);
-        var beta = -90 + initialY;
+        var beta = -90 + event.beta;
 
         //var deltaXTmp = initialX - event.gamma;
         var gamma = initialX - event.gamma;
-        /*if (deltaXTmp<0){
-          gamma = Math.max(-55, deltaXTmp);
-        }else{
-          gamma = Math.min(55, deltaXTmp);
-        }*/
-
+        
         $scope.pluginCommunication('sp', {
             hide : false,
-            'alpha' : event.alpha,
+            'alpha' : 0,// We let Alpha to 0 because it cause to many noise in the move of pointer
             'beta' : beta,
             'gamma' : gamma,
             color : currentColor
         });
         return;
-
-      
-        if (initialX === -1 || !initialX){
-          initialX = event.alpha;
-          initialY = event.beta;
-          // We calculate the position of smartphone use as reference in Y;
-          initialY = Math.max(0, Math.min(maxY, initialY));
-          initialYPercent = 100 - Math.round((initialY / maxY) * 100);
-          initialYPercent = initialYPercent === 0 ? 1 : initialYPercent;
-        }
-        var y = event.beta; // inclinaison of phone (top / bottom)        
-
-        //x = (x < 0 ? Math.max(-3, x) : Math.min(3,x)) +3;
-        y = Math.max(0, Math.min(maxY, y));   
-        // We calculate the percent of Y to evaluate the X
-        var percentY = 100 - Math.round((y / maxY) * 100);
-
-        var deltaXTmp = deltaXBottom + (deltaXTop - deltaXBottom) * (y / maxY);
-        var xRef = (initialX * percentY) / initialYPercent;
-        var x = xRef - event.alpha; //inclinaison of phone (right / left)
-        var maxX = deltaXTmp / 2; //10 + ((25 - 10) * (y / maxY));
-    
-        x = (x < 0 ? Math.max(-maxX, x) : Math.min(maxX,x)) +maxX;
-        var percentX = Math.round((x / (maxX*2)) * 100);
-
-        /*$scope.pluginCommunication('sp', {
-            hide : false,
-            x : Math.round(percentX),
-            y : Math.round(percentY),
-            color : currentColor
-        });*/
-
-        var deltaY = 130 - 45; 
-
-        $scope.pluginCommunication('sp', {
-            hide : false,
-            alpha : event.alpha,
-            beta : -130 + ((initialY / maxY)*deltaY),// event.beta,
-            gamma : event.gamma,
-            color : currentColor
-        });
-
-
 
       }
 
@@ -244,10 +189,12 @@ plugins.directive('spPlugin', ['$rootScope'
         swsControl.syncToDist();
         
         initialX = -1;
+        touch = false;
+        release = false;
         window.removeEventListener('deviceorientation', orientationFeedback, false);
         window.addEventListener('deviceorientation', orientationFeedback, false);
-        $(areaPointer).hammer().off('touch release', touchFeedback);
-        $(areaPointer).hammer().on('touch release', touchFeedback);
+        $(areaPointer).hammer().off('touch', touchFeedback);
+        $(areaPointer).hammer().on('touch', touchFeedback);
 
       }
 
