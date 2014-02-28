@@ -94,11 +94,11 @@ plugins.directive('spPlugin', ['$rootScope'
          // We calculate the position of smartphone use as reference in Y;
         var initialY = event.beta;
         //initialY = Math.max(0, Math.min(maxY, initialY));
-        initialY = Math.max(0, initialY);
+        //initialY = Math.max(0, initialY);
         var beta = -90 + initialY;
 
-        var deltaXTmp = initialX - event.gamma;
-        var gamma = deltaXTmp;
+        //var deltaXTmp = initialX - event.gamma;
+        var gamma = initialX - event.gamma;
         /*if (deltaXTmp<0){
           gamma = Math.max(-55, deltaXTmp);
         }else{
@@ -187,9 +187,11 @@ plugins.directive('spPlugin', ['$rootScope'
         }
 
         if (!areaPointer){
-          notesElement = iElement.find('#notes');
+          notesElement = iElement.find('#notes'); 
 
           areaPointer = document.createElement('DIV');
+          areaPointer.setAttribute('id', 'sws-sp-area');
+          $scope.model.excludeArray.push('sws-sp-area');
           areaPointer.style.display = 'none';
           areaPointer.style.position = 'absolute';
           areaPointer.style.width = previewElement.width()+'px';
