@@ -183,7 +183,14 @@ function writeFile(){
         setTimeout(writeFile,500);
     }else{
         console.log('Write ip file');
-        fs.writeFile(__dirname+'/ips.json', JSON.stringify(jsonNetWork), function(err) {
+        var pathIpFile = null;
+        if (conf.devMode){
+            pathIpFile = __dirname+'/../../reveal_plugin/conf/ips.json'; // Reveal Client
+        }else{
+            pathIpFile = __dirname+'/../reveal_plugin/conf/ips.json'; // Reveal Client
+        }
+
+        fs.writeFile(pathIpFile, JSON.stringify(jsonNetWork), function(err) {
             if(err) {
                 console.log(err);
             } else {

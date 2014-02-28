@@ -48,6 +48,8 @@ var RevealClientNotes = (function () {
 
   var conf = null,
     socket = null,
+    ips = null,
+    qrCode = null,
     pluginList = {};
 
   /*
@@ -65,16 +67,73 @@ var RevealClientNotes = (function () {
         initConfig();
         initRevealListener();
     }        
-	};    
+  };    
   
   // Initialise with the configuration file
   var initConfig = function(){
         UtilClientNotes.ajaxJSONGet(UtilClientNotes.extractPath()+'/reveal_plugin/conf/conf.json', function(data){    
             conf = data;
             initWS();
+            loadAdditionnalScripts();
         });
+
+        // We also list the ips file
+        UtilClientNotes.ajaxJSONGet(UtilClientNotes.extractPath()+'/reveal_plugin/conf/ips.json', function(data) {
+          ips = data;
+        });
+
+        document.onkeydown = keyPress;
       
   };    	
+
+  // Use to detect the call of server presentation
+  var keyPress = function(e){
+    var evtobj = window.event? event : e
+    //keyCode = 80 = q for QRCode
+    if (evtobj.keyCode === 81 && evtobj.ctrlKey) showRemoteQrCode();
+  }
+
+
+  var showRemoteQrCode = function(){
+
+    // We show the qrcode for the phone
+    if (!document.querySelector('#sws-show-qr-code')){
+      var container = document.createElement('DIV');
+      container.setAttribute('id', 'sws-show-qr-code');
+      container.innerHTML = '<h1>Click on the choose network to start the speaker presentation</h1><p> Ctrl+Q to hide</p>'+
+        '<div id="listIp"></div>'+
+        '<h1>Scan with your phone</h1>'+
+        '<a id="qrCodeLink"><div id="qrCode"></div></a>';
+
+      document.body.appendChild(container);
+      qrCode = new QRCode("qrCode", {
+            text: "",
+            width: 256,
+            height: 256,
+            colorDark : "#000000",
+            colorLight : "#ffffff",
+            correctLevel : QRCode.CorrectLevel.H
+        });
+      var list = "<ul>";
+      for (var i = 0; i < ips.length; i++){
+          list+= "<li><a href='#' id='ip"+ips[i].id+"' index='"+ips[i].id+"' >"+ips[i].name+"</a></li>";                
+      }
+      list += "</ul>";
+      document.querySelector('#listIp').innerHTML = list;
+      
+      for (var i = 0; i < ips.length; i++){
+          document.querySelector('#ip'+ips[i].id).addEventListener('click',function(event){
+              qrCode.clear();
+              qrCode.makeCode("http://"+ips[event.target.getAttribute('index')].ip+":"+conf.port+window.location.pathname+(conf.devMode ?"../../remote/src/" : "../remote/")+"notes-speaker.html");
+              document.querySelector("#qrCodeLink").setAttribute("href","http://"+ips[event.target.getAttribute('index')].ip+":"+conf.port+window.location.pathname+(conf.devMode ?"../../remote/src/" : "../remote/")+"notes-speaker.html");
+          });
+      }
+    }
+
+    var area = document.querySelector('#sws-show-qr-code');
+    area.style.display= area.style.display === 'none' ? '' : 'none';
+
+  }
   
   // Init the WebSocket connection
 	var initWS = function(){
@@ -106,8 +165,12 @@ var RevealClientNotes = (function () {
             if( data.type === "operation" && data.data === "show"){
                 Reveal.slide( data.index.h, data.index.v, data.fragment );
             }else if( data.type === "ping"){	  		               
-                 // We have to check the controls in order to show the correct directions
-              
+
+                if (document.querySelector('#sws-show-qr-code')){
+                  document.querySelector('#sws-show-qr-code').style.display = 'none';
+                }
+
+                // We have to check the controls in order to show the correct directions              
                 socket.emit('message', {
                     type :"config", 
                     url : window.location.pathname, 
@@ -190,6 +253,33 @@ var RevealClientNotes = (function () {
 	var initRevealListener = function (){
 		Reveal.addEventListener( 'slidechanged', reavealCallBack);
 	};
+
+  // Function that load a script
+  var loadScript = function(url){
+    var js_script = document.createElement('script');
+    js_script.type = "text/javascript";
+    js_script.src = url;
+    js_script.async = true;
+    document.getElementsByTagName('head')[0].appendChild(js_script);
+  }
+
+  // Function that load a script
+  var loadCss = function(url){
+    var css_script = document.createElement('link');
+    css_script.rel = "stylesheet";
+    css_script.type = "text/css";    
+    css_script.href = url;
+    css_script.media = 'all';
+    css_script.async = true;
+    document.getElementsByTagName('head')[0].appendChild(css_script);
+  }
+
+  // Load all the additionnals javascript libraries needed (QrCode)
+  var loadAdditionnalScripts = function(){
+    var path = UtilClientNotes.extractPath()+'reveal_plugin/'+(conf.devMode ? 'src/' : '');
+    loadScript(path+'components/qrcode/qrcode.min.js');
+    loadCss(path+'css/main.css');
+  }
 
   /*
   * **************************************

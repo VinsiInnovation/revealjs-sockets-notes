@@ -26,6 +26,19 @@ module.exports = function (grunt) {
           all: 'js/**/*.js',
           dir: 'js',
         },
+        components:   {
+          all: 'components/**/*.js',
+          dir: 'components',
+        },
+        css: {
+          all :'css/**/*.css',
+          dir: 'css',
+          app: 'css/server.css'
+        },
+        sass: {
+          all :'sass/**/*.scss',
+          dir: 'sass'
+        },
         plugins: {
           all:     'plugins/**/*.js',
           dir:   'plugins'
@@ -36,7 +49,7 @@ module.exports = function (grunt) {
     * TARGET
     **/
     dist:{
-      basedir: '../dist/reveal_plugin'
+      basedir: '../dist/reveal_plugin/'
     },
 
     //////////////////////////////////////////////////
@@ -56,6 +69,18 @@ module.exports = function (grunt) {
       reveal:   ['<%= dist.basedir %>']
     },
 
+    /*
+    * COPY FILES
+    **/
+    copy: {
+        reveal: {
+            files: [
+                {expand: true, cwd: '<%= src.basedir %><%= reveal.css.dir %>', src: ['**'], dest: '<%= dist.basedir %><%= reveal.css.dir %>'},
+                {expand: true, cwd: '<%= src.basedir %><%= reveal.components.dir %>', src: ['**'], dest: '<%= dist.basedir %><%= reveal.components.dir %>'}
+            ]
+            
+        }      
+    },
 
     /*
     * UGLIFY THE FILES DIRECTORIES
@@ -81,6 +106,29 @@ module.exports = function (grunt) {
     //////////////////////////////////////////////////
     //////////////////////////////////////////////////
 
+    /*
+    * Compass Task
+    */
+    compass:{
+        
+        reveal:{
+
+            options:{
+                sassDir: 'src/sass',
+                cssDir : '<%= src.basedir %><%= reveal.css.dir %>'
+            }
+        },
+        reveal_sourcemap:{
+
+            options:{
+                sassDir: 'src/sass',
+                sourcemap: true,
+                cssDir : '<%= src.basedir %><%= reveal.css.dir %>'
+            }
+        }
+        
+    },
+
    
     // Watch Configuration : compilation sass/compass + livereload 
     watch: {
@@ -89,6 +137,16 @@ module.exports = function (grunt) {
             options: {
               livereload: true
             }
+        },
+        reveal_css: {
+            files: ['<%= src.basedir %><%= reveal.css.all %>'],
+            options: {
+              livereload: true
+            }
+        },
+        reveal_sass: {
+            files: ['<%= src.basedir %><%= reveal.sass.all %>'],
+            tasks: ['compass:reveal_sourcemap']
         },
         reveal_plugins: {
             files: ['<%= src.basedir %><%= reveal.plugins.all %>'],
@@ -102,13 +160,20 @@ module.exports = function (grunt) {
 
   // Chargement des clients
   grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-cssmin');
+  grunt.loadNpmTasks('grunt-usemin');
+  grunt.loadNpmTasks('grunt-contrib-csslint');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-compass');
   
   // Déclaration des taches
   /*grunt.registerTask('lint',    ['jshint']);*/
-  grunt.registerTask('release',    ['clean', 'uglify']);
+  grunt.registerTask('release_build',    ['clean', 'copy', 'uglify', 'clean:tmp']);
+  grunt.registerTask('release',    ['compass:reveal', 'clean', 'copy','uglify','clean:tmp']);
   grunt.registerTask('default', ['release']);
 
 };

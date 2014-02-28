@@ -3,13 +3,13 @@ echo "Start Remote build"
 cd remote
 npm install
 bower install
-grunt release
+grunt release_build
 echo "Remote build done"
 echo ""
 echo "Start Reveal build"
 cd ../reveal_plugin
 npm install
-grunt release
+grunt release_build
 echo "Reveal build done"
 echo ""
 echo "Start Server build"

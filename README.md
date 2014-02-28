@@ -69,13 +69,14 @@ Here is the list of plugin and their paths (according to reveal\_plugins/plugins
  * ```sws-plugin-video-play.js``` : Could play or pause a html5 video tag in the current slide show on screen
  * ```sws-plugin-audio-play.js``` : Could play or pause a html5 audio tag in the current slide show on screen
  * ```sws-plugin-remote-pointer.js``` : Allow you to use your finger as laser pointer on the client presentation.
+ * ```sws-plugin-sensor-pointer.js``` : Allow you to use your phone as laser pointer on the client presentation.
  *  More to come soon
 
 ### Use it
 
 1. Start the server from your revealPresentation folder root with ```node plugin/sockets-notes/dist/server/server.js -r REVEAL_DIRECTORY_PATH``` (The REVEAL\_DIRECTORY\_PATH is corresponding to the relative path according to the curent directory where the reveal presentation with the plugin is present (A directory where plugin/sockets-notes is present)). If your reveal presentation is on the root of the server (I.E. the plugin directory is aside of the index.html) juste start the server with ```node plugin/sockets-notes/dist/server/server.js```
 2. Launch your reveal presentation on http://localhost:8080/{youRevealPresentation}.html
-2. Launch your favorites browser and go to http://localhost:8080/{REVEAL\_DIRECTORY\_PATH}/plugin/sockets-notes/dist/server
+2. Tap on your keyboard CRTL+Q
 3. Select the right network and click on it
 4. Scan the QrCode with your smartphone
 5. Enjoy ! 

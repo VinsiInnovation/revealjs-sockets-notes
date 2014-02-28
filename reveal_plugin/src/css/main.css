@@ -1,0 +1,35 @@
+/* line 4, ../sass/main.scss */
+#sws-show-qr-code {
+  position: absolute;
+  z-index: 200;
+  top: 50%;
+  left: 50%;
+  width: 600px;
+  height: 500px;
+  margin-top: -250px;
+  margin-left: -300px;
+  background-color: #E0DAC7;
+  border-radius: 10px;
+  border: thin solid black;
+  padding: 20px;
+  text-align: center;
+}
+/* line 20, ../sass/main.scss */
+#sws-show-qr-code h1 {
+  font-size: 23px;
+}
+/* line 24, ../sass/main.scss */
+#sws-show-qr-code #listIp {
+  text-align: left;
+}
+
+/* line 31, ../sass/main.scss */
+#qrCode {
+  margin: 20px 50px;
+}
+/* line 34, ../sass/main.scss */
+#qrCode img {
+  margin: auto;
+}
+
+/*# sourceMappingURL=main.css.map */

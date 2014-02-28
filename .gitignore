@@ -11,7 +11,6 @@ server/.sass-cache
 server/.tmp
 server/conf
 server/node_modules
-server/src/ips.json
 server/src/node_modules
 server/src/npm-debug.log
 server/src/bower_components
