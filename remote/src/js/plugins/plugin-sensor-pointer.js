@@ -37,6 +37,8 @@ plugins.directive('spPlugin', ['$rootScope'
       var areaPointer = null;
       var currentColor = 'red';
       var lastTarget = null;
+      var touch = false;
+      var release = false;
       var initialX = -1;
       var initialY = -1;
       var initialYPercent = -1;
@@ -44,33 +46,12 @@ plugins.directive('spPlugin', ['$rootScope'
       var deltaX = 40;
       var deltaY = 30;
 
-      function motionFeedback(event){
-        var x = event.accelerationIncludingGravity.x; //inclinaison of phone (right / left)
-        var y = event.accelerationIncludingGravity.y; // inclinaison of phone (top / bottom)
-        var z = event.accelerationIncludingGravity.z; 
-
-        x = (x < 0 ? Math.max(-3, x) : Math.min(3,x)) +3;
-        y = Math.max(0, Math.min(7, y));
-
-        if (initialX === -1 || Math.abs(initialX - x) < 10){
-          initialX = x;
-        }
-
-        // We have to inverse due to acceleration negativ
-        var percentX = 100 - Math.round((initialX / 6) * 100);
-        var percentY = 100 - Math.round((y / 7) * 100);
-
-        $scope.pluginCommunication('sp', {
-            hide : false,
-            x : percentX,
-            y : percentY,
-            color : currentColor
-        });
-
-
+      function touchFeedback(event){        
+        touch = event.type === 'touch';        
+        release = event.type === 'release';        
       }
 
-       function orientationFeedback(event){
+      function orientationFeedback(event){
 
 
 
@@ -100,8 +81,11 @@ plugins.directive('spPlugin', ['$rootScope'
 
 
         // We don't allow the pointer if the smartphone has no referenced point (when the user hold the screen)
-        if (initialX === -1 || !initialX){
+        if (touch && (initialX === -1 || !initialX)){
           initialX = event.gamma;
+        }
+        if (release){
+          initialX = -1;
         }
         if (initialX === -1 || !initialX){
           return;
@@ -109,16 +93,17 @@ plugins.directive('spPlugin', ['$rootScope'
 
          // We calculate the position of smartphone use as reference in Y;
         var initialY = event.beta;
-        initialY = Math.max(0, Math.min(maxY, initialY));
+        //initialY = Math.max(0, Math.min(maxY, initialY));
+        initialY = Math.max(0, initialY);
         var beta = -90 + initialY;
 
         var deltaXTmp = initialX - event.gamma;
-        var gamma = 0;
-        if (deltaXTmp<0){
+        var gamma = deltaXTmp;
+        /*if (deltaXTmp<0){
           gamma = Math.max(-55, deltaXTmp);
         }else{
           gamma = Math.min(55, deltaXTmp);
-        }
+        }*/
 
         $scope.pluginCommunication('sp', {
             hide : false,
@@ -259,6 +244,8 @@ plugins.directive('spPlugin', ['$rootScope'
         initialX = -1;
         window.removeEventListener('deviceorientation', orientationFeedback, false);
         window.addEventListener('deviceorientation', orientationFeedback, false);
+        $(areaPointer).hammer().off('touch release', touchFeedback);
+        $(areaPointer).hammer().on('touch release', touchFeedback);
 
       }
 
