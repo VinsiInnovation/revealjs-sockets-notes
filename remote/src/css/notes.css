@@ -146,7 +146,12 @@ body {
   color: #E0DAC7;
 }
 
-/* line 70, ../sass/notes.scss */
+/* line 69, ../sass/notes.scss */
+#notes .title-abs.innactive + i {
+  color: white;
+}
+
+/* line 74, ../sass/notes.scss */
 #content-notes, ul.plugin-list {
   position: absolute;
   left: 0;
@@ -155,7 +160,7 @@ body {
   width: calc(100%);
 }
 
-/* line 78, ../sass/notes.scss */
+/* line 82, ../sass/notes.scss */
 #content-notes {
   padding: 0 10px;
   top: 35px;
@@ -164,7 +169,7 @@ body {
   line-height: 1.2em;
 }
 
-/* line 86, ../sass/notes.scss */
+/* line 90, ../sass/notes.scss */
 .hractionbar {
   position: absolute;
   width: 100%;
@@ -172,7 +177,7 @@ body {
   left: 0;
 }
 
-/* line 93, ../sass/notes.scss */
+/* line 97, ../sass/notes.scss */
 .slide-number {
   background-color: #e0dac7;
   border-top: thin solid #675c53;
@@ -188,7 +193,7 @@ body {
   color: #2da594;
 }
 
-/* line 108, ../sass/notes.scss */
+/* line 112, ../sass/notes.scss */
 .curent-slide {
   color: #b7183b;
   font-size: 19.5pt;
@@ -199,17 +204,17 @@ body {
 *  PLUGINS
 *
 */
-/* line 122, ../sass/notes.scss */
+/* line 126, ../sass/notes.scss */
 #notes ul.plugin-list {
   list-style: none;
   top: calc(35px + 5px);
-  -moz-box-shadow: rgba(0, 0, 0, 0.75) 0px -1px 5px;
-  -webkit-box-shadow: rgba(0, 0, 0, 0.75) 0px -1px 5px;
-  box-shadow: rgba(0, 0, 0, 0.75) 0px -1px 5px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.75) 0px 1px 3px inset;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.75) 0px 1px 3px inset;
+  box-shadow: rgba(0, 0, 0, 0.75) 0px 1px 3px inset;
   padding: 0;
   margin: 0;
 }
-/* line 129, ../sass/notes.scss */
+/* line 133, ../sass/notes.scss */
 #notes ul.plugin-list .plugin {
   font-family: 'open_sansregular';
   position: relative;
@@ -219,22 +224,21 @@ body {
   -moz-box-shadow: rgba(0, 0, 0, 0.75) 0px -1px 1px;
   -webkit-box-shadow: rgba(0, 0, 0, 0.75) 0px -1px 1px;
   box-shadow: rgba(0, 0, 0, 0.75) 0px -1px 1px;
-  /*border-top: thin solid white;*/
   text-align: left;
   padding-left: 2.5em;
   color: #675c53;
   line-height: 45px;
   height: 45px;
 }
-/* line 143, ../sass/notes.scss */
+/* line 146, ../sass/notes.scss */
 #notes ul.plugin-list .plugin a {
   text-decoration: none;
 }
-/* line 147, ../sass/notes.scss */
+/* line 150, ../sass/notes.scss */
 #notes ul.plugin-list .plugin a:link, #notes ul.plugin-list .plugin a:visited, #notes ul.plugin-list .plugin a:hover, #notes ul.plugin-list .plugin a:active {
   color: #3e3d40;
 }
-/* line 151, ../sass/notes.scss */
+/* line 154, ../sass/notes.scss */
 #notes ul.plugin-list .plugin i {
   position: absolute;
   color: #939183;

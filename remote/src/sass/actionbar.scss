@@ -30,6 +30,7 @@
 
 .actionbar .icon-menu{
     position:absolute;
+    border-right : thin solid $color-actions;
     left:0;
     top:0;
     color: $color-actions;
@@ -40,6 +41,7 @@
 
 .actionbar .icon-menu.expand{
     background-color: $bg-color-menu;
+    border-right-width: 0;
     color: white;
 }
 
@@ -89,8 +91,7 @@
 .elapsed_time, .elapsed_bg{
     @include background-image(linear-gradient(top, $color-normal-stop-1, $color-normal-stop-2));
     position: absolute;    
-    border-top: thin solid black;
-    border-bottom: thin solid black;
+    border-top: thin solid $color-actions;
     height:$margin-timer;
     width:100%;
     top:$abs-height;
@@ -143,6 +144,7 @@
 
 #action_time_play, #action_time_pause{
     position:absolute;
+    border-left : thin solid $color-actions;
     top: 0;
     width:$abs-height;
     height:$abs-height;    

@@ -66,6 +66,10 @@
     color: #E0DAC7;
 }
 
+#notes  .title-abs.innactive+i{
+    color: white;
+}
+
 
 #content-notes, ul.plugin-list{
     position:absolute;    
@@ -122,7 +126,7 @@ $icon-padding-left : 2.5em;
 #notes ul.plugin-list{
     list-style: none;
     top:calc(#{$abs-notes-height} + 5px);
-    @include box-shadow(rgba(black, 0.75) 0px -1px 5px);
+    @include box-shadow(rgba(black, 0.75) 0px 1px 3px inset);
     padding: 0;
     margin: 0;
     
@@ -133,7 +137,6 @@ $icon-padding-left : 2.5em;
         height: auto;
         font-size: $font-size-submenu;
         @include box-shadow(rgba(black, 0.75) 0px -1px 1px);
-        /*border-top: thin solid white;*/
         text-align: left;
         padding-left: $icon-padding-left;
         color: $font-color-notes;
