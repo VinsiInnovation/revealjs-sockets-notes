@@ -120,12 +120,16 @@ var RevealClientNotes = (function () {
       }
       list += "</ul>";
       document.querySelector('#listIp').innerHTML = list;
-      
+      var pathPlugin = UtilClientNotes.extractPath();
       for (var i = 0; i < ips.length; i++){
           document.querySelector('#ip'+ips[i].id).addEventListener('click',function(event){
+              var urlRemote = "http://"+ips[event.target.getAttribute('index')].ip // HOST
+                +":"+conf.port // PORT
+                +pathPlugin.substr(pathPlugin.indexOf(conf.port)+(''+conf.port).length, pathPlugin.length) // PATHNAME
+                +(conf.devMode ?"remote/src/" : "dist/remote/")+"notes-speaker.html";
               qrCode.clear();
-              qrCode.makeCode("http://"+ips[event.target.getAttribute('index')].ip+":"+conf.port+window.location.pathname+(conf.devMode ?"../../remote/src/" : "../remote/")+"notes-speaker.html");
-              document.querySelector("#qrCodeLink").setAttribute("href","http://"+ips[event.target.getAttribute('index')].ip+":"+conf.port+window.location.pathname+(conf.devMode ?"../../remote/src/" : "../remote/")+"notes-speaker.html");
+              qrCode.makeCode(urlRemote);
+              document.querySelector("#qrCodeLink").setAttribute("href",urlRemote);
           });
       }
     }

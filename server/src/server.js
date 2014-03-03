@@ -103,10 +103,9 @@ for (var i =0; i < confFileArray.length; i++){
         if(err) {
             console.log(err);
         } else {
-            console.log('The file was saved!');
+            console.log('The file '+confFile+' was saved!');
         }
         
-        console.log('Finish server loading');
     }); 
 }
 
@@ -155,7 +154,7 @@ for (var dev in ifaces) {
 var http = require('http');
 var wait = true;
 console.log('Check Public ip');
-http.get('http://api.externalip.net/ip'
+var request = http.get('http://api.externalip.net/ip'
     , function(res){
     res.on('data', function (data) {
         try{
@@ -172,10 +171,19 @@ http.get('http://api.externalip.net/ip'
         }
         wait = false;
     });
-}).on('error',function(e){
+});
+request.on('error',function(e){
     console.log('Warn : error geting ip from internet : '+e.message);
     wait = false;
 });
+
+setTimeout(function() {
+    if (wait){
+        console.log('Request public ip timeout ! ');
+        request.abort();
+        wait = false;
+    }
+}, 10000);
 
 
 function writeFile(){
@@ -194,7 +202,7 @@ function writeFile(){
             if(err) {
                 console.log(err);
             } else {
-                console.log('The file was saved!');
+                console.log('The file '+pathIpFile+' was saved!');
             }
             
             console.log('Finish server loading');
