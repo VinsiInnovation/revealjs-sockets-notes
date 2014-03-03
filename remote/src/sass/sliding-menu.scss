@@ -9,9 +9,11 @@ $icon-padding-left : 2.5em;
 .sliding-menu{
 	position: absolute;
   /*left: 0;*/
-	top: calc(#{$abs-height} + #{$margin-timer});
+  top: calc(#{$abs-height} + #{$margin-timer});
+	top: -webkit-calc(#{$abs-height} + #{$margin-timer});
   width:80%;    
-	height : calc(100% - #{$abs-height} - #{$margin-timer});
+  height : calc(100% - #{$abs-height} - #{$margin-timer});
+	height : -webkit-calc(100% - #{$abs-height} - #{$margin-timer});
 	background-color: $bg-color-menu;
 	color: $font-color-menu;
 	left:-80%;

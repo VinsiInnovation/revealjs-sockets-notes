@@ -43,6 +43,7 @@
 #notes .title-abs{
     left: 0;    
     padding-left: calc(#{$abs-notes-height} + #{$margin});
+    padding-left: -webkit-calc(#{$abs-notes-height} + #{$margin});
     width: 50%;
 }
 
@@ -76,7 +77,8 @@
     left:0;
     overflow:auto;
     height:calc(100% - #{$abs-notes-height});
-    width:calc(100%); // scrollbar
+    height:-webkit-calc(100% - #{$abs-notes-height});
+    width:100%; // scrollbar
 }
 
 #content-notes{
@@ -126,6 +128,7 @@ $icon-padding-left : 2.5em;
 #notes ul.plugin-list{
     list-style: none;
     top:calc(#{$abs-notes-height} + 5px);
+    top:-webkit-calc(#{$abs-notes-height} + 5px);
     @include box-shadow(rgba(black, 0.75) 0px 1px 3px inset);
     padding: 0;
     margin: 0;

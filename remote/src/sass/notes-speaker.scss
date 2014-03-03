@@ -61,26 +61,33 @@ body {
  */
 
  $height-content-portrait : calc( (100% - #{$abs-height} - (2 * #{$margin}) - (2 * #{$margin-timer})) / 2) ;    
- $height-content-paysage : calc(100% - #{$abs-height} - #{$margin} - (2 * #{$margin-timer})) ;    
+ $height-content-portrait-safari : -webkit-calc( (100% - #{$abs-height} - (2 * #{$margin}) - (2 * #{$margin-timer})) / 2) ;    
+ $height-content-landscape : calc(100% - #{$abs-height} - #{$margin} - (2 * #{$margin-timer})) ;    
+ $height-content-landscape-safari : -webkit-calc(100% - #{$abs-height} - #{$margin} - (2 * #{$margin-timer})) ;    
 
 #notes, #time, #preview{
     width:calc(100% - (#{$margin} * 2));
+    width:-webkit-calc(100% - (#{$margin} * 2));
     left:0;
 }
 
 #notes {    
     height: $height-content-portrait;
+    height: $height-content-portrait-safari;
     top: calc( #{$abs-height} + (2 * #{$margin-timer}));
+    top: -webkit-calc( #{$abs-height} + (2 * #{$margin-timer}));
 }
 
 #notes.fullSize{
     height: calc(100% - #{$abs-height} - #{$margin} - (2 * #{$margin-timer})) ;    
+    height: -webkit-calc(100% - #{$abs-height} - #{$margin} - (2 * #{$margin-timer})) ;    
     z-index:50;
 }
 
 #preview{
     margin-bottom: $margin;    
     height: $height-content-portrait;
+    height: $height-content-portrait-safari;
     bottom:0;
     @include shadow;
 }
@@ -88,18 +95,24 @@ body {
 @media screen and (orientation:landscape){
     #notes{
         width:calc(30% - #{$margin} - #{$margin});        
+        width:-webkit-calc(30% - #{$margin} - #{$margin});        
         left:0;
-        height:$height-content-paysage; 
+        height:$height-content-landscape; 
+        height:$height-content-landscape-safari; 
     }    
 
     #notes.fullSize{
         width:calc(100% - (2 * #{$margin}));
+        width:-webkit-calc(100% - (2 * #{$margin}));
     }
     
     #preview{
         width:calc(70% - #{$margin} - #{$margin});
-        height:$height-content-paysage;
+        width:-webkit-calc(70% - #{$margin} - #{$margin});
+        height:$height-content-landscape;
+        height:$height-content-landscape-safari;
         top: calc( #{$abs-height} + (2 * #{$margin-timer}));
+        top: -webkit-calc( #{$abs-height} + (2 * #{$margin-timer}));
         bottom:0;
         left:30%;
     }   

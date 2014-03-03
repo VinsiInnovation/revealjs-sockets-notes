@@ -78,9 +78,11 @@
 .elapsed {
     position:absolute;
     width:calc(100% - (#{$abs-height} * 3 + 2px));
+    width:-webkit-calc(100% - (#{$abs-height} * 3 + 2px));
     height:$abs-height;
     top:0;
     left:calc(#{$abs-height} * 2 + 1px);
+    left:-webkit-calc(#{$abs-height} * 2 + 1px);
     color: $font-color;
     vertical-align:middle;
     
@@ -172,6 +174,7 @@
 
 #config_ellapsed_cancel{
     right: calc(#{$abs-height} + 1px);
+    right: -webkit-calc(#{$abs-height} + 1px);
 }
 
 #config_ellapsed_validate{
@@ -191,11 +194,13 @@
 #time .config_ellapsed_time{
     font-family:digital;    
     width: calc(100% - (#{$abs-height} * 2 + 1px) - 150px);
+    width: -webkit-calc(100% - (#{$abs-height} * 2 + 1px) - 150px);
     margin: auto;
     height:2em;
     position:absolute;
     top:50%;
     right:calc(#{$abs-height} * 2 + 5px);
+    right:-webkit-calc(#{$abs-height} * 2 + 5px);
     margin-top:-1em;
 }
 
@@ -208,6 +213,7 @@
 
 #configEllapsed .actions_times{
     left:calc(100% - (#{$abs-height} * 2 + 1px));
+    left:-webkit-calc(100% - (#{$abs-height} * 2 + 1px));
 }
 
 /**-----------------

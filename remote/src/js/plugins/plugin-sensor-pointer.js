@@ -41,6 +41,34 @@ plugins.directive('spPlugin', ['$rootScope'
       var release = false;
       var initialX = -1;
       var initialY = -1;
+
+      function getVendorPrefix()
+      {
+        if('result' in arguments.callee) return arguments.callee.result;
+
+        var regex = /^(Moz|Webkit|Khtml|O|ms|Icab)(?=[A-Z])/;
+
+        var someScript = document.getElementsByTagName('script')[0];
+
+        for(var prop in someScript.style)
+        {
+          if(regex.test(prop))
+          {
+            // test is faster than match, so it's better to perform
+            // that on the lot and match only when necessary
+            return arguments.callee.result = prop.match(regex)[0];
+          }
+
+        }
+
+        // Nothing found so far? Webkit does not enumerate over the CSS properties of the style object.
+        // However (prop in style) returns the correct value, so we'll have to test for
+        // the precence of a specific property
+        if('WebkitOpacity' in someScript.style) return arguments.callee.result = 'Webkit';
+        if('KhtmlOpacity' in someScript.style) return arguments.callee.result = 'Khtml';
+
+        return arguments.callee.result = '';
+      }
       
       function touchFeedback(event){        
         touch = !touch;
@@ -92,10 +120,21 @@ plugins.directive('spPlugin', ['$rootScope'
 
         //var deltaXTmp = initialX - event.gamma;
         var gamma = initialX - event.gamma;
+
+        // We let Alpha to 0 because it cause to many noise in the move of pointer
+        var alpha = 0;
+
+        // If we're working with Firefox, we have to inverse the values
+        if(getVendorPrefix() === 'Moz'){
+          //alpha = event.alpha;
+          beta = 180 - beta;
+          gamma = gamma * -1;
+        }
+
         
         $scope.pluginCommunication('sp', {
             hide : false,
-            'alpha' : 0,// We let Alpha to 0 because it cause to many noise in the move of pointer
+            'alpha' : alpha,
             'beta' : beta,
             'gamma' : gamma,
             color : currentColor
