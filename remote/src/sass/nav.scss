@@ -123,6 +123,7 @@ $height-back : 30px;
     opacity: 0.7;
     border-radius: $size-show;
     height:$size-show;
+    line-height:$size-show;
     width:$size-show;
     text-align: center;
     font-size:20pt;
@@ -134,11 +135,20 @@ $height-back : 30px;
 }
 
 #preview .slide-preview-number{
-    position:absolute;
-    bottom:9px;
-    left:50%;
-    margin-left:-25%;
-    font-size: 16pt;
+    background-color: $bg-color;
+    position: absolute;
+    width: auto;
+    top: -1px;
+    text-align: right;
+    padding: 0 10px;
+    right: -1px;
+    height: 40px;
+    font-size: 12pt;
+    color: $font-color-notes;
+
+    .next-slide{
+        font-size: $font-size-current-slide;
+    }
     
 }
 

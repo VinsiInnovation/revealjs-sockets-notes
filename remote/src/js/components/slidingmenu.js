@@ -9,16 +9,6 @@ components.directive('slidingMenu', ['$rootScope','$injector'
     scope: true,    
     link: function postLink($scope, iElement, iAttrs, swsControl) { 
 
-      
-      $scope.activeFilter = function(plugin){
-        return plugin.active;
-      }
-
-      $scope.pluginClicked = function(plugin){
-        $scope[plugin.id + 'Click']();
-        $scope.model.showMenuClass = 'collapse';
-      }
-
       $scope.stop = function(){
         $rootScope.$broadcast('resetTimer');  
       }

@@ -14,6 +14,8 @@
  *                                         
  */
 
+ $abs-notes-height: 35px;
+
 #notes{
     overflow:hidden;
     background-color: #fff;
@@ -21,14 +23,38 @@
 }
 
 
-#notes .title-abs{
+#notes .title-abs, #notes .title-abs-plugins{
     position: absolute;
-    color: #675C53;
-    font-size: 19.5pt;
-    left: calc(#{$abs-notes-height} + #{$margin});
+    color: $font-color-notes;
+    font-size: $font-size-submenu;
     line-height: $abs-notes-height;
+    top: 0;
     height: $abs-notes-height;
+    text-align: left;
+    text-transform: uppercase;
 }
+
+#notes .title-abs.innactive, #notes .title-abs-plugins.innactive{
+    border-bottom: thin solid $font-color-notes;
+    color: white;
+    background-color: $bg-color-menu;
+}
+
+#notes .title-abs{
+    left: 0;    
+    padding-left: calc(#{$abs-notes-height} + #{$margin});
+    width: 50%;
+}
+
+#notes .title-abs-plugins{
+    position: absolute;
+    width: 50%;
+    right: 0;
+    border-left: thin solid $font-color-notes;
+    padding-left: 10px;
+}
+
+
 
 #notes  i{
     position: absolute;
@@ -41,19 +67,21 @@
 }
 
 
-#content-notes{
-    position:absolute;
-    padding: 0 10px;
-    top:$abs-notes-height;
+#content-notes, ul.plugin-list{
+    position:absolute;    
     left:0;
-    font-family: $font-notes;
-    font-size:$font-size-notes;
-    line-height:1.2em;
     overflow:auto;
     height:calc(100% - #{$abs-notes-height});
     width:calc(100%); // scrollbar
 }
 
+#content-notes{
+    padding: 0 10px;
+    top:$abs-notes-height;
+    font-family: $font-notes;
+    font-size:$font-size-notes;
+    line-height:1.2em;    
+}
 
 .hractionbar{
     position:absolute;
@@ -61,3 +89,72 @@
     top:$abs-notes-height;
     left:0;
 }
+
+.slide-number{
+    background-color: $bg-color;
+    border-top: thin solid $font-color-notes;
+    border-left: thin solid $font-color-notes;
+    position: absolute;
+    width: auto;
+    text-align: right;
+    padding: 0 10px;
+    right: -1px;
+    bottom: -1px;
+    height: 40px;
+    font-size: 12pt;
+    color: $font-color-timer;
+}
+
+.curent-slide{
+    color:$font-color-slide;
+    font-size: $font-size-current-slide;
+}
+
+/*
+*
+*  PLUGINS
+*
+*/
+
+$row-height : 45px;
+$icon-padding-left : 2.5em;
+
+#notes ul.plugin-list{
+    list-style: none;
+    top:calc(#{$abs-notes-height} + 5px);
+    @include box-shadow(rgba(black, 0.75) 0px -1px 5px);
+    padding: 0;
+    margin: 0;
+    
+    .plugin{
+        font-family: 'open_sansregular';
+        position: relative;     
+        width: auto;
+        height: auto;
+        font-size: $font-size-submenu;
+        @include box-shadow(rgba(black, 0.75) 0px -1px 1px);
+        /*border-top: thin solid white;*/
+        text-align: left;
+        padding-left: $icon-padding-left;
+        color: $font-color-notes;
+        line-height: $row-height;
+        height: $row-height;
+
+        a{
+            text-decoration: none;
+        }
+
+        a:link, a:visited, a:hover, a:active{
+            color: $font-color;
+        }
+
+        i{
+            position: absolute;
+            color: $color-actions;
+            line-height: $row-height;
+            left: $margin;
+        }
+
+    }
+}
+

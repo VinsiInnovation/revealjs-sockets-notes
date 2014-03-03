@@ -64,21 +64,6 @@
   font-size: 20px;
 }
 
-/* line 52, ../sass/actionbar.scss */
-.slide-number {
-  position: absolute;
-  left: calc(40px + 20px);
-  height: 100%;
-  font-size: 12pt;
-  color: #2da594;
-}
-
-/* line 60, ../sass/actionbar.scss */
-.curent-slide {
-  color: #b7183b;
-  font-size: 19.5pt;
-}
-
 /***
  *      _______ _____ __  __ ______         _      ____          _____  ______ _____  
  *     |__   __|_   _|  \/  |  ____|       | |    / __ \   /\   |  __ \|  ____|  __ \ 
@@ -93,7 +78,7 @@
 * Ellapsed
 **------------------
 */
-/* line 87, ../sass/actionbar.scss */
+/* line 76, ../sass/actionbar.scss */
 .elapsed {
   position: absolute;
   width: calc(100% - (40px * 3 + 2px));
@@ -104,7 +89,7 @@
   vertical-align: middle;
 }
 
-/* line 100, ../sass/actionbar.scss */
+/* line 89, ../sass/actionbar.scss */
 .elapsed_time, .elapsed_bg {
   background-image: -moz-linear-gradient(top, #a4ff00, #7bba09);
   background-image: -o-linear-gradient(top, #a4ff00, #7bba09);
@@ -119,13 +104,13 @@
   left: 0;
 }
 
-/* line 111, ../sass/actionbar.scss */
+/* line 100, ../sass/actionbar.scss */
 .elapsed_bg {
   background-image: none;
   background-color: white;
 }
 
-/* line 116, ../sass/actionbar.scss */
+/* line 105, ../sass/actionbar.scss */
 .elapsed_time.alert {
   background-image: -moz-linear-gradient(top, #ff8d00, #ff0000);
   background-image: -o-linear-gradient(top, #ff8d00, #ff0000);
@@ -133,7 +118,7 @@
   background-image: linear-gradient(to bottom, #ff8d00, #ff0000);
 }
 
-/* line 119, ../sass/actionbar.scss */
+/* line 108, ../sass/actionbar.scss */
 .elapsed_time.advanced {
   background-image: -moz-linear-gradient(top, #ffdd00, #dd9700);
   background-image: -o-linear-gradient(top, #ffdd00, #dd9700);
@@ -141,7 +126,7 @@
   background-image: linear-gradient(to bottom, #ffdd00, #dd9700);
 }
 
-/* line 123, ../sass/actionbar.scss */
+/* line 112, ../sass/actionbar.scss */
 .timeEllapesd {
   font-weight: 400;
   font-size: 27pt;
@@ -154,19 +139,19 @@
   text-align: center;
 }
 
-/* line 135, ../sass/actionbar.scss */
+/* line 124, ../sass/actionbar.scss */
 .totalTime {
   font-weight: 400;
   font-size: 12pt;
   color: #2da594;
 }
 
-/* line 142, ../sass/actionbar.scss */
+/* line 131, ../sass/actionbar.scss */
 .elapsed .mute {
   color: #939183;
 }
 
-/* line 146, ../sass/actionbar.scss */
+/* line 135, ../sass/actionbar.scss */
 .actions_times {
   position: absolute;
   background-color: #e0dac7;
@@ -176,7 +161,7 @@
   width: 40px;
 }
 
-/* line 155, ../sass/actionbar.scss */
+/* line 144, ../sass/actionbar.scss */
 #action_time_play, #action_time_pause {
   position: absolute;
   top: 0;
@@ -190,7 +175,7 @@
 * Config
 **------------------
 */
-/* line 170, ../sass/actionbar.scss */
+/* line 159, ../sass/actionbar.scss */
 #config_ellapsed_cancel, #config_ellapsed_validate {
   background-color: #939183;
   position: absolute;
@@ -203,17 +188,17 @@
   margin: auto;
 }
 
-/* line 182, ../sass/actionbar.scss */
+/* line 171, ../sass/actionbar.scss */
 #config_ellapsed_cancel {
   right: calc(40px + 1px);
 }
 
-/* line 186, ../sass/actionbar.scss */
+/* line 175, ../sass/actionbar.scss */
 #config_ellapsed_validate {
   right: 0;
 }
 
-/* line 190, ../sass/actionbar.scss */
+/* line 179, ../sass/actionbar.scss */
 .config_ellapsed_lbl {
   position: absolute;
   width: 60%;
@@ -224,7 +209,7 @@
   text-align: center;
 }
 
-/* line 200, ../sass/actionbar.scss */
+/* line 189, ../sass/actionbar.scss */
 #time .config_ellapsed_time {
   font-family: digital;
   width: calc(100% - (40px * 2 + 1px) - 150px);
@@ -236,7 +221,7 @@
   margin-top: -1em;
 }
 
-/* line 211, ../sass/actionbar.scss */
+/* line 200, ../sass/actionbar.scss */
 #time .config_ellapsed_time input {
   font-family: digital;
   text-align: center;
@@ -244,7 +229,7 @@
   width: 100%;
 }
 
-/* line 218, ../sass/actionbar.scss */
+/* line 207, ../sass/actionbar.scss */
 #configEllapsed .actions_times {
   left: calc(100% - (40px * 2 + 1px));
 }
@@ -253,7 +238,7 @@
 * Spinner
 **------------------
 */
-/* line 227, ../sass/actionbar.scss */
+/* line 216, ../sass/actionbar.scss */
 .loader-spiner, .loader-spinner-alert {
   width: 200%;
   height: 200%;
@@ -262,12 +247,12 @@
   box-sizing: border-box;
 }
 
-/* line 236, ../sass/actionbar.scss */
+/* line 225, ../sass/actionbar.scss */
 .loader-spinner-alert {
   border-color: #be233a;
 }
 
-/* line 239, ../sass/actionbar.scss */
+/* line 228, ../sass/actionbar.scss */
 .loader-spiner {
   border-color: #939183;
 }

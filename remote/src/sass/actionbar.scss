@@ -49,18 +49,7 @@
     font-size: $font-size-abs;
 }
 
-.slide-number{
-    position: absolute;
-    left:calc(#{$abs-height} + 20px);
-    height:100%;
-    font-size:$font-size-slide-number;
-    color:$font-color-timer;
-}
 
-.curent-slide{
-    color:$font-color-slide;
-    font-size: $font-size-current-slide;
-}
 
 
 

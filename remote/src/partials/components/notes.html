@@ -1,7 +1,16 @@
  <div id="notes" class="border" ng-class='noteFullClass'>
     <i class="fa fa-play-circle-o" ng-class="iconClass" ng-click='toggleNotes()'></i>
-    <div class="title-abs">Notes</div>
-    <div id="content-notes">
+    <div class="title-abs" ng-class='classNotes' ng-click='toggleNotesPlugins(true)'>Notes</div>
+    <div class="title-abs-plugins" ng-class='classPlugins' ng-click='toggleNotesPlugins(false)'>Plugins</div>
+    <div id="content-notes" ng-show='notesPress'>
     {{model.contentNotes}}
+    </div>
+    <ul id="plugin-list" class="plugin-list" ng-hide='notesPress'>
+        <li class="plugin" ng-repeat="plugin in model.pluginList | filter:activeFilter" id="plugin.id" ng-click='pluginClicked(plugin)' ><i class="fa {{plugin.icon}}"></i>&nbsp {{plugin.name}}</li>        
+        <li class="plugin" ng-show='model.pluginList.length === 0'><i class="fa fa-frown-o"></i>No plugin add</li>        
+    </ul>
+
+    <div class="slide-number">
+        <span class="curent-slide">{{model.currentSlideNumber}}</span> / <span class="nb-slides">{{model.nbSlides}}</span>
     </div>
 </div>

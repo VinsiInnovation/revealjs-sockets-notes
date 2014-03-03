@@ -1,4 +1,5 @@
 <div id="controls" ng-show="model.showControls && model.iframeLoad">
+	<div class="slide-preview-number"><span class="next-slide">{{model.nextSlideNumber}}</span> / <span class="nb-slides">{{model.nbSlides}}</div>
 	<!--<a id="reset"  ng-disabled="model.controls.reset" ng-click="resetClick($event)"><i class="fa fa-undo"></i></a>-->
 	<!--<a id="next"  ng-disabled="model.controls.next" ng-click="nextClick($event)"><i class="fa fa-step-forward fa-3x"></i></a>
 	<a id="prev"  ng-disabled="model.controls.prev" ng-click="prevClick($event)"><i class="fa fa-step-backward fa-3x"></i></a>-->
@@ -8,6 +9,6 @@
 	<a id="down"  ng-disabled="model.controls.down" ng-click="downClick($event)"><i class="fa fa-caret-down fa-3x"></i></a>
 	<a id="back" ng-show="showBack" ng-click="back()" ng-class="classBack">Back</a>
 	<a id="show"  ng-disabled="model.controls.show" ng-click="showClick($event)" ng-class="classShow"><i class="fa fa-share"></i>
-	    <div class="slide-preview-number"><span class="next-slide">{{model.nextSlideNumber}}</span> / <span class="nb-slides">{{model.nbSlides}}</div>
+	    
 	</a>                			
 </div>

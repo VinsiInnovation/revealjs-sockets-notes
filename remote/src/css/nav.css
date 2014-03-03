@@ -160,6 +160,7 @@
   opacity: 0.7;
   border-radius: 75px;
   height: 75px;
+  line-height: 75px;
   width: 75px;
   text-align: center;
   font-size: 20pt;
@@ -170,16 +171,25 @@
   color: black;
 }
 
-/* line 136, ../sass/nav.scss */
+/* line 137, ../sass/nav.scss */
 #preview .slide-preview-number {
+  background-color: #e0dac7;
   position: absolute;
-  bottom: 9px;
-  left: 50%;
-  margin-left: -25%;
-  font-size: 16pt;
+  width: auto;
+  top: -1px;
+  text-align: right;
+  padding: 0 10px;
+  right: -1px;
+  height: 40px;
+  font-size: 12pt;
+  color: #675c53;
+}
+/* line 149, ../sass/nav.scss */
+#preview .slide-preview-number .next-slide {
+  font-size: 19.5pt;
 }
 
-/* line 145, ../sass/nav.scss */
+/* line 155, ../sass/nav.scss */
 #preview #show.hide, #preview #back.visible.hide {
   -moz-transition-property: opacity;
   -o-transition-property: opacity;

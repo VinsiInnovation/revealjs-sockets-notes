@@ -80,7 +80,7 @@ $icon-padding-left : 2.5em;
 .sliding-menu.collapse{
 	/*left:-80%;*/
   @include transition-property(width, opacity, left, transform);
-  @include transition-duration(0.5s);
+  @include transition-duration(0.2s);
   @include transition-timing-function(ease-in);
   @include translateX(0);
 	/*opacity: 0;*/
@@ -89,7 +89,7 @@ $icon-padding-left : 2.5em;
 .sliding-menu.expand{
   
   @include transition-property(width, opacity, left, transform);
-  @include transition-duration(0.5s);
+  @include transition-duration(0.2s);
   @include transition-timing-function(ease-in);
   @include translateX(100%);
 	/*width:80%;	*/
@@ -103,41 +103,4 @@ $icon-padding-left : 2.5em;
 }
 
 
-
-ul.plugin-list{
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    
-    .plugin{
-      font-family: 'open_sansregular';
-    	position: relative;    	
-        width: auto;
-        height: auto;
-        font-size: $font-size-submenu;
-        @include box-shadow(rgba(black, 0.75) 0px -1px 1px);
-        border-top: thin solid white;
-        text-align: left;
-        padding-left: $icon-padding-left;
-        color: white;
-  		line-height: $row-height;
-  		height: $row-height;
-
-        a{
-            text-decoration: none;
-        }
-
-        a:link, a:visited, a:hover, a:active{
-            color: $font-color;
-        }
-
-        i{
-            position: absolute;
-        	color: $font-color-menu;
-        	line-height: $row-height;
-        	left: $margin;
-        }
-
-    }
-}
 

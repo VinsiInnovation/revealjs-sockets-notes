@@ -96,10 +96,10 @@
   -o-transition-property: width, opacity, left, -o-transform;
   -webkit-transition-property: width, opacity, left, -webkit-transform;
   transition-property: width, opacity, left, transform;
-  -moz-transition-duration: 0.5s;
-  -o-transition-duration: 0.5s;
-  -webkit-transition-duration: 0.5s;
-  transition-duration: 0.5s;
+  -moz-transition-duration: 0.2s;
+  -o-transition-duration: 0.2s;
+  -webkit-transition-duration: 0.2s;
+  transition-duration: 0.2s;
   -moz-transition-timing-function: ease-in;
   -o-transition-timing-function: ease-in;
   -webkit-transition-timing-function: ease-in;
@@ -118,10 +118,10 @@
   -o-transition-property: width, opacity, left, -o-transform;
   -webkit-transition-property: width, opacity, left, -webkit-transform;
   transition-property: width, opacity, left, transform;
-  -moz-transition-duration: 0.5s;
-  -o-transition-duration: 0.5s;
-  -webkit-transition-duration: 0.5s;
-  transition-duration: 0.5s;
+  -moz-transition-duration: 0.2s;
+  -o-transition-duration: 0.2s;
+  -webkit-transition-duration: 0.2s;
+  transition-duration: 0.2s;
   -moz-transition-timing-function: ease-in;
   -o-transition-timing-function: ease-in;
   -webkit-transition-timing-function: ease-in;
@@ -141,45 +141,6 @@
 #config_interval {
   width: 4.5em;
   display: inline;
-}
-
-/* line 107, ../sass/sliding-menu.scss */
-ul.plugin-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-/* line 112, ../sass/sliding-menu.scss */
-ul.plugin-list .plugin {
-  font-family: 'open_sansregular';
-  position: relative;
-  width: auto;
-  height: auto;
-  font-size: 14pt;
-  -moz-box-shadow: rgba(0, 0, 0, 0.75) 0px -1px 1px;
-  -webkit-box-shadow: rgba(0, 0, 0, 0.75) 0px -1px 1px;
-  box-shadow: rgba(0, 0, 0, 0.75) 0px -1px 1px;
-  border-top: thin solid white;
-  text-align: left;
-  padding-left: 2.5em;
-  color: white;
-  line-height: 45px;
-  height: 45px;
-}
-/* line 126, ../sass/sliding-menu.scss */
-ul.plugin-list .plugin a {
-  text-decoration: none;
-}
-/* line 130, ../sass/sliding-menu.scss */
-ul.plugin-list .plugin a:link, ul.plugin-list .plugin a:visited, ul.plugin-list .plugin a:hover, ul.plugin-list .plugin a:active {
-  color: #3e3d40;
-}
-/* line 134, ../sass/sliding-menu.scss */
-ul.plugin-list .plugin i {
-  position: absolute;
-  color: #cac3ad;
-  line-height: 45px;
-  left: 10px;
 }
 
 /*# sourceMappingURL=sliding-menu.css.map */
