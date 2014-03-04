@@ -88,6 +88,13 @@ components.directive('sws', ['$rootScope'
           pluginList : [] // List of plugin of application
         };
 
+        $scope.compatibility = {
+          fullScreen : Modernizr.fullscreen,
+          webSockets : Modernizr.websockets,
+          cssCalc : Modernizr.csscalc,
+          cssAnimation : Modernizr.cssanimations,
+          mediaQuieries : Modernizr.mediaquieries
+        }
 
         /*
         * Methods

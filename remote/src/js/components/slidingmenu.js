@@ -22,7 +22,7 @@ components.directive('slidingMenu', ['$rootScope','$injector'
       $scope.fullscreen = function(){
         if (document.fullscreenElement || 
             document.webkitFullscreenElement ||
-            document.mozFullscreenElement){
+            document.mozFullScreenElement){
             if (document.exitFullscreen) {
                 document.exitFullscreen();
             }

@@ -1,6 +1,6 @@
 <div class="sliding-menu" ng-class="model.showMenuClass">
 	<div class="menu-title">Presentation</div>
-	<div id="full-screen" class="menu-icon" ng-click='fullscreen()'>
+	<div id="full-screen" class="menu-icon needsclick" ng-click='fullscreen()' ng-show='compatibility.fullScreen'>
 		<i class="fa fa-expand"></i> 
 		<div class='menu-icon-text'>			
 			Full Screen
