@@ -102,7 +102,12 @@ components.directive('iframeControl', ['$rootScope', '$timeout'
         revealIFrame.initialize({
             controls: true,
             transition : 'default',
-            transitionSpeed : 'fast'
+            transitionSpeed : 'fast',
+            history : false,
+            slideNumber: false,
+            keyboard: false,
+            touch: false,
+            embedded : true
         });
         
         // We listen to reaveal events in order to ajust the screen
@@ -113,8 +118,6 @@ components.directive('iframeControl', ['$rootScope', '$timeout'
         updateControls();
         $scope.model.iframeLoad = true;
 
-        iframe.contentWindow.document.documentElement.style.overflow = '';
-        iframe.contentWindow.document.body.style.height = '100%';
       }
 
       var revealChangeListener = function(event){
