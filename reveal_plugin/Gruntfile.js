@@ -35,6 +35,9 @@ module.exports = function (grunt) {
           dir: 'css',
           app: 'css/server.css'
         },
+        font: {
+          dir: 'font'
+        },
         sass: {
           all :'sass/**/*.scss',
           dir: 'sass'
@@ -76,7 +79,8 @@ module.exports = function (grunt) {
         reveal: {
             files: [
                 {expand: true, cwd: '<%= src.basedir %><%= reveal.css.dir %>', src: ['**'], dest: '<%= dist.basedir %><%= reveal.css.dir %>'},
-                {expand: true, cwd: '<%= src.basedir %><%= reveal.components.dir %>', src: ['**'], dest: '<%= dist.basedir %><%= reveal.components.dir %>'}
+                {expand: true, cwd: '<%= src.basedir %><%= reveal.components.dir %>', src: ['**'], dest: '<%= dist.basedir %><%= reveal.components.dir %>'},
+                {expand: true, cwd: '<%= src.basedir %><%= reveal.font.dir %>', src: ['**'], dest: '<%= dist.basedir %><%= reveal.font.dir %>'}
             ]
             
         }      

@@ -1,0 +1,42 @@
+@import "compass";
+
+
+/***
+ *      ______ ____  _   _ _______ _____ 
+ *     |  ____/ __ \| \ | |__   __/ ____|
+ *     | |__ | |  | |  \| |  | | | (___  
+ *     |  __|| |  | | . ` |  | |  \___ \ 
+ *     | |   | |__| | |\  |  | |  ____) |
+ *     |_|    \____/|_| \_|  |_| |_____/ 
+ *                                       
+ *                                       
+ */
+
+
+
+@font-face {
+    font-family: 'open_sansregular';
+    src: url('../font/opensans-regular-webfont.eot');
+    src: url('../font/opensans-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../font/opensans-regular-webfont.woff') format('woff'),
+         url('../font/opensans-regular-webfont.ttf') format('truetype'),
+         url('../font/opensans-regular-webfont.svg#open_sansregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'open_sanssemibold';
+    src: url('../font/opensans-semibold-webfont.eot');
+    src: url('../font/opensans-semibold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../font/opensans-semibold-webfont.woff') format('woff'),
+         url('../font/opensans-semibold-webfont.ttf') format('truetype'),
+         url('../font/opensans-semibold-webfont.svg#open_sanssemibold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}

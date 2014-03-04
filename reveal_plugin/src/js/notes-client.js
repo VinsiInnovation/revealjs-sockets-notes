@@ -100,10 +100,16 @@ var RevealClientNotes = (function () {
     if (!document.querySelector('#sws-show-qr-code')){
       var container = document.createElement('DIV');
       container.setAttribute('id', 'sws-show-qr-code');
-      container.innerHTML = '<h1>Click on the choose network to start the speaker presentation</h1><p> Ctrl+Q to hide</p>'+
+      container.innerHTML = '<div id="sws-show-qr-header">'+
+        '<h1 class="title">Choose, Generate and Scan !</h1><div class="close"> "Ctrl+Q" to hide</div>'+
+        '<p>Choose the right network interface and click on \'Generate\' button</p>'+
         '<div id="listIp"></div>'+
+        '</div>'+
+        '<div id="sws-show-qr-bottom">'+
+        '<a id="qrCodeLink"><div id="qrCode"></div></a>'+
         '<h1>Scan with your phone</h1>'+
-        '<a id="qrCodeLink"><div id="qrCode"></div></a>';
+        '<div id="sws-show-qr-url"></div>'+
+        '</div>';
 
       document.body.appendChild(container);
       qrCode = new QRCode("qrCode", {
@@ -114,13 +120,27 @@ var RevealClientNotes = (function () {
             colorLight : "#ffffff",
             correctLevel : QRCode.CorrectLevel.H
         });
-      var list = "<ul>";
+      var list = "<select id='sws-show-qr-code-select'>";
       for (var i = 0; i < ips.length; i++){
-          list+= "<li><a href='#' id='ip"+ips[i].id+"' index='"+ips[i].id+"' >"+ips[i].name+"</a></li>";                
+          list+= "<option value='"+ips[i].id+"' id='ip"+ips[i].id+"' index='"+ips[i].id+"' >"+ips[i].name+"</option>";                
       }
-      list += "</ul>";
+      list += "</select>";
+      list += "<button id='sws-show-qr-code-generate'>Generate</button>";
       document.querySelector('#listIp').innerHTML = list;
       var pathPlugin = UtilClientNotes.extractPath();
+      document.querySelector('#sws-show-qr-code-generate').addEventListener('click', function(event){
+        var get_id = document.getElementById('sws-show-qr-code-select');
+        var result = get_id.options[get_id.selectedIndex].value;
+        var urlRemote = "http://"+ips[result].ip // HOST
+          +":"+conf.port // PORT
+          +pathPlugin.substr(pathPlugin.indexOf(conf.port)+(''+conf.port).length, pathPlugin.length) // PATHNAME
+          +(conf.devMode ?"remote/src/" : "dist/remote/")+"notes-speaker.html";
+        qrCode.clear();
+        qrCode.makeCode(urlRemote);
+        document.querySelector("#qrCodeLink").setAttribute("href",urlRemote);
+        document.querySelector("#sws-show-qr-url").innerHTML = '<span style="text-transform:uppercase; font-weight:bold;">Or goto : </span><br>'+urlRemote;
+      });
+      /*
       for (var i = 0; i < ips.length; i++){
           document.querySelector('#ip'+ips[i].id).addEventListener('click',function(event){
               var urlRemote = "http://"+ips[event.target.getAttribute('index')].ip // HOST
@@ -131,7 +151,7 @@ var RevealClientNotes = (function () {
               qrCode.makeCode(urlRemote);
               document.querySelector("#qrCodeLink").setAttribute("href",urlRemote);
           });
-      }
+      }*/
     }
 
     var area = document.querySelector('#sws-show-qr-code');

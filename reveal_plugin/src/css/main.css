@@ -1,33 +1,119 @@
-/* line 4, ../sass/main.scss */
+/***
+ *      ______ ____  _   _ _______ _____ 
+ *     |  ____/ __ \| \ | |__   __/ ____|
+ *     | |__ | |  | |  \| |  | | | (___  
+ *     |  __|| |  | | . ` |  | |  \___ \ 
+ *     | |   | |__| | |\  |  | |  ____) |
+ *     |_|    \____/|_| \_|  |_| |_____/ 
+ *                                       
+ *                                       
+ */
+@font-face {
+  font-family: 'open_sansregular';
+  src: url("../font/opensans-regular-webfont.eot");
+  src: url("../font/opensans-regular-webfont.eot?#iefix") format("embedded-opentype"), url("../font/opensans-regular-webfont.woff") format("woff"), url("../font/opensans-regular-webfont.ttf") format("truetype"), url("../font/opensans-regular-webfont.svg#open_sansregular") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'open_sanssemibold';
+  src: url("../font/opensans-semibold-webfont.eot");
+  src: url("../font/opensans-semibold-webfont.eot?#iefix") format("embedded-opentype"), url("../font/opensans-semibold-webfont.woff") format("woff"), url("../font/opensans-semibold-webfont.ttf") format("truetype"), url("../font/opensans-semibold-webfont.svg#open_sanssemibold") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+/*#878787;*/
+/*$color : #939183;*/
+/* line 15, ../sass/main.scss */
 #sws-show-qr-code {
+  font-family: 'open_sansregular';
   position: absolute;
   z-index: 200;
   top: 50%;
   left: 50%;
   width: 600px;
-  height: 500px;
-  margin-top: -250px;
+  height: 600px;
+  margin-top: -300px;
   margin-left: -300px;
-  background-color: #E0DAC7;
-  border-radius: 10px;
-  border: thin solid black;
-  padding: 20px;
+  color: #939183;
+  background-color: #e0dac7;
+  -moz-box-shadow: rgba(0, 0, 0, 0.75) 5px 5px 10px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.75) 5px 5px 10px;
+  box-shadow: rgba(0, 0, 0, 0.75) 5px 5px 10px;
+  /*border-radius: 10px;*/
+  /*border: thin solid black;*/
+  /*padding: 20px;*/
   text-align: center;
 }
-/* line 20, ../sass/main.scss */
-#sws-show-qr-code h1 {
-  font-size: 23px;
-}
-/* line 24, ../sass/main.scss */
+/* line 34, ../sass/main.scss */
 #sws-show-qr-code #listIp {
-  text-align: left;
+  text-align: center;
 }
 
-/* line 31, ../sass/main.scss */
-#qrCode {
-  margin: 20px 50px;
+/* line 39, ../sass/main.scss */
+#sws-show-qr-header, #sws-show-qr-bottom {
+  position: absolute;
+  padding: 25px 20px;
+  width: calc(100% - 40px);
+  width: -webkit-calc(100% - 40px);
 }
-/* line 34, ../sass/main.scss */
+
+/* line 46, ../sass/main.scss */
+#sws-show-qr-header {
+  top: 0;
+  height: calc(200px - 40px);
+  height: -webkit-calc(200px - 40px);
+  background-color: #575757;
+  color: white;
+}
+/* line 53, ../sass/main.scss */
+#sws-show-qr-header select, #sws-show-qr-header button {
+  font-size: 20px;
+}
+/* line 57, ../sass/main.scss */
+#sws-show-qr-header p {
+  font-size: 17px;
+  color: #939183;
+  margin-bottom: 30px;
+}
+/* line 63, ../sass/main.scss */
+#sws-show-qr-header .title {
+  font-family: 'open_sanssemibold';
+  font-size: 30px;
+  width: 100%;
+  text-transform: uppercase;
+}
+/* line 70, ../sass/main.scss */
+#sws-show-qr-header .close {
+  position: absolute;
+  font-size: 12px;
+  text-transform: uppercase;
+  top: 10px;
+  right: 10px;
+}
+
+/* line 79, ../sass/main.scss */
+#sws-show-qr-bottom {
+  top: 200px;
+  height: calc(400px - 40px);
+  height: -webkit-calc(400px - 40px);
+  text-align: center;
+}
+/* line 85, ../sass/main.scss */
+#sws-show-qr-bottom h1 {
+  font-size: 1.6em;
+  text-transform: uppercase;
+}
+/* line 90, ../sass/main.scss */
+#sws-show-qr-bottom canvas {
+  border: thin dashed #939183;
+}
+
+/* line 96, ../sass/main.scss */
+#qrCode {
+  margin: 0px 50px 10px;
+}
+/* line 99, ../sass/main.scss */
 #qrCode img {
   margin: auto;
 }
