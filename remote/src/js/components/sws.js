@@ -60,7 +60,8 @@ components.directive('sws', ['$rootScope'
           localUrl : null, // var in order to see if the presentation has already be loaded    
           showControls : true, // var to know if the iframe was load
           iframeLoad : false, // var to know if the iframe was load
-          showMenuClass : 'collapse', // expand if we show the menu / collapse else          
+          showMenuClass : 'collapse', // expand if we show the menu / collapse else
+          showPlugin : false, // true to show the plugin area          
           excludeArray : ['controls','show','back'], // Array of id to exclude
           controls : {
             reset : true,

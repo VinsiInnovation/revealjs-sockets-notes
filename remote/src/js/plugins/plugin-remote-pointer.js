@@ -117,6 +117,7 @@ plugins.directive('rpPlugin', ['$rootScope'
         }
         
         if (areaPointer.style.display === 'none'){
+          $scope.model.showPlugin = true;
           notesElement.css('top', (notesElement.position().top - 70)+'px');
         }
         areaPointer.style.display = '';

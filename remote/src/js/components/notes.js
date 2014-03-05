@@ -8,7 +8,7 @@ components.directive('notes', ['$rootScope'
     scope: true,    
     link: function postLink($scope, iElement, iAttrs) { 
         $scope.iconClass = 'fa-rotate-90';
-        $scope.noteFullClass = '';
+        $scope.noteFullClass = false;//'';
         $scope.notesPress = true;
         $scope.classNotes = '';
         $scope.classPlugins = 'innactive';
@@ -26,7 +26,7 @@ components.directive('notes', ['$rootScope'
         $scope.toggleNotes = function(){
           full = !full;
           $scope.iconClass = full ? 'fa-rotate-270' : 'fa-rotate-90';
-          $scope.noteFullClass = full ? 'fullSize' : '';
+          $scope.noteFullClass = full;// ? 'fullSize' : '';
         }
 
         $scope.toggleNotesPlugins = function(notesPress){
