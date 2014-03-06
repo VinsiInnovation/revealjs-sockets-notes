@@ -5,6 +5,7 @@
 @import "actionbar";
 @import "fonts";
 @import "sliding-menu";
+@import "plugins";
 
     
 /***
@@ -64,8 +65,13 @@ body {
  $height-content-portrait-safari : -webkit-calc( (100% - #{$abs-height} - (2 * #{$margin}) - (2 * #{$margin-timer})) / 2) ;    
  $height-content-landscape : calc(100% - #{$abs-height} - #{$margin} - (2 * #{$margin-timer})) ;    
  $height-content-landscape-safari : -webkit-calc(100% - #{$abs-height} - #{$margin} - (2 * #{$margin-timer})) ;    
+ $bottom-portrait : calc(#{$margin} + (100% - #{$abs-height} - (2 * #{$margin}) - (2 * #{$margin-timer})) / 2) ;    
+ $bottom-portrait-safari : -webkit-calc(#{$margin} + (100% - #{$abs-height} - (2 * #{$margin}) - (2 * #{$margin-timer})) / 2) ;    
+ $bottom-landscape : calc(#{$margin} + 100% - #{$abs-height} - #{$margin} - (2 * #{$margin-timer})) ;    
+ $bottom-landscape-safari : -webkit-calc(#{$margin} + 100% - #{$abs-height} - #{$margin} - (2 * #{$margin-timer})) ;    
 
 #notes, #time, #preview{
+    position: absolute;
     width:calc(100% - (#{$margin} * 2));
     width:-webkit-calc(100% - (#{$margin} * 2));
     left:0;
@@ -84,12 +90,28 @@ body {
     z-index:50;
 }
 
+#notes.upPlugin{
+    top: calc( #{$abs-height} + (2 * #{$margin-timer}) - #{$pluginHeight});
+    top: -webkit-calc( #{$abs-height} + (2 * #{$margin-timer}) - #{$pluginHeight});
+}
+
+
 #preview{
     margin-bottom: $margin;    
     height: $height-content-portrait;
     height: $height-content-portrait-safari;
     bottom:0;
     @include shadow;
+}
+
+
+#sws-plugins-area{
+    position: absolute;
+    width: 100%;
+    left: 0;
+    height: $pluginHeight;
+    bottom:  $bottom-portrait;
+    bottom:  $bottom-portrait-safari;
 }
 
 @media screen and (orientation:landscape){
@@ -116,6 +138,13 @@ body {
         bottom:0;
         left:30%;
     }   
+
+    #sws-plugins-area{
+        width:calc(30% - #{$margin} - #{$margin});        
+        width:-webkit-calc(30% - #{$margin} - #{$margin});        
+        bottom:  $bottom-landscape;
+        bottom:  $bottom-landscape-safari;
+    }
 }
 
 

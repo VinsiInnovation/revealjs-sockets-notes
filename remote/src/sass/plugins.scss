@@ -1,0 +1,40 @@
+@import "compass";
+
+$size :40px;
+
+.sws-plugin-box {
+  position : absolute;
+  width : $size;
+  height : $size;
+  top : calc(#{$size} - #{$size} / 2 );
+  top : -webkit-calc(#{$size} - #{$size} / 2 );
+  text-align : center;
+  font-size : 25px;
+  line-height : $size;
+}
+
+.sws-plugin-box.fa {
+  background-color : #7F89A5;
+  color : white;          
+}
+
+#sws-plugins-area-content{
+	position: absolute;
+	top: 0;
+	height: 100%;
+	width: calc(100% - #{$size});
+	width: -webkit-calc(100% - #{$size});
+}
+
+.sws-plugin-ctrl{
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+}
+
+#sws-box-close{
+	right : 0;
+}
+

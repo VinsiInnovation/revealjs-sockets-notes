@@ -80,7 +80,7 @@ components.directive('iframeControl', ['$rootScope', '$timeout'
             leftControl = controls.querySelector("div.navigate-left.enabled") ? false : true;
             rightControl = controls.querySelector("div.navigate-right.enabled") ? false : true;
         }
-        $scope.model.controls = {
+        $scope.ui.controls = {
             reset : false,
             show : false,
             up : upControl,
@@ -116,7 +116,7 @@ components.directive('iframeControl', ['$rootScope', '$timeout'
         revealIFrame.addEventListener( 'fragmenthidden', revealFragementHiddeListener);
         
         updateControls();
-        $scope.model.iframeLoad = true;
+        $scope.ui.iframeLoad = true;
 
       }
 

@@ -26,7 +26,14 @@ sws.controller('SwsCtrl',
         });
 
 
-      
+      $scope.hidePlugin = function(){
+          for (var pluginIndex =0; pluginIndex < $scope.model.pluginList.length; pluginIndex++){
+            var plugin = $scope.model.pluginList[pluginIndex];            
+            if ($scope[plugin.id + 'Close']){
+              $scope[plugin.id + 'Close']();
+            }
+          }
+        }
 
       	
 

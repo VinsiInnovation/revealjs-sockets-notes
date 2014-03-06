@@ -149,7 +149,7 @@ plugins.directive('spPlugin', ['$rootScope'
           areaPointer.style.display = 'none';
           notesElement.css('top','');
           notesElement.css('zIndex','');
-          $scope.model.showControls = true;
+          $scope.ui.showControls = true;
           swsControl.restoreSlideState();
           $scope.pluginCommunication('sp', {
             hide : true
@@ -175,7 +175,7 @@ plugins.directive('spPlugin', ['$rootScope'
 
           areaPointer = document.createElement('DIV');
           areaPointer.setAttribute('id', 'sws-sp-area');
-          $scope.model.excludeArray.push('sws-sp-area');
+          $scope.ui.excludeArray.push('sws-sp-area');
           areaPointer.style.display = 'none';
           areaPointer.style.position = 'absolute';
           areaPointer.style.width = previewElement.width()+'px';
@@ -223,7 +223,7 @@ plugins.directive('spPlugin', ['$rootScope'
         if (areaPointer.style.display === 'none'){
           notesElement.css('top', (notesElement.position().top - 70)+'px');
         }
-        $scope.model.showControls = false;
+        $scope.ui.showControls = false;
         areaPointer.style.display = '';
         swsControl.syncToDist();
         

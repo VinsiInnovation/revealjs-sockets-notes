@@ -99,19 +99,19 @@ components.directive('controls', ['$rootScope', '$timeout'
         if (event.gesture && event.gesture.direction && event.gesture.distance > 1){
           event.gesture.preventDefault();
           reset();
-          if (event.gesture.direction === 'left' && !$scope.model.controls.right){
+          if (event.gesture.direction === 'left' && !$scope.ui.controls.right){
             //$scope.model.indices.h++;
             //iframeCtrl.revealAction('show');
             iframeCtrl.revealAction('right');
-          }else if (event.gesture.direction === 'right' && !$scope.model.controls.left){
+          }else if (event.gesture.direction === 'right' && !$scope.ui.controls.left){
             //$scope.model.indices.h--;
             //iframeCtrl.revealAction('show');
             iframeCtrl.revealAction('left');
-          }else if (event.gesture.direction === 'up' && !$scope.model.controls.down){
+          }else if (event.gesture.direction === 'up' && !$scope.ui.controls.down){
             //$scope.model.indices.v++;
             //iframeCtrl.revealAction('show');
             iframeCtrl.revealAction('down');
-          }else if (event.gesture.direction === 'down' && !$scope.model.controls.up){
+          }else if (event.gesture.direction === 'down' && !$scope.ui.controls.up){
             //$scope.model.indices.v--;
             //iframeCtrl.revealAction('show');
             iframeCtrl.revealAction('up');

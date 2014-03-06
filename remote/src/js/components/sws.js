@@ -43,37 +43,19 @@ components.directive('sws', ['$rootScope'
     link: function postLink($scope, iElement, iAttrs) { 
 
 
+        var socketIO = null;
+
        /*
         * Model
         */
-        var socketIO = null;
-
         $scope.model = {
           defaultInterval : 60, // Time in minute of the conference
           limitAlert : 1, // time before the end where we have to alert the speaker (if defaultInterval is upper limitAlert)
           totalTime : 0, // Total time ellapsed during the presentation
-          timeStart : false, // true if the time loader is on
-          couldUnlock : false, // true if the client is ready for websocket control
           socket : null, // The webSocket
           indices : null, // The indices of the presentation
           fragment : 0, // The current fragment number
           localUrl : null, // var in order to see if the presentation has already be loaded    
-          showControls : true, // var to know if the iframe was load
-          iframeLoad : false, // var to know if the iframe was load
-          showMenuClass : 'collapse', // expand if we show the menu / collapse else
-          showPlugin : false, // true to show the plugin area          
-          excludeArray : ['controls','show','back'], // Array of id to exclude
-          controls : {
-            reset : true,
-            show : true,
-            up : true,
-            down : true,
-            left : true,
-            right : true,
-            next :  true,
-            prev : true
-          }, // Controls values
-          contentNotes : '', // the notes of current slide
           indicesDist : {
               h : 0,
               v : 0
@@ -89,6 +71,34 @@ components.directive('sws', ['$rootScope'
           pluginList : [] // List of plugin of application
         };
 
+        /*
+        * UI interactions
+        */
+        $scope.ui = {
+          timeStart : false, // true if the time loader is on
+          couldUnlock : false, // true if the client is ready for websocket control
+          showControls : true, // var to know if the iframe was load
+          iframeLoad : false, // var to know if the iframe was load
+          showMenuClass : 'collapse', // expand if we show the menu / collapse else
+          showPlugin : false, // true to show the plugin area          
+          excludeArray : ['controls','show','back'], // Array of id to exclude
+          showPluginCtrl : {}, // List of ui Elements that are corresponding to plugins identify by id of plugin
+          controls : {
+            reset : true,
+            show : true,
+            up : true,
+            down : true,
+            left : true,
+            right : true,
+            next :  true,
+            prev : true
+          }, // Controls values
+          contentNotes : '', // the notes of current slide
+        }
+
+        /*
+        * Compatibilities needed for the application
+        */
         $scope.compatibility = {
           fullScreen : Modernizr.fullscreen,
           webSockets : Modernizr.websockets,
@@ -105,19 +115,19 @@ components.directive('sws', ['$rootScope'
           // Message send when recieving notes
           if (json.type === "notes"){                   
             if( json.data.markdown ) {
-              $scope.model.contentNotes = marked( json.data.notes );
+              $scope.ui.contentNotes = marked( json.data.notes );
             }
             else {
-              $scope.model.contentNotes =  json.data.notes;
+              $scope.ui.contentNotes =  json.data.notes;
             }                              
             //$rootScope.$broadcast('noteEvt', json.data);
           }else  // Message recieve on each change of slide
             if (json.type === "config"){    
               // We unlock the presentation if we have a client
-              if (!$scope.model.couldUnlock){
+              if (!$scope.ui.couldUnlock){
                 $("#show").removeAttr("disabled");
               }
-              $scope.model.couldUnlock = $scope.model.couldUnlock || true;
+              $scope.ui.couldUnlock = $scope.ui.couldUnlock || true;
               // If we have to load the speaker slide versions (recieve the url of presentation)
               if (json.url && !$scope.model.localUrl){
                 $scope.model.localUrl = "http://"+window.location.hostname+":"+$scope.model.conf.port+json.url;
@@ -214,8 +224,9 @@ components.directive('sws', ['$rootScope'
         $scope.register = function(plugin){
           plugin.active = false;
           $scope.model.pluginList.push(plugin);
+          $scope.ui.showPluginCtrl[plugin.id] = false;
         }
-          
+
       }
   };
   return directiveDefinitionObject;

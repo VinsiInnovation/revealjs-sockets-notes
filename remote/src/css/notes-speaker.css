@@ -954,6 +954,47 @@ body {
   display: inline;
 }
 
+/* line 5, ../sass/plugins.scss */
+.sws-plugin-box {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  top: calc(40px - 40px / 2 );
+  top: -webkit-calc(40px - 40px / 2 );
+  text-align: center;
+  font-size: 25px;
+  line-height: 40px;
+}
+
+/* line 16, ../sass/plugins.scss */
+.sws-plugin-box.fa {
+  background-color: #7F89A5;
+  color: white;
+}
+
+/* line 21, ../sass/plugins.scss */
+#sws-plugins-area-content {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: calc(100% - 40px);
+  width: -webkit-calc(100% - 40px);
+}
+
+/* line 29, ../sass/plugins.scss */
+.sws-plugin-ctrl {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+
+/* line 37, ../sass/plugins.scss */
+#sws-box-close {
+  right: 0;
+}
+
 /***
  *       _____ ____  __  __ __  __  ____  _   _        _____  _____   ____  _____  ______ _____ _______ _____ ______  _____ 
  *      / ____/ __ \|  \/  |  \/  |/ __ \| \ | |      |  __ \|  __ \ / __ \|  __ \|  ____|  __ \__   __|_   _|  ____|/ ____|
@@ -964,35 +1005,35 @@ body {
  *                                                                                                                          
  *                                                                                                                          
  */
-/* line 20, ../sass/notes-speaker.scss */
+/* line 21, ../sass/notes-speaker.scss */
 body {
   height: 100%;
   background-color: #e0dac7;
   color: #3e3d40;
 }
 
-/* line 32, ../sass/notes-speaker.scss */
+/* line 33, ../sass/notes-speaker.scss */
 #main-content:-webkit-full-screen {
   background-color: #e0dac7;
   height: 100%;
   width: 100%;
 }
 
-/* line 35, ../sass/notes-speaker.scss */
+/* line 36, ../sass/notes-speaker.scss */
 #main-content:fullscreen {
   background-color: #e0dac7;
   height: 100%;
   width: 100%;
 }
 
-/* line 38, ../sass/notes-speaker.scss */
+/* line 39, ../sass/notes-speaker.scss */
 #main-content:-moz-full-screen {
   background-color: #e0dac7;
   height: 100%;
   width: 100%;
 }
 
-/* line 43, ../sass/notes-speaker.scss */
+/* line 44, ../sass/notes-speaker.scss */
 .border {
   border-style: solid;
   border-width: 0px;
@@ -1012,14 +1053,15 @@ body {
  *                                                                                                               
  *                                                                                                               
  */
-/* line 68, ../sass/notes-speaker.scss */
+/* line 73, ../sass/notes-speaker.scss */
 #notes, #time, #preview {
+  position: absolute;
   width: calc(100% - (10px * 2));
   width: -webkit-calc(100% - (10px * 2));
   left: 0;
 }
 
-/* line 74, ../sass/notes-speaker.scss */
+/* line 80, ../sass/notes-speaker.scss */
 #notes {
   height: calc((100% - 40px - (2 * 10px) - (2 * 7px)) / 2);
   height: -webkit-calc((100% - 40px - (2 * 10px) - (2 * 7px)) / 2);
@@ -1027,14 +1069,20 @@ body {
   top: -webkit-calc(40px + (2 * 7px));
 }
 
-/* line 81, ../sass/notes-speaker.scss */
+/* line 87, ../sass/notes-speaker.scss */
 #notes.fullSize {
   height: calc(100% - 40px - 10px - (2 * 7px));
   height: -webkit-calc(100% - 40px - 10px - (2 * 7px));
   z-index: 50;
 }
 
-/* line 87, ../sass/notes-speaker.scss */
+/* line 93, ../sass/notes-speaker.scss */
+#notes.upPlugin {
+  top: calc(40px + (2 * 7px) - 70px);
+  top: -webkit-calc(40px + (2 * 7px) - 70px);
+}
+
+/* line 99, ../sass/notes-speaker.scss */
 #preview {
   margin-bottom: 10px;
   height: calc((100% - 40px - (2 * 10px) - (2 * 7px)) / 2);
@@ -1045,8 +1093,18 @@ body {
   box-shadow: rgba(0, 0, 0, 0.75) 0px 0px 5px;
 }
 
+/* line 108, ../sass/notes-speaker.scss */
+#sws-plugins-area {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  height: 70px;
+  bottom: calc(10px + (100% - 40px - (2 * 10px) - (2 * 7px)) / 2);
+  bottom: -webkit-calc(10px + (100% - 40px - (2 * 10px) - (2 * 7px)) / 2);
+}
+
 @media screen and (orientation: landscape) {
-  /* line 96, ../sass/notes-speaker.scss */
+  /* line 118, ../sass/notes-speaker.scss */
   #notes {
     width: calc(30% - 10px - 10px);
     width: -webkit-calc(30% - 10px - 10px);
@@ -1055,13 +1113,13 @@ body {
     height: -webkit-calc(100% - 40px - 10px - (2 * 7px));
   }
 
-  /* line 104, ../sass/notes-speaker.scss */
+  /* line 126, ../sass/notes-speaker.scss */
   #notes.fullSize {
     width: calc(100% - (2 * 10px));
     width: -webkit-calc(100% - (2 * 10px));
   }
 
-  /* line 109, ../sass/notes-speaker.scss */
+  /* line 131, ../sass/notes-speaker.scss */
   #preview {
     width: calc(70% - 10px - 10px);
     width: -webkit-calc(70% - 10px - 10px);
@@ -1071,6 +1129,14 @@ body {
     top: -webkit-calc(40px + (2 * 7px));
     bottom: 0;
     left: 30%;
+  }
+
+  /* line 142, ../sass/notes-speaker.scss */
+  #sws-plugins-area {
+    width: calc(30% - 10px - 10px);
+    width: -webkit-calc(30% - 10px - 10px);
+    bottom: calc(10px + 100% - 40px - 10px - (2 * 7px));
+    bottom: -webkit-calc(10px + 100% - 40px - 10px - (2 * 7px));
   }
 }
 /***
@@ -1083,14 +1149,14 @@ body {
  *                                                              
  *                                                              
  */
-/* line 133, ../sass/notes-speaker.scss */
+/* line 162, ../sass/notes-speaker.scss */
 #wrap-next-slide {
   position: absolute;
   width: 100%;
   height: 100%;
 }
 
-/* line 139, ../sass/notes-speaker.scss */
+/* line 168, ../sass/notes-speaker.scss */
 .slides {
   position: relative;
   margin-bottom: 10px;
@@ -1099,7 +1165,7 @@ body {
   background: #1c1e20;
 }
 
-/* line 147, ../sass/notes-speaker.scss */
+/* line 176, ../sass/notes-speaker.scss */
 .slides span {
   /*position: absolute;*/
   top: 3px;
@@ -1109,7 +1175,7 @@ body {
   /*    color: rgba( 255, 255, 255, 0.9 );*/
 }
 
-/* line 156, ../sass/notes-speaker.scss */
+/* line 185, ../sass/notes-speaker.scss */
 .error {
   font-weight: bold;
   color: red;
@@ -1118,14 +1184,14 @@ body {
   margin-top: 10%;
 }
 
-/* line 164, ../sass/notes-speaker.scss */
+/* line 193, ../sass/notes-speaker.scss */
 .error code {
   font-family: monospace;
 }
 
-/* line 168, ../sass/notes-speaker.scss */
+/* line 197, ../sass/notes-speaker.scss */
 iframe {
   border: none;
 }
 
-/*# sourceMappingURL=notes-speaker.map */
+/*# sourceMappingURL=notes-speaker.css.map */

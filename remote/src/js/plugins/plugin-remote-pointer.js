@@ -43,25 +43,26 @@ plugins.directive('rpPlugin', ['$rootScope'
       }
 
       function boxClicked(event){
-        if (event.target.id === 'sws-rp-box-close'){
-          $(areaPointer).hammer().off('drag', touchFeedback);
-          areaPointer.style.display = 'none';
-          notesElement.css('top','');
-          notesElement.css('zIndex','');
-          $scope.model.showControls = true;
-          swsControl.restoreSlideState();
-          $scope.pluginCommunication('rp', {
-            hide : true
-          });
-        }else{
-          currentColor = event.target.getAttribute('sws-color');
-          lastTarget.classList.remove('activ');
-          event.target.classList.add('activ');
-          lastTarget = event.target;
-        }
-        console.log(event);
+        currentColor = event.target.getAttribute('sws-color');
+        lastTarget.classList.remove('activ');
+        event.target.classList.add('activ');
+        lastTarget = event.target;
+        
       }
 
+      $scope.rpClose = function(){
+        $(areaPointer).hammer().off('drag', touchFeedback);
+        areaPointer.style.display = 'none';
+        notesElement.css('top','');
+        notesElement.css('zIndex','');
+        $scope.ui.showControls = true;
+        $scope.ui.showPlugin = false;
+        $scope.ui.showPluginCtrl['rp'] = false;
+        swsControl.restoreSlideState();
+        $scope.pluginCommunication('rp', {
+          hide : true
+        });
+      }
 
       $scope.rpClick = function(){
 
@@ -70,7 +71,7 @@ plugins.directive('rpPlugin', ['$rootScope'
 
           areaPointer = document.createElement('DIV');
           areaPointer.setAttribute('id', 'sws-rp-area');
-          $scope.model.excludeArray.push('sws-rp-area');
+          $scope.ui.excludeArray.push('sws-rp-area');
           areaPointer.style.display = 'none';
           areaPointer.style.position = 'absolute';
           areaPointer.style.width = previewElement.width()+'px';
@@ -88,6 +89,7 @@ plugins.directive('rpPlugin', ['$rootScope'
             var boxDiv = document.createElement('DIV');
             boxDiv.setAttribute('id', 'sws-rp-box-'+id);
             boxDiv.setAttribute('sws-color', color);
+            boxDiv.classList.add('sws-plugin-box');
             boxDiv.classList.add('sws-plugin-rp-box');
             boxDiv.style.left = left;
             if (icon){              
@@ -101,27 +103,26 @@ plugins.directive('rpPlugin', ['$rootScope'
           }
 
           //fa-circle
-          lastTarget = addBox('red', '#FF0000', null,'0');
+          lastTarget = addBox('red', '#FF0000', null,'10px');
           lastTarget.classList.add('activ');
-          areaPointer.appendChild(lastTarget);
-          areaPointer.appendChild(addBox('white', '#FFFFFF', null,'20%'));
-          areaPointer.appendChild(addBox('black', '#000000', null,'40%'));
-          areaPointer.appendChild(addBox('blue', '#005FFF', null,'60%'));
-          areaPointer.appendChild(addBox('close', 'black', 'fa-times','calc(100% - 30px)'));
+          var ctrlArea = document.getElementById('sws-plugin-ctrl-rp');
+          ctrlArea.appendChild(lastTarget);
+          ctrlArea.appendChild(addBox('white', '#FFFFFF', null,'25%'));
+          ctrlArea.appendChild(addBox('black', '#000000', null,'50%'));
+          ctrlArea.appendChild(addBox('blue', '#005FFF', null,'75%'));
 
           iElement.find('#sws-rp-box-red').bind('click', boxClicked);
           iElement.find('#sws-rp-box-white').bind('click', boxClicked);
           iElement.find('#sws-rp-box-black').bind('click', boxClicked);
           iElement.find('#sws-rp-box-blue').bind('click', boxClicked);
-          iElement.find('#sws-rp-box-close').bind('click', boxClicked);
         }
         
         if (areaPointer.style.display === 'none'){
-          $scope.model.showPlugin = true;
-          notesElement.css('top', (notesElement.position().top - 70)+'px');
+          $scope.ui.showPlugin = true;
+          //notesElement.css('top', (notesElement.position().top - 70)+'px');
         }
         areaPointer.style.display = '';
-        $scope.model.showControls = false;
+        $scope.ui.showControls = false;
         swsControl.syncToDist();
         
 
@@ -157,7 +158,7 @@ plugins.directive('rpPlugin', ['$rootScope'
         }
 
         var size = 40;      
-        pluginStyleSheet.insertRule('.sws-plugin-rp-box {'+
+        /*pluginStyleSheet.insertRule('.sws-plugin-rp-box {'+
           'position : absolute;'+
           'width : '+size+'px;'+
           'height : '+size+'px;'+
@@ -170,7 +171,7 @@ plugins.directive('rpPlugin', ['$rootScope'
         pluginStyleSheet.insertRule('.sws-plugin-rp-box.fa {'+
           'background-color : #7F89A5;'+
           'color : white;'+          
-        '}',0);
+        '}',0);*/
 
         pluginStyleSheet.insertRule('.sws-plugin-rp-box.color {'+
           cssProp('boxShadow')+' : 0px 0px 10px 0 black; '+

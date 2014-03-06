@@ -28,18 +28,18 @@ components.directive('timer', ['$rootScope', '$interval'
       $scope.play = function(){
         $scope.showPlay = false;
         start  = new Date();
-        $scope.model.timeStart = true;
+        $scope.ui.timeStart = true;
       }
 
       $scope.pause = function(){
         $scope.showPlay = true;
-        $scope.model.timeStart = false;
+        $scope.ui.timeStart = false;
         $scope.model.totalTime = $scope.model.totalTime + (new Date().getTime() - start.getTime());
       }
 
       $scope.stop = function(){
         $scope.showPlay = true;
-        $scope.model.timeStart = false;
+        $scope.ui.timeStart = false;
         $scope.model.totalTime  = 0;
         renderProgress(0);
         $scope.hours = "00";
@@ -98,7 +98,7 @@ components.directive('timer', ['$rootScope', '$interval'
               hours, 
               minutes, 
               seconds;                
-          if ($scope.model.timeStart){
+          if ($scope.ui.timeStart){
               var now = new Date();
               diff = now.getTime() - start.getTime();
               $scope.model.defaultInterval = $scope.model.defaultInterval > 0 ? $scope.model.defaultInterval : 60;

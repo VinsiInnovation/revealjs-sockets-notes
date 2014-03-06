@@ -15,7 +15,7 @@ components.directive('slidingMenu', ['$rootScope','$injector'
 
       $scope.reset = function(){
         swsControl.revealAction('reset')
-        $scope.model.showMenuClass = 'collapse';
+        $scope.ui.showMenuClass = 'collapse';
       }
 
 
@@ -51,7 +51,7 @@ components.directive('slidingMenu', ['$rootScope','$injector'
       var expandDirection = true;
       $(document.body).hammer().on('touch drag dragstart dragleft dragright release', function(event){
         if (event.gesture && event.gesture.direction && event.gesture.distance > 1 
-            && ((event.target.id && $scope.model.excludeArray.indexOf(event.target.id) === -1)
+            && ((event.target.id && $scope.ui.excludeArray.indexOf(event.target.id) === -1)
                || !event.target.id)
               ){
           event.gesture.preventDefault();
@@ -59,15 +59,15 @@ components.directive('slidingMenu', ['$rootScope','$injector'
             if (event.type === 'release'){
               iElement[0].style[Modernizr.prefixed('transform')] = '';
               if (event.gesture.direction === 'left'){
-                $scope.model.showMenuClass = 'collapse';                
+                $scope.ui.showMenuClass = 'collapse';                
               }else if (event.gesture.direction === 'right'){
-                $scope.model.showMenuClass = 'expand';
+                $scope.ui.showMenuClass = 'expand';
                 iElement.css('left', '');
               }
             }else if (event.type === 'dragstart' || event.type === 'touch'){
-              expandDirection = $scope.model.showMenuClass === 'collapse';
+              expandDirection = $scope.ui.showMenuClass === 'collapse';
             }else if (event.type === 'drags' || event.type === 'dragleft'  || event.type === 'dragright'){
-              $scope.model.showMenuClass = '';
+              $scope.ui.showMenuClass = '';
               var delta = expandDirection ? event.gesture.deltaX : Math.round( (screen.width * 0.8) + event.gesture.deltaX);
               iElement[0].style[Modernizr.prefixed('transform')] = 'translateX('+delta+'px)';
             }

@@ -20,7 +20,8 @@ components.directive('notes', ['$rootScope'
 
         $scope.pluginClicked = function(plugin){
           $scope[plugin.id + 'Click']();
-          $scope.model.showMenuClass = 'collapse';
+          $scope.ui.showMenuClass = 'collapse';
+          $scope.ui.showPluginCtrl[plugin.id] = true;
         }
 
         $scope.toggleNotes = function(){
