@@ -72,7 +72,7 @@
 }
 
 
-#content-notes, ul.plugin-list{
+#content-notes, ul.plugin-list, #notes .mask-plugins{
     position:absolute;    
     left:0;
     overflow:auto;
@@ -81,12 +81,16 @@
     width:100%; // scrollbar
 }
 
-#content-notes{
+#content-notes, #notes .mask-plugins{
     padding: 0 10px;
     top:$abs-notes-height;
     font-family: $font-notes;
     font-size:$font-size-notes;
     line-height:1.2em;    
+}
+
+#notes .mask-plugins{
+    background-color: rgba(255,255,255,0.75);
 }
 
 .hractionbar{
@@ -163,4 +167,6 @@ $icon-padding-left : 2.5em;
 
     }
 }
+
+
 

@@ -381,7 +381,7 @@ body {
 }
 
 /* line 75, ../sass/notes.scss */
-#content-notes, ul.plugin-list {
+#content-notes, ul.plugin-list, #notes .mask-plugins {
   position: absolute;
   left: 0;
   overflow: auto;
@@ -391,7 +391,7 @@ body {
 }
 
 /* line 84, ../sass/notes.scss */
-#content-notes {
+#content-notes, #notes .mask-plugins {
   padding: 0 10px;
   top: 35px;
   font-family: Arial, sans-serif;
@@ -400,6 +400,11 @@ body {
 }
 
 /* line 92, ../sass/notes.scss */
+#notes .mask-plugins {
+  background-color: rgba(255, 255, 255, 0.75);
+}
+
+/* line 96, ../sass/notes.scss */
 .hractionbar {
   position: absolute;
   width: 100%;
@@ -407,7 +412,7 @@ body {
   left: 0;
 }
 
-/* line 99, ../sass/notes.scss */
+/* line 103, ../sass/notes.scss */
 .slide-number {
   background-color: #e0dac7;
   border-top: thin solid #675c53;
@@ -423,7 +428,7 @@ body {
   color: #2da594;
 }
 
-/* line 114, ../sass/notes.scss */
+/* line 118, ../sass/notes.scss */
 .curent-slide {
   color: #b7183b;
   font-size: 19.5pt;
@@ -434,7 +439,7 @@ body {
 *  PLUGINS
 *
 */
-/* line 128, ../sass/notes.scss */
+/* line 132, ../sass/notes.scss */
 #notes ul.plugin-list {
   list-style: none;
   top: calc(35px + 5px);
@@ -445,7 +450,7 @@ body {
   padding: 0;
   margin: 0;
 }
-/* line 136, ../sass/notes.scss */
+/* line 140, ../sass/notes.scss */
 #notes ul.plugin-list .plugin {
   font-family: 'open_sansregular';
   position: relative;
@@ -461,15 +466,15 @@ body {
   line-height: 45px;
   height: 45px;
 }
-/* line 149, ../sass/notes.scss */
+/* line 153, ../sass/notes.scss */
 #notes ul.plugin-list .plugin a {
   text-decoration: none;
 }
-/* line 153, ../sass/notes.scss */
+/* line 157, ../sass/notes.scss */
 #notes ul.plugin-list .plugin a:link, #notes ul.plugin-list .plugin a:visited, #notes ul.plugin-list .plugin a:hover, #notes ul.plugin-list .plugin a:active {
   color: #3e3d40;
 }
-/* line 157, ../sass/notes.scss */
+/* line 161, ../sass/notes.scss */
 #notes ul.plugin-list .plugin i {
   position: absolute;
   color: #939183;
@@ -954,25 +959,35 @@ body {
   display: inline;
 }
 
-/* line 5, ../sass/plugins.scss */
+/***
+ *     __      __     _____   _____ 
+ *     \ \    / /\   |  __ \ / ____|
+ *      \ \  / /  \  | |__) | (___  
+ *       \ \/ / /\ \ |  _  / \___ \ 
+ *        \  / ____ \| | \ \ ____) |
+ *         \/_/    \_\_|  \_\_____/ 
+ *                                  
+ *                                  
+ */
+/* line 6, ../sass/plugins.scss */
 .sws-plugin-box {
   position: absolute;
   width: 40px;
   height: 40px;
-  top: calc(40px - 40px / 2 );
-  top: -webkit-calc(40px - 40px / 2 );
+  top: calc((70px / 2) - (40px / 2) );
+  top: -webkit-calc((70px / 2)  - (40px / 2) );
   text-align: center;
   font-size: 25px;
   line-height: 40px;
 }
 
-/* line 16, ../sass/plugins.scss */
+/* line 17, ../sass/plugins.scss */
 .sws-plugin-box.fa {
   background-color: #7F89A5;
   color: white;
 }
 
-/* line 21, ../sass/plugins.scss */
+/* line 22, ../sass/plugins.scss */
 #sws-plugins-area-content {
   position: absolute;
   top: 0;
@@ -981,7 +996,7 @@ body {
   width: -webkit-calc(100% - 40px);
 }
 
-/* line 29, ../sass/plugins.scss */
+/* line 30, ../sass/plugins.scss */
 .sws-plugin-ctrl {
   position: absolute;
   top: 0;
@@ -990,7 +1005,7 @@ body {
   width: 100%;
 }
 
-/* line 37, ../sass/plugins.scss */
+/* line 38, ../sass/plugins.scss */
 #sws-box-close {
   right: 0;
 }

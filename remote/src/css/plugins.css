@@ -1,22 +1,32 @@
-/* line 5, ../sass/plugins.scss */
+/***
+ *     __      __     _____   _____ 
+ *     \ \    / /\   |  __ \ / ____|
+ *      \ \  / /  \  | |__) | (___  
+ *       \ \/ / /\ \ |  _  / \___ \ 
+ *        \  / ____ \| | \ \ ____) |
+ *         \/_/    \_\_|  \_\_____/ 
+ *                                  
+ *                                  
+ */
+/* line 6, ../sass/plugins.scss */
 .sws-plugin-box {
   position: absolute;
   width: 40px;
   height: 40px;
-  top: calc(40px - 40px / 2 );
-  top: -webkit-calc(40px - 40px / 2 );
+  top: calc((70px / 2) - (40px / 2) );
+  top: -webkit-calc((70px / 2)  - (40px / 2) );
   text-align: center;
   font-size: 25px;
   line-height: 40px;
 }
 
-/* line 16, ../sass/plugins.scss */
+/* line 17, ../sass/plugins.scss */
 .sws-plugin-box.fa {
   background-color: #7F89A5;
   color: white;
 }
 
-/* line 21, ../sass/plugins.scss */
+/* line 22, ../sass/plugins.scss */
 #sws-plugins-area-content {
   position: absolute;
   top: 0;
@@ -25,7 +35,7 @@
   width: -webkit-calc(100% - 40px);
 }
 
-/* line 29, ../sass/plugins.scss */
+/* line 30, ../sass/plugins.scss */
 .sws-plugin-ctrl {
   position: absolute;
   top: 0;
@@ -34,7 +44,7 @@
   width: 100%;
 }
 
-/* line 37, ../sass/plugins.scss */
+/* line 38, ../sass/plugins.scss */
 #sws-box-close {
   right: 0;
 }

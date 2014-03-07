@@ -27,15 +27,17 @@ sws.controller('SwsCtrl',
 
 
       $scope.hidePlugin = function(){
-          for (var pluginIndex =0; pluginIndex < $scope.model.pluginList.length; pluginIndex++){
-            var plugin = $scope.model.pluginList[pluginIndex];            
-            if ($scope[plugin.id + 'Close']){
-              $scope[plugin.id + 'Close']();
+        if ($scope.model.currentPluginActiv){            
+            $scope.ui.showPluginCtrl[$scope.model.currentPluginActiv] = false;
+            $scope.ui.showPlugin = false;
+            $scope.ui.showControls = true;
+            if ($scope[$scope.model.currentPluginActiv + 'Close']){
+              $scope[$scope.model.currentPluginActiv + 'Close']();
             }
-          }
+            $scope.model.currentPluginActiv = null;
+            
         }
-
-      	
+    }
 
                 
 }]);

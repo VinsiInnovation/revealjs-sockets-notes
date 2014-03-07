@@ -39,6 +39,25 @@ components.directive('sws', ['$rootScope'
           indicesSav = null;
         }
       }
+
+      // StyleSheet Management  for plugins
+      this.createStyleSheet = function(pluginId) {
+          // Create the <style> tag
+          var style = document.createElement("style");
+
+          // Add a media (and/or media query) here if you'd like!
+          style.setAttribute("media", "screen");
+          style.setAttribute("id", "style-sheet-sws-plugins-"+pluginId);
+
+          // WebKit hack :(
+          style.appendChild(document.createTextNode(""));
+
+          // Add the <style> element to the page
+          document.head.appendChild(style);
+
+          return style.sheet ? style.sheet : style.styleSheet;
+        }
+
     }, 
     link: function postLink($scope, iElement, iAttrs) { 
 
@@ -56,6 +75,7 @@ components.directive('sws', ['$rootScope'
           indices : null, // The indices of the presentation
           fragment : 0, // The current fragment number
           localUrl : null, // var in order to see if the presentation has already be loaded    
+          currentPluginActiv : null, // The id of the currentPlugin
           indicesDist : {
               h : 0,
               v : 0
@@ -135,14 +155,12 @@ components.directive('sws', ['$rootScope'
                 $rootScope.$broadcast('loadIframeEvt', $scope.model.localUrl);
                   
                 $scope.model.nbSlides = json.nbSlides;
-                //$rootScope.$broadcast('updateRevealState');
               }else  // If we recieve the index of presentation
                 if (json.indices){
                     $scope.model.indicesDist = json.indices;
                     $scope.model.fragment = 0;
                     $scope.model.currentSlideNumber = $scope.model.indicesDist.h+$scope.model.indicesDist.v;
-                    //$rootScope.$broadcast('updateRevealState');
-                     
+                    
                       
               }else // If we recieve a fragment modification
                 if (json.fragment){
@@ -165,6 +183,7 @@ components.directive('sws', ['$rootScope'
 
         }
 
+       
         /*
         * Services
         */
@@ -185,19 +204,9 @@ components.directive('sws', ['$rootScope'
                    socketIO.emit('message', {
                        type:'ping-plugin'
                    }); 
-
-                    /*// To comment
-                    $(".plugin a").on("click", function(evt){
-                        RevealSpeakerNotes.uiElements.pluginList.hide();
-                        RevealSpeakerNotes.$scope.socket.broadcast('message', {
-                           type:'activate-plugin',
-                           id: evt.target.id
-                       }); 
-                    });*/
+                    
                 });
-
-               
-               
+             
 
                 // Message from presentation
                 socketIO.on("message", function(json){

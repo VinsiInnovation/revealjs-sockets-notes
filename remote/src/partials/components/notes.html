@@ -9,6 +9,7 @@
         <li class="plugin" ng-repeat="plugin in model.pluginList | filter:activeFilter" id="plugin.id" ng-click='pluginClicked(plugin)' ><i class="fa {{plugin.icon}}"></i>&nbsp {{plugin.name}}</li>        
         <li class="plugin" ng-show='model.pluginList.length === 0'><i class="fa fa-frown-o"></i>No plugin add</li>        
     </ul>
+    <div class="mask-plugins" ng-show="model.currentPluginActiv && !notesPress"></div>
 
     <div class="slide-number">
         <span class="curent-slide">{{model.currentSlideNumber}}</span> / <span class="nb-slides">{{model.nbSlides}}</span>

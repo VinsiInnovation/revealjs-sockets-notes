@@ -1,4 +1,5 @@
 @import "compass";
+@import "vars";
 
 $size :40px;
 
@@ -6,8 +7,8 @@ $size :40px;
   position : absolute;
   width : $size;
   height : $size;
-  top : calc(#{$size} - #{$size} / 2 );
-  top : -webkit-calc(#{$size} - #{$size} / 2 );
+  top : calc((#{$pluginHeight} / 2) - (#{$size} / 2) );
+  top : -webkit-calc((#{$pluginHeight} / 2)  - (#{$size} / 2) );
   text-align : center;
   font-size : 25px;
   line-height : $size;

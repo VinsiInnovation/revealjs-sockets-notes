@@ -1,8 +1,8 @@
 /*
 * Remote pointer plugin
 */
-plugins.directive('rpPlugin', ['$rootScope'
-  ,function ($rootScope) {
+plugins.directive('rpPlugin', ['$rootScope', 'HelperFactory'
+  ,function ($rootScope, helper) {
   var directiveDefinitionObject = {
     restrict: 'A',
     require: '^sws',
@@ -17,9 +17,8 @@ plugins.directive('rpPlugin', ['$rootScope'
       });
 
       var previewElement = iElement.find('#preview');
-      var notesElement = null;
       var areaPointer = null;
-      var currentColor = 'red';
+      var currentColor = '#FF0000';
       var lastTarget = null;
       
 
@@ -44,6 +43,7 @@ plugins.directive('rpPlugin', ['$rootScope'
 
       function boxClicked(event){
         currentColor = event.target.getAttribute('sws-color');
+        areaPointer.style['border-color'] = currentColor;
         lastTarget.classList.remove('activ');
         event.target.classList.add('activ');
         lastTarget = event.target;
@@ -53,11 +53,6 @@ plugins.directive('rpPlugin', ['$rootScope'
       $scope.rpClose = function(){
         $(areaPointer).hammer().off('drag', touchFeedback);
         areaPointer.style.display = 'none';
-        notesElement.css('top','');
-        notesElement.css('zIndex','');
-        $scope.ui.showControls = true;
-        $scope.ui.showPlugin = false;
-        $scope.ui.showPluginCtrl['rp'] = false;
         swsControl.restoreSlideState();
         $scope.pluginCommunication('rp', {
           hide : true
@@ -67,7 +62,6 @@ plugins.directive('rpPlugin', ['$rootScope'
       $scope.rpClick = function(){
 
         if (!areaPointer){
-          notesElement = iElement.find('#notes');
 
           areaPointer = document.createElement('DIV');
           areaPointer.setAttribute('id', 'sws-rp-area');
@@ -80,6 +74,8 @@ plugins.directive('rpPlugin', ['$rootScope'
           areaPointer.style.left = previewElement.position().left+'px';
           areaPointer.style['margin'] = previewElement.css('margin');
           areaPointer.style['background-color'] = 'rgba(0,0,0,0)';
+          areaPointer.style.border = 'solid red 2px';
+          areaPointer.style['border-color'] = currentColor;
 
           iElement.find('#main-content')[0].appendChild(areaPointer);
 
@@ -119,7 +115,6 @@ plugins.directive('rpPlugin', ['$rootScope'
         
         if (areaPointer.style.display === 'none'){
           $scope.ui.showPlugin = true;
-          //notesElement.css('top', (notesElement.position().top - 70)+'px');
         }
         areaPointer.style.display = '';
         $scope.ui.showControls = false;
@@ -129,84 +124,54 @@ plugins.directive('rpPlugin', ['$rootScope'
         $(areaPointer).hammer().off('drag dragright dragleft dragup dragdown', touchFeedback);
         $(areaPointer).hammer().on('drag dragright dragleft dragup dragdown', touchFeedback);
 
-        /*
-        **************************************
-        **************************************
-        * Style Sheet Management
-        **************************************
-        **************************************
-        */
-        var pluginStyleSheet = (function() {
-          // Create the <style> tag
-          var style = document.createElement("style");
-
-          // Add a media (and/or media query) here if you'd like!
-          style.setAttribute("media", "screen");
-          style.setAttribute("id", "style-sheet-sws-remote");
-
-          // WebKit hack :(
-          style.appendChild(document.createTextNode(""));
-
-          // Add the <style> element to the page
-          document.head.appendChild(style);
-
-          return style.sheet ? style.sheet : style.styleSheet;
-        })();
-
-        function cssProp(properties){
-          return Modernizr.prefixed(properties).replace(/([A-Z])/g, function(str,m1){ return '-' + m1.toLowerCase(); }).replace(/^ms-/,'-ms-');
-        }
-
-        var size = 40;      
-        /*pluginStyleSheet.insertRule('.sws-plugin-rp-box {'+
-          'position : absolute;'+
-          'width : '+size+'px;'+
-          'height : '+size+'px;'+
-          'top : -'+(size+20)+'px;'+
-          'text-align : center;'+
-          'font-size : 25px;'+
-          'line-height : '+size+'px;'+
-        '}',0);
-
-        pluginStyleSheet.insertRule('.sws-plugin-rp-box.fa {'+
-          'background-color : #7F89A5;'+
-          'color : white;'+          
-        '}',0);*/
-
-        pluginStyleSheet.insertRule('.sws-plugin-rp-box.color {'+
-          cssProp('boxShadow')+' : 0px 0px 10px 0 black; '+
-          'border-radius : '+size+'px; '+
-          'border : solid 1px white; '+
-        '}',0);
-
-         pluginStyleSheet.insertRule('.sws-plugin-rp-box.color.activ::after {'+
-          'content : \'\'; '+
-          'position : absolute; '+
-          'top : '+(size+5)+'px; '+
-          'left : 5px; '+
-          'width : '+(size-10)+'px; '+
-          'height : 5px; '+
-        '}',0);
-
-        pluginStyleSheet.insertRule('.sws-plugin-rp-box.color.red::after, .sws-plugin-rp-box.color.red {'+
-          'background-color : #FF0000; '+
-        '}',0);
-
-        pluginStyleSheet.insertRule('.sws-plugin-rp-box.color.white::after, .sws-plugin-rp-box.color.white {'+
-          'background-color : #FFFFFF; '+
-        '}',0);
-
-        pluginStyleSheet.insertRule('.sws-plugin-rp-box.color.black::after, .sws-plugin-rp-box.color.black {'+
-          'background-color : #000000; '+
-        '}',0);
-
-        pluginStyleSheet.insertRule('.sws-plugin-rp-box.color.blue::after, .sws-plugin-rp-box.color.blue {'+
-          'background-color : #005FFF; '+
-        '}',0);
-
-
-
       }
+
+      /*
+      **************************************
+      **************************************
+      * Style Sheet Management
+      **************************************
+      **************************************
+      */
+      
+      var size = 40;      
+     
+      var pluginStyleSheet = swsControl.createStyleSheet('rp');
+
+      pluginStyleSheet.insertRule('.sws-plugin-rp-box.color {'+
+        helper.cssProp('boxShadow')+' : 0px 0px 10px 0 black; '+
+        'border-radius : '+size+'px; '+
+        'border : solid 1px white; '+
+      '}',0);
+
+       pluginStyleSheet.insertRule('.sws-plugin-rp-box.color.activ::after {'+
+        'content : \'\'; '+
+        'position : absolute; '+
+        'top : '+(size+5)+'px; '+
+        'left : 5px; '+
+        'width : '+(size-10)+'px; '+
+        'height : 5px; '+
+      '}',0);
+
+      pluginStyleSheet.insertRule('.sws-plugin-rp-box.color.red::after, .sws-plugin-rp-box.color.red {'+
+        'background-color : #FF0000; '+
+      '}',0);
+
+      pluginStyleSheet.insertRule('.sws-plugin-rp-box.color.white::after, .sws-plugin-rp-box.color.white {'+
+        'background-color : #FFFFFF; '+
+      '}',0);
+
+      pluginStyleSheet.insertRule('.sws-plugin-rp-box.color.black::after, .sws-plugin-rp-box.color.black {'+
+        'background-color : #000000; '+
+      '}',0);
+
+      pluginStyleSheet.insertRule('.sws-plugin-rp-box.color.blue::after, .sws-plugin-rp-box.color.blue {'+
+        'background-color : #005FFF; '+
+      '}',0);
+
+
+
+      
     }
   };
   return directiveDefinitionObject;

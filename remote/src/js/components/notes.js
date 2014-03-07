@@ -21,7 +21,13 @@ components.directive('notes', ['$rootScope'
         $scope.pluginClicked = function(plugin){
           $scope[plugin.id + 'Click']();
           $scope.ui.showMenuClass = 'collapse';
+          // If a previous plugin was show, we close it first
+          if ($scope.model.currentPluginActiv){
+            $scope[$scope.model.currentPluginActiv + 'Close']();
+            $scope.ui.showPluginCtrl[$scope.model.currentPluginActiv] = false;
+          }
           $scope.ui.showPluginCtrl[plugin.id] = true;
+          $scope.model.currentPluginActiv = plugin.id;
         }
 
         $scope.toggleNotes = function(){

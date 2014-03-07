@@ -153,7 +153,7 @@ body {
 }
 
 /* line 75, ../sass/notes.scss */
-#content-notes, ul.plugin-list {
+#content-notes, ul.plugin-list, #notes .mask-plugins {
   position: absolute;
   left: 0;
   overflow: auto;
@@ -163,7 +163,7 @@ body {
 }
 
 /* line 84, ../sass/notes.scss */
-#content-notes {
+#content-notes, #notes .mask-plugins {
   padding: 0 10px;
   top: 35px;
   font-family: Arial, sans-serif;
@@ -172,6 +172,11 @@ body {
 }
 
 /* line 92, ../sass/notes.scss */
+#notes .mask-plugins {
+  background-color: rgba(255, 255, 255, 0.75);
+}
+
+/* line 96, ../sass/notes.scss */
 .hractionbar {
   position: absolute;
   width: 100%;
@@ -179,7 +184,7 @@ body {
   left: 0;
 }
 
-/* line 99, ../sass/notes.scss */
+/* line 103, ../sass/notes.scss */
 .slide-number {
   background-color: #e0dac7;
   border-top: thin solid #675c53;
@@ -195,7 +200,7 @@ body {
   color: #2da594;
 }
 
-/* line 114, ../sass/notes.scss */
+/* line 118, ../sass/notes.scss */
 .curent-slide {
   color: #b7183b;
   font-size: 19.5pt;
@@ -206,7 +211,7 @@ body {
 *  PLUGINS
 *
 */
-/* line 128, ../sass/notes.scss */
+/* line 132, ../sass/notes.scss */
 #notes ul.plugin-list {
   list-style: none;
   top: calc(35px + 5px);
@@ -217,7 +222,7 @@ body {
   padding: 0;
   margin: 0;
 }
-/* line 136, ../sass/notes.scss */
+/* line 140, ../sass/notes.scss */
 #notes ul.plugin-list .plugin {
   font-family: 'open_sansregular';
   position: relative;
@@ -233,15 +238,15 @@ body {
   line-height: 45px;
   height: 45px;
 }
-/* line 149, ../sass/notes.scss */
+/* line 153, ../sass/notes.scss */
 #notes ul.plugin-list .plugin a {
   text-decoration: none;
 }
-/* line 153, ../sass/notes.scss */
+/* line 157, ../sass/notes.scss */
 #notes ul.plugin-list .plugin a:link, #notes ul.plugin-list .plugin a:visited, #notes ul.plugin-list .plugin a:hover, #notes ul.plugin-list .plugin a:active {
   color: #3e3d40;
 }
-/* line 157, ../sass/notes.scss */
+/* line 161, ../sass/notes.scss */
 #notes ul.plugin-list .plugin i {
   position: absolute;
   color: #939183;
