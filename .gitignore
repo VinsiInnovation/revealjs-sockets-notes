@@ -1,9 +1,11 @@
+.sass-cache
 dist
+node_modules
 remote/.sass-cache
 remote/.tmp
 remote/conf
 remote/node_modules
-server/npm-debug.log
+remote/npm-debug.log
 remote/src/bower_components
 reveal_plugin/.sass-cache
 reveal_plugin/.tmp
@@ -11,7 +13,9 @@ reveal_plugin/conf
 reveal_plugin/node_modules
 reveal_plugin/npm-debug.log
 server/.tmp
+server/.sass-cache
 server/conf
 server/node_modules
+server/src/bower_components
 server/src/node_modules
 server/src/npm-debug.log
