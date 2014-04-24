@@ -28,7 +28,7 @@
   height: calc(100% - 40px - 7px);
   height: -webkit-calc(100% - 40px - 7px);
   background-color: #939183;
-  color: #cac3ad;
+  color: white;
   left: -80%;
   z-index: 100;
   overflow: auto;
@@ -48,6 +48,7 @@
   font-family: 'open_sansregular';
   padding-left: 10px;
   position: relative;
+  background-color: #575757;
   -moz-box-shadow: rgba(0, 0, 0, 0.75) 0px -1px 1px;
   -webkit-box-shadow: rgba(0, 0, 0, 0.75) 0px -1px 1px;
   box-shadow: rgba(0, 0, 0, 0.75) 0px -1px 1px;
@@ -57,29 +58,29 @@
   height: 45px;
   font-size: 14pt;
 }
-/* line 45, ../sass/sliding-menu.scss */
+/* line 46, ../sass/sliding-menu.scss */
 .sliding-menu .menu-icon .fa {
-  color: #cac3ad;
+  color: white;
 }
-/* line 49, ../sass/sliding-menu.scss */
+/* line 50, ../sass/sliding-menu.scss */
 .sliding-menu .menu-icon .fa-stack {
   width: 1em;
   height: 1em;
   line-height: 1em;
 }
-/* line 55, ../sass/sliding-menu.scss */
+/* line 56, ../sass/sliding-menu.scss */
 .sliding-menu .menu-icon .fa-stack-2x {
   font-size: 1em;
 }
-/* line 59, ../sass/sliding-menu.scss */
+/* line 60, ../sass/sliding-menu.scss */
 .sliding-menu .menu-icon .fa-stack-1x {
   font-size: 0.8em;
 }
-/* line 63, ../sass/sliding-menu.scss */
+/* line 64, ../sass/sliding-menu.scss */
 .sliding-menu .menu-icon .fa.fa-inverse {
   color: #939183;
 }
-/* line 67, ../sass/sliding-menu.scss */
+/* line 68, ../sass/sliding-menu.scss */
 .sliding-menu .menu-icon .menu-icon-text {
   position: absolute;
   top: 0;
@@ -91,7 +92,7 @@
   left: -80%;
 }
 */
-/* line 82, ../sass/sliding-menu.scss */
+/* line 83, ../sass/sliding-menu.scss */
 .sliding-menu.collapse {
   /*left:-80%;*/
   -moz-transition-property: width, opacity, left, -moz-transform;
@@ -108,13 +109,12 @@
   transition-timing-function: ease-in;
   -moz-transform: translateX(0);
   -ms-transform: translateX(0);
-  -o-transform: translateX(0);
   -webkit-transform: translateX(0);
   transform: translateX(0);
   /*opacity: 0;*/
 }
 
-/* line 91, ../sass/sliding-menu.scss */
+/* line 92, ../sass/sliding-menu.scss */
 .sliding-menu.expand {
   -moz-transition-property: width, opacity, left, -moz-transform;
   -o-transition-property: width, opacity, left, -o-transform;
@@ -130,7 +130,6 @@
   transition-timing-function: ease-in;
   -moz-transform: translateX(100%);
   -ms-transform: translateX(100%);
-  -o-transform: translateX(100%);
   -webkit-transform: translateX(100%);
   transform: translateX(100%);
   /*width:80%;	*/
@@ -139,7 +138,7 @@
   box-shadow: rgba(0, 0, 0, 0.75) 2px 0px 5px;
 }
 
-/* line 102, ../sass/sliding-menu.scss */
+/* line 103, ../sass/sliding-menu.scss */
 #config_interval {
   width: 4.5em;
   display: inline;

@@ -425,7 +425,7 @@ body {
   bottom: -1px;
   height: 40px;
   font-size: 12pt;
-  color: #2da594;
+  color: white;
 }
 
 /* line 118, ../sass/notes.scss */
@@ -518,7 +518,7 @@ body {
   position: absolute;
   top: 0;
   left: 0;
-  background: #e0dac7;
+  background: #575757;
   height: 40px;
   width: 100%;
   font-size: 20px;
@@ -528,6 +528,7 @@ body {
 /* line 31, ../sass/actionbar.scss */
 .actionbar .icon-menu {
   position: absolute;
+  background-color: #575757;
   border-right: thin solid #939183;
   left: 0;
   top: 0;
@@ -537,14 +538,14 @@ body {
   text-align: center;
 }
 
-/* line 42, ../sass/actionbar.scss */
+/* line 43, ../sass/actionbar.scss */
 .actionbar .icon-menu.expand {
   background-color: #939183;
   border-right-width: 0;
   color: white;
 }
 
-/* line 49, ../sass/actionbar.scss */
+/* line 50, ../sass/actionbar.scss */
 .actionbar i {
   line-height: 40px;
   font-size: 20px;
@@ -564,7 +565,7 @@ body {
 * Ellapsed
 **------------------
 */
-/* line 78, ../sass/actionbar.scss */
+/* line 79, ../sass/actionbar.scss */
 .elapsed {
   position: absolute;
   width: calc(100% - (40px * 3 + 2px));
@@ -577,10 +578,9 @@ body {
   vertical-align: middle;
 }
 
-/* line 93, ../sass/actionbar.scss */
+/* line 94, ../sass/actionbar.scss */
 .elapsed_time, .elapsed_bg {
   background-image: -moz-linear-gradient(top, #a4ff00, #7bba09);
-  background-image: -o-linear-gradient(top, #a4ff00, #7bba09);
   background-image: -webkit-linear-gradient(top, #a4ff00, #7bba09);
   background-image: linear-gradient(to bottom, #a4ff00, #7bba09);
   position: absolute;
@@ -591,34 +591,32 @@ body {
   left: 0;
 }
 
-/* line 103, ../sass/actionbar.scss */
+/* line 104, ../sass/actionbar.scss */
 .elapsed_bg {
   background-image: none;
   background-color: white;
 }
 
-/* line 108, ../sass/actionbar.scss */
+/* line 109, ../sass/actionbar.scss */
 .elapsed_time.alert {
   background-image: -moz-linear-gradient(top, #ff8d00, #ff0000);
-  background-image: -o-linear-gradient(top, #ff8d00, #ff0000);
   background-image: -webkit-linear-gradient(top, #ff8d00, #ff0000);
   background-image: linear-gradient(to bottom, #ff8d00, #ff0000);
 }
 
-/* line 111, ../sass/actionbar.scss */
+/* line 112, ../sass/actionbar.scss */
 .elapsed_time.advanced {
   background-image: -moz-linear-gradient(top, #ffdd00, #dd9700);
-  background-image: -o-linear-gradient(top, #ffdd00, #dd9700);
   background-image: -webkit-linear-gradient(top, #ffdd00, #dd9700);
   background-image: linear-gradient(to bottom, #ffdd00, #dd9700);
 }
 
-/* line 115, ../sass/actionbar.scss */
+/* line 116, ../sass/actionbar.scss */
 .timeEllapesd {
   font-weight: 400;
   font-size: 27pt;
   line-height: 40px;
-  color: #2da594;
+  color: white;
   position: absolute;
   width: 100%;
   height: 100%;
@@ -626,29 +624,29 @@ body {
   text-align: center;
 }
 
-/* line 127, ../sass/actionbar.scss */
+/* line 128, ../sass/actionbar.scss */
 .totalTime {
   font-weight: 400;
   font-size: 12pt;
-  color: #2da594;
+  color: #939183;
 }
 
-/* line 134, ../sass/actionbar.scss */
+/* line 135, ../sass/actionbar.scss */
 .elapsed .mute {
   color: #939183;
 }
 
-/* line 138, ../sass/actionbar.scss */
+/* line 139, ../sass/actionbar.scss */
 .actions_times {
   position: absolute;
-  background-color: #e0dac7;
+  background-color: #575757;
   top: 0;
   right: 0;
   height: 40px;
   width: 40px;
 }
 
-/* line 147, ../sass/actionbar.scss */
+/* line 148, ../sass/actionbar.scss */
 #action_time_play, #action_time_pause {
   position: absolute;
   border-left: thin solid #939183;
@@ -663,7 +661,7 @@ body {
 * Config
 **------------------
 */
-/* line 163, ../sass/actionbar.scss */
+/* line 164, ../sass/actionbar.scss */
 #config_ellapsed_cancel, #config_ellapsed_validate {
   background-color: #939183;
   position: absolute;
@@ -676,18 +674,18 @@ body {
   margin: auto;
 }
 
-/* line 175, ../sass/actionbar.scss */
+/* line 176, ../sass/actionbar.scss */
 #config_ellapsed_cancel {
   right: calc(40px + 1px);
   right: -webkit-calc(40px + 1px);
 }
 
-/* line 180, ../sass/actionbar.scss */
+/* line 181, ../sass/actionbar.scss */
 #config_ellapsed_validate {
   right: 0;
 }
 
-/* line 184, ../sass/actionbar.scss */
+/* line 185, ../sass/actionbar.scss */
 .config_ellapsed_lbl {
   position: absolute;
   width: 60%;
@@ -698,7 +696,7 @@ body {
   text-align: center;
 }
 
-/* line 194, ../sass/actionbar.scss */
+/* line 195, ../sass/actionbar.scss */
 #time .config_ellapsed_time {
   font-family: digital;
   width: calc(100% - (40px * 2 + 1px) - 150px);
@@ -712,7 +710,7 @@ body {
   margin-top: -1em;
 }
 
-/* line 207, ../sass/actionbar.scss */
+/* line 208, ../sass/actionbar.scss */
 #time .config_ellapsed_time input {
   font-family: digital;
   text-align: center;
@@ -720,7 +718,7 @@ body {
   width: 100%;
 }
 
-/* line 214, ../sass/actionbar.scss */
+/* line 215, ../sass/actionbar.scss */
 #configEllapsed .actions_times {
   left: calc(100% - (40px * 2 + 1px));
   left: -webkit-calc(100% - (40px * 2 + 1px));
@@ -730,7 +728,7 @@ body {
 * Spinner
 **------------------
 */
-/* line 224, ../sass/actionbar.scss */
+/* line 225, ../sass/actionbar.scss */
 .loader-spiner, .loader-spinner-alert {
   width: 200%;
   height: 200%;
@@ -739,12 +737,12 @@ body {
   box-sizing: border-box;
 }
 
-/* line 233, ../sass/actionbar.scss */
+/* line 234, ../sass/actionbar.scss */
 .loader-spinner-alert {
   border-color: #be233a;
 }
 
-/* line 236, ../sass/actionbar.scss */
+/* line 237, ../sass/actionbar.scss */
 .loader-spiner {
   border-color: #939183;
 }
@@ -842,7 +840,7 @@ body {
   height: calc(100% - 40px - 7px);
   height: -webkit-calc(100% - 40px - 7px);
   background-color: #939183;
-  color: #cac3ad;
+  color: white;
   left: -80%;
   z-index: 100;
   overflow: auto;
@@ -862,6 +860,7 @@ body {
   font-family: 'open_sansregular';
   padding-left: 10px;
   position: relative;
+  background-color: #575757;
   -moz-box-shadow: rgba(0, 0, 0, 0.75) 0px -1px 1px;
   -webkit-box-shadow: rgba(0, 0, 0, 0.75) 0px -1px 1px;
   box-shadow: rgba(0, 0, 0, 0.75) 0px -1px 1px;
@@ -871,29 +870,29 @@ body {
   height: 45px;
   font-size: 14pt;
 }
-/* line 45, ../sass/sliding-menu.scss */
+/* line 46, ../sass/sliding-menu.scss */
 .sliding-menu .menu-icon .fa {
-  color: #cac3ad;
+  color: white;
 }
-/* line 49, ../sass/sliding-menu.scss */
+/* line 50, ../sass/sliding-menu.scss */
 .sliding-menu .menu-icon .fa-stack {
   width: 1em;
   height: 1em;
   line-height: 1em;
 }
-/* line 55, ../sass/sliding-menu.scss */
+/* line 56, ../sass/sliding-menu.scss */
 .sliding-menu .menu-icon .fa-stack-2x {
   font-size: 1em;
 }
-/* line 59, ../sass/sliding-menu.scss */
+/* line 60, ../sass/sliding-menu.scss */
 .sliding-menu .menu-icon .fa-stack-1x {
   font-size: 0.8em;
 }
-/* line 63, ../sass/sliding-menu.scss */
+/* line 64, ../sass/sliding-menu.scss */
 .sliding-menu .menu-icon .fa.fa-inverse {
   color: #939183;
 }
-/* line 67, ../sass/sliding-menu.scss */
+/* line 68, ../sass/sliding-menu.scss */
 .sliding-menu .menu-icon .menu-icon-text {
   position: absolute;
   top: 0;
@@ -905,7 +904,7 @@ body {
   left: -80%;
 }
 */
-/* line 82, ../sass/sliding-menu.scss */
+/* line 83, ../sass/sliding-menu.scss */
 .sliding-menu.collapse {
   /*left:-80%;*/
   -moz-transition-property: width, opacity, left, -moz-transform;
@@ -922,13 +921,12 @@ body {
   transition-timing-function: ease-in;
   -moz-transform: translateX(0);
   -ms-transform: translateX(0);
-  -o-transform: translateX(0);
   -webkit-transform: translateX(0);
   transform: translateX(0);
   /*opacity: 0;*/
 }
 
-/* line 91, ../sass/sliding-menu.scss */
+/* line 92, ../sass/sliding-menu.scss */
 .sliding-menu.expand {
   -moz-transition-property: width, opacity, left, -moz-transform;
   -o-transition-property: width, opacity, left, -o-transform;
@@ -944,7 +942,6 @@ body {
   transition-timing-function: ease-in;
   -moz-transform: translateX(100%);
   -ms-transform: translateX(100%);
-  -o-transform: translateX(100%);
   -webkit-transform: translateX(100%);
   transform: translateX(100%);
   /*width:80%;	*/
@@ -953,7 +950,7 @@ body {
   box-shadow: rgba(0, 0, 0, 0.75) 2px 0px 5px;
 }
 
-/* line 102, ../sass/sliding-menu.scss */
+/* line 103, ../sass/sliding-menu.scss */
 #config_interval {
   width: 4.5em;
   display: inline;

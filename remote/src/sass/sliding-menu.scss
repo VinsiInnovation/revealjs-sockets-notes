@@ -35,6 +35,7 @@ $icon-padding-left : 2.5em;
       font-family: 'open_sansregular';
       padding-left:$margin;
   		position: relative;
+      background-color: $bg-color-menu-item;
       @include box-shadow(rgba(black, 0.75) 0px -1px 1px);
   		border-top: thin solid white;
   		color: white;

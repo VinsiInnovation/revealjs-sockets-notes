@@ -42,10 +42,37 @@ plugins.directive('vpPlugin', ['$rootScope'
             return boxDiv;
           }
 
-          var ctrlArea = document.getElementById('sws-plugin-ctrl-vp');
-          ctrlArea.appendChild(addBox('play', '#FF0000', 'fa-play','50%'));
+          function addRange(id, color, icon, left){
+            var rangeDiv = document.createElement('input');
+            rangeDiv.setAttribute('id', 'sws-vp-range-'+id);
+            rangeDiv.setAttribute('type', 'range');
+            rangeDiv.setAttribute('value', '0');
+            rangeDiv.setAttribute('step', '1');
+            rangeDiv.setAttribute('min', '0');
+            rangeDiv.setAttribute('max', '0');
+            rangeDiv.style.left = left;
+            rangeDiv.style.width = '70%';
+           return rangeDiv;
+          }
 
-          iElement.find('#sws-vp-box-play').bind('click', function(){
+          // Add  input type range
+          //<input type="range" class="vertical" orient="vertical" />  
+          // writing-mode: bt-lr; /* IE */
+          //-webkit-appearance: slider-vertical; /* WebKit */
+          //width: 8px;
+          //height: 200px;
+          //padding: 0 5px;
+
+          // use font-awesome fa-volume-up
+          // use font awesome fa-step-forward & fa-step-backward 
+
+          var ctrlArea = document.getElementById('sws-plugin-ctrl-vp');
+          ctrlArea.appendChild(addBox('play', '#FF0000', 'fa-play','10%'));
+          ctrlArea.appendChild(addRange('time', '#FF0000', '','50%'));
+
+          iElement.find('#sws-vp-box-play').bind('click', function(event){
+            angular.element(event.target).toggleClass('fa-play');
+            angular.element(event.target).toggleClass('fa-pause');
             $scope.pluginCommunication('vp', {});  
           });
         }

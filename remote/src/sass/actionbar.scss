@@ -20,7 +20,7 @@
     position: absolute;
     top:0;
     left:0;
-    background:$bg-color;
+    background:$bg-color-abs;
     height:$abs-height;
     width:100%;    
     font-size:$font-size-abs;    
@@ -30,6 +30,7 @@
 
 .actionbar .icon-menu{
     position:absolute;
+    background-color: $bg-color-abs;
     border-right : thin solid $color-actions;
     left:0;
     top:0;
@@ -127,7 +128,7 @@
 .totalTime{
     font-weight: 400;
     font-size: $font-size-slide-number;
-    color:$font-color-timer;
+    color:$font-color-mute;
     
 }
 
@@ -137,7 +138,7 @@
 
 .actions_times{
     position: absolute;
-    background-color:$bg-color;
+    background-color:$bg-color-abs;
     top:0;
     right:0;
     height:$abs-height;
