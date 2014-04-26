@@ -8,7 +8,60 @@
  *                                  
  *                                  
  */
-/* line 6, ../sass/plugins.scss */
+/***
+ *       _____ ____  _      ____  _____   _____ 
+ *      / ____/ __ \| |    / __ \|  __ \ / ____|
+ *     | |   | |  | | |   | |  | | |__) | (___  
+ *     | |   | |  | | |   | |  | |  _  / \___ \ 
+ *     | |___| |__| | |___| |__| | | \ \ ____) |
+ *      \_____\____/|______\____/|_|  \_\_____/ 
+ *                                              
+ *                                              
+ */
+/* line 9, ../sass/plugins.scss */
+#notes ul.plugin-list {
+  list-style: none;
+  top: calc(45px + 5px);
+  top: -webkit-calc(45px + 5px);
+  -moz-box-shadow: rgba(0, 0, 0, 0.75) 0px 1px 3px inset;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.75) 0px 1px 3px inset;
+  box-shadow: rgba(0, 0, 0, 0.75) 0px 1px 3px inset;
+  padding: 0;
+  margin: 0;
+}
+/* line 17, ../sass/plugins.scss */
+#notes ul.plugin-list .plugin {
+  font-family: 'open_sansregular';
+  position: relative;
+  width: auto;
+  height: auto;
+  font-size: 14pt;
+  -moz-box-shadow: rgba(0, 0, 0, 0.75) 0px -1px 1px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.75) 0px -1px 1px;
+  box-shadow: rgba(0, 0, 0, 0.75) 0px -1px 1px;
+  text-align: left;
+  padding-left: 2.5em;
+  color: #675c53;
+  line-height: 45px;
+  height: 45px;
+}
+/* line 30, ../sass/plugins.scss */
+#notes ul.plugin-list .plugin a {
+  text-decoration: none;
+}
+/* line 34, ../sass/plugins.scss */
+#notes ul.plugin-list .plugin a:link, #notes ul.plugin-list .plugin a:visited, #notes ul.plugin-list .plugin a:hover, #notes ul.plugin-list .plugin a:active {
+  color: #575757;
+}
+/* line 38, ../sass/plugins.scss */
+#notes ul.plugin-list .plugin i {
+  position: absolute;
+  color: #575757;
+  line-height: 45px;
+  left: 10px;
+}
+
+/* line 48, ../sass/plugins.scss */
 .sws-plugin-box {
   position: absolute;
   width: 40px;
@@ -20,13 +73,13 @@
   line-height: 40px;
 }
 
-/* line 17, ../sass/plugins.scss */
+/* line 59, ../sass/plugins.scss */
 .sws-plugin-box.fa {
   background-color: #7F89A5;
   color: white;
 }
 
-/* line 22, ../sass/plugins.scss */
+/* line 64, ../sass/plugins.scss */
 #sws-plugins-area-content {
   position: absolute;
   top: 0;
@@ -35,7 +88,7 @@
   width: -webkit-calc(100% - 40px);
 }
 
-/* line 30, ../sass/plugins.scss */
+/* line 72, ../sass/plugins.scss */
 .sws-plugin-ctrl {
   position: absolute;
   top: 0;
@@ -44,7 +97,7 @@
   width: 100%;
 }
 
-/* line 38, ../sass/plugins.scss */
+/* line 80, ../sass/plugins.scss */
 #sws-box-close {
   right: 0;
 }

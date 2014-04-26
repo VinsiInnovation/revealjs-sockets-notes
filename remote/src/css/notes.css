@@ -91,27 +91,27 @@ body {
  *                                         
  *                                         
  */
-/* line 19, ../sass/notes.scss */
+/* line 18, ../sass/notes.scss */
 #notes {
   overflow: hidden;
   background-color: #fff;
   /*@include shadow;*/
 }
 
-/* line 26, ../sass/notes.scss */
+/* line 25, ../sass/notes.scss */
 #notes .title-abs, #notes .title-abs-plugins {
   position: absolute;
   background-color: #e0dac7;
-  color: white;
+  color: #575757;
   font-size: 14pt;
-  line-height: 35px;
+  line-height: 45px;
   top: 0;
-  height: 35px;
+  height: 45px;
   text-align: left;
   text-transform: uppercase;
 }
 
-/* line 38, ../sass/notes.scss */
+/* line 37, ../sass/notes.scss */
 #notes .title-abs:after, #notes .title-abs-plugins:after {
   content: '';
   position: absolute;
@@ -119,23 +119,23 @@ body {
   bottom: 0;
   left: 0;
   height: 5px;
-  background-color: #939183;
+  background-color: #575757;
 }
 
-/* line 48, ../sass/notes.scss */
+/* line 47, ../sass/notes.scss */
 #notes .title-abs.innactive:after, #notes .title-abs-plugins.innactive:after {
   height: 1px;
 }
 
-/* line 52, ../sass/notes.scss */
+/* line 51, ../sass/notes.scss */
 #notes .title-abs {
   left: 0;
-  padding-left: calc(35px + 10px);
-  padding-left: -webkit-calc(35px + 10px);
+  padding-left: calc(45px + 10px);
+  padding-left: -webkit-calc(45px + 10px);
   width: 50%;
 }
 
-/* line 59, ../sass/notes.scss */
+/* line 58, ../sass/notes.scss */
 #notes .title-abs-plugins {
   position: absolute;
   width: 50%;
@@ -144,55 +144,60 @@ body {
   padding-left: 10px;
 }
 
-/* line 69, ../sass/notes.scss */
+/* line 68, ../sass/notes.scss */
 #notes i {
   position: absolute;
   left: 10px;
   font-size: 19.5pt;
   text-align: center;
-  height: 35px;
-  line-height: 35px;
-  color: white;
+  height: 45px;
+  line-height: 45px;
+  color: #575757;
 }
 
-/* line 79, ../sass/notes.scss */
+/* line 78, ../sass/notes.scss */
+#notes .title-abs.innactive, #notes .title-abs-plugins.innactive {
+  color: #939193;
+}
+
+/* line 82, ../sass/notes.scss */
 #notes .title-abs.innactive + i {
-  color: white;
+  color: #939193;
 }
 
-/* line 84, ../sass/notes.scss */
+/* line 87, ../sass/notes.scss */
 #content-notes, ul.plugin-list, #notes .mask-plugins {
   position: absolute;
   left: 0;
   overflow: auto;
-  height: calc(100% - 35px);
-  height: -webkit-calc(100% - 35px);
+  height: calc(100% - 45px);
+  height: -webkit-calc(100% - 45px);
   width: 100%;
 }
 
-/* line 93, ../sass/notes.scss */
+/* line 96, ../sass/notes.scss */
 #content-notes, #notes .mask-plugins {
   padding: 0 10px;
-  top: 35px;
+  top: 45px;
   font-family: Arial, sans-serif;
   font-size: 2em;
   line-height: 1.2em;
 }
 
-/* line 101, ../sass/notes.scss */
+/* line 104, ../sass/notes.scss */
 #notes .mask-plugins {
   background-color: rgba(255, 255, 255, 0.75);
 }
 
-/* line 105, ../sass/notes.scss */
+/* line 108, ../sass/notes.scss */
 .hractionbar {
   position: absolute;
   width: 100%;
-  top: 35px;
+  top: 45px;
   left: 0;
 }
 
-/* line 112, ../sass/notes.scss */
+/* line 115, ../sass/notes.scss */
 .slide-number {
   background-color: #e0dac7;
   border-top: thin solid #675c53;
@@ -208,7 +213,7 @@ body {
   color: #675c53;
 }
 
-/* line 127, ../sass/notes.scss */
+/* line 130, ../sass/notes.scss */
 .curent-slide {
   color: #b7183b;
   font-size: 19.5pt;
@@ -219,47 +224,5 @@ body {
 *  PLUGINS
 *
 */
-/* line 141, ../sass/notes.scss */
-#notes ul.plugin-list {
-  list-style: none;
-  top: calc(35px + 5px);
-  top: -webkit-calc(35px + 5px);
-  -moz-box-shadow: rgba(0, 0, 0, 0.75) 0px 1px 3px inset;
-  -webkit-box-shadow: rgba(0, 0, 0, 0.75) 0px 1px 3px inset;
-  box-shadow: rgba(0, 0, 0, 0.75) 0px 1px 3px inset;
-  padding: 0;
-  margin: 0;
-}
-/* line 149, ../sass/notes.scss */
-#notes ul.plugin-list .plugin {
-  font-family: 'open_sansregular';
-  position: relative;
-  width: auto;
-  height: auto;
-  font-size: 14pt;
-  -moz-box-shadow: rgba(0, 0, 0, 0.75) 0px -1px 1px;
-  -webkit-box-shadow: rgba(0, 0, 0, 0.75) 0px -1px 1px;
-  box-shadow: rgba(0, 0, 0, 0.75) 0px -1px 1px;
-  text-align: left;
-  padding-left: 2.5em;
-  color: #675c53;
-  line-height: 45px;
-  height: 45px;
-}
-/* line 162, ../sass/notes.scss */
-#notes ul.plugin-list .plugin a {
-  text-decoration: none;
-}
-/* line 166, ../sass/notes.scss */
-#notes ul.plugin-list .plugin a:link, #notes ul.plugin-list .plugin a:visited, #notes ul.plugin-list .plugin a:hover, #notes ul.plugin-list .plugin a:active {
-  color: #3e3d40;
-}
-/* line 170, ../sass/notes.scss */
-#notes ul.plugin-list .plugin i {
-  position: absolute;
-  color: #939183;
-  line-height: 45px;
-  left: 10px;
-}
 
 /*# sourceMappingURL=notes.css.map */

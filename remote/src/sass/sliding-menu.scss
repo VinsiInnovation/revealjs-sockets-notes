@@ -5,18 +5,19 @@
 $menu-title-height : 50px;
 $row-height : 45px;
 $icon-padding-left : 2.5em;
+$menu-width : 300px;
 
 .sliding-menu{
 	position: absolute;
   /*left: 0;*/
   top: calc(#{$abs-height} + #{$margin-timer});
 	top: -webkit-calc(#{$abs-height} + #{$margin-timer});
-  width:80%;    
+  width:$menu-width;    
   height : calc(100% - #{$abs-height} - #{$margin-timer});
 	height : -webkit-calc(100% - #{$abs-height} - #{$margin-timer});
 	background-color: $bg-color-menu;
 	color: $font-color-menu;
-	left:-80%;
+	left:-$menu-width;
 	z-index:100;
 	overflow:auto;
   font-size: $font-size-menu;
@@ -98,6 +99,7 @@ $icon-padding-left : 2.5em;
 	/*width:80%;	*/
   @include box-shadow(rgba(black, 0.75) 2px 0px 5px);
 }
+
 
 
 #config_interval{

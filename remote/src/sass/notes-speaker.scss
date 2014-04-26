@@ -134,8 +134,8 @@ body {
         width:-webkit-calc(70% - #{$margin} - #{$margin});
         height:$height-content-landscape;
         height:$height-content-landscape-safari;
-        top: calc( #{$abs-height} + (2 * #{$margin-timer}));
-        top: -webkit-calc( #{$abs-height} + (2 * #{$margin-timer}));
+        top: calc( #{$abs-height} + #{$margin-timer});
+        top: -webkit-calc( #{$abs-height} + #{$margin-timer});
         bottom:0;
         left:30%;
     }   

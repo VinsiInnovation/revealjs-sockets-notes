@@ -14,7 +14,6 @@
  *                                         
  */
 
- $abs-notes-height: 35px;
 
 #notes{
     overflow:hidden;
@@ -26,7 +25,7 @@
 #notes .title-abs, #notes .title-abs-plugins{
     position: absolute;
     background-color: $bg-color;
-    color: white;
+    color: $font-color;
     font-size: $font-size-submenu;
     line-height: $abs-notes-height;
     top: 0;
@@ -42,7 +41,7 @@
     bottom: 0;
     left: 0;
     height: $height-tab-indicator;
-    background-color: $bg-color-menu;
+    background-color: $bg-color-tab;
 }
 
 #notes .title-abs.innactive:after, #notes .title-abs-plugins.innactive:after{
@@ -73,11 +72,15 @@
     text-align: center;
     height: $abs-notes-height;
     line-height: $abs-notes-height;
-    color: white;
+    color: $font-color;
+}
+
+#notes  .title-abs.innactive, #notes .title-abs-plugins.innactive{
+    color: $font-color-inactive;    
 }
 
 #notes  .title-abs.innactive+i{
-    color: white;
+    color: $font-color-inactive;
 }
 
 
@@ -135,47 +138,6 @@
 *
 */
 
-$row-height : 45px;
-$icon-padding-left : 2.5em;
-
-#notes ul.plugin-list{
-    list-style: none;
-    top:calc(#{$abs-notes-height} + 5px);
-    top:-webkit-calc(#{$abs-notes-height} + 5px);
-    @include box-shadow(rgba(black, 0.75) 0px 1px 3px inset);
-    padding: 0;
-    margin: 0;
-    
-    .plugin{
-        font-family: 'open_sansregular';
-        position: relative;     
-        width: auto;
-        height: auto;
-        font-size: $font-size-submenu;
-        @include box-shadow(rgba(black, 0.75) 0px -1px 1px);
-        text-align: left;
-        padding-left: $icon-padding-left;
-        color: $font-color-notes;
-        line-height: $row-height;
-        height: $row-height;
-
-        a{
-            text-decoration: none;
-        }
-
-        a:link, a:visited, a:hover, a:active{
-            color: $font-color;
-        }
-
-        i{
-            position: absolute;
-            color: $color-actions;
-            line-height: $row-height;
-            left: $margin;
-        }
-
-    }
-}
 
 
 
