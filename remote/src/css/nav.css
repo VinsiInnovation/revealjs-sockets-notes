@@ -189,7 +189,16 @@
   font-size: 19.5pt;
 }
 
-/* line 155, ../sass/nav.scss */
+@media screen and (orientation: landscape) {
+  /* line 156, ../sass/nav.scss */
+  #preview .slide-preview-number {
+    top: initial;
+    right: initial;
+    left: -1px;
+    bottom: -1px;
+  }
+}
+/* line 165, ../sass/nav.scss */
 #preview #show.hide, #preview #back.visible.hide {
   -moz-transition-property: opacity;
   -o-transition-property: opacity;

@@ -46,8 +46,8 @@ body {
     border-width:0px;
     position: absolute;    
     background-color:$panel-color;
-    margin-left:$margin;
-    margin-right:$margin;
+    /*margin-left:$margin;
+    margin-right:$margin;*/
 }
 
 /***
@@ -72,21 +72,22 @@ body {
 
 #notes, #time, #preview{
     position: absolute;
-    width:calc(100% - (#{$margin} * 2));
-    width:-webkit-calc(100% - (#{$margin} * 2));
+    /*width:calc(100% - (#{$margin} * 2));
+    width:-webkit-calc(100% - (#{$margin} * 2));*/
+    width:100%;
     left:0;
 }
 
 #notes {    
     height: $height-content-portrait;
     height: $height-content-portrait-safari;
-    top: calc( #{$abs-height} + (2 * #{$margin-timer}));
-    top: -webkit-calc( #{$abs-height} + (2 * #{$margin-timer}));
+    top: calc( #{$abs-height} +  #{$margin-timer});
+    top: -webkit-calc( #{$abs-height} + #{$margin-timer});
 }
 
 #notes.fullSize{
-    height: calc(100% - #{$abs-height} - #{$margin} - (2 * #{$margin-timer})) ;    
-    height: -webkit-calc(100% - #{$abs-height} - #{$margin} - (2 * #{$margin-timer})) ;    
+    height: calc(100% - #{$abs-height} - #{$margin} - #{$margin-timer}) ;    
+    height: -webkit-calc(100% - #{$abs-height} - #{$margin} - #{$margin-timer}) ;    
     z-index:50;
 }
 
@@ -101,7 +102,7 @@ body {
     height: $height-content-portrait;
     height: $height-content-portrait-safari;
     bottom:0;
-    @include shadow;
+    /*@include shadow;*/
 }
 
 
@@ -118,7 +119,7 @@ body {
     #notes{
         width:calc(30% - #{$margin} - #{$margin});        
         width:-webkit-calc(30% - #{$margin} - #{$margin});        
-        left:0;
+        left:$margin;
         height:$height-content-landscape; 
         height:$height-content-landscape-safari; 
     }    

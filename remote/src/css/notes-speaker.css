@@ -209,7 +209,16 @@
   font-size: 19.5pt;
 }
 
-/* line 155, ../sass/nav.scss */
+@media screen and (orientation: landscape) {
+  /* line 156, ../sass/nav.scss */
+  #preview .slide-preview-number {
+    top: initial;
+    right: initial;
+    left: -1px;
+    bottom: -1px;
+  }
+}
+/* line 165, ../sass/nav.scss */
 #preview #show.hide, #preview #back.visible.hide {
   -moz-transition-property: opacity;
   -o-transition-property: opacity;
@@ -323,15 +332,14 @@ body {
 #notes {
   overflow: hidden;
   background-color: #fff;
-  -moz-box-shadow: rgba(0, 0, 0, 0.75) 0px 0px 5px;
-  -webkit-box-shadow: rgba(0, 0, 0, 0.75) 0px 0px 5px;
-  box-shadow: rgba(0, 0, 0, 0.75) 0px 0px 5px;
+  /*@include shadow;*/
 }
 
 /* line 26, ../sass/notes.scss */
 #notes .title-abs, #notes .title-abs-plugins {
   position: absolute;
-  color: #675c53;
+  background-color: #e0dac7;
+  color: white;
   font-size: 14pt;
   line-height: 35px;
   top: 0;
@@ -340,14 +348,23 @@ body {
   text-transform: uppercase;
 }
 
-/* line 37, ../sass/notes.scss */
-#notes .title-abs.innactive, #notes .title-abs-plugins.innactive {
-  border-bottom: thin solid #675c53;
-  color: white;
+/* line 38, ../sass/notes.scss */
+#notes .title-abs:after, #notes .title-abs-plugins:after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  height: 5px;
   background-color: #939183;
 }
 
-/* line 43, ../sass/notes.scss */
+/* line 48, ../sass/notes.scss */
+#notes .title-abs.innactive:after, #notes .title-abs-plugins.innactive:after {
+  height: 1px;
+}
+
+/* line 52, ../sass/notes.scss */
 #notes .title-abs {
   left: 0;
   padding-left: calc(35px + 10px);
@@ -355,16 +372,16 @@ body {
   width: 50%;
 }
 
-/* line 50, ../sass/notes.scss */
+/* line 59, ../sass/notes.scss */
 #notes .title-abs-plugins {
   position: absolute;
   width: 50%;
   right: 0;
-  border-left: thin solid #675c53;
+  /*border-left: thin solid $font-color-notes;*/
   padding-left: 10px;
 }
 
-/* line 60, ../sass/notes.scss */
+/* line 69, ../sass/notes.scss */
 #notes i {
   position: absolute;
   left: 10px;
@@ -372,15 +389,15 @@ body {
   text-align: center;
   height: 35px;
   line-height: 35px;
-  color: #E0DAC7;
+  color: white;
 }
 
-/* line 70, ../sass/notes.scss */
+/* line 79, ../sass/notes.scss */
 #notes .title-abs.innactive + i {
   color: white;
 }
 
-/* line 75, ../sass/notes.scss */
+/* line 84, ../sass/notes.scss */
 #content-notes, ul.plugin-list, #notes .mask-plugins {
   position: absolute;
   left: 0;
@@ -390,7 +407,7 @@ body {
   width: 100%;
 }
 
-/* line 84, ../sass/notes.scss */
+/* line 93, ../sass/notes.scss */
 #content-notes, #notes .mask-plugins {
   padding: 0 10px;
   top: 35px;
@@ -399,12 +416,12 @@ body {
   line-height: 1.2em;
 }
 
-/* line 92, ../sass/notes.scss */
+/* line 101, ../sass/notes.scss */
 #notes .mask-plugins {
   background-color: rgba(255, 255, 255, 0.75);
 }
 
-/* line 96, ../sass/notes.scss */
+/* line 105, ../sass/notes.scss */
 .hractionbar {
   position: absolute;
   width: 100%;
@@ -412,7 +429,7 @@ body {
   left: 0;
 }
 
-/* line 103, ../sass/notes.scss */
+/* line 112, ../sass/notes.scss */
 .slide-number {
   background-color: #e0dac7;
   border-top: thin solid #675c53;
@@ -425,10 +442,10 @@ body {
   bottom: -1px;
   height: 40px;
   font-size: 12pt;
-  color: white;
+  color: #675c53;
 }
 
-/* line 118, ../sass/notes.scss */
+/* line 127, ../sass/notes.scss */
 .curent-slide {
   color: #b7183b;
   font-size: 19.5pt;
@@ -439,7 +456,7 @@ body {
 *  PLUGINS
 *
 */
-/* line 132, ../sass/notes.scss */
+/* line 141, ../sass/notes.scss */
 #notes ul.plugin-list {
   list-style: none;
   top: calc(35px + 5px);
@@ -450,7 +467,7 @@ body {
   padding: 0;
   margin: 0;
 }
-/* line 140, ../sass/notes.scss */
+/* line 149, ../sass/notes.scss */
 #notes ul.plugin-list .plugin {
   font-family: 'open_sansregular';
   position: relative;
@@ -466,15 +483,15 @@ body {
   line-height: 45px;
   height: 45px;
 }
-/* line 153, ../sass/notes.scss */
+/* line 162, ../sass/notes.scss */
 #notes ul.plugin-list .plugin a {
   text-decoration: none;
 }
-/* line 157, ../sass/notes.scss */
+/* line 166, ../sass/notes.scss */
 #notes ul.plugin-list .plugin a:link, #notes ul.plugin-list .plugin a:visited, #notes ul.plugin-list .plugin a:hover, #notes ul.plugin-list .plugin a:active {
   color: #3e3d40;
 }
-/* line 161, ../sass/notes.scss */
+/* line 170, ../sass/notes.scss */
 #notes ul.plugin-list .plugin i {
   position: absolute;
   color: #939183;
@@ -1051,8 +1068,8 @@ body {
   border-width: 0px;
   position: absolute;
   background-color: white;
-  margin-left: 10px;
-  margin-right: 10px;
+  /*margin-left:$margin;
+  margin-right:$margin;*/
 }
 
 /***
@@ -1068,44 +1085,43 @@ body {
 /* line 73, ../sass/notes-speaker.scss */
 #notes, #time, #preview {
   position: absolute;
-  width: calc(100% - (10px * 2));
-  width: -webkit-calc(100% - (10px * 2));
+  /*width:calc(100% - (10px * 2));
+  width:-webkit-calc(100% - (10px * 2));*/
+  width: 100%;
   left: 0;
 }
 
-/* line 80, ../sass/notes-speaker.scss */
+/* line 81, ../sass/notes-speaker.scss */
 #notes {
   height: calc((100% - 40px - (2 * 10px) - (2 * 7px)) / 2);
   height: -webkit-calc((100% - 40px - (2 * 10px) - (2 * 7px)) / 2);
-  top: calc(40px + (2 * 7px));
-  top: -webkit-calc(40px + (2 * 7px));
+  top: calc(40px +  7px);
+  top: -webkit-calc(40px + 7px);
 }
 
-/* line 87, ../sass/notes-speaker.scss */
+/* line 88, ../sass/notes-speaker.scss */
 #notes.fullSize {
-  height: calc(100% - 40px - 10px - (2 * 7px));
-  height: -webkit-calc(100% - 40px - 10px - (2 * 7px));
+  height: calc(100% - 40px - 10px - 7px);
+  height: -webkit-calc(100% - 40px - 10px - 7px);
   z-index: 50;
 }
 
-/* line 93, ../sass/notes-speaker.scss */
+/* line 94, ../sass/notes-speaker.scss */
 #notes.upPlugin {
   top: calc(40px + (2 * 7px) - 70px);
   top: -webkit-calc(40px + (2 * 7px) - 70px);
 }
 
-/* line 99, ../sass/notes-speaker.scss */
+/* line 100, ../sass/notes-speaker.scss */
 #preview {
   margin-bottom: 10px;
   height: calc((100% - 40px - (2 * 10px) - (2 * 7px)) / 2);
   height: -webkit-calc((100% - 40px - (2 * 10px) - (2 * 7px)) / 2);
   bottom: 0;
-  -moz-box-shadow: rgba(0, 0, 0, 0.75) 0px 0px 5px;
-  -webkit-box-shadow: rgba(0, 0, 0, 0.75) 0px 0px 5px;
-  box-shadow: rgba(0, 0, 0, 0.75) 0px 0px 5px;
+  /*@include shadow;*/
 }
 
-/* line 108, ../sass/notes-speaker.scss */
+/* line 109, ../sass/notes-speaker.scss */
 #sws-plugins-area {
   position: absolute;
   width: 100%;
@@ -1116,22 +1132,22 @@ body {
 }
 
 @media screen and (orientation: landscape) {
-  /* line 118, ../sass/notes-speaker.scss */
+  /* line 119, ../sass/notes-speaker.scss */
   #notes {
     width: calc(30% - 10px - 10px);
     width: -webkit-calc(30% - 10px - 10px);
-    left: 0;
+    left: 10px;
     height: calc(100% - 40px - 10px - (2 * 7px));
     height: -webkit-calc(100% - 40px - 10px - (2 * 7px));
   }
 
-  /* line 126, ../sass/notes-speaker.scss */
+  /* line 127, ../sass/notes-speaker.scss */
   #notes.fullSize {
     width: calc(100% - (2 * 10px));
     width: -webkit-calc(100% - (2 * 10px));
   }
 
-  /* line 131, ../sass/notes-speaker.scss */
+  /* line 132, ../sass/notes-speaker.scss */
   #preview {
     width: calc(70% - 10px - 10px);
     width: -webkit-calc(70% - 10px - 10px);
@@ -1143,7 +1159,7 @@ body {
     left: 30%;
   }
 
-  /* line 142, ../sass/notes-speaker.scss */
+  /* line 143, ../sass/notes-speaker.scss */
   #sws-plugins-area {
     width: calc(30% - 10px - 10px);
     width: -webkit-calc(30% - 10px - 10px);
@@ -1161,14 +1177,14 @@ body {
  *                                                              
  *                                                              
  */
-/* line 162, ../sass/notes-speaker.scss */
+/* line 163, ../sass/notes-speaker.scss */
 #wrap-next-slide {
   position: absolute;
   width: 100%;
   height: 100%;
 }
 
-/* line 168, ../sass/notes-speaker.scss */
+/* line 169, ../sass/notes-speaker.scss */
 .slides {
   position: relative;
   margin-bottom: 10px;
@@ -1177,7 +1193,7 @@ body {
   background: #1c1e20;
 }
 
-/* line 176, ../sass/notes-speaker.scss */
+/* line 177, ../sass/notes-speaker.scss */
 .slides span {
   /*position: absolute;*/
   top: 3px;
@@ -1187,7 +1203,7 @@ body {
   /*    color: rgba( 255, 255, 255, 0.9 );*/
 }
 
-/* line 185, ../sass/notes-speaker.scss */
+/* line 186, ../sass/notes-speaker.scss */
 .error {
   font-weight: bold;
   color: red;
@@ -1196,12 +1212,12 @@ body {
   margin-top: 10%;
 }
 
-/* line 193, ../sass/notes-speaker.scss */
+/* line 194, ../sass/notes-speaker.scss */
 .error code {
   font-family: monospace;
 }
 
-/* line 197, ../sass/notes-speaker.scss */
+/* line 198, ../sass/notes-speaker.scss */
 iframe {
   border: none;
 }

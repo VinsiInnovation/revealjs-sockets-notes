@@ -19,13 +19,14 @@
 #notes{
     overflow:hidden;
     background-color: #fff;
-    @include shadow;
+    /*@include shadow;*/
 }
 
 
 #notes .title-abs, #notes .title-abs-plugins{
     position: absolute;
-    color: $font-color-notes;
+    background-color: $bg-color;
+    color: white;
     font-size: $font-size-submenu;
     line-height: $abs-notes-height;
     top: 0;
@@ -34,10 +35,18 @@
     text-transform: uppercase;
 }
 
-#notes .title-abs.innactive, #notes .title-abs-plugins.innactive{
-    border-bottom: thin solid $font-color-notes;
-    color: white;
+#notes .title-abs:after, #notes .title-abs-plugins:after{
+    content: '';
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    height: $height-tab-indicator;
     background-color: $bg-color-menu;
+}
+
+#notes .title-abs.innactive:after, #notes .title-abs-plugins.innactive:after{
+    height: 1px;
 }
 
 #notes .title-abs{
@@ -51,7 +60,7 @@
     position: absolute;
     width: 50%;
     right: 0;
-    border-left: thin solid $font-color-notes;
+    /*border-left: thin solid $font-color-notes;*/
     padding-left: 10px;
 }
 
@@ -64,7 +73,7 @@
     text-align: center;
     height: $abs-notes-height;
     line-height: $abs-notes-height;
-    color: #E0DAC7;
+    color: white;
 }
 
 #notes  .title-abs.innactive+i{
@@ -112,7 +121,7 @@
     bottom: -1px;
     height: 40px;
     font-size: 12pt;
-    color: $font-color-timer;
+    color: $font-color-notes;
 }
 
 .curent-slide{

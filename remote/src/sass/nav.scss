@@ -152,6 +152,16 @@ $height-back : 30px;
     
 }
 
+@media screen and (orientation:landscape){
+    #preview .slide-preview-number{
+        top: initial;
+        right: initial;
+        left : -1px;    
+        bottom : -1px;
+    }
+}
+
+
 #preview #show.hide, #preview #back.visible.hide{
     @include transition-property(opacity);
     @include transition-duration(6s);

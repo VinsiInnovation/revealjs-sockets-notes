@@ -24,6 +24,8 @@ plugins.directive('vpPlugin', ['$rootScope'
       $scope.vpClick = function(){
         if (!init){
 
+          $scope.ui.excludeArray.push('sws-vp-range-time');
+
           init = true;
           // We add color div to change the color of pointer
           function addBox(id, color, icon, left){
@@ -42,16 +44,18 @@ plugins.directive('vpPlugin', ['$rootScope'
             return boxDiv;
           }
 
-          function addRange(id, color, icon, left){
+          function addRange(id, left){
             var rangeDiv = document.createElement('input');
+            rangeDiv.classList.add('sws-plugin-box');
+            rangeDiv.classList.add('sws-plugin-vp-range');
             rangeDiv.setAttribute('id', 'sws-vp-range-'+id);
             rangeDiv.setAttribute('type', 'range');
             rangeDiv.setAttribute('value', '0');
             rangeDiv.setAttribute('step', '1');
             rangeDiv.setAttribute('min', '0');
-            rangeDiv.setAttribute('max', '0');
+            rangeDiv.setAttribute('max', '100');
             rangeDiv.style.left = left;
-            rangeDiv.style.width = '70%';
+            rangeDiv.style.width = '50%';
            return rangeDiv;
           }
 
@@ -68,7 +72,7 @@ plugins.directive('vpPlugin', ['$rootScope'
 
           var ctrlArea = document.getElementById('sws-plugin-ctrl-vp');
           ctrlArea.appendChild(addBox('play', '#FF0000', 'fa-play','10%'));
-          ctrlArea.appendChild(addRange('time', '#FF0000', '','50%'));
+          ctrlArea.appendChild(addRange('time','30%'));
 
           iElement.find('#sws-vp-box-play').bind('click', function(event){
             angular.element(event.target).toggleClass('fa-play');
@@ -96,6 +100,12 @@ plugins.directive('vpPlugin', ['$rootScope'
       var size = 40;      
 
       var pluginStyleSheet = swsControl.createStyleSheet('vp');
+
+      pluginStyleSheet.insertRule('.sws-plugin-vp-range:before {'+
+        'content : attr(min); '+
+        'position : absolute; '+
+        'left : 0; '+
+      '}',0);
       
     }
   };
