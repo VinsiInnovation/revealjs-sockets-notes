@@ -1078,6 +1078,66 @@ body {
 }
 
 /* line 44, ../sass/notes-speaker.scss */
+.main-content-app, .main-content-app-scroll {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* line 51, ../sass/notes-speaker.scss */
+.main-content-app {
+  overflow: hidden;
+}
+
+/* line 55, ../sass/notes-speaker.scss */
+.main-content-app-scroll.collapse {
+  /*left:-80%;*/
+  -moz-transition-property: width, opacity, left, -moz-transform;
+  -o-transition-property: width, opacity, left, -o-transform;
+  -webkit-transition-property: width, opacity, left, -webkit-transform;
+  transition-property: width, opacity, left, transform;
+  -moz-transition-duration: 0.2s;
+  -o-transition-duration: 0.2s;
+  -webkit-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+  -moz-transition-timing-function: ease-in;
+  -o-transition-timing-function: ease-in;
+  -webkit-transition-timing-function: ease-in;
+  transition-timing-function: ease-in;
+  -moz-transform: translateX(0);
+  -ms-transform: translateX(0);
+  -webkit-transform: translateX(0);
+  transform: translateX(0);
+  /*opacity: 0;*/
+}
+
+/* line 64, ../sass/notes-speaker.scss */
+.main-content-app-scroll.expand {
+  -moz-transition-property: width, opacity, left, -moz-transform;
+  -o-transition-property: width, opacity, left, -o-transform;
+  -webkit-transition-property: width, opacity, left, -webkit-transform;
+  transition-property: width, opacity, left, transform;
+  -moz-transition-duration: 0.2s;
+  -o-transition-duration: 0.2s;
+  -webkit-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+  -moz-transition-timing-function: ease-in;
+  -o-transition-timing-function: ease-in;
+  -webkit-transition-timing-function: ease-in;
+  transition-timing-function: ease-in;
+  -moz-transform: translateX(300px);
+  -ms-transform: translateX(300px);
+  -webkit-transform: translateX(300px);
+  transform: translateX(300px);
+  /*width:80%;    */
+  -moz-box-shadow: rgba(0, 0, 0, 0.75) 2px 0px 5px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.75) 2px 0px 5px;
+  box-shadow: rgba(0, 0, 0, 0.75) 2px 0px 5px;
+}
+
+/* line 75, ../sass/notes-speaker.scss */
 .border {
   border-style: solid;
   border-width: 0px;
@@ -1097,7 +1157,7 @@ body {
  *                                                                                                               
  *                                                                                                               
  */
-/* line 73, ../sass/notes-speaker.scss */
+/* line 104, ../sass/notes-speaker.scss */
 #notes, #time, #preview {
   position: absolute;
   /*width:calc(100% - (10px * 2));
@@ -1106,7 +1166,7 @@ body {
   left: 0;
 }
 
-/* line 81, ../sass/notes-speaker.scss */
+/* line 112, ../sass/notes-speaker.scss */
 #notes {
   height: calc((100% - 40px - (2 * 10px) - (2 * 7px)) / 2);
   height: -webkit-calc((100% - 40px - (2 * 10px) - (2 * 7px)) / 2);
@@ -1114,20 +1174,20 @@ body {
   top: -webkit-calc(40px + 7px);
 }
 
-/* line 88, ../sass/notes-speaker.scss */
+/* line 119, ../sass/notes-speaker.scss */
 #notes.fullSize {
   height: calc(100% - 40px - 10px - 7px);
   height: -webkit-calc(100% - 40px - 10px - 7px);
   z-index: 50;
 }
 
-/* line 94, ../sass/notes-speaker.scss */
+/* line 125, ../sass/notes-speaker.scss */
 #notes.upPlugin {
   top: calc(40px + (2 * 7px) - 70px);
   top: -webkit-calc(40px + (2 * 7px) - 70px);
 }
 
-/* line 100, ../sass/notes-speaker.scss */
+/* line 131, ../sass/notes-speaker.scss */
 #preview {
   margin-bottom: 10px;
   height: calc((100% - 40px - (2 * 10px) - (2 * 7px)) / 2);
@@ -1136,7 +1196,7 @@ body {
   /*@include shadow;*/
 }
 
-/* line 109, ../sass/notes-speaker.scss */
+/* line 140, ../sass/notes-speaker.scss */
 #sws-plugins-area {
   position: absolute;
   width: 100%;
@@ -1147,7 +1207,7 @@ body {
 }
 
 @media screen and (orientation: landscape) {
-  /* line 119, ../sass/notes-speaker.scss */
+  /* line 150, ../sass/notes-speaker.scss */
   #notes {
     width: calc(30% - 10px - 10px);
     width: -webkit-calc(30% - 10px - 10px);
@@ -1156,13 +1216,13 @@ body {
     height: -webkit-calc(100% - 40px - 10px - (2 * 7px));
   }
 
-  /* line 127, ../sass/notes-speaker.scss */
+  /* line 158, ../sass/notes-speaker.scss */
   #notes.fullSize {
     width: calc(100% - (2 * 10px));
     width: -webkit-calc(100% - (2 * 10px));
   }
 
-  /* line 132, ../sass/notes-speaker.scss */
+  /* line 163, ../sass/notes-speaker.scss */
   #preview {
     width: calc(70% - 10px - 10px);
     width: -webkit-calc(70% - 10px - 10px);
@@ -1174,7 +1234,7 @@ body {
     left: 30%;
   }
 
-  /* line 143, ../sass/notes-speaker.scss */
+  /* line 174, ../sass/notes-speaker.scss */
   #sws-plugins-area {
     width: calc(30% - 10px - 10px);
     width: -webkit-calc(30% - 10px - 10px);
@@ -1192,14 +1252,14 @@ body {
  *                                                              
  *                                                              
  */
-/* line 163, ../sass/notes-speaker.scss */
+/* line 194, ../sass/notes-speaker.scss */
 #wrap-next-slide {
   position: absolute;
   width: 100%;
   height: 100%;
 }
 
-/* line 169, ../sass/notes-speaker.scss */
+/* line 200, ../sass/notes-speaker.scss */
 .slides {
   position: relative;
   margin-bottom: 10px;
@@ -1208,7 +1268,7 @@ body {
   background: #1c1e20;
 }
 
-/* line 177, ../sass/notes-speaker.scss */
+/* line 208, ../sass/notes-speaker.scss */
 .slides span {
   /*position: absolute;*/
   top: 3px;
@@ -1218,7 +1278,7 @@ body {
   /*    color: rgba( 255, 255, 255, 0.9 );*/
 }
 
-/* line 186, ../sass/notes-speaker.scss */
+/* line 217, ../sass/notes-speaker.scss */
 .error {
   font-weight: bold;
   color: red;
@@ -1227,12 +1287,12 @@ body {
   margin-top: 10%;
 }
 
-/* line 194, ../sass/notes-speaker.scss */
+/* line 225, ../sass/notes-speaker.scss */
 .error code {
   font-family: monospace;
 }
 
-/* line 198, ../sass/notes-speaker.scss */
+/* line 229, ../sass/notes-speaker.scss */
 iframe {
   border: none;
 }

@@ -7,7 +7,10 @@ components.directive('slidingMenu', ['$rootScope','$injector'
     require: '^sws',
     restrict: 'E',
     scope: true,    
+    transclude : true,
     link: function postLink($scope, iElement, iAttrs, swsControl) { 
+
+      var srcollElement = iElement.find('.main-content-app-scroll');
 
       $scope.stop = function(){
         $rootScope.$broadcast('resetTimer');  
@@ -57,19 +60,19 @@ components.directive('slidingMenu', ['$rootScope','$injector'
           event.gesture.preventDefault();
           $scope.$apply(function(){
             if (event.type === 'release'){
-              iElement[0].style[Modernizr.prefixed('transform')] = '';
+              srcollElement[0].style[Modernizr.prefixed('transform')] = '';
               if (event.gesture.direction === 'left'){
                 $scope.ui.showMenuClass = 'collapse';                
               }else if (event.gesture.direction === 'right'){
                 $scope.ui.showMenuClass = 'expand';
-                iElement.css('left', '');
+                srcollElement.css('left', '');
               }
             }else if (event.type === 'dragstart' || event.type === 'touch'){
               expandDirection = $scope.ui.showMenuClass === 'collapse';
             }else if (event.type === 'drags' || event.type === 'dragleft'  || event.type === 'dragright'){
               $scope.ui.showMenuClass = '';
               var delta = expandDirection ? event.gesture.deltaX : Math.round( (screen.width * 0.8) + event.gesture.deltaX);
-              iElement[0].style[Modernizr.prefixed('transform')] = 'translateX('+delta+'px)';
+              srcollElement[0].style[Modernizr.prefixed('transform')] = 'translateX('+delta+'px)';
             }
           });
         }
