@@ -77,7 +77,12 @@ plugins.directive('vpPlugin', ['$rootScope'
           iElement.find('#sws-vp-box-play').bind('click', function(event){
             angular.element(event.target).toggleClass('fa-play');
             angular.element(event.target).toggleClass('fa-pause');
-            $scope.pluginCommunication('vp', {});  
+            $scope.pluginCommunication('vp', {action:'play-pause'});  
+          });
+
+           iElement.find('#sws-vp-range-time').bind('change', function(event){
+            console.log(event.target.value);
+            $scope.pluginCommunication('vp', {action:'skip', time : event.target.value});  
           });
         }
         
@@ -101,10 +106,42 @@ plugins.directive('vpPlugin', ['$rootScope'
 
       var pluginStyleSheet = swsControl.createStyleSheet('vp');
 
-      pluginStyleSheet.insertRule('.sws-plugin-vp-range:before {'+
-        'content : attr(min); '+
+      pluginStyleSheet.insertRule('.sws-plugin-vp-range:before, .sws-plugin-vp-range:after {'+
         'position : absolute; '+
-        'left : 0; '+
+        'font-size : 10px;'+
+        'top : 0.3em;'+
+        'color : #aaa;'+
+      '}',0);
+
+      pluginStyleSheet.insertRule('.sws-plugin-vp-range:before{'+
+        'content : attr(min); '+
+        'left : 0em; '+
+      '}',0);
+
+      pluginStyleSheet.insertRule('.sws-plugin-vp-range:after {'+
+        'content : attr(max); '+
+        'right : 0em; '+
+      '}',0);
+
+      pluginStyleSheet.insertRule('.sws-plugin-vp-range{'+
+        '-webkit-appearance: none;'+
+        'background-color: black;'+
+        'top : 30px;'+
+        'height: 2px;'+
+      '}',0);
+
+      pluginStyleSheet.insertRule('.sws-plugin-vp-range::-webkit-slider-thumb{'+
+        '-webkit-appearance: none;'+
+        'position: relative;'+
+        'top: -1px;'+
+        'z-index: 1;'+
+        'width: 11px;'+
+        'height: 11px;'+
+ 
+        '-webkit-border-radius: 40px;'+
+        '-moz-border-radius: 40px;'+
+        'border-radius: 40px;'+
+        'background-color: #666;'+
       '}',0);
       
     }

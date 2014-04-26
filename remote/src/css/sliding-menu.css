@@ -18,7 +18,7 @@
  *                                  
  *                                  
  */
-/* line 10, ../sass/sliding-menu.scss */
+/* line 9, ../sass/sliding-menu.scss */
 .sliding-menu {
   position: absolute;
   /*left: 0;*/
@@ -35,7 +35,7 @@
   font-size: 18pt;
   font-weight: 400;
 }
-/* line 27, ../sass/sliding-menu.scss */
+/* line 26, ../sass/sliding-menu.scss */
 .sliding-menu .menu-title {
   padding-left: 10px;
   margin-bottom: -10px;
@@ -43,7 +43,7 @@
   height: 50px;
   line-height: 50px;
 }
-/* line 35, ../sass/sliding-menu.scss */
+/* line 34, ../sass/sliding-menu.scss */
 .sliding-menu .menu-icon {
   font-family: 'open_sansregular';
   padding-left: 10px;
@@ -58,29 +58,29 @@
   height: 45px;
   font-size: 14pt;
 }
-/* line 47, ../sass/sliding-menu.scss */
+/* line 46, ../sass/sliding-menu.scss */
 .sliding-menu .menu-icon .fa {
   color: white;
 }
-/* line 51, ../sass/sliding-menu.scss */
+/* line 50, ../sass/sliding-menu.scss */
 .sliding-menu .menu-icon .fa-stack {
   width: 1em;
   height: 1em;
   line-height: 1em;
 }
-/* line 57, ../sass/sliding-menu.scss */
+/* line 56, ../sass/sliding-menu.scss */
 .sliding-menu .menu-icon .fa-stack-2x {
   font-size: 1em;
 }
-/* line 61, ../sass/sliding-menu.scss */
+/* line 60, ../sass/sliding-menu.scss */
 .sliding-menu .menu-icon .fa-stack-1x {
   font-size: 0.8em;
 }
-/* line 65, ../sass/sliding-menu.scss */
+/* line 64, ../sass/sliding-menu.scss */
 .sliding-menu .menu-icon .fa.fa-inverse {
   color: #939183;
 }
-/* line 69, ../sass/sliding-menu.scss */
+/* line 68, ../sass/sliding-menu.scss */
 .sliding-menu .menu-icon .menu-icon-text {
   position: absolute;
   top: 0;
@@ -92,7 +92,7 @@
   left: -80%;
 }
 */
-/* line 84, ../sass/sliding-menu.scss */
+/* line 83, ../sass/sliding-menu.scss */
 .sliding-menu.collapse {
   /*left:-80%;*/
   -moz-transition-property: width, opacity, left, -moz-transform;
@@ -114,7 +114,7 @@
   /*opacity: 0;*/
 }
 
-/* line 93, ../sass/sliding-menu.scss */
+/* line 92, ../sass/sliding-menu.scss */
 .sliding-menu.expand {
   -moz-transition-property: width, opacity, left, -moz-transform;
   -o-transition-property: width, opacity, left, -o-transform;
@@ -138,7 +138,7 @@
   box-shadow: rgba(0, 0, 0, 0.75) 2px 0px 5px;
 }
 
-/* line 105, ../sass/sliding-menu.scss */
+/* line 104, ../sass/sliding-menu.scss */
 #config_interval {
   width: 4.5em;
   display: inline;

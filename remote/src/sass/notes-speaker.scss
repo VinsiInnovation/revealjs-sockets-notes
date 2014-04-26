@@ -66,7 +66,7 @@ body {
   @include transition-property(width, opacity, left, transform);
   @include transition-duration(0.2s);
   @include transition-timing-function(ease-in);
-  @include translateX(300px);
+  @include translateX($menu-width);
     /*width:80%;    */
   @include box-shadow(rgba(black, 0.75) 2px 0px 5px);
 }
@@ -98,8 +98,7 @@ body {
  $height-content-landscape-safari : -webkit-calc(100% - #{$abs-height} - #{$margin} - (2 * #{$margin-timer})) ;    
  $bottom-portrait : calc(#{$margin} + (100% - #{$abs-height} - (2 * #{$margin}) - (2 * #{$margin-timer})) / 2) ;    
  $bottom-portrait-safari : -webkit-calc(#{$margin} + (100% - #{$abs-height} - (2 * #{$margin}) - (2 * #{$margin-timer})) / 2) ;    
- $bottom-landscape : calc(#{$margin} + 100% - #{$abs-height} - #{$margin} - (2 * #{$margin-timer})) ;    
- $bottom-landscape-safari : -webkit-calc(#{$margin} + 100% - #{$abs-height} - #{$margin} - (2 * #{$margin-timer})) ;    
+ 
 
 #notes, #time, #preview{
     position: absolute;
@@ -174,8 +173,7 @@ body {
     #sws-plugins-area{
         width:calc(30% - #{$margin} - #{$margin});        
         width:-webkit-calc(30% - #{$margin} - #{$margin});        
-        bottom:  $bottom-landscape;
-        bottom:  $bottom-landscape-safari;
+        bottom:  $margin;
     }
 }
 
