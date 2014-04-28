@@ -64,7 +64,7 @@ You have to add thoses line in your html
 5. You have to check that you have the file lib/js/head.min.js in your presentation
 
 According to the number of plugins you want to use with the remote control, add as many lines as you want somes plugins in the reveal dependancies : 
-```{ src: '{$REVEAL\_HOME\_DIRECTORY}/plugin/sockets-notes/dist/reveal_plugin/plugins/*{thePluginYouWant}*.js', async: true, condition: function() { return window['RevealClientNotes']; } }```
+```{ src: '{$REVEAL\_HOME\_DIRECTORY}/plugin/sockets-notes/dist/reveal_plugin/plugins/*{thePluginYouWant}*.js', async: true}```
 
 Here is the list of plugin and their paths (according to reveal\_plugins/plugins directory) : 
 
