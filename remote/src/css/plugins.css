@@ -19,7 +19,7 @@
  *                                              
  */
 /* line 9, ../sass/plugins.scss */
-#notes ul.plugin-list {
+.plugin-menu ul.plugin-list {
   list-style: none;
   top: calc(45px + 5px);
   top: -webkit-calc(45px + 5px);
@@ -30,7 +30,7 @@
   margin: 0;
 }
 /* line 17, ../sass/plugins.scss */
-#notes ul.plugin-list .plugin {
+.plugin-menu ul.plugin-list .plugin {
   font-family: 'open_sansregular';
   position: relative;
   width: auto;
@@ -46,15 +46,15 @@
   height: 45px;
 }
 /* line 30, ../sass/plugins.scss */
-#notes ul.plugin-list .plugin a {
+.plugin-menu ul.plugin-list .plugin a {
   text-decoration: none;
 }
 /* line 34, ../sass/plugins.scss */
-#notes ul.plugin-list .plugin a:link, #notes ul.plugin-list .plugin a:visited, #notes ul.plugin-list .plugin a:hover, #notes ul.plugin-list .plugin a:active {
+.plugin-menu ul.plugin-list .plugin a:link, .plugin-menu ul.plugin-list .plugin a:visited, .plugin-menu ul.plugin-list .plugin a:hover, .plugin-menu ul.plugin-list .plugin a:active {
   color: #575757;
 }
 /* line 38, ../sass/plugins.scss */
-#notes ul.plugin-list .plugin i {
+.plugin-menu ul.plugin-list .plugin i {
   position: absolute;
   color: #575757;
   line-height: 45px;

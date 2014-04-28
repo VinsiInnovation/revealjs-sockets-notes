@@ -8,6 +8,12 @@
 					Full Screen
 				</div>
 			</div>
+			<div class="menu-icon" ng-click='playPause()'>
+                <i class="fa fa-play" ng-show="showPlay"></i>
+                <i class="fa fa-pause" ng-hide="showPlay"></i>
+				<div class='menu-icon-text' ng-bind="playText">					
+				</div>
+			</div>
 			<div class="menu-icon" ng-click='stop()'>
 				<span class="fa-stack">
 					<i class="fa fa-circle fa-stack-2x"></i>

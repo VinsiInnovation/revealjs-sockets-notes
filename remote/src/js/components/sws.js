@@ -113,6 +113,7 @@ components.directive('sws', ['$rootScope'
             next :  true,
             prev : true
           }, // Controls values
+          controlsColor : 'white',
           contentNotes : '', // the notes of current slide
         }
 
@@ -155,6 +156,8 @@ components.directive('sws', ['$rootScope'
                 $rootScope.$broadcast('loadIframeEvt', $scope.model.localUrl);
                   
                 $scope.model.nbSlides = json.nbSlides;
+
+                $scope.ui.controlsColor = json.controlsColor;
               }else  // If we recieve the index of presentation
                 if (json.indices){
                     $scope.model.indicesDist = json.indices;

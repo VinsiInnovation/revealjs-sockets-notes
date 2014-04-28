@@ -12,8 +12,21 @@ components.directive('slidingMenu', ['$rootScope','$injector'
 
       var srcollElement = iElement.find('.main-content-app-scroll');
 
+      /*
+      * Menu Actions
+      */
+
+      $scope.playText = 'Play';
+      $scope.showPlay = true;
+
       $scope.stop = function(){
         $rootScope.$broadcast('resetTimer');  
+      }
+
+      $scope.playPause = function(){
+        $scope.showPlay = !$scope.showPlay;
+        $scope.playText = $scope.showPlay ? 'Play' : 'Pause';
+        $rootScope.$broadcast('playPauseTimer', {play : !$scope.showPlay});  
       }
 
       $scope.reset = function(){
@@ -49,29 +62,63 @@ components.directive('slidingMenu', ['$rootScope','$injector'
         }
       }
 
+
+      /*
+      * Plugins
+      */
+
+      $scope.activeFilter = function(plugin){
+        return plugin.active;
+      }
+
+      $scope.pluginClicked = function(plugin){
+        $scope[plugin.id + 'Click']();
+        $scope.ui.showMenuClass = 'collapse';
+        // If a previous plugin was show, we close it first
+        if ($scope.model.currentPluginActiv){
+          $scope[$scope.model.currentPluginActiv + 'Close']();
+          $scope.ui.showPluginCtrl[$scope.model.currentPluginActiv] = false;
+        }
+        $scope.ui.showPluginCtrl[plugin.id] = true;
+        $scope.model.currentPluginActiv = plugin.id;
+      }
+
+      /*
+      * Swype management
+      */
+
       // We add a managment of gesture in order to control the reveal presentation
       // We have to avoid to detect drag on controls (except when controls are not shown)
       var expandDirection = true;
+      var lastState = 'collapse';
       $(document.body).hammer().on('touch drag dragstart dragleft dragright release', function(event){
+        // We check that we had a minimum mouvement
         if (event.gesture && event.gesture.direction && event.gesture.distance > 1 
+            // We check that we are not on a forbidden id (plugins / preview area)
             && ((event.target.id && $scope.ui.excludeArray.indexOf(event.target.id) === -1)
                || !event.target.id)
               ){
+          // We cancel the event
           event.gesture.preventDefault();
           $scope.$apply(function(){
+            // We check the direction and we have to take care of the original position
             if (event.type === 'release'){
               srcollElement[0].style[Modernizr.prefixed('transform')] = '';
               if (event.gesture.direction === 'left'){
-                $scope.ui.showMenuClass = 'collapse';                
+                $scope.ui.showMenuClass = lastState ===  'collapse' ? 'expand-plugin' : 'collapse';       
               }else if (event.gesture.direction === 'right'){
-                $scope.ui.showMenuClass = 'expand';
-                srcollElement.css('left', '');
+                $scope.ui.showMenuClass = lastState ===  'collapse' ? 'expand-menu' : 'collapse';
               }
             }else if (event.type === 'dragstart' || event.type === 'touch'){
               expandDirection = $scope.ui.showMenuClass === 'collapse';
             }else if (event.type === 'drags' || event.type === 'dragleft'  || event.type === 'dragright'){
+              if ($scope.ui.showMenuClass != ''){                
+                lastState = ''+$scope.ui.showMenuClass;
+              }
               $scope.ui.showMenuClass = '';
-              var delta = expandDirection ? event.gesture.deltaX : Math.round( (screen.width * 0.8) + event.gesture.deltaX);
+              var deltaX = lastState === 'expand-menu' ? 300 : -300;
+              var delta = lastState === 'collapse' ? event.gesture.deltaX : Math.round( deltaX + event.gesture.deltaX); 
+              console.info('LastState : '+lastState+' | deltaX : '+deltaX+' | delta : '+delta+' | eventDelta : '+event.gesture.deltaX);              
               srcollElement[0].style[Modernizr.prefixed('transform')] = 'translateX('+delta+'px)';
             }
           });

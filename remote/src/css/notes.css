@@ -95,10 +95,9 @@ body {
 #notes {
   overflow: hidden;
   background-color: #fff;
-  /*@include shadow;*/
 }
 
-/* line 25, ../sass/notes.scss */
+/* line 24, ../sass/notes.scss */
 #notes .title-abs, #notes .title-abs-plugins {
   position: absolute;
   background-color: #e0dac7;
@@ -111,7 +110,7 @@ body {
   text-transform: uppercase;
 }
 
-/* line 37, ../sass/notes.scss */
+/* line 36, ../sass/notes.scss */
 #notes .title-abs:after, #notes .title-abs-plugins:after {
   content: '';
   position: absolute;
@@ -122,29 +121,28 @@ body {
   background-color: #575757;
 }
 
-/* line 47, ../sass/notes.scss */
+/* line 46, ../sass/notes.scss */
 #notes .title-abs.innactive:after, #notes .title-abs-plugins.innactive:after {
   height: 1px;
 }
 
-/* line 51, ../sass/notes.scss */
+/* line 50, ../sass/notes.scss */
 #notes .title-abs {
   left: 0;
   padding-left: calc(45px + 10px);
   padding-left: -webkit-calc(45px + 10px);
-  width: 50%;
+  width: 100%;
 }
 
-/* line 58, ../sass/notes.scss */
+/* line 57, ../sass/notes.scss */
 #notes .title-abs-plugins {
   position: absolute;
   width: 50%;
   right: 0;
-  /*border-left: thin solid $font-color-notes;*/
   padding-left: 10px;
 }
 
-/* line 68, ../sass/notes.scss */
+/* line 66, ../sass/notes.scss */
 #notes i {
   position: absolute;
   left: 10px;
@@ -155,17 +153,17 @@ body {
   color: #575757;
 }
 
-/* line 78, ../sass/notes.scss */
+/* line 76, ../sass/notes.scss */
 #notes .title-abs.innactive, #notes .title-abs-plugins.innactive {
   color: #939193;
 }
 
-/* line 82, ../sass/notes.scss */
+/* line 80, ../sass/notes.scss */
 #notes .title-abs.innactive + i {
   color: #939193;
 }
 
-/* line 87, ../sass/notes.scss */
+/* line 85, ../sass/notes.scss */
 #content-notes, ul.plugin-list, #notes .mask-plugins {
   position: absolute;
   left: 0;
@@ -175,7 +173,7 @@ body {
   width: 100%;
 }
 
-/* line 96, ../sass/notes.scss */
+/* line 94, ../sass/notes.scss */
 #content-notes, #notes .mask-plugins {
   padding: 0 10px;
   top: 45px;
@@ -184,12 +182,12 @@ body {
   line-height: 1.2em;
 }
 
-/* line 104, ../sass/notes.scss */
+/* line 102, ../sass/notes.scss */
 #notes .mask-plugins {
   background-color: rgba(255, 255, 255, 0.75);
 }
 
-/* line 108, ../sass/notes.scss */
+/* line 106, ../sass/notes.scss */
 .hractionbar {
   position: absolute;
   width: 100%;
@@ -197,7 +195,7 @@ body {
   left: 0;
 }
 
-/* line 115, ../sass/notes.scss */
+/* line 113, ../sass/notes.scss */
 .slide-number {
   background-color: #e0dac7;
   border-top: thin solid #675c53;
@@ -213,7 +211,7 @@ body {
   color: #675c53;
 }
 
-/* line 130, ../sass/notes.scss */
+/* line 128, ../sass/notes.scss */
 .curent-slide {
   color: #b7183b;
   font-size: 19.5pt;

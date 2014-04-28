@@ -42,6 +42,7 @@
 
 .actionbar .icon-menu-plugin{
     left:initial;
+    border-left : thin solid $color-actions;
     right:0;
 }
 
@@ -83,8 +84,8 @@
 
 .elapsed {
     position:absolute;
-    width:calc(100% - (#{$abs-height} * 3 + 2px));
-    width:-webkit-calc(100% - (#{$abs-height} * 3 + 2px));
+    width:calc(100% - (#{$abs-height} * 2 + 2px));
+    width:-webkit-calc(100% - (#{$abs-height} * 2 + 2px));
     height:$abs-height;
     top:0;
     left:calc(#{$abs-height} * 1 + 1px);

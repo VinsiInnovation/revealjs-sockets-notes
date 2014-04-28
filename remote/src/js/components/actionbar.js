@@ -8,9 +8,7 @@ components.directive('actionBar', ['$rootScope','$injector', '$interval'
     scope: true,    
     link: function postLink($scope, iElement, iAttrs) { 
 
-     
-
-      $scope.showPlay = true;
+      
       $scope.showTime = true;
       $scope.showHours = false;
       $scope.hours = "00";
@@ -34,14 +32,12 @@ components.directive('actionBar', ['$rootScope','$injector', '$interval'
         $scope.ui.showMenuClass = $scope.ui.showMenuClass === 'collapse' ? 'expand-plugin' : 'collapse';
       }
 
-      $scope.play = function(){
-        $scope.showPlay = false;
+      $scope.play = function(){        
         start  = new Date();
         $scope.ui.timeStart = true;
       }
 
       $scope.pause = function(){
-        $scope.showPlay = true;
         $scope.ui.timeStart = false;
         $scope.model.totalTime = $scope.model.totalTime + (new Date().getTime() - start.getTime());
       }
@@ -57,6 +53,14 @@ components.directive('actionBar', ['$rootScope','$injector', '$interval'
         $scope.classHours = "mute";
         $scope.showHours = false;
         $scope.classMinutes = "mute";
+      });
+
+      $rootScope.$on('playPauseTimer', function(event, data){
+        if(data.play){
+          $scope.play();
+        }else{
+          $scope.pause();
+        }
       });
 
       $scope.validate = function(){

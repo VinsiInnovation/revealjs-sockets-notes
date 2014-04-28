@@ -47,6 +47,7 @@ var RevealClientNotes = (function () {
   */
 
   var conf = null,
+    additionnalConfiguration = null,
     socket = null,
     ips = null,
     qrCode = null,
@@ -59,15 +60,27 @@ var RevealClientNotes = (function () {
   */
   
   // We init the client side (websocket + reveal Listener)
-	var init = function(){
+	var init = function(conf){
 
     // We check if this script ins't in the iframe of the remote control
     if(!window.parent || !window.parent.document.body.getAttribute('sws-remote-iframe-desactiv')){
-        console.log('Initialize Client side')
+        console.log('Initialize Client side');
+        additionnalConfiguration = conf;
+        checkAdditionnalConfiguration();
         initConfig();
         initRevealListener();
     }        
   };    
+
+  var checkAdditionnalConfiguration = function(){
+    if (!additionnalConfiguration){
+      additionnalConfiguration = {};
+    }
+
+    if (!additionnalConfiguration.controlsColor){
+      additionnalConfiguration.controlsColor = 'white';
+    }
+  };
   
   // Initialise with the configuration file
   var initConfig = function(){
@@ -140,18 +153,7 @@ var RevealClientNotes = (function () {
         document.querySelector("#qrCodeLink").setAttribute("href",urlRemote);
         document.querySelector("#sws-show-qr-url").innerHTML = '<span style="text-transform:uppercase; font-weight:bold;">Or goto : </span><br>'+urlRemote;
       });
-      /*
-      for (var i = 0; i < ips.length; i++){
-          document.querySelector('#ip'+ips[i].id).addEventListener('click',function(event){
-              var urlRemote = "http://"+ips[event.target.getAttribute('index')].ip // HOST
-                +":"+conf.port // PORT
-                +pathPlugin.substr(pathPlugin.indexOf(conf.port)+(''+conf.port).length, pathPlugin.length) // PATHNAME
-                +(conf.devMode ?"remote/src/" : "dist/remote/")+"notes-speaker.html";
-              qrCode.clear();
-              qrCode.makeCode(urlRemote);
-              document.querySelector("#qrCodeLink").setAttribute("href",urlRemote);
-          });
-      }*/
+      
     }
 
     var area = document.querySelector('#sws-show-qr-code');
@@ -176,6 +178,7 @@ var RevealClientNotes = (function () {
             socket.emit('message', {
                type :"config", 
                url : window.location.pathname, 
+               controlsColor : additionnalConfiguration.controlsColor,
                nbSlides : nbSlides-1
             });
             // If we are on the slides of speaker, we specify the controls values
@@ -198,6 +201,7 @@ var RevealClientNotes = (function () {
                 socket.emit('message', {
                     type :"config", 
                     url : window.location.pathname, 
+                    controlsColor : additionnalConfiguration.controlsColor,
                     nbSlides : nbSlides-1
                 });
                 socket.emit('message', {
@@ -323,10 +327,11 @@ var RevealClientNotes = (function () {
   * **************************************
   */
 
-  init();
+  //init();
 
   return {
-    registerPlugin : registerPlugin
+    registerPlugin : registerPlugin, 
+    init : init
   };
     
 })();

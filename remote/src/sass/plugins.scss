@@ -6,7 +6,7 @@ $size :40px;
 
 
 
-#notes ul.plugin-list{
+.plugin-menu ul.plugin-list{
     list-style: none;
     top:calc(#{$abs-notes-height} + 5px);
     top:-webkit-calc(#{$abs-notes-height} + 5px);
