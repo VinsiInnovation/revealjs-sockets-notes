@@ -53,22 +53,26 @@ body {
 }
 
 .main-content-app-scroll.collapse{
-    /*left:-80%;*/
   @include transition-property(width, opacity, left, transform);
   @include transition-duration(0.2s);
   @include transition-timing-function(ease-in);
   @include translateX(0);
-    /*opacity: 0;*/
 }
 
-.main-content-app-scroll.expand{
+.main-content-app-scroll.expand-menu, .main-content-app-scroll.expand-plugin{
   
   @include transition-property(width, opacity, left, transform);
   @include transition-duration(0.2s);
   @include transition-timing-function(ease-in);
-  @include translateX($menu-width);
-    /*width:80%;    */
   @include box-shadow(rgba(black, 0.75) 2px 0px 5px);
+}
+
+.main-content-app-scroll.expand-menu{  
+  @include translateX($menu-width);  
+}
+
+.main-content-app-scroll.expand-plugin{
+  @include translateX(-$menu-width);
 }
 
 

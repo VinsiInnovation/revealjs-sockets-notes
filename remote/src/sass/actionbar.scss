@@ -28,7 +28,7 @@
 }
 
 
-.actionbar .icon-menu{
+.actionbar .icon-menu, .actionbar .icon-menu-plugin{
     position:absolute;
     background-color: $bg-color-abs;
     border-right : thin solid $color-actions;
@@ -40,7 +40,12 @@
     text-align:center;
 }
 
-.actionbar .icon-menu.expand{
+.actionbar .icon-menu-plugin{
+    left:initial;
+    right:0;
+}
+
+.actionbar .icon-menu.expand-menu, .actionbar .icon-menu-plugin.expand-plugin{
     background-color: $bg-color-menu;
     border-right-width: 0;
     color: white;
@@ -82,8 +87,8 @@
     width:-webkit-calc(100% - (#{$abs-height} * 3 + 2px));
     height:$abs-height;
     top:0;
-    left:calc(#{$abs-height} * 2 + 1px);
-    left:-webkit-calc(#{$abs-height} * 2 + 1px);
+    left:calc(#{$abs-height} * 1 + 1px);
+    left:-webkit-calc(#{$abs-height} * 1 + 1px);
     color: $font-color;
     vertical-align:middle;
     
@@ -140,7 +145,7 @@
     position: absolute;
     background-color:$bg-color-abs;
     top:0;
-    right:0;
+    right:$abs-height;
     height:$abs-height;
     width:$abs-height;
 }
@@ -148,6 +153,7 @@
 #action_time_play, #action_time_pause{
     position:absolute;
     border-left : thin solid $color-actions;
+    border-right : thin solid $color-actions;
     top: 0;
     width:$abs-height;
     height:$abs-height;    

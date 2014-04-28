@@ -2,11 +2,9 @@
 @import 'vars';
 @import "compass/css3";
 
-$menu-title-height : 50px;
-$row-height : 45px;
-$icon-padding-left : 2.5em;
 
-.sliding-menu{
+
+.sliding-menu, .plugin-menu{
 	position: absolute;
   /*left: 0;*/
   top: calc(#{$abs-height} + #{$margin-timer});
@@ -70,34 +68,17 @@ $icon-padding-left : 2.5em;
   			top: 0;
   			left: $icon-padding-left;
 
-  		}
+  		} 
   	}
 
 }
 
-/*.sliding-menu.move{
-  width:80%;    
-  left: -80%;
-}
-*/
-.sliding-menu.collapse{
-	/*left:-80%;*/
-  @include transition-property(width, opacity, left, transform);
-  @include transition-duration(0.2s);
-  @include transition-timing-function(ease-in);
-  @include translateX(0);
-	/*opacity: 0;*/
+
+.plugin-menu{
+  left:initial;
+  right:-$menu-width; 
 }
 
-.sliding-menu.expand{
-  
-  @include transition-property(width, opacity, left, transform);
-  @include transition-duration(0.2s);
-  @include transition-timing-function(ease-in);
-  @include translateX(100%);
-	/*width:80%;	*/
-  @include box-shadow(rgba(black, 0.75) 2px 0px 5px);
-}
 
 
 

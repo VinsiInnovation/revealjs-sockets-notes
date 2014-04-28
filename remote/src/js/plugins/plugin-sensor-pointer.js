@@ -32,7 +32,7 @@ plugins.directive('spPlugin', ['$rootScope', 'HelperFactory'
 
       // TODO : We Have to persit on localstorage the callibration for the phone
 
-      var previewElement = iElement.find('#preview');
+      var previewElement;
       var areaPointer = null;
       var currentColor = 'FF0000';
       var lastTarget = null;
@@ -167,6 +167,7 @@ plugins.directive('spPlugin', ['$rootScope', 'HelperFactory'
         }
 
         if (!areaPointer){
+          previewElement = iElement.find('#preview');
           areaPointer = document.createElement('DIV');
           areaPointer.setAttribute('id', 'sws-sp-area');
           $scope.ui.excludeArray.push('sws-sp-area');

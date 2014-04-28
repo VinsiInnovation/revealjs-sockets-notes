@@ -27,7 +27,11 @@ components.directive('actionBar', ['$rootScope','$injector', '$interval'
       }
 
       $scope.toggleMenu = function(){
-        $scope.ui.showMenuClass = $scope.ui.showMenuClass === 'collapse' ? 'expand' : 'collapse';
+        $scope.ui.showMenuClass = $scope.ui.showMenuClass === 'collapse' ? 'expand-menu' : 'collapse';
+      }
+
+      $scope.toggleMenuPlugin = function(){
+        $scope.ui.showMenuClass = $scope.ui.showMenuClass === 'collapse' ? 'expand-plugin' : 'collapse';
       }
 
       $scope.play = function(){
