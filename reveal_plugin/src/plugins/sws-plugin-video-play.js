@@ -10,8 +10,21 @@ function callBack(object){
 			}else{
 				video.pause();
 			}
+		}else if (object.action === 'mute-volume'){			
+			if (!video.muted){
+				video.muted = true;				
+			}else{
+				video.muted = false;
+			}
 		}else if (object.action === 'skip'){
-			
+			var isPlaying =  !(video.paused || video.ended);
+			if (isPlaying){
+				video.pause();
+			}
+			video.currentTime = (object.time / 100) * video.duration;
+			if (isPlaying){
+				video.play();
+			}
 		}
 	}
 }

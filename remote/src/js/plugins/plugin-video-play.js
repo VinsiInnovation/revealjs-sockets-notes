@@ -70,14 +70,23 @@ plugins.directive('vpPlugin', ['$rootScope'
           // use font-awesome fa-volume-up
           // use font awesome fa-step-forward & fa-step-backward 
 
+          var size = 40;      
+
           var ctrlArea = document.getElementById('sws-plugin-ctrl-vp');
-          ctrlArea.appendChild(addBox('play', '#FF0000', 'fa-play','10%'));
-          ctrlArea.appendChild(addRange('time','30%'));
+          ctrlArea.appendChild(addBox('play', '#FF0000', 'fa-play','10px'));
+          ctrlArea.appendChild(addBox('mute', '#FF0000', 'fa-volume-off', (size+15)+'px'));
+          ctrlArea.appendChild(addRange('time',((2*size)+25)+'px'));
 
           iElement.find('#sws-vp-box-play').bind('click', function(event){
             angular.element(event.target).toggleClass('fa-play');
             angular.element(event.target).toggleClass('fa-pause');
             $scope.pluginCommunication('vp', {action:'play-pause'});  
+          });
+
+          iElement.find('#sws-vp-box-mute').bind('click', function(event){
+            angular.element(event.target).toggleClass('fa-volume-off');
+            angular.element(event.target).toggleClass('fa-volume-up');
+            $scope.pluginCommunication('vp', {action:'mute-volume'});  
           });
 
            iElement.find('#sws-vp-range-time').bind('change', function(event){
