@@ -98,19 +98,21 @@ components.directive('slidingMenu', ['$rootScope','$injector'
             && ((event.target.id && $scope.ui.excludeArray.indexOf(event.target.id) === -1)
                || !event.target.id)
               ){
-          // We cancel the event
-          event.gesture.preventDefault();
+          // We cancel the event          
           $scope.$apply(function(){
             // We check the direction and we have to take care of the original position
             if (event.type === 'release'){
               srcollElement[0].style[Modernizr.prefixed('transform')] = '';
               if (event.gesture.direction === 'left'){
                 $scope.ui.showMenuClass = lastState ===  'collapse' ? 'expand-plugin' : 'collapse';       
+                event.gesture.preventDefault();
               }else if (event.gesture.direction === 'right'){
                 $scope.ui.showMenuClass = lastState ===  'collapse' ? 'expand-menu' : 'collapse';
+                event.gesture.preventDefault();
               }
             }else if (event.type === 'dragstart' || event.type === 'touch'){
               expandDirection = $scope.ui.showMenuClass === 'collapse';
+              event.gesture.preventDefault();
             }else if (event.type === 'drags' || event.type === 'dragleft'  || event.type === 'dragright'){
               if ($scope.ui.showMenuClass != ''){                
                 lastState = ''+$scope.ui.showMenuClass;
@@ -120,6 +122,7 @@ components.directive('slidingMenu', ['$rootScope','$injector'
               var delta = lastState === 'collapse' ? event.gesture.deltaX : Math.round( deltaX + event.gesture.deltaX); 
               console.info('LastState : '+lastState+' | deltaX : '+deltaX+' | delta : '+delta+' | eventDelta : '+event.gesture.deltaX);              
               srcollElement[0].style[Modernizr.prefixed('transform')] = 'translateX('+delta+'px)';
+              event.gesture.preventDefault();
             }
           });
         }
