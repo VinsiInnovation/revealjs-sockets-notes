@@ -202,9 +202,17 @@ plugins.directive('spPlugin', ['$rootScope', 'HelperFactory'
             return boxDiv;
           }
 
+          var ctrlArea = document.querySelector('#sws-plugin-ctrl-sp .sws-plugin-ctrl');
           lastTarget = addBox('red', '#FF0000', null,'10px');
           lastTarget.classList.add('activ');
-          var ctrlArea = document.getElementById('sws-plugin-ctrl-sp');
+          var divDescription = document.createElement('DIV');
+          divDescription.classList.add('sws-plugin-sp-desc');         
+          divDescription.innerHTML = '<ol>'+
+              '<li>Choose the color of pointer</li>'+
+              '<li>Clic once on the preview area to show the pointer</li>'+
+              '<li>Clic twice to remove the pointer</li>'+
+              '</ol>';
+          ctrlArea.appendChild(divDescription);
           ctrlArea.appendChild(lastTarget);
           ctrlArea.appendChild(addBox('white', '#FFFFFF', null,'25%'));
           ctrlArea.appendChild(addBox('black', '#000000', null,'50%'));
@@ -246,10 +254,20 @@ plugins.directive('spPlugin', ['$rootScope', 'HelperFactory'
 
       var pluginStyleSheet = swsControl.createStyleSheet('sp');
       
+       pluginStyleSheet.insertRule('.sws-plugin-sp-desc {'+
+        'padding : 10px;'+
+        'overflow : auto;'+
+        'font-size : 1.2em;'+
+        'height : calc(100% - '+size+'px - 15px);'+
+        'height : -webkit-calc(100% - '+size+'px - 15px);'+        
+      '}',0);
+
       pluginStyleSheet.insertRule('.sws-plugin-sp-box.color {'+
         helper.cssProp('boxShadow')+' : 0px 0px 10px 0 black; '+
         'border-radius : '+size+'px; '+
         'border : solid 1px white; '+
+        'bottom : 20px;'+
+        'top : initial;'+
       '}',0);
 
        pluginStyleSheet.insertRule('.sws-plugin-sp-box.color.activ::after {'+
@@ -259,6 +277,7 @@ plugins.directive('spPlugin', ['$rootScope', 'HelperFactory'
         'left : 5px; '+
         'width : '+(size-10)+'px; '+
         'height : 5px; '+
+        helper.cssProp('boxShadow')+' : 0px 0px 10px 0 black; '+
       '}',0);
 
       pluginStyleSheet.insertRule('.sws-plugin-sp-box.color.red::after, .sws-plugin-sp-box.color.red {'+

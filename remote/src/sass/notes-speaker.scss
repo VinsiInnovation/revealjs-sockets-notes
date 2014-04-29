@@ -104,29 +104,20 @@ body {
  $bottom-portrait-safari : -webkit-calc(#{$margin} + (100% - #{$abs-height} - (2 * #{$margin}) - (2 * #{$margin-timer})) / 2) ;    
  
 
-#notes, #time, #preview{
+#notes, #time, #preview, #sws-plugins-area{
     position: absolute;
     width:100%;
     left:0;
 }
 
-#notes {    
+#notes, #sws-plugins-area {    
     height: $height-content-portrait;
     height: $height-content-portrait-safari;
     top: calc( #{$abs-height} +  #{$margin-timer});
     top: -webkit-calc( #{$abs-height} + #{$margin-timer});
 }
 
-#notes.fullSize{
-    height: calc(100% - #{$abs-height} - #{$margin} - #{$margin-timer}) ;    
-    height: -webkit-calc(100% - #{$abs-height} - #{$margin} - #{$margin-timer}) ;    
-    z-index:50;
-}
 
-#notes.upPlugin{
-    top: calc( #{$abs-height} + (2 * #{$margin-timer}) - #{$pluginHeight});
-    top: -webkit-calc( #{$abs-height} + (2 * #{$margin-timer}) - #{$pluginHeight});
-}
 
 
 #preview{
@@ -136,7 +127,7 @@ body {
     bottom:0;
 }
 
-
+/*
 #sws-plugins-area{
     position: absolute;
     width: 100%;
@@ -144,10 +135,10 @@ body {
     height: $pluginHeight;
     bottom:  $bottom-portrait;
     bottom:  $bottom-portrait-safari;
-}
+}*/
 
 @media screen and (orientation:landscape){
-    #notes{
+    #notes, #sws-plugins-area{
         width:calc(30% - #{$margin} - #{$margin});        
         width:-webkit-calc(30% - #{$margin} - #{$margin});        
         left:$margin;

@@ -98,7 +98,27 @@ body {
 }
 
 /* line 24, ../sass/notes.scss */
-#notes .title-abs, #notes .title-abs-plugins {
+#notes.fullSize {
+  height: calc(100% - 40px - 10px - 7px);
+  height: -webkit-calc(100% - 40px - 10px - 7px);
+  z-index: 50;
+}
+
+/* line 30, ../sass/notes.scss */
+#notes.upPlugin .title-abs, #notes.upPlugin i {
+    /*top: calc( 40px + (2 * 7px) - 70px);
+    top: -webkit-calc( 40px + (2 * 7px) - 70px);
+*/
+  color: #e0dac7;
+}
+
+/* line 38, ../sass/notes.scss */
+#notes.upPlugin #content-notes, #notes.upPlugin .slide-number {
+  display: none;
+}
+
+/* line 43, ../sass/notes.scss */
+#notes .title-abs, #sws-plugins-area-content .title-abs {
   position: absolute;
   background-color: #e0dac7;
   color: #575757;
@@ -110,8 +130,8 @@ body {
   text-transform: uppercase;
 }
 
-/* line 36, ../sass/notes.scss */
-#notes .title-abs:after, #notes .title-abs-plugins:after {
+/* line 55, ../sass/notes.scss */
+#notes .title-abs:after, #sws-plugins-area-content .title-abs:after {
   content: '';
   position: absolute;
   width: 100%;
@@ -121,12 +141,12 @@ body {
   background-color: #575757;
 }
 
-/* line 46, ../sass/notes.scss */
+/* line 65, ../sass/notes.scss */
 #notes .title-abs.innactive:after, #notes .title-abs-plugins.innactive:after {
   height: 1px;
 }
 
-/* line 50, ../sass/notes.scss */
+/* line 69, ../sass/notes.scss */
 #notes .title-abs {
   left: 0;
   padding-left: calc(45px + 10px);
@@ -134,7 +154,7 @@ body {
   width: 100%;
 }
 
-/* line 57, ../sass/notes.scss */
+/* line 76, ../sass/notes.scss */
 #notes .title-abs-plugins {
   position: absolute;
   width: 50%;
@@ -142,7 +162,7 @@ body {
   padding-left: 10px;
 }
 
-/* line 66, ../sass/notes.scss */
+/* line 85, ../sass/notes.scss */
 #notes i {
   position: absolute;
   left: 10px;
@@ -153,17 +173,17 @@ body {
   color: #575757;
 }
 
-/* line 76, ../sass/notes.scss */
+/* line 95, ../sass/notes.scss */
 #notes .title-abs.innactive, #notes .title-abs-plugins.innactive {
   color: #939193;
 }
 
-/* line 80, ../sass/notes.scss */
+/* line 99, ../sass/notes.scss */
 #notes .title-abs.innactive + i {
   color: #939193;
 }
 
-/* line 85, ../sass/notes.scss */
+/* line 104, ../sass/notes.scss */
 #content-notes, ul.plugin-list, #notes .mask-plugins {
   position: absolute;
   left: 0;
@@ -173,7 +193,7 @@ body {
   width: 100%;
 }
 
-/* line 94, ../sass/notes.scss */
+/* line 113, ../sass/notes.scss */
 #content-notes, #notes .mask-plugins {
   padding: 0 10px;
   top: 45px;
@@ -182,12 +202,12 @@ body {
   line-height: 1.2em;
 }
 
-/* line 102, ../sass/notes.scss */
+/* line 121, ../sass/notes.scss */
 #notes .mask-plugins {
   background-color: rgba(255, 255, 255, 0.75);
 }
 
-/* line 106, ../sass/notes.scss */
+/* line 125, ../sass/notes.scss */
 .hractionbar {
   position: absolute;
   width: 100%;
@@ -195,7 +215,7 @@ body {
   left: 0;
 }
 
-/* line 113, ../sass/notes.scss */
+/* line 132, ../sass/notes.scss */
 .slide-number {
   background-color: #e0dac7;
   border-top: thin solid #675c53;
@@ -211,7 +231,7 @@ body {
   color: #675c53;
 }
 
-/* line 128, ../sass/notes.scss */
+/* line 147, ../sass/notes.scss */
 .curent-slide {
   color: #b7183b;
   font-size: 19.5pt;

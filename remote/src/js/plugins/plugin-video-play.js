@@ -72,9 +72,17 @@ plugins.directive('vpPlugin', ['$rootScope'
 
           var size = 40;      
 
-          var ctrlArea = document.getElementById('sws-plugin-ctrl-vp');
-          ctrlArea.appendChild(addBox('play', '#FF0000', 'fa-play','10px'));
-          ctrlArea.appendChild(addBox('mute', '#FF0000', 'fa-volume-off', (size+15)+'px'));
+          var ctrlArea = document.querySelector('#sws-plugin-ctrl-vp .sws-plugin-ctrl');
+          var divDescription = document.createElement('DIV');
+          divDescription.classList.add('sws-plugin-vp-desc');         
+          divDescription.innerHTML = '<ol>'+
+              '<li>Mute/Unmute the video</li>'+
+              '<li>Play/Pause the video</li>'+
+              '<li>Move in the video</li>'+
+              '</ol>';
+          ctrlArea.appendChild(divDescription);
+          ctrlArea.appendChild(addBox('mute', '#FF0000', 'fa-volume-off', '10px'));
+          ctrlArea.appendChild(addBox('play', '#FF0000', 'fa-play',(size+15)+'px'));
           ctrlArea.appendChild(addRange('time',((2*size)+25)+'px'));
 
           iElement.find('#sws-vp-box-play').bind('click', function(event){
@@ -115,10 +123,23 @@ plugins.directive('vpPlugin', ['$rootScope'
 
       var pluginStyleSheet = swsControl.createStyleSheet('vp');
 
+       pluginStyleSheet.insertRule('.sws-plugin-vp-desc {'+
+        'padding : 10px;'+
+        'overflow : auto;'+
+        'font-size : 1.2em;'+
+        'height : calc(100% - '+size+'px - 15px);'+
+        'height : -webkit-calc(100% - '+size+'px - 15px);'+        
+      '}',0);
+
+      pluginStyleSheet.insertRule('.sws-plugin-vp-box{'+
+        'bottom : 20px;'+
+        'top : initial'+
+      '}',0);
+
       pluginStyleSheet.insertRule('.sws-plugin-vp-range:before, .sws-plugin-vp-range:after {'+
         'position : absolute; '+
         'font-size : 10px;'+
-        'top : 0.3em;'+
+        'bottom : 0.3em;'+
         'color : #aaa;'+
       '}',0);
 
@@ -135,7 +156,8 @@ plugins.directive('vpPlugin', ['$rootScope'
       pluginStyleSheet.insertRule('.sws-plugin-vp-range{'+
         '-webkit-appearance: none;'+
         'background-color: black;'+
-        'top : 30px;'+
+        'bottom : 30px;'+
+        'top : initial;'+
         'height: 2px;'+
       '}',0);
 

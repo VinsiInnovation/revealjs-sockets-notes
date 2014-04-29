@@ -21,7 +21,26 @@
 }
 
 
-#notes .title-abs, #notes .title-abs-plugins{
+#notes.fullSize{
+    height: calc(100% - #{$abs-height} - #{$margin} - #{$margin-timer}) ;    
+    height: -webkit-calc(100% - #{$abs-height} - #{$margin} - #{$margin-timer}) ;    
+    z-index:50;
+}
+
+#notes.upPlugin .title-abs, #notes.upPlugin i{
+    /*top: calc( #{$abs-height} + (2 * #{$margin-timer}) - #{$pluginHeight});
+    top: -webkit-calc( #{$abs-height} + (2 * #{$margin-timer}) - #{$pluginHeight});
+*/
+    // We put the same color as background in order to give the impression of hidden elements
+    color : $bg-color;
+}
+
+#notes.upPlugin #content-notes, #notes.upPlugin .slide-number{
+    display: none;
+}
+
+
+#notes .title-abs, #sws-plugins-area-content .title-abs{
     position: absolute;
     background-color: $bg-color;
     color: $font-color;
@@ -33,7 +52,7 @@
     text-transform: uppercase;
 }
 
-#notes .title-abs:after, #notes .title-abs-plugins:after{
+#notes .title-abs:after, #sws-plugins-area-content .title-abs:after{
     content: '';
     position: absolute;
     width: 100%;

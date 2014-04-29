@@ -44,7 +44,7 @@ plugins.directive('apPlugin', ['$rootScope'
             return boxDiv;
           }
 
-          var ctrlArea = document.getElementById('sws-plugin-ctrl-ap');
+          var ctrlArea = document.querySelector('#sws-plugin-ctrl-ap .sws-plugin-ctrl');
           ctrlArea.appendChild(addBox('play', '#FF0000', 'fa-play','50%'));
 
           iElement.find('#sws-ap-box-play').bind('click', function(){

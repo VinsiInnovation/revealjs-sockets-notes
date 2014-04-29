@@ -102,7 +102,14 @@ plugins.directive('rpPlugin', ['$rootScope', 'HelperFactory'
           //fa-circle
           lastTarget = addBox('red', '#FF0000', null,'10px');
           lastTarget.classList.add('activ');
-          var ctrlArea = document.getElementById('sws-plugin-ctrl-rp');
+          var ctrlArea = document.querySelector('#sws-plugin-ctrl-rp .sws-plugin-ctrl');
+          var divDescription = document.createElement('DIV');
+          divDescription.classList.add('sws-plugin-rp-desc');         
+          divDescription.innerHTML = '<ol>'+
+              '<li>Choose the color of pointer</li>'+
+              '<li>Drag your finger on the preview area to show the pointer</li>'+
+              '</ol>';
+          ctrlArea.appendChild(divDescription);
           ctrlArea.appendChild(lastTarget);
           ctrlArea.appendChild(addBox('white', '#FFFFFF', null,'25%'));
           ctrlArea.appendChild(addBox('black', '#000000', null,'50%'));
@@ -139,10 +146,20 @@ plugins.directive('rpPlugin', ['$rootScope', 'HelperFactory'
      
       var pluginStyleSheet = swsControl.createStyleSheet('rp');
 
+      pluginStyleSheet.insertRule('.sws-plugin-rp-desc {'+
+        'padding : 10px;'+
+        'overflow : auto;'+
+        'font-size : 1.2em;'+
+        'height : calc(100% - '+size+'px - 15px);'+
+        'height : -webkit-calc(100% - '+size+'px - 15px);'+        
+      '}',0);
+
       pluginStyleSheet.insertRule('.sws-plugin-rp-box.color {'+
         helper.cssProp('boxShadow')+' : 0px 0px 10px 0 black; '+
         'border-radius : '+size+'px; '+
         'border : solid 1px white; '+
+        'bottom : 20px;'+
+        'top : initial;'+
       '}',0);
 
        pluginStyleSheet.insertRule('.sws-plugin-rp-box.color.activ::after {'+
@@ -152,6 +169,7 @@ plugins.directive('rpPlugin', ['$rootScope', 'HelperFactory'
         'left : 5px; '+
         'width : '+(size-10)+'px; '+
         'height : 5px; '+
+         helper.cssProp('boxShadow')+' : 0px 0px 10px 0 black; '+
       '}',0);
 
       pluginStyleSheet.insertRule('.sws-plugin-rp-box.color.red::after, .sws-plugin-rp-box.color.red {'+

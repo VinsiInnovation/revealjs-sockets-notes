@@ -18,7 +18,7 @@
  *                                              
  *                                              
  */
-/* line 9, ../sass/plugins.scss */
+/* line 10, ../sass/plugins.scss */
 .plugin-menu ul.plugin-list {
   list-style: none;
   top: calc(45px + 5px);
@@ -29,7 +29,7 @@
   padding: 0;
   margin: 0;
 }
-/* line 17, ../sass/plugins.scss */
+/* line 18, ../sass/plugins.scss */
 .plugin-menu ul.plugin-list .plugin {
   font-family: 'open_sansregular';
   position: relative;
@@ -45,15 +45,15 @@
   line-height: 45px;
   height: 45px;
 }
-/* line 30, ../sass/plugins.scss */
+/* line 31, ../sass/plugins.scss */
 .plugin-menu ul.plugin-list .plugin a {
   text-decoration: none;
 }
-/* line 34, ../sass/plugins.scss */
+/* line 35, ../sass/plugins.scss */
 .plugin-menu ul.plugin-list .plugin a:link, .plugin-menu ul.plugin-list .plugin a:visited, .plugin-menu ul.plugin-list .plugin a:hover, .plugin-menu ul.plugin-list .plugin a:active {
   color: #575757;
 }
-/* line 38, ../sass/plugins.scss */
+/* line 39, ../sass/plugins.scss */
 .plugin-menu ul.plugin-list .plugin i {
   position: absolute;
   color: #575757;
@@ -61,7 +61,7 @@
   left: 10px;
 }
 
-/* line 48, ../sass/plugins.scss */
+/* line 49, ../sass/plugins.scss */
 .sws-plugin-box {
   position: absolute;
   width: 40px;
@@ -73,32 +73,33 @@
   line-height: 40px;
 }
 
-/* line 59, ../sass/plugins.scss */
+/* line 60, ../sass/plugins.scss */
 .sws-plugin-box.fa {
   background-color: #575757;
   color: white;
 }
 
-/* line 64, ../sass/plugins.scss */
+/* line 65, ../sass/plugins.scss */
 #sws-plugins-area-content {
   position: absolute;
   top: 0;
   height: 100%;
-  width: calc(100% - 40px);
-  width: -webkit-calc(100% - 40px);
+  width: 100%;
 }
 
 /* line 72, ../sass/plugins.scss */
 .sws-plugin-ctrl {
   position: absolute;
-  top: 0;
+  top: 45px;
   left: 0;
-  height: 100%;
+  height: calc(100% - 40px - 5px);
+  height: -webkit-calc(100% - 40px - 5px);
   width: 100%;
 }
 
-/* line 80, ../sass/plugins.scss */
+/* line 81, ../sass/plugins.scss */
 #sws-box-close {
+  top: 0;
   right: 0;
 }
 

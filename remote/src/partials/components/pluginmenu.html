@@ -1,0 +1,7 @@
+<div class="plugin-menu">
+	<div class="menu-title">Plugins</div>
+	<ul id="plugin-list" class="plugin-list" ng-hide='notesPress'>
+        <li class="menu-icon" ng-repeat="plugin in model.pluginList | filter:activeFilter" id="plugin.id" ng-click='pluginClicked(plugin)' ><i class="fa {{plugin.icon}}"></i>&nbsp {{plugin.name}}</li>        
+        <li class="plugin" ng-show='model.pluginList.length === 0'><i class="fa fa-frown-o"></i>No plugin add</li>        
+    </ul>	    
+</div>

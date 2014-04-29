@@ -6,6 +6,7 @@ $size :40px;
 
 
 
+
 .plugin-menu ul.plugin-list{
     list-style: none;
     top:calc(#{$abs-notes-height} + 5px);
@@ -65,19 +66,20 @@ $size :40px;
 	position: absolute;
 	top: 0;
 	height: 100%;
-	width: calc(100% - #{$size});
-	width: -webkit-calc(100% - #{$size});
+	width: 100%;
 }
 
 .sws-plugin-ctrl{
 	position: absolute;
-	top: 0;
+	top: $size + $height-tab-indicator;
 	left: 0;
-	height: 100%;
+  height: calc(100% - #{$size} - #{$height-tab-indicator});
+	height: -webkit-calc(100% - #{$size} - #{$height-tab-indicator});
 	width: 100%;
 }
 
 #sws-box-close{
+  top: 0;
 	right : 0;
 }
 
