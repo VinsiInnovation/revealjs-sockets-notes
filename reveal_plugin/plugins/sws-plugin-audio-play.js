@@ -1,0 +1,1 @@
+function callBack(){var a=document.querySelector("section.present:not(.stack) audio");a&&(a.paused?a.play():a.pause())}RevealClientNotes.registerPlugin("ap",callBack);

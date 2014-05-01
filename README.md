@@ -25,38 +25,23 @@ This plugin use :
 
 # Use the build version
 
-## Require for build
-
-The build is based on those tools
-
- * Grunt
- * Bower (and implicitly git)
-
-1. For Grunt : just execute ```npm install -g grunt-cli``` 
-2. For bower : just execute ```npm install -g bower```
-
-If you are behind a proxy, you have to configure npm to go throught proxy [npm behind proxy](http://jjasonclark.com/how-to-setup-node-behind-web-proxy) and for bower, you have to set HTTP\_PROXY and HTTPS\_PROXY as env var and you might have to specify to use https over git protocol : [https://coderwall.com/p/sitezg/](https://coderwall.com/p/sitezg/)
-
 ## Install
 
 1. Download of clone the repository
 2. Copy this directory into : 'YourRevealPresentation/plugin/sockets-notes'
 
-## Build, the project
+## Init, the project
 
-A build.bat or build.sh was write to build the project to a dist directory
+A init.bat or init.sh was write to help you to init the project
 
 1. Go to 'YourRevealPresentation/plugin/sockets-notes'
-2. run 'build.bat' or 'build.sh'
-
-This should create a "dist" directory with the project compile and it has normally download all the necessary dependancies
-
+2. run 'init.bat' or 'init.sh'
 
 ### In the presentation
 
 You have to add thoses line in your html
 
-1. ```{ src: '{$REVEAL_HOME_DIRECTORY}/plugin/sockets-notes/dist/reveal_plugin/js/notes-client.js', async: true, callback: function() { RevealClientNotes.init({}); } }``` in the dependancies of Reveal
+1. ```{ src: '{$REVEAL_HOME_DIRECTORY}/plugin/sockets-notes/reveal_plugin/js/notes-client.js', async: true, callback: function() { RevealClientNotes.init({}); } }``` in the dependancies of Reveal
 2. the object to pass to init method has thoses parameters
  1. controlsColor : The color of controls in remote (default is 'white')
 3. ```<script src="/socket.io/socket.io.js"></script>``` in the import section of your javascripts
@@ -64,7 +49,7 @@ You have to add thoses line in your html
 5. You have to check that you have the file lib/js/head.min.js in your presentation
 
 According to the number of plugins you want to use with the remote control, add as many lines as you want somes plugins in the reveal dependancies : 
-```{ src: '{$REVEAL\_HOME\_DIRECTORY}/plugin/sockets-notes/dist/reveal_plugin/plugins/*{thePluginYouWant}*.js', async: true}```
+```{ src: '{$REVEAL\_HOME\_DIRECTORY}/plugin/sockets-notes/reveal_plugin/plugins/*{thePluginYouWant}*.js', async: true}```
 
 Here is the list of plugin and their paths (according to reveal\_plugins/plugins directory) : 
 
@@ -76,7 +61,7 @@ Here is the list of plugin and their paths (according to reveal\_plugins/plugins
 
 ### Use it
 
-1. Start the server from your revealPresentation folder root with ```node plugin/sockets-notes/dist/server/server.js -r REVEAL_DIRECTORY_PATH``` (The REVEAL\_DIRECTORY\_PATH is corresponding to the relative path according to the curent directory where the reveal presentation with the plugin is present (A directory where plugin/sockets-notes is present)). If your reveal presentation is on the root of the server (I.E. the plugin directory is aside of the index.html) juste start the server with ```node plugin/sockets-notes/dist/server/server.js```
+1. Start the server from your revealPresentation folder root with ```node plugin/sockets-notes/server/server.js -r REVEAL_DIRECTORY_PATH``` (The REVEAL\_DIRECTORY\_PATH is corresponding to the relative path according to the curent directory where the reveal presentation with the plugin is present (A directory where plugin/sockets-notes is present)). If your reveal presentation is on the root of the server (I.E. the plugin directory is aside of the index.html) juste start the server with ```node plugin/sockets-notes/server/server.js```
 2. Launch your reveal presentation on http://localhost:8080/{youRevealPresentation}.html
 2. Tap on your keyboard CRTL+Q
 3. Select the right network and click on it
@@ -84,15 +69,5 @@ Here is the list of plugin and their paths (according to reveal\_plugins/plugins
 5. Enjoy ! 
 
 
-**You could user node ```{PATH_TO_SERVER_JS}/server.js -h``` for getting the available commands**
-
-# Use the development version
-
-If you want to work with the source, you will have to install [Compass](http://compass-style.org/install/). And you have to install the sourcemaps for compass : ```gem install compass-sourcemaps --pre``` and ```gem install compass --pre```
-
-The build task use previously don't use compass, so if you want to build a part of the project, you have to run ```grunt release``` instead of ```grunt release_build``` (cf [https://github.com/chriseppstein/compass/issues/1108](https://github.com/chriseppstein/compass/issues/1108))
-
-When you will work with the server, don't forget to specify that your are in development mode : ```node plugin/sockets-notes/dist/server/server.js -d true```
-
-
+**You could user node ```{PATH_TO_SERVER_JS}/server.js -h``` for getting the available commands** (dev mode is only to use if you are on the branch dev !)
 

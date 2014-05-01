@@ -1,0 +1,1 @@
+function callBack(a){var b=document.querySelector("section.present:not(.stack) video");if(b)if("play-pause"===a.action)b.paused?b.play():b.pause();else if("mute-volume"===a.action)b.muted=b.muted?!1:!0;else if("skip"===a.action){var c=!(b.paused||b.ended);c&&b.pause(),b.currentTime=a.time/100*b.duration,c&&b.play()}}RevealClientNotes.registerPlugin("vp",callBack);
