@@ -1,6 +1,6 @@
 {
-  "author": "SNCF SV.SI",
-  "name": "broadcast-socket",
+  "author": "jefBinomed",
+  "name": "SpeakerWS-Server",
   "dependencies": {
     "socket.io": "~0.9.14",
     "connect" : "~2.8.4"

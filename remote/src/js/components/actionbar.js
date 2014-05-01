@@ -1,71 +1,76 @@
-components.directive('actionBar', ['$rootScope','$injector', '$interval'
-  ,function ($rootScope,$injector, $interval) {
+/*
+* Action Bar directive
+*/
+'use strict'
+
+components.directive('actionBar', ['$rootScope', '$interval'
+  ,function ($rootScope, $interval) {
    var directiveDefinitionObject = {
     templateUrl: 'partials/components/actionbar.html',
     replace: true,
     priority : 900,
     restrict: 'E',
     scope: true,    
-    link: function postLink($scope, iElement, iAttrs) { 
+    link: function postLink(scope, iElement, iAttrs) { 
 
       
-      $scope.showTime = true;
-      $scope.showHours = false;
-      $scope.hours = "00";
-      $scope.minutes = "00";
-      $scope.seconds = "00";
-      $scope.classHours = "mute";
-      $scope.classMinutes = "mute";
-      $scope.interval = 60;
+      scope.showTime = true;
+      scope.showHours = false;
+      scope.hours = "00";
+      scope.minutes = "00";
+      scope.seconds = "00";
+      scope.classHours = "mute";
+      scope.classMinutes = "mute";
+      scope.interval = 60;
 
       var progressEl = iElement.find('div.elapsed_time');
 
-      $scope.toggleTime = function(){
-        $scope.showTime = !$scope.showTime;
+      scope.toggleTime = function(){
+        scope.showTime = !scope.showTime;
       }
 
-      $scope.toggleMenu = function(){
-        $scope.ui.showMenuClass = $scope.ui.showMenuClass === 'collapse' ? 'expand-menu' : 'collapse';
+      scope.toggleMenu = function(){
+        scope.ui.showMenuClass = scope.ui.showMenuClass === 'collapse' ? 'expand-menu' : 'collapse';
       }
 
-      $scope.toggleMenuPlugin = function(){
-        $scope.ui.showMenuClass = $scope.ui.showMenuClass === 'collapse' ? 'expand-plugin' : 'collapse';
+      scope.toggleMenuPlugin = function(){
+        scope.ui.showMenuClass = scope.ui.showMenuClass === 'collapse' ? 'expand-plugin' : 'collapse';
       }
 
-      $scope.play = function(){        
+      scope.play = function(){        
         start  = new Date();
-        $scope.ui.timeStart = true;
+        scope.ui.timeStart = true;
       }
 
-      $scope.pause = function(){
-        $scope.ui.timeStart = false;
-        $scope.model.totalTime = $scope.model.totalTime + (new Date().getTime() - start.getTime());
+      scope.pause = function(){
+        scope.ui.timeStart = false;
+        scope.model.totalTime = scope.model.totalTime + (new Date().getTime() - start.getTime());
       }
 
       $rootScope.$on('resetTimer', function(){
-        $scope.showPlay = true;
-        $scope.ui.timeStart = false;
-        $scope.model.totalTime  = 0;
+        scope.showPlay = true;
+        scope.ui.timeStart = false;
+        scope.model.totalTime  = 0;
         renderProgress(0);
-        $scope.hours = "00";
-        $scope.minutes = "00";
-        $scope.seconds = "00";
-        $scope.classHours = "mute";
-        $scope.showHours = false;
-        $scope.classMinutes = "mute";
+        scope.hours = "00";
+        scope.minutes = "00";
+        scope.seconds = "00";
+        scope.classHours = "mute";
+        scope.showHours = false;
+        scope.classMinutes = "mute";
       });
 
       $rootScope.$on('playPauseTimer', function(event, data){
         if(data.play){
-          $scope.play();
+          scope.play();
         }else{
-          $scope.pause();
+          scope.pause();
         }
       });
 
-      $scope.validate = function(){
-        $scope.toggleTime();
-        $scope.model.defaultInterval = $scope.interval;
+      scope.validate = function(){
+        scope.toggleTime();
+        scope.model.defaultInterval = scope.interval;
       }
 
       // We add a gesture to switch to fullscreen
@@ -147,35 +152,35 @@ components.directive('actionBar', ['$rootScope','$injector', '$interval'
               hours, 
               minutes, 
               seconds;                
-          if ($scope.ui.timeStart){
+          if (scope.ui.timeStart){
               var now = new Date();
               diff = now.getTime() - start.getTime();
-              $scope.model.defaultInterval = $scope.model.defaultInterval > 0 ? $scope.model.defaultInterval : 60;
-              var totalDiff = diff + $scope.model.totalTime;
-              var alertTime = ($scope.model.defaultInterval * 60 * 1000) - ($scope.model.limitAlert * 60 * 1000);
+              scope.model.defaultInterval = scope.model.defaultInterval > 0 ? scope.model.defaultInterval : 60;
+              var totalDiff = diff + scope.model.totalTime;
+              var alertTime = (scope.model.defaultInterval * 60 * 1000) - (scope.model.limitAlert * 60 * 1000);
               hours = parseInt( totalDiff / ( 1000 * 60 * 60 ) );
               minutes = parseInt( ( totalDiff / ( 1000 * 60 ) ) % 60 );
               seconds = parseInt( ( totalDiff / 1000 ) % 60 );
           
-              $scope.hours = zeroPadInteger( hours );
-              if (hours > 0 && $scope.classHours === 'mute'){
+              scope.hours = zeroPadInteger( hours );
+              if (hours > 0 && scope.classHours === 'mute'){
 
-                  $scope.classHours = '';
-                  $scope.showHours = true;
-              }else if(hours === 0 && $scope.classHours != 'mute'){
-                  $scope.classHours = 'mute';
-                  $scope.showHours = false;
+                  scope.classHours = '';
+                  scope.showHours = true;
+              }else if(hours === 0 && scope.classHours != 'mute'){
+                  scope.classHours = 'mute';
+                  scope.showHours = false;
               }
               
-              $scope.minutes = zeroPadInteger( minutes );
-              if (minutes > 0 && $scope.classMinutes === 'mute')
-                  $scope.classMinutes = '';
-              else if(minutes === 0 && $scope.classMinutes != 'mute')
-                  $scope.classMinutes = 'mute';
+              scope.minutes = zeroPadInteger( minutes );
+              if (minutes > 0 && scope.classMinutes === 'mute')
+                  scope.classMinutes = '';
+              else if(minutes === 0 && scope.classMinutes != 'mute')
+                  scope.classMinutes = 'mute';
               
-              $scope.seconds = zeroPadInteger( seconds );
+              scope.seconds = zeroPadInteger( seconds );
               
-              var diffPercent = (totalDiff / ($scope.model.defaultInterval * 60 * 1000)) * 100;                
+              var diffPercent = (totalDiff / (scope.model.defaultInterval * 60 * 1000)) * 100;                
               renderProgress(Math.min(diffPercent, 100));
               
           }

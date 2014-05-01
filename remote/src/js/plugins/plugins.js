@@ -1,11 +1,17 @@
 /**
  * Speaker Websoket plugins
  */
+'use strict';
+
 var plugins = angular.module('sws.plugins', ['sws.components'])
-.run(['$rootScope', '$window', function($rootScope,$window){
+.run([function(){
     
 }]);
 
+
+/*
+* Factory that provides some helpers methods for plugins
+*/
 plugins.factory('HelperFactory',[function(){
 
 	

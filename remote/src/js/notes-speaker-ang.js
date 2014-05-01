@@ -1,4 +1,7 @@
-/* exported app */
+/*
+* Reveal Sockets Notes : Remote App V1.0.0
+*
+*/
 'use strict';
 
 var app = angular.module('sws', ['ngRoute', 'ngSanitize', 'sws.main', 'sws.components', 'sws.plugins']);

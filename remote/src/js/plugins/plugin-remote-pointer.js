@@ -1,16 +1,18 @@
 /*
 * Remote pointer plugin
 */
-plugins.directive('rpPlugin', ['$rootScope', 'HelperFactory'
-  ,function ($rootScope, helper) {
+'use strict';
+
+plugins.directive('rpPlugin', ['HelperFactory'
+  ,function (HelperFactory) {
   var directiveDefinitionObject = {
     restrict: 'A',
     require: '^sws',
     priority : 102,
     scope: false,    
-    link: function postLink($scope, iElement, iAttrs, swsControl) { 
+    link: function postLink(scope, iElement, iAttrs, swsControl) { 
 
-      $scope.register({
+      scope.register({
         name : 'remote pointer',
         icon : 'fa-pencil',
         id : 'rp'
@@ -32,7 +34,7 @@ plugins.directive('rpPlugin', ['$rootScope', 'HelperFactory'
 
           var percentX = ((x-rect.left) / rect.width) * 100;
           var percentY = ((y-rect.top) / rect.height) * 100;
-          $scope.pluginCommunication('rp', {
+          scope.pluginCommunication('rp', {
             hide : false,
             x : Math.round(percentX),
             y : Math.round(percentY),
@@ -50,23 +52,42 @@ plugins.directive('rpPlugin', ['$rootScope', 'HelperFactory'
         
       }
 
-      $scope.rpClose = function(){
+      // We add color div to change the color of pointer
+      function addBox(id, color, icon, left){
+        
+        var boxDiv = document.createElement('DIV');
+        boxDiv.setAttribute('id', 'sws-rp-box-'+id);
+        boxDiv.setAttribute('sws-color', color);
+        boxDiv.classList.add('sws-plugin-box');
+        boxDiv.classList.add('sws-plugin-rp-box');
+        boxDiv.style.left = left;
+        if (icon){              
+          boxDiv.classList.add('fa');
+          boxDiv.classList.add(icon);
+        }else{
+          boxDiv.classList.add('color');              
+          boxDiv.classList.add(id);              
+        }
+        return boxDiv;
+      }
+
+      scope.rpClose = function(){
         $(areaPointer).hammer().off('drag', touchFeedback);
         areaPointer.style.display = 'none';
         swsControl.restoreSlideState();
-        $scope.pluginCommunication('rp', {
+        scope.pluginCommunication('rp', {
           hide : true
         });
       }
 
-      $scope.rpClick = function(){
+      scope.rpClick = function(){
 
         if (!areaPointer){
 
           previewElement = iElement.find('#preview');
           areaPointer = document.createElement('DIV');
           areaPointer.setAttribute('id', 'sws-rp-area');
-          $scope.ui.excludeArray.push('sws-rp-area');
+          scope.ui.excludeArray.push('sws-rp-area');
           areaPointer.style.display = 'none';
           areaPointer.style.position = 'absolute';
           areaPointer.style.width = previewElement.width()+'px';
@@ -80,26 +101,7 @@ plugins.directive('rpPlugin', ['$rootScope', 'HelperFactory'
 
           iElement.find('#main-content')[0].appendChild(areaPointer);
 
-          // We add color div to change the color of pointer
-          function addBox(id, color, icon, left){
-            
-            var boxDiv = document.createElement('DIV');
-            boxDiv.setAttribute('id', 'sws-rp-box-'+id);
-            boxDiv.setAttribute('sws-color', color);
-            boxDiv.classList.add('sws-plugin-box');
-            boxDiv.classList.add('sws-plugin-rp-box');
-            boxDiv.style.left = left;
-            if (icon){              
-              boxDiv.classList.add('fa');
-              boxDiv.classList.add(icon);
-            }else{
-              boxDiv.classList.add('color');              
-              boxDiv.classList.add(id);              
-            }
-            return boxDiv;
-          }
-
-          //fa-circle
+          
           lastTarget = addBox('red', '#FF0000', null,'10px');
           lastTarget.classList.add('activ');
           var ctrlArea = document.querySelector('#sws-plugin-ctrl-rp .sws-plugin-ctrl');
@@ -122,10 +124,10 @@ plugins.directive('rpPlugin', ['$rootScope', 'HelperFactory'
         }
         
         if (areaPointer.style.display === 'none'){
-          $scope.ui.showPlugin = true;
+          scope.ui.showPlugin = true;
         }
         areaPointer.style.display = '';
-        $scope.ui.showControls = false;
+        scope.ui.showControls = false;
         swsControl.syncToDist();
         
 
@@ -155,7 +157,7 @@ plugins.directive('rpPlugin', ['$rootScope', 'HelperFactory'
       '}',0);
 
       pluginStyleSheet.insertRule('.sws-plugin-rp-box.color {'+
-        helper.cssProp('boxShadow')+' : 0px 0px 10px 0 black; '+
+        HelperFactory.cssProp('boxShadow')+' : 0px 0px 10px 0 black; '+
         'border-radius : '+size+'px; '+
         'border : solid 1px white; '+
         'bottom : 20px;'+
@@ -169,7 +171,7 @@ plugins.directive('rpPlugin', ['$rootScope', 'HelperFactory'
         'left : 5px; '+
         'width : '+(size-10)+'px; '+
         'height : 5px; '+
-         helper.cssProp('boxShadow')+' : 0px 0px 10px 0 black; '+
+         HelperFactory.cssProp('boxShadow')+' : 0px 0px 10px 0 black; '+
       '}',0);
 
       pluginStyleSheet.insertRule('.sws-plugin-rp-box.color.red::after, .sws-plugin-rp-box.color.red {'+

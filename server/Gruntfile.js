@@ -25,7 +25,8 @@ module.exports = function (grunt) {
         nodeServer: {
           server: 'server.js',
           npm:    'package.json',
-        }
+        },
+        readme:    'README.md'
     },
  
    
@@ -61,7 +62,8 @@ module.exports = function (grunt) {
         server: {
             files: [
                 { src: '<%= src.basedir %><%= server.nodeServer.server %>', dest: '<%= dist.basedir %><%= server.nodeServer.server %>' },
-                { src: '<%= src.basedir %><%= server.nodeServer.npm %>', dest: '<%= dist.basedir %><%= server.nodeServer.npm %>' }
+                { src: '<%= src.basedir %><%= server.nodeServer.npm %>', dest: '<%= dist.basedir %><%= server.nodeServer.npm %>' },
+                { src: '<%= server.readme %>', dest: '<%= dist.basedir %><%= server.readme %>' }
             ]
             
         }      

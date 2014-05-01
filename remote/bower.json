@@ -4,12 +4,12 @@
   "dependencies": {
     "fastclick": "latest",
     "prefix-free": "gh-pages",
-    "hammerjs":"1.0.6",
-    "jquery-hammerjs":"1.0.6",
+    "hammerjs": "1.0.6",
+    "jquery-hammerjs": "1.0.6",
     "jquery": "2.0.3",
-    "angular": "1.2.1",
-    "angular-route": "1.2.1",
-    "angular-sanitize": "1.2.1",
-    "font-awesome":"4.0.3"
+    "angular": "1.2.16",
+    "angular-route": "1.2.16",
+    "angular-sanitize": "1.2.16",
+    "font-awesome": "4.0.3"
   }
 }

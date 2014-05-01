@@ -1,3 +1,10 @@
+'use strict';
+
+/*
+* Reveal Sockets Notes : Server V1.0.0
+*
+*/
+
 // Configuration part
 var fs = require('fs');
 // If set as parameters, we get the reveal directory path
@@ -12,6 +19,7 @@ var argList = ['-h','--help',
     '-d', '--dev'
 ];
 
+// Helper method for management of arguments
 function manageArgs(args){
     var showHelp = false;
     var newArgs = [];
@@ -58,7 +66,8 @@ function manageArgs(args){
         console.log('=========Reveal Speaker Notes Server');
         console.log(' Parameters : \n');
         console.log(' * -h | --help : The command help. ');
-        console.log(' * -p | --path : The path of reveal js presentation (defaut : consider that the path is the directory of presentation). ');
+        console.log(' * -p | --port : The port to use (defaut : 8080). ');
+        console.log(' * -r | --reveal : The path of reveal js presentation (defaut : consider that the path is the directory of presentation). ');
         console.log(' * -d | --dev : Specify if we\'re in developpement mode (the path load are different) : set true or false (default is false).');
         return true;
     }
@@ -66,6 +75,7 @@ function manageArgs(args){
     return manageArgs(newArgs);
 }
 
+// We check if we have args
 if (process.argv.length > 2){
     var args = [];
     for (var i = 2; i < process.argv.length; i++){
@@ -76,7 +86,7 @@ if (process.argv.length > 2){
     }
 }
 
-
+// We will create the configuration files according to the configuration (dev or not)
 var confFileArray = [];
 var confFileJSON = JSON.stringify(conf);
 if (conf.devMode){
@@ -84,6 +94,7 @@ if (conf.devMode){
     confFileArray.push(__dirname+'/../../remote/conf/conf.json'); // Remote
     confFileArray.push(__dirname+'/../../reveal_plugin/conf/conf.json'); // Reveal Client
 }else{
+    confFileArray.push(__dirname+'/../conf/conf.json'); // Base
     confFileArray.push(__dirname+'/conf/conf.json'); // Server
     confFileArray.push(__dirname+'/../remote/conf/conf.json'); // Remote
     confFileArray.push(__dirname+'/../reveal_plugin/conf/conf.json'); // Reveal Client

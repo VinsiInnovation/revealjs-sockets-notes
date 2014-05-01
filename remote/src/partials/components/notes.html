@@ -1,7 +1,7 @@
  <div id="notes" class="border" ng-class='{fullSize : noteFullClass, upPlugin : ui.showPlugin}' >
-    <div class="title-abs" ng-class='classNotes' ng-click='toggleNotesPlugins(true)'>Notes</div>
+    <div class="title-abs" >Notes</div>
     <i class="fa fa-play-circle-o" ng-class="iconClass" ng-click='toggleNotes()'></i>    
-    <div id="content-notes" ng-show='notesPress' ng-bind-html='ui.contentNotes'></div>   
+    <div id="content-notes" ng-bind-html='ui.contentNotes'></div>   
 
     <div class="slide-number">
         <span class="curent-slide">{{model.currentSlideNumber}}</span> / <span class="nb-slides">{{model.nbSlides}}</span>

@@ -1,10 +1,16 @@
+/*
+* IFRAME Directive
+*/
+'use strict';
+
 components.directive('iframeControl', ['$rootScope', '$timeout'
   ,function ($rootScope, $timeout ) {
 
     
    var revealIFrame = null;
 
-   var revealIFrameAction = function(action, $scope){
+   // Function to manipulate the presentation
+   var revealIFrameAction = function(action, scope){
       if (action === 'next'){
         revealIFrame.next();
       }else if (action === 'prev'){
@@ -20,40 +26,26 @@ components.directive('iframeControl', ['$rootScope', '$timeout'
       }else if (action === 'reset'){
         revealIFrame.slide( 0, 0, 0 );          
       }else if (action === 'show'){
-        revealIFrame.slide( $scope.model.indices.h, $scope.model.indices.v, 0 );          
+        revealIFrame.slide( scope.model.indices.h, scope.model.indices.v, 0 );          
       }
    }
 
+   // Directive definition
    var directiveDefinitionObject = {
     restrict: 'A',
     require: '^sws',
     priority : 950,
     scope: false,    
-    controller: function($scope){
+    controller: ['$scope', function($scope){
 
+      // Add a method for sharing action to directives
       this.revealAction = function(action){
-        revealIFrameAction(action,$scope);
-        /*if (action === 'next'){
-          revealIFrame.next();
-        }else if (action === 'prev'){
-          revealIFrame.prev();          
-        }else if (action === 'up'){
-          revealIFrame.up();          
-        }else if (action === 'down'){
-          revealIFrame.down();          
-        }else if (action === 'left'){
-          revealIFrame.left();          
-        }else if (action === 'right'){
-          revealIFrame.right();          
-        }else if (action === 'reset'){
-          revealIFrame.slide( 0, 0, 0 );          
-        }else if (action === 'show'){
-          revealIFrame.slide( $scope.model.indices.h, $scope.model.indices.v, 0 );          
-        }*/
+        revealIFrameAction(action,$scope);      
       }
-    },
-    link: function postLink($scope, iElement, iAttrs, swsControl) { 
+    }],
+    link: function postLink(scope, iElement, iAttrs, swsControl) { 
 
+      // We share the possibility to navigate in the main directive (just the method)
       swsControl.registerControl(revealIFrameAction);
 
       var iframe = iElement.find('iframe')[0];
@@ -80,15 +72,15 @@ components.directive('iframeControl', ['$rootScope', '$timeout'
             leftControl = controls.querySelector("div.navigate-left.enabled") ? false : true;
             rightControl = controls.querySelector("div.navigate-right.enabled") ? false : true;
         }
-        $scope.ui.controls = {
+        scope.ui.controls = {
             reset : false,
             show : false,
             up : upControl,
             down : downControl,
             left : leftControl,
             right : rightControl,
-            next :  $scope.model.indices.h+$scope.model.indices.v+1 > $scope.model.nbSlides,
-            prev : $scope.model.indices.h+$scope.model.indices.v <= 0
+            next :  scope.model.indices.h+scope.model.indices.v+1 > scope.model.nbSlides,
+            prev : scope.model.indices.h+scope.model.indices.v <= 0
         };
 
       }
@@ -116,26 +108,27 @@ components.directive('iframeControl', ['$rootScope', '$timeout'
         revealIFrame.addEventListener( 'fragmenthidden', revealFragementHiddeListener);
         
         updateControls();
-        $scope.ui.iframeLoad = true;
+        scope.ui.iframeLoad = true;
 
       }
 
+      // We delay the update of model 
       var revealChangeListener = function(event){
          $timeout(function(){          
-            $scope.model.indices = revealIFrame.getIndices();
-            $scope.model.nextSlideNumber = $scope.model.indices.h+$scope.model.indices.v;
+            scope.model.indices = revealIFrame.getIndices();
+            scope.model.nextSlideNumber = scope.model.indices.h+scope.model.indices.v;
             updateControls();
           }, 500);    
       }
 
 
       var revealFragementShowListener = function(event){
-          $scope.model.fragment++;
+          scope.model.fragment++;
       }
 
 
       var revealFragementHiddeListener = function(event){
-          $scope.model.fragment = Math.min(0, $scope.model.fragment++);
+          scope.model.fragment = Math.min(0, scope.model.fragment++);
       }
 
       iframe.onload = onIFrameLoad;

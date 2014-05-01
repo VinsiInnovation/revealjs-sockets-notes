@@ -1,3 +1,10 @@
+'use strict';
+
+/*
+* Reveal Sockets Notes : Plugin Client V1.0.0
+*
+*/
+
 var UtilClientNotes = (function () {
     var ajaxJSONGet = function(url, callback){
         var http_request = new XMLHttpRequest();
@@ -15,7 +22,7 @@ var UtilClientNotes = (function () {
     var extractPath = function(){
       var scripts = document.getElementsByTagName("script");
 
-        for(idx = 0; idx < scripts.length; idx++)
+        for(var idx = 0; idx < scripts.length; idx++)
         {
           var script = scripts.item(idx);
 
@@ -51,7 +58,8 @@ var RevealClientNotes = (function () {
     socket = null,
     ips = null,
     qrCode = null,
-    pluginList = {};
+    pluginList = {},
+    VERSION = '1.0.0';
 
   /*
   * **************************************
@@ -147,7 +155,7 @@ var RevealClientNotes = (function () {
         var urlRemote = "http://"+ips[result].ip // HOST
           +":"+conf.port // PORT
           +pathPlugin.substr(pathPlugin.indexOf(conf.port)+(''+conf.port).length, pathPlugin.length) // PATHNAME
-          +(conf.devMode ?"remote/src/" : "dist/remote/")+"notes-speaker.html";
+          +(conf.devMode ?"remote/src/" : "remote/")+"notes-speaker.html";
         qrCode.clear();
         qrCode.makeCode(urlRemote);
         document.querySelector("#qrCodeLink").setAttribute("href",urlRemote);

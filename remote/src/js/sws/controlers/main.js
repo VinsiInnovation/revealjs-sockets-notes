@@ -1,13 +1,14 @@
+/*
+* Main Controler
+*/
+'use strict';
+
 sws.controller('SwsCtrl',        
-    ['$rootScope', '$scope', '$http', 
-    function($rootScope, $scope, $http) {
+    ['$scope', '$http', 
+    function($scope, $http) {
 
-
-       
-
-                
         FastClick.attach(document.body);
-
+        
         $http({
         	url: '../conf/conf.json',
         	method: 'GET'

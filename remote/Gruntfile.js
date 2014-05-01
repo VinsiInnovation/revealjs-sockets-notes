@@ -42,7 +42,8 @@ module.exports = function (grunt) {
           dir: 'sass'
         },
         assets: {
-          font:     'font',
+          fonts:     'fonts',
+          fontsAwesome: 'bower_components/font-awesome/fonts',
           images:   'images'
         }
     },
@@ -81,7 +82,8 @@ module.exports = function (grunt) {
             files: [
                 { src: '<%= src.basedir %><%= remote.html.index %>', dest: '<%= dist.basedir %><%= remote.html.index %>' },
                 {expand: true, cwd: '<%= src.basedir %><%= remote.html.partials %>', src: ['**'], dest: '<%= dist.basedir %><%= remote.html.partials %>'},
-                {expand: true, cwd: '<%= src.basedir %><%= remote.assets.font %>', src: ['**'], dest: '<%= dist.basedir %><%= remote.assets.font %>'},
+                {expand: true, cwd: '<%= src.basedir %><%= remote.assets.fonts %>', src: ['**'], dest: '<%= dist.basedir %><%= remote.assets.fonts %>'},
+                {expand: true, cwd: '<%= src.basedir %><%= remote.assets.fontsAwesome %>', src: ['**'], dest: '<%= dist.basedir %><%= remote.assets.fonts %>'},
                 {expand: true, cwd: '<%= src.basedir %><%= remote.assets.images %>', src: ['**'], dest: '<%= dist.basedir %><%= remote.assets.images %>'}
             ]            
         }      

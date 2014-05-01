@@ -1,10 +1,15 @@
+/**
+* Main Directive
+*/
+'use strict';
+
 components.directive('sws', ['$rootScope'
   ,function ($rootScope) {
    var directiveDefinitionObject = {
     restrict: 'A',    
-    priority : 1000,
+    priority : 1000, // It is the hight priority of the app and it have to rest like this
     scope: false,   
-    controller: function($scope){
+    controller: ['$scope',function($scope){
       var revealIframeAction = null;
       // Register the iframe controller for manipulating the reveal presentation in the iframe
       this.registerControl = function(controlRevealDistant){
@@ -58,21 +63,21 @@ components.directive('sws', ['$rootScope'
           return style.sheet ? style.sheet : style.styleSheet;
         }
 
-    }, 
-    link: function postLink($scope, iElement, iAttrs) { 
+    }], 
+    link: function postLink(scope, iElement, iAttrs) { 
 
 
         var socketIO = null;
+        
 
        /*
         * Model
         */
-        $scope.model = {
+        scope.model = {
           defaultInterval : 60, // Time in minute of the conference
           limitAlert : 1, // time before the end where we have to alert the speaker (if defaultInterval is upper limitAlert)
           totalTime : 0, // Total time ellapsed during the presentation
           socket : null, // The webSocket
-          indices : null, // The indices of the presentation
           fragment : 0, // The current fragment number
           localUrl : null, // var in order to see if the presentation has already be loaded    
           currentPluginActiv : null, // The id of the currentPlugin
@@ -94,7 +99,7 @@ components.directive('sws', ['$rootScope'
         /*
         * UI interactions
         */
-        $scope.ui = {
+        scope.ui = {
           timeStart : false, // true if the time loader is on
           couldUnlock : false, // true if the client is ready for websocket control
           showControls : true, // var to know if the iframe was load
@@ -120,7 +125,7 @@ components.directive('sws', ['$rootScope'
         /*
         * Compatibilities needed for the application
         */
-        $scope.compatibility = {
+        scope.compatibility = {
           fullScreen : Modernizr.fullscreen,
           webSockets : Modernizr.websockets,
           cssCalc : Modernizr.csscalc,
@@ -136,47 +141,46 @@ components.directive('sws', ['$rootScope'
           // Message send when recieving notes
           if (json.type === "notes"){                   
             if( json.data.markdown ) {
-              $scope.ui.contentNotes = marked( json.data.notes );
+              scope.ui.contentNotes = marked( json.data.notes );
             }
             else {
-              $scope.ui.contentNotes =  json.data.notes;
+              scope.ui.contentNotes =  json.data.notes;
             }                              
-            //$rootScope.$broadcast('noteEvt', json.data);
           }else  // Message recieve on each change of slide
             if (json.type === "config"){    
               // We unlock the presentation if we have a client
-              if (!$scope.ui.couldUnlock){
+              if (!scope.ui.couldUnlock){
                 $("#show").removeAttr("disabled");
               }
-              $scope.ui.couldUnlock = $scope.ui.couldUnlock || true;
+              scope.ui.couldUnlock = scope.ui.couldUnlock || true;
               // If we have to load the speaker slide versions (recieve the url of presentation)
-              if (json.url && !$scope.model.localUrl){
-                $scope.model.localUrl = "http://"+window.location.hostname+":"+$scope.model.conf.port+json.url;
+              if (json.url && !scope.model.localUrl){
+                scope.model.localUrl = "http://"+window.location.hostname+":"+scope.model.conf.port+json.url;
 
-                $rootScope.$broadcast('loadIframeEvt', $scope.model.localUrl);
+                $rootScope.$broadcast('loadIframeEvt', scope.model.localUrl);
                   
-                $scope.model.nbSlides = json.nbSlides;
+                scope.model.nbSlides = json.nbSlides;
 
-                $scope.ui.controlsColor = json.controlsColor;
+                scope.ui.controlsColor = json.controlsColor;
               }else  // If we recieve the index of presentation
                 if (json.indices){
-                    $scope.model.indicesDist = json.indices;
-                    $scope.model.fragment = 0;
-                    $scope.model.currentSlideNumber = $scope.model.indicesDist.h+$scope.model.indicesDist.v;
+                    scope.model.indicesDist = json.indices;
+                    scope.model.fragment = 0;
+                    scope.model.currentSlideNumber = scope.model.indicesDist.h+scope.model.indicesDist.v;
                     
                       
               }else // If we recieve a fragment modification
                 if (json.fragment){
                   if (json.fragment === '+1'){
-                      $scope.model.fragment++;
+                      scope.model.fragment++;
                   }else{
-                      $scope.model.fragment = Math.min(0, $scope.model.fragment++);
+                      scope.model.fragment = Math.min(0, scope.model.fragment++);
                   }
               }
             }else if (json.type === 'plugin'){
               if (json.action === 'activate'){
-                for (var i = 0; i < $scope.model.pluginList.length; i++){
-                  var plugin = $scope.model.pluginList[i];
+                for (var i = 0; i < scope.model.pluginList.length; i++){
+                  var plugin = scope.model.pluginList[i];
                   if (plugin.id === json.id){
                     plugin.active = true;
                   }
@@ -191,9 +195,10 @@ components.directive('sws', ['$rootScope'
         * Services
         */
 
-        $scope.connect = function(){                
+        //This method connect the app to the webSocket
+        scope.connect = function(){                
             if ( typeof io != 'undefined'){                
-                socketIO = io.connect('http://'+window.location.hostname+':'+$scope.model.conf.port);
+                socketIO = io.connect('http://'+window.location.hostname+':'+scope.model.conf.port);
                 
                 // Socket IO connect
                 socketIO.on('connect',function(){
@@ -221,22 +226,25 @@ components.directive('sws', ['$rootScope'
         }
 
 
-        $scope.sendMessage = function(message){
+        // This method send a message through the websocket
+        scope.sendMessage = function(message){
             socketIO.emit('message', message);
         }
 
-        $scope.pluginCommunication = function(id, data){
+        // This method manage the communication between plugins
+        scope.pluginCommunication = function(id, data){
           socketIO.emit('message', {
               type : 'communicate-plugin',
               'id'  : id,
               'data': data
           }); 
         }
-          
-        $scope.register = function(plugin){
+         
+        // This method register a plugin 
+        scope.register = function(plugin){
           plugin.active = false;
-          $scope.model.pluginList.push(plugin);
-          $scope.ui.showPluginCtrl[plugin.id] = false;
+          scope.model.pluginList.push(plugin);
+          scope.ui.showPluginCtrl[plugin.id] = false;
         }
 
       }
