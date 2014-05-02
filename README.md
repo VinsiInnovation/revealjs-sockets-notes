@@ -71,3 +71,5 @@ Here is the list of plugin and their paths (according to reveal\_plugins/plugins
 
 **You could user node ```{PATH_TO_SERVER_JS}/server.js -h``` for getting the available commands** (dev mode is only to use if you are on the branch dev !)
 
+url of githupPage : http://vinsiinnovation.github.io/revealjs-sockets-notes/
+
