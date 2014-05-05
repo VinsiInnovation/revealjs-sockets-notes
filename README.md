@@ -143,12 +143,3 @@ Here is the list of plugin and their paths (according to reveal\_plugins/plugins
  * ```sws-plugin-sensor-pointer.js``` : Allow you to use your phone as laser pointer on the client presentation.
  *  More to come soon
  
-## User Guide
-
-### UI
-
-Here is how to use the remote
-
-<pre>
-<img src="/assets/images/remote.png" width="400px">
-</pre>
