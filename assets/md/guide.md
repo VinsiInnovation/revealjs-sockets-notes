@@ -2,7 +2,7 @@
 
 ### UI
 
-<img src="/assets/images/remote.png" width="400px">
+<img src="../assets/images/remote.png" width="400px">
 
 <br>
 
@@ -22,6 +22,6 @@ Here is how to use the remote
 </p>
 
 <pre>
-<img src="/assets/images/remote_howto.png" width="400px">
+<img src="../assets/images/remote_howto.png" width="400px">
 </pre>
 
