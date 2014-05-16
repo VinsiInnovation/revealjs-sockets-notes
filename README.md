@@ -9,7 +9,6 @@ The basic features ares :
 * You could configure a timer if your presentation need to respect a timing.
 * The remote provides also some plugins to enhance the speaker experiences. See after for more information about the plugins
 
-
 ## Getting Started
 
 ### Require for installation
@@ -143,3 +142,7 @@ Here is the list of plugin and their paths (according to reveal\_plugins/plugins
  * ```sws-plugin-sensor-pointer.js``` : Allow you to use your phone as laser pointer on the client presentation.
  *  More to come soon
  
+
+# Credits 
+
+The app was developped by [jefBinomed](https://github.com/jefBinomed) and the design was imagine by [brongier](https://twitter.com/brongier) and [cboure](https://twitter.com/cboure)
