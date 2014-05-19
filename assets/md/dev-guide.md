@@ -149,3 +149,4 @@ When you will work with the server, don't forget to specify that your are in dev
 # How To contribute ?
 
 
+More info soon...
