@@ -145,4 +145,4 @@ Here is the list of plugin and their paths (according to reveal\_plugins/plugins
 
 # Credits 
 
-The app was developped by [jefBinomed](https://github.com/jefBinomed) and the design was imagine by [brongier](https://twitter.com/brongier) and [cboure](https://twitter.com/cboure)
+The app was developped by [jefBinomed](https://github.com/jefBinomed) and the design was imagine by [@brongier](https://twitter.com/brongier) and [@cboure](https://twitter.com/cboure)
