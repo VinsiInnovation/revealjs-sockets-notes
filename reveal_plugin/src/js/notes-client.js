@@ -198,7 +198,7 @@ var RevealClientNotes = (function () {
         // On message recieve
         socket.on('message', function (data) {
             if( data.type === "operation" && data.data === "show"){
-                Reveal.slide( data.index.h, data.index.v, data.fragment );
+                Reveal.slide( data.index.h, data.index.v, data.index.f ? data.index.f : 0 );
             }else if( data.type === "ping"){	  		               
 
                 if (document.querySelector('#sws-show-qr-code')){
@@ -246,29 +246,12 @@ var RevealClientNotes = (function () {
     var slideElement = Reveal.getCurrentSlide(),
       messageData = null;
     
-          // We get the notes and init the indexs
-    var notes = slideElement.querySelector( 'aside.notes' ),
-      indexh = Reveal.getIndices().h,
-      indexv = Reveal.getIndices().v,
-      nextindexh,
-      nextindexv;
+    // We get the notes and init the indexs
+    var notes = slideElement.querySelector( 'aside.notes' );
 
-          
-    if( slideElement.nextElementSibling && slideElement.parentNode.nodeName == 'SECTION' ) {
-      nextindexh = indexh;
-      nextindexv = indexv + 1;
-    } else {
-      nextindexh = indexh + 1;
-      nextindexv = 0;
-    }
-
-          // We prepare the message data to send through websocket
+    // We prepare the message data to send through websocket
     messageData = {
       notes : notes ? notes.innerHTML : '',
-      indexh : indexh,
-      indexv : indexv,
-      nextindexh : nextindexh,
-      nextindexv : nextindexv,
       markdown : notes ? typeof notes.getAttribute( 'data-markdown' ) === 'string' : false
     };
 

@@ -27,10 +27,12 @@ components.directive('sws', ['$rootScope'
         if (!indicesSav){
           indicesSav = {
             h : $scope.model.indices.h,
-            v : $scope.model.indices.v
+            v : $scope.model.indices.v,
+            f : $scope.model.indices.f
           };
           $scope.model.indices.h = $scope.model.indicesDist.h;
           $scope.model.indices.v = $scope.model.indicesDist.v;
+          $scope.model.indices.f = $scope.model.indicesDist.f;
           revealIframeAction('show', $scope);
         }
       }
@@ -40,6 +42,7 @@ components.directive('sws', ['$rootScope'
         if (indicesSav){
           $scope.model.indices.h = indicesSav.h;
           $scope.model.indices.v = indicesSav.v;
+          $scope.model.indices.f = indicesSav.f;
           revealIframeAction('show', $scope);
           indicesSav = null;
         }
@@ -78,7 +81,6 @@ components.directive('sws', ['$rootScope'
           limitAlert : 1, // time before the end where we have to alert the speaker (if defaultInterval is upper limitAlert)
           totalTime : 0, // Total time ellapsed during the presentation
           socket : null, // The webSocket
-          fragment : 0, // The current fragment number
           localUrl : null, // var in order to see if the presentation has already be loaded    
           currentPluginActiv : null, // The id of the currentPlugin
           indicesDist : {
@@ -165,28 +167,18 @@ components.directive('sws', ['$rootScope'
               }else  // If we recieve the index of presentation
                 if (json.indices){
                     scope.model.indicesDist = json.indices;
-                    scope.model.fragment = 0;
-                    scope.model.currentSlideNumber = scope.model.indicesDist.h+scope.model.indicesDist.v;
-                    
-                      
-              }else // If we recieve a fragment modification
-                if (json.fragment){
-                  if (json.fragment === '+1'){
-                      scope.model.fragment++;
-                  }else{
-                      scope.model.fragment = Math.min(0, scope.model.fragment++);
-                  }
-              }
-            }else if (json.type === 'plugin'){
-              if (json.action === 'activate'){
-                for (var i = 0; i < scope.model.pluginList.length; i++){
-                  var plugin = scope.model.pluginList[i];
-                  if (plugin.id === json.id){
-                    plugin.active = true;
+                    scope.model.currentSlideNumber = scope.model.indicesDist.h+scope.model.indicesDist.v;  
+                }
+              }else if (json.type === 'plugin'){
+                if (json.action === 'activate'){
+                  for (var i = 0; i < scope.model.pluginList.length; i++){
+                    var plugin = scope.model.pluginList[i];
+                    if (plugin.id === json.id){
+                      plugin.active = true;
+                    }
                   }
                 }
               }
-            }
 
         }
 

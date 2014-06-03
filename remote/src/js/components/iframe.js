@@ -24,9 +24,9 @@ components.directive('iframeControl', ['$rootScope', '$timeout'
       }else if (action === 'right'){
         revealIFrame.right();          
       }else if (action === 'reset'){
-        revealIFrame.slide( 0, 0, 0 );          
+        revealIFrame.slide( 0, 0, -1 );          
       }else if (action === 'show'){
-        revealIFrame.slide( scope.model.indices.h, scope.model.indices.v, 0 );          
+        revealIFrame.slide( scope.model.indices.h, scope.model.indices.v, scope.model.indices.f ? scope.model.indices.f : 0 );          
       }
    }
 
@@ -117,18 +117,19 @@ components.directive('iframeControl', ['$rootScope', '$timeout'
          $timeout(function(){          
             scope.model.indices = revealIFrame.getIndices();
             scope.model.nextSlideNumber = scope.model.indices.h+scope.model.indices.v;
+            
             updateControls();
           }, 500);    
       }
 
 
       var revealFragementShowListener = function(event){
-          scope.model.fragment++;
+        scope.model.indices = revealIFrame.getIndices();
       }
 
 
       var revealFragementHiddeListener = function(event){
-          scope.model.fragment = Math.min(0, scope.model.fragment++);
+        scope.model.indices = revealIFrame.getIndices();
       }
 
       iframe.onload = onIFrameLoad;

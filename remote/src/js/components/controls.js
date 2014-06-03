@@ -62,13 +62,12 @@ components.directive('controls', ['$timeout'
           scope.classShow = '';
           scope.classBack = '';
           indices = null;
-          iframeCtrl.revealAction('next');
           scope.sendMessage({
               type : 'operation', 
               data : 'show', 
-              index: scope.model.indices, 
-              fragment : scope.model.fragment
+              index: scope.model.indices
           });
+          iframeCtrl.revealAction('next');
         }
       }
 
@@ -76,6 +75,7 @@ components.directive('controls', ['$timeout'
         scope.classBack = '';
         scope.model.indices.h = indices.h;
         scope.model.indices.v = indices.v;
+        scope.model.indices.f = indices.f;
         iframeCtrl.revealAction('show');
       }
 
@@ -85,7 +85,8 @@ components.directive('controls', ['$timeout'
         if (indices == null){
           indices = {
             h : scope.model.indices.h, 
-            v : scope.model.indices.v
+            v : scope.model.indices.v,
+            f : scope.model.indices.f
           };
          }
       }
