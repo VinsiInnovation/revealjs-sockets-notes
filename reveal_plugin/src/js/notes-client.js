@@ -168,16 +168,59 @@ var RevealClientNotes = (function () {
     area.style.display= area.style.display === 'none' ? '' : 'none';
 
   }
+
+  /**
+   * Converts the target object to an array.
+   */
+  var toArray = function( o ) {
+
+    return Array.prototype.slice.call( o );
+
+  }
+
+
+  /**
+  *  Return the number of slides of the presentation and gives a mapping of position for each index
+  */
+  var countNbSlides = function(){
+    var totalSlides = 0;
+    var mapPosition = {};
+
+    // Method take from revealJS lib and rearange
+
+    var HORIZONTAL_SLIDES_SELECTOR = '.reveal .slides>section',
+      SLIDES_SELECTOR = '.reveal .slides section';
+
+    var horizontalSlides = toArray( document.querySelectorAll( HORIZONTAL_SLIDES_SELECTOR ) );
+
+    // The number of past and total slides
+    var totalCount = document.querySelectorAll( SLIDES_SELECTOR + ':not(.stack)' ).length;    
+
+    // Step through all slides and count the past ones
+    for( var i = 0; i < horizontalSlides.length; i++ ) {
+      var horizontalSlide = horizontalSlides[i];
+      var verticalSlides = toArray( horizontalSlide.querySelectorAll( 'section' ) );
+      if (verticalSlides.length >0){
+        for (var j = 0; j < verticalSlides.length; j++){
+          mapPosition[i+'-'+j] = totalSlides+j+1;  
+        }
+      }else{
+        mapPosition[i+'-0'] = totalSlides+1;
+      }
+      totalSlides += verticalSlides.length > 0 ? verticalSlides.length : 1;
+    }
+
+    return {
+      nbSlides : totalSlides,
+      map : mapPosition
+    }
+  }
   
   // Init the WebSocket connection
 	var initWS = function(){
         // Get the number of slides
-        var nbSlides = 0;
-        var continueLoop = true;
-        while(continueLoop){
-            nbSlides++;                
-            continueLoop = Reveal.getSlide(nbSlides);
-        }
+
+        var confNbSlides = countNbSlides();      
         
         // Connect to websocket
         socket = io.connect('http://'+window.location.hostname+':'+conf.port);
@@ -187,7 +230,8 @@ var RevealClientNotes = (function () {
                type :"config", 
                url : window.location.pathname, 
                controlsColor : additionnalConfiguration.controlsColor,
-               nbSlides : nbSlides-1
+               nbSlides : confNbSlides.nbSlides, 
+               mapPosition : confNbSlides.map
             });
             // If we are on the slides of speaker, we specify the controls values
            socket.emit('message', {
@@ -210,7 +254,8 @@ var RevealClientNotes = (function () {
                     type :"config", 
                     url : window.location.pathname, 
                     controlsColor : additionnalConfiguration.controlsColor,
-                    nbSlides : nbSlides-1
+                    nbSlides : confNbSlides.nbSlides, 
+                    mapPosition : confNbSlides.map
                 });
                 socket.emit('message', {
                     type :"config", 

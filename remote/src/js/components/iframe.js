@@ -116,7 +116,7 @@ components.directive('iframeControl', ['$rootScope', '$timeout'
       var revealChangeListener = function(event){
          $timeout(function(){          
             scope.model.indices = revealIFrame.getIndices();
-            scope.model.nextSlideNumber = scope.model.indices.h+scope.model.indices.v;
+            scope.model.nextSlideNumber = scope.model.mapPosition[scope.model.indices.h+'-'+scope.model.indices.v];
             
             updateControls();
           }, 500);    

@@ -91,9 +91,10 @@ components.directive('sws', ['$rootScope'
               h : 0,
               v : 0
           }, // Basic initialization of indices of reveal presentation
-          currentSlideNumber : 0, // current slide number on client side
-          nextSlideNumber : 0, // next slide number on preview 
+          currentSlideNumber : 1, // current slide number on client side
+          nextSlideNumber : 1, // next slide number on preview 
           nbSlides : 0, // Total Number of slides        
+          mapPosition : {}, // The position of slide according to indexs
           conf : {}, // Configuration corresponding to server
           pluginList : [] // List of plugin of application
         };
@@ -162,12 +163,13 @@ components.directive('sws', ['$rootScope'
                 $rootScope.$broadcast('loadIframeEvt', scope.model.localUrl);
                   
                 scope.model.nbSlides = json.nbSlides;
+                scope.model.mapPosition = json.mapPosition;
 
                 scope.ui.controlsColor = json.controlsColor;
               }else  // If we recieve the index of presentation
                 if (json.indices){
                     scope.model.indicesDist = json.indices;
-                    scope.model.currentSlideNumber = scope.model.indicesDist.h+scope.model.indicesDist.v;  
+                    scope.model.currentSlideNumber = scope.model.mapPosition[scope.model.indicesDist.h+'-'+scope.model.indicesDist.v];  
                 }
               }else if (json.type === 'plugin'){
                 if (json.action === 'activate'){
