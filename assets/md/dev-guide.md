@@ -13,7 +13,7 @@ This plugin use :
 
 1. For NodeJS you have to install [node.js](http://nodejs.org/download/). Don't forget to select to add node to the path ! 
 
-**It is important that you have the right to write on the directory where the reveal presentation is because the start of the server will write some files on your File System.**
+**It is important that you have the right to write on the directory where the reveal presentation is, because the server will write some files on your File System.**
 
 ## Require for build
 
@@ -29,12 +29,12 @@ If you are behind a proxy, you have to configure npm to go throught proxy [npm b
 
 ## Install
 
-1. Download of clone the repository (on branch [dev](https://github.com/VinsiInnovation/revealjs-sockets-notes/tree/dev))
+1. Download or clone the repository (on branch [dev](https://github.com/VinsiInnovation/revealjs-sockets-notes/tree/dev))
 2. Copy this directory into : 'YourRevealPresentation/plugin/sockets-notes'
 
 ## Build, the project
 
-A build.bat or build.sh was write to build the project to a dist directory
+A build.bat or build.sh was write to build the project to a dist directory. build-dev.bat and build-dev.sh are the script you have to start for initialize your project.
 
 1. Go to 'YourRevealPresentation/plugin/sockets-notes'
 2. run 'build-dev.bat' or 'build-dev.sh'
@@ -98,7 +98,7 @@ Add the main dependency
 { src: '{$REVEAL_HOME_DIRECTORY}/plugin/sockets-notes/reveal_plugin/src/js/notes-client.js', async: true, callback: function() { RevealClientNotes.init({}); } }
 ```
 
-The object to pass to init method has thoses parameters
+The object to pass to 'init' method has thoses parameters
 
 ```javascript
     {
@@ -106,13 +106,13 @@ The object to pass to init method has thoses parameters
     }
 ```
 
-Check that the markdown reveal plugin active
+Check that the markdown reveal plugin is active
 
 ```javascript
 { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } }
 ```
 
-According to the number of plugins you want to use with the remote control, add as many lines as you want somes plugins in the reveal dependancies : 
+According to the number of plugins you want to use with the remote control, add as many lines as you want in the reveal dependancies : 
 
 ```javascript
 { src: '{$REVEAL\_HOME\_DIRECTORY}/plugin/sockets-notes/reveal_plugin/src/plugins/*{thePluginYouWant}*.js', async: true}

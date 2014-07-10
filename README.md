@@ -1,13 +1,13 @@
 # About the project
 
-**Reveal Sockets Notes** is a _[RevealJS](https://github.com/hakimel/reveal.js/)_ plugin for speakers that offer a remote control of the presentation from your mobile located in the same network loop.
+**Reveal Sockets Notes** is a _[RevealJS](https://github.com/hakimel/reveal.js/)_ plugin for speakers that offer you a remote control of your presentation in your mobile.
 
-The basic features ares : 
+The basic features are : 
 
-* Remote control of presentation, you could navigate throught your presentation on mobile and validate the slide to show it on your presentation screen.
-* You have access to the notes of the current slide
+* Remote control of presentation, you could navigate throught your presentation on mobile and validate the slide to show on your presentation screen.
+* You have access to the notes of the current slide.
 * You could configure a timer if your presentation need to respect a timing.
-* The remote provides also some plugins to enhance the speaker experiences. See after for more information about the plugins
+* The remote provides also some plugins to enhance the speaker experience. See after for more informations about the plugins.
 
 ## Getting Started
 
@@ -20,12 +20,12 @@ This plugin use :
 1. For NodeJS you have to install [node.js](http://nodejs.org/download/). Don't forget to select to add node to the path ! 
 
 
-**It is important that you have the right to write on the directory where the reveal presentation is because the start of the server will write some files on your File System.**
+**It is important that you have the right to write on the directory where the reveal presentation is, because the server will write some files on your File System.**
 
 
 ### Install
 
-1. Download of clone the repository
+1. Download or clone the repository.
 2. Copy this directory into : 'YourRevealPresentation/plugin/sockets-notes'
 
 ### Init, the project
@@ -91,7 +91,7 @@ Add the main dependency
 { src: '{$REVEAL_HOME_DIRECTORY}/plugin/sockets-notes/reveal_plugin/js/notes-client.js', async: true, callback: function() { RevealClientNotes.init({}); } }
 ```
 
-The object to pass to init method has thoses parameters
+The object to pass to the 'init' method has thoses parameters
 
 ```javascript
     {
@@ -99,13 +99,13 @@ The object to pass to init method has thoses parameters
     }
 ```
 
-Check that the markdown reveal plugin active
+Check that the markdown reveal plugin is active
 
 ```javascript
 { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } }
 ```
 
-According to the number of plugins you want to use with the remote control, add as many lines as you want somes plugins in the reveal dependancies : 
+According to the number of plugins you want to use with the remote control, add as many lines as you want in the reveal dependancies : 
 
 ```javascript
 { src: '{$REVEAL\_HOME\_DIRECTORY}/plugin/sockets-notes/reveal_plugin/plugins/*{thePluginYouWant}*.js', async: true}
@@ -114,7 +114,7 @@ According to the number of plugins you want to use with the remote control, add 
 ### Use it
 
 Start the server from your revealPresentation folder root with the command line : 
-(The REVEAL\_DIRECTORY\_PATH is corresponding to the relative path according to the curent directory where the reveal presentation with the plugin is present (A directory where plugin/sockets-notes is present)). If your reveal presentation is on the root of the server (I.E. the plugin directory is aside of the index.html) juste start the server with ```node plugin/sockets-notes/server/server.js```
+(The REVEAL\_DIRECTORY\_PATH is corresponding to the relative path according to the curent directory where the reveal presentation with the plugin is present (A directory where plugin/sockets-notes is present)). If your reveal presentation is on the root of the server (I.E. the plugin directory is aside of the index.html) just start the server with ```node plugin/sockets-notes/server/server.js```
 
 ```Bash
 node plugin/sockets-notes/server/server.js -r REVEAL_DIRECTORY_PATH
@@ -127,7 +127,7 @@ node plugin/sockets-notes/server/server.js -r REVEAL_DIRECTORY_PATH
 * Enjoy ! 
 
 
-**You could user node ```{PATH_TO_SERVER_JS}/server.js -h``` for getting the available commands** (dev mode is only to use if you are on the branch dev !)
+**You could use node ```{PATH_TO_SERVER_JS}/server.js -h``` for getting the available commands** (dev mode is only to use if you are on the branch dev !)
 
 
 ## Plugins
