@@ -1,12 +1,13 @@
 # About the project
 
-**Reveal Sockets Notes** is a _[RevealJS](https://github.com/hakimel/reveal.js/)_ plugin for speakers that offer you a remote control of your presentation in your mobile.
+**Reveal Sockets Notes** is a _[RevealJS](https://github.com/hakimel/reveal.js/)_ plugin that transforms your mobile into a remote control for your presentations.
 
 The basic features are : 
 
-* Remote control of presentation, you could navigate throught your presentation on mobile and validate the slide to show on your presentation screen.
-* You have access to the notes of the current slide.
-* You could configure a timer if your presentation need to respect a timing.
+* Remote control 
+* Asynchroneous navigation between mobile and main screen
+* Access notes of the current slide on mobile.
+* Configure a timer.
 * The remote provides also some plugins to enhance the speaker experience. See after for more informations about the plugins.
 
 ## Getting Started
@@ -20,17 +21,17 @@ This plugin use :
 1. For NodeJS you have to install [node.js](http://nodejs.org/download/). Don't forget to select to add node to the path ! 
 
 
-**It is important that you have the right to write on the directory where the reveal presentation is, because the server will write some files on your File System.**
+**It is important that you have the right to write on the directory where the reveal presentation is, because the server will write some files on your File System. _Write rights must be granted on the reveal presentation directory to left the remote control operate._**
 
 
 ### Install
 
 1. Download or clone the repository.
-2. Copy this directory into : 'YourRevealPresentation/plugin/sockets-notes'
+2. Copy it into : 'YourRevealPresentation/plugin/sockets-notes'
 
 ### Init, the project
 
-A init.bat or init.sh was write to help you to init the project
+The init.bat (or init.sh) helps you init the project
 
 1. Go to 'YourRevealPresentation/plugin/sockets-notes'
 2. run 'init.bat' or 'init.sh'
@@ -38,20 +39,20 @@ A init.bat or init.sh was write to help you to init the project
 ### In the presentation
 
 
-Add the SocketIO dependency in your html
+Add the SocketIO dependency to your html
 
 ```html
 <script src="/socket.io/socket.io.js"></script>
 ```
 
-Check that head.js library is add
+Check that head.js library is added
 
 ```html
 <script src="{REVEALJS_PATH}/lib/js/head.min.js"></script>
 ```
 
 
-You have to add thoses lines in your html (in the revealJS Dependancies)
+Add the following lines to your html file (in the revealJS Dependencies) : 
 
 
 ```javascript
@@ -91,7 +92,7 @@ Add the main dependency
 { src: '{$REVEAL_HOME_DIRECTORY}/plugin/sockets-notes/reveal_plugin/js/notes-client.js', async: true, callback: function() { RevealClientNotes.init({}); } }
 ```
 
-The object to pass to the 'init' method has thoses parameters
+The object requested by the 'init' method has an optionnal parameter
 
 ```javascript
     {
@@ -114,7 +115,7 @@ According to the number of plugins you want to use with the remote control, add 
 ### Use it
 
 Start the server from your revealPresentation folder root with the command line : 
-(The REVEAL\_DIRECTORY\_PATH is corresponding to the relative path according to the curent directory where the reveal presentation with the plugin is present (A directory where plugin/sockets-notes is present)). If your reveal presentation is on the root of the server (I.E. the plugin directory is aside of the index.html) just start the server with ```node plugin/sockets-notes/server/server.js```
+(The REVEAL\_DIRECTORY\_PATH is the relative path from the curent directory to the reveal presentation directory (A directory where plugin/sockets-notes is present)). If your reveal presentation is on the root of the server (I.E. the plugin directory is aside the index.html) just start the server with ```node plugin/sockets-notes/server/server.js```
 
 ```Bash
 node plugin/sockets-notes/server/server.js -r REVEAL_DIRECTORY_PATH
@@ -127,7 +128,7 @@ node plugin/sockets-notes/server/server.js -r REVEAL_DIRECTORY_PATH
 * Enjoy ! 
 
 
-**You could use node ```{PATH_TO_SERVER_JS}/server.js -h``` for getting the available commands** (dev mode is only to use if you are on the branch dev !)
+**You could use node ```{PATH_TO_SERVER_JS}/server.js -h``` for getting the available commands** (dev mode is only to be used if you are on the dev branch !)
 
 
 ## Plugins
