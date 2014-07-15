@@ -13,7 +13,7 @@ This plugin use :
 
 1. For NodeJS you have to install [node.js](http://nodejs.org/download/). Don't forget to select to add node to the path ! 
 
-**It is important that you have the right to write on the directory where the reveal presentation is, because the server will write some files on your File System.**
+**It is important that you have the right to write on the directory where the reveal presentation is, because the server will write some files on your File System. _Write rights must be granted on the reveal presentation directory to left the remote control operate._** 
 
 ## Require for build
 
@@ -25,21 +25,21 @@ The build is based on those tools
 1. For Grunt : just execute ```npm install -g grunt-cli``` 
 2. For bower : just execute ```npm install -g bower```
 
-If you are behind a proxy, you have to configure npm to go throught proxy [npm behind proxy](http://jjasonclark.com/how-to-setup-node-behind-web-proxy) and for bower, you have to set HTTP\_PROXY and HTTPS\_PROXY as env var and you might have to specify to use https over git protocol : [https://coderwall.com/p/sitezg/](https://coderwall.com/p/sitezg/)
+If you are behind a proxy, you have to configure npm to go through proxy [npm behind proxy](http://jjasonclark.com/how-to-setup-node-behind-web-proxy) and for bower, you have to set HTTP\_PROXY and HTTPS\_PROXY as env vars and you might have to specify to use https over git protocol : [https://coderwall.com/p/sitezg/](https://coderwall.com/p/sitezg/)
 
 ## Install
 
 1. Download or clone the repository (on branch [dev](https://github.com/VinsiInnovation/revealjs-sockets-notes/tree/dev))
-2. Copy this directory into : 'YourRevealPresentation/plugin/sockets-notes'
+2. Copy it into : 'YourRevealPresentation/plugin/sockets-notes'
 
 ## Build, the project
 
-A build.bat or build.sh was write to build the project to a dist directory. build-dev.bat and build-dev.sh are the script you have to start for initialize your project.
+The build.bat (or build.sh) helps you to build the project to a dist directory. build-dev.bat (or build-dev.sh) helps you to initialize the project.
 
 1. Go to 'YourRevealPresentation/plugin/sockets-notes'
 2. run 'build-dev.bat' or 'build-dev.sh'
 
-This should normally download all the necessary dependancies
+This should normally download all the necessary dependencies
 
 
 ### In the presentation
@@ -58,7 +58,7 @@ Check that head.js library is add
 ```
 
 
-You have to add thoses lines in your html (in the revealJS Dependancies)
+Add the following lines to your html file (in the revealJS Dependencies)
 
 
 ```javascript
@@ -98,7 +98,7 @@ Add the main dependency
 { src: '{$REVEAL_HOME_DIRECTORY}/plugin/sockets-notes/reveal_plugin/src/js/notes-client.js', async: true, callback: function() { RevealClientNotes.init({}); } }
 ```
 
-The object to pass to 'init' method has thoses parameters
+The object requested by the 'init' method has optionnal parameter
 
 ```javascript
     {
@@ -121,7 +121,7 @@ According to the number of plugins you want to use with the remote control, add 
 
 ### Use it
 
-Start the server from your revealPresentation folder root with ```node plugin/sockets-notes/dist/server/server.js -r REVEAL_DIRECTORY_PATH``` (The REVEAL\_DIRECTORY\_PATH is corresponding to the relative path according to the curent directory where the reveal presentation with the plugin is present (A directory where plugin/sockets-notes is present)). If your reveal presentation is on the root of the server (I.E. the plugin directory is aside of the index.html) juste start the server with ```node plugin/sockets-notes/server/src/server.js -d true```
+Start the server from your revealPresentation folder root with ```node plugin/sockets-notes/dist/server/server.js -r REVEAL_DIRECTORY_PATH``` (The REVEAL\_DIRECTORY\_PATH is the relative path from the curent directory to the reveal presentation directory (A directory where plugin/sockets-notes is present)). If your reveal presentation is on the root of the server (I.E. the plugin directory is aside the index.html) juste start the server with ```node plugin/sockets-notes/server/src/server.js -d true```
 
 ```Bash
 node plugin/sockets-notes/server/server.js -d true -r REVEAL_DIRECTORY_PATH
